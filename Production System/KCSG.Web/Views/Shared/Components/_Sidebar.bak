@@ -1,0 +1,42 @@
+﻿<aside class="main-sidebar">
+    
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+            
+            <!-- Product planning -->
+            @Html.Partial("Components/SidebarGroups/_ProductPlanning")
+            
+            <!-- Material Management -->
+            @Html.Partial("Components/SidebarGroups/_MaterialManagement")
+            
+            <!-- Kneading commands -->
+            @Html.Partial("Components/SidebarGroups/_KneadingCommand")
+            
+            <!-- Pre-product management -->
+            @Html.Partial("Components/SidebarGroups/_PreProductManagement")
+            
+            <!-- Table listing commands -->
+            @Html.Partial("Components/SidebarGroups/_TablelLisingCommand")
+            
+            <!-- Product Management -->
+            @Html.Partial("Components/SidebarGroups/_ProductManagement")
+            
+            <!-- Inquiry -->
+            @Html.Partial("Components/SidebarGroups/_Inquiry")
+
+            <!-- Management report -->
+            @Html.Partial("Components/SidebarGroups/_ManagementReport")
+            
+            <!-- System management -->
+            @Html.Partial("Components/SidebarGroups/_SystemManagement")
+            
+            <!-- Communication management -->
+            @Html.Partial("Components/SidebarGroups/_Communication")
+
+            <!--Enviroment Management-->
+            @Html.Partial("Components/SidebarGroups/_EnvironmentManagement")
+        </ul>
+    </section>
+
+</aside>

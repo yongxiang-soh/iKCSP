@@ -1,0 +1,123 @@
+﻿@using System.Web.Mvc.Ajax
+@using System.Web.Mvc.Html
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.ProductManagement.ViewModels.ProductCertification.ProductCertificationViewModel
+@using (Ajax.BeginForm("Edit", "ProductCertification", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess(data, status, xhr)", Confirm = Model.IsCreate ? "Ready to add?" : "Ready to update?" }, new { @id = "addNewForm" }))
+{
+
+    @Html.HiddenFor(model => model.IsCreate)    
+    @Html.HiddenFor(model => model.F67_PrePdtLotNo)
+    @Html.HiddenFor(model => model.F67_ProductFlg)
+    @*@Html.HiddenFor(model => model.F67_CertificationDate)*@
+    @Html.HiddenFor(m=>m.KndLine,new{id="hdfKndLine"})
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            @if (Model.IsCreate)
+            {
+                <span> Add Product Certification Management Confirm - TCPR022F</span>
+            }
+            else
+            {
+                <span> Update Product Certification Management Confirm - TCPR022F</span>
+            }
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F67_ProductCode)
+                    </div>
+                    <div class="col-lg-8">
+
+                        @if (Model.IsCreate)
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.F67_ProductCode, CustomControlConstants.AddOn.Search, "#modalProductCodeSelect", new { @id = "txtProductCode" })
+
+                        }
+                        else
+                        {
+                            @*@Html.ExtTextBoxAddOnFor(model => model.F94_PrepdtCode, CustomControlConstants.AddOn.Search, "#modalPreProductCodeSelectFortbl94", new { style = "width:100%;cursor: not-allowed", @readonly = "readonly", @id = "disabledInput", @class = "form-control" })*@
+                            @Html.ExtTextBoxAddOnFor(model => model.F67_ProductCode, CustomControlConstants.AddOn.Search, "", new { style = "cursor: not-allowed", @class = "form-control" })
+
+                        }
+
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F09_ProductDesp)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtTextBoxFor(model => model.F09_ProductDesp, new { style = "  cursor: not-allowed", @readonly = "readonly", @id = "txtProductName" })
+                        @*@Html.ExtNumberFor(model => model.F09_ProductDesp, new NumberOption() { NumberOfDecimal = 2, Max = 999999 })*@
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F67_ProductLotNo)
+                    </div>
+                    <div class="col-lg-8">
+                        @if (Model.IsCreate)
+                        {
+                            @Html.ExtTextBoxAddOnForEnable(model => model.F67_ProductLotNo, CustomControlConstants.AddOn.Search, "#modalProductLotNoSelect", new { @readonly = "readonly", id = "txtProductLotNo" })
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.F67_ProductLotNo, new { @readonly = "readonly", @id = "txtProductLotNo", @class = "form-control" })
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F67_Amount)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtNumberFor(model => model.F67_Amount, new NumberOption() { NumberOfDecimal = 2,Max = 99999999.00})
+
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.CertificationDate)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtDateTimeFor(model => model.CertificationDate, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                    </div>
+                </div>
+            </div>                    
+            <button type="submit" class="btn btn-default btn-flat btn-less-5-chars">OK</button>
+            <button type="button" class="btn btn-default btn-flat btn-less-5-chars" onclick=" hideFormProdCer() ">Cancel</button>
+        </div>
+
+
+
+    </div>
+}
+
+
+
+@*<script>
+    $(document).ready(function () {
+        $("#F39_KndEptBgnDate").focus();
+        $.validator.unobtrusive.parse('#addNewFormPdtPln');
+        $("#dvKndLine").find("input").each(function() {
+            $(this).click(function() {
+                $("#hdfKndLine").val($(this).val());
+            });
+        });
+    });
+</script>*@
+
+<script type="text/javascript">
+    $().ready(function () {
+        $("#F67_Amount").focus();
+       $.validator.unobtrusive.parse('#addNewForm');
+    });
+</script>

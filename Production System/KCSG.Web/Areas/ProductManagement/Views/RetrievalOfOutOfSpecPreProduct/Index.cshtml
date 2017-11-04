@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.ScreenId = "TCPR111F";
+    ViewBag.Title = "Retrieval of Out-of-Spec Pre-Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model KCSG.Web.Areas.ProductManagement.ViewModels.RetrievalOfOutOfSpecPreProduct.RetrievalOfOutOfSpecPreProductViewModel
+@using KCSG.Core;
+@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC
+@using Resources
+
+
+<script src="/Scripts/areas/RetrievalOfOutOfSpecPreProduct/RetrievalOfOutOfSpecPreProduct.js" type="text/javascript"></script>
+
+<script>
+    var formUrl = {
+        urlStorage: '@Url.Action("Storage", "RetrievalOfOutOfSpecPreProduct")',
+        urlRetrieval: '@Url.Action("Retrieval", "RetrievalOfOutOfSpecPreProduct")',
+        urlValidate:'@Url.Action("IsStoragable", "RetrievalOfOutOfSpecPreProduct")'
+    }
+    var message = {
+        MSG18: '@ProductManagementResources.MSG18',
+        MSG33:'@ProductManagementResources.MSG33'
+    }
+</script>
+
+<div class="col-lg-12">
+
+    <div class="panel panel-danger" id="searchForm">
+        <div class="panel-heading">Search Criteria</div>
+        <div class="panel-body">
+            <div class="col-lg-3">
+                @Html.ExtLabelFor(model => model.ShelfStatus)
+            </div>
+            <div class="col-lg-9 form-group">
+                @Html.ExtRadioButtonFor(model => model.ShelfStatus, EnumsHelper.GetListItemsWithDescription<Constants.ShelfStatusSearch>(Constants.ShelfStatusSearch.EmptyPallet), new { @id = "txtMaterialCodeSearch", onchange = "onChangeShelfStatus(this)" }, true, 2)
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">List of Retrieval of Out-of-Spec Pre-Product</div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.Grid(Model.Grid)
+            </div>
+            <div class="form-group">
+
+                <button class="btn btn-flat btn-default btn-less-5-chars"
+                        id="btnStorage" disabled="disabled"
+                        onclick=" clickRetrieveStorage() ">
+                    Storage
+                </button>
+
+                <button class="btn btn-flat btn-default btn-less-5-chars"
+                        id="btnRetrieval" disabled="disabled"
+                        onclick=" clickRetrieveStorage() ">
+                    Retrieval
+                </button>
+
+               
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+

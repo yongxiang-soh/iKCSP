@@ -1,0 +1,6 @@
+2017-11-02 15:56:47,316 [9] ERROR System.Reflection.RuntimeAssembly [(null)] - An error occurred while executing the command definition. See the inner exception for details.
+2017-11-02 22:40:26,077 [11] ERROR System.Reflection.RuntimeAssembly [(null)] - The specified type member 'F09_Label' is not supported in LINQ to Entities. Only initializers, entity members, and entity navigation properties are supported.
+2017-11-02 22:40:39,059 [11] ERROR System.Reflection.RuntimeAssembly [(null)] - The specified type member 'F09_Label' is not supported in LINQ to Entities. Only initializers, entity members, and entity navigation properties are supported.
+2017-11-02 22:41:02,172 [13] ERROR System.Reflection.RuntimeAssembly [(null)] - The specified type member 'F09_Label' is not supported in LINQ to Entities. Only initializers, entity members, and entity navigation properties are supported.
+2017-11-02 22:51:48,365 [13] ERROR System.Reflection.RuntimeAssembly [(null)] - The specified type member 'F09_Label' is not supported in LINQ to Entities. Only initializers, entity members, and entity navigation properties are supported.
+2017-11-02 22:52:22,590 [17] ERROR System.Reflection.RuntimeAssembly [(null)] - The specified type member 'F09_Label' is not supported in LINQ to Entities. Only initializers, entity members, and entity navigation properties are supported.

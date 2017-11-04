@@ -1,0 +1,75 @@
+﻿<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th style="text-align: center">** ALL SHELF LIST **</th>
+    </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC094P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td>< Product ></td>
+            <td></td>
+        </tr>        
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>R.B.L</th>
+            <th>Pallet No.</th>
+            <th>Product Code</th>            
+            <th>Product Name</th>
+            <th>S DATE</th>
+            <th>S TIME</th>          
+            <th>CF.</th>          
+            <th>LOT.NO</th>            
+            <th class="text-align-right">Quantity (Kg)</th>            
+        </tr>        
+    </thead>
+
+    <tbody>
+    {{#groupitems}}
+    {{#FindPrintMaterialNameItem}}
+    <tr>
+        <td>{{RBL}}</td>
+        <td>{{PalletNo}}</td>
+        <td>{{PreProductCode}}</td>
+        <td>{{PreProductName}}</td>
+        <td>{{SDate}}</td>
+        <td>{{Stime}}</td>
+        <td>{{CF}}</td>
+        <td>{{LotNo}}</td>
+        <td class="text-align-right">{{Quantityst}}</td>
+    </tr>
+        {{/FindPrintMaterialNameItem}}
+
+        <tr>
+            <td colspan="6"></td>
+            <td></td>
+            <td class="text-align-right">Total:</td>
+            <td class="text-align-right">{{Total}}</td>
+        </tr> 
+        {{/groupitems}}
+    </tbody>  
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>        
+    </tfoot> 
+</table>

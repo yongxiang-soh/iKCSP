@@ -1,0 +1,49 @@
+﻿@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.Common.ViewModels.CommonViewModel
+<script src="~/Scripts/areas/commond/commonSearchHelper.js"></script>
+@using (Html.BeginForm("", "", FormMethod.Post, new {id = "modalSelect"}))
+{
+    @Html.HiddenFor(model => model.Code)
+    @Html.HiddenFor(model => model.ModelType)
+    <div class="panel panel-danger" id="searchForm">
+        <div class="panel-heading">Search Criteria</div>
+        <div class="panel-body">
+            <div class="col-lg-3 form-group">
+                @((object) Html.ExtLabelFor(model => model.KeyWord))
+            </div>
+            <div class="col-lg-7 form-group">
+                @((object) Html.ExtTextBoxFor(model => model.KeyWord, new {id = "txtKeyWordSearch"}))
+            </div>
+            <div class="col-lg-2">
+                
+                <button type="button" class="btn btn-default btn-flat btn-less-5-chars col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                        id="btnSearch"
+                        onclick=" searchKeyWord() ">
+                    Search
+                </button>
+
+            </div>
+        </div>
+    </div>
+}
+<div class="panel panel-danger">
+    <div class="panel-heading">@Model.ListLabel </div>
+    <div class="panel-body">
+        <div class="col-lg-12">
+            @Html.Grid(Model.Grid)
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $().ready(function () {
+        setTimeout(function () { $('#txtKeyWordSearch').focus() }, 500);
+        //$("#txtKeyWordSearch").focus();
+            searchKeyWord();
+       try {
+           $("#modalShelfNoSelect #txtKeyWordSearch").mask("99-99-99");
+       } catch (err) {
+           console.log(err);
+       }
+    });
+</script>

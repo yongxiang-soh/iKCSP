@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.ScreenId = "TCSC011F";
+    ViewBag.Title = "Process Start/End";
+    if (!Model.Reload)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    
+}
+@model KCSG.Web.Areas.SystemManagement.ViewModels.StartEndSystemViewModel
+@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+ @if (!Model.Reload)
+ {
+     <link href="~/Content/toastr.min.css" rel="stylesheet"/>
+
+     <script src="~/Scripts/areas/SystemStartEnd/systemStartEnd.js"></script>
+
+     <script>
+         var formUrl = {
+             urlEnd: '@Url.Action("EndSystem", "StartEndSystem")'
+         }
+     </script>
+ }
+@using (Ajax.BeginForm("EndSystem", "StartEndSystem", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess" }, new { id = "startOrEndForm" }))
+{
+  
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-body text-center">
+                <h3>
+                    Kyocera Chemical Singapore Pte. Ltd.
+                </h3>
+                <h3>
+                    Singapore Works Production Control System
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-body text-center">
+                <label>
+                    @Model.Status
+                </label>
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.IsStart)
+    if (Model.IsStart)
+    {
+
+        <div class="col-lg-12">
+            <div class="panel panel-danger">
+                <div class="panel-body">
+                    <div class="row ">
+                        <div class="col-lg-4 "></div>
+                        <div class="col-lg-4 " id="dvEnd">
+                            @Html.ExtRadioButtonFor(model => model.StatusEnd, EnumsHelper.GetListItemsWithDescription<Constants.StatusEnd>(Constants.StatusEnd.NormalEnd).OrderByDescending(i => i.Text), null, true, 6)
+                        </div>
+                        <div class="col-lg-4 "></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="col-lg-12">
+            <div class="panel panel-danger">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4 "></div>
+                        <div class="col-lg-4" id="dvStart">
+                            @Html.ExtRadioButtonFor(model => model.StatusStart, EnumsHelper.GetListItemsWithDescription<Constants.StatusStart>(Constants.StatusStart.NormalStart), null, true, 6)
+                        </div>
+                        <div class="col-lg-4 "></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+    
+
+
+    <div class="col-lg-12">
+        @if (Model.Device)
+        {
+            <button type="button"
+                    class="btn btn-default btn-flat btn-less-5-chars  pull-right"
+                    id="btnSearch"
+                    onclick=" StartOrEnd() ">
+                OK
+            </button>
+        }
+        else
+        {
+            <button type="button"
+                    class="btn btn-default btn-flat pull-right"
+                    disabled="disabled">
+                OK
+            </button>
+        }
+    </div>
+}

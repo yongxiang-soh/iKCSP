@@ -1,0 +1,555 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@model KCSG.Web.Areas.Inquiry.ViewModels.InquiryByWarehouseLocation.InquiryRawMaterialShelfStatusModelView
+<style>
+    input.error {
+        border: 1px solid #b94a48;
+    }
+    .error {
+        color: #b94a48;
+    }
+</style>
+@using (Ajax.BeginForm("UpdateSubscreentcf032f", "InquiryBase", new AjaxOptions() { HttpMethod = "POST", Confirm = "Ready to update ?", OnSuccess = "InquiryBase.onUpdateSubscreentcf032fSuccess" }, new { @id = "updateSubscreentcf032f" }))
+{
+    @Html.HiddenFor(m => m.SearchCondition)
+    @Html.HiddenFor(m => m.Row)
+    @Html.HiddenFor(m => m.Bay)
+    @Html.HiddenFor(m => m.Level)
+    <div class="panel panel-danger">
+        <div class="panel-heading">Inquiry of Raw Material Shelf Status Picture2 - TCFC032F</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.ShelfNo)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @Html.ExtTextBoxFor(model => model.ShelfNo, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.ShelfStatus)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @Html.ExtTextBoxFor(model => model.ShelfStatus, new { @class = "form-control", @disabled = "disabled" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    @Html.ExtLabelRequireFor(model => model.PalletNo,Model.ShowUpdate)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @if (!Model.ShowUpdate)
+                    {
+                        @Html.ExtTextBoxFor(model => model.PalletNo, new { @class = "form-control", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.ExtTextBoxFor(model => model.PalletNo, new { @class = "form-control" })
+                    }
+                </div>
+
+                <div class="col-lg-2">
+                    @Html.ExtLabelRequireFor(model => model.StorageDate, Model.ShowUpdate)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @if (!Model.ShowUpdate)
+                    {
+                        @Html.ExtDateTimeFor(model => model.StorageDate, new DateTimeOption() { Format = "DD/MM/YYYY HH:mm:ss" }, new { @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.ExtDateTimeFor(model => model.StorageDate, new DateTimeOption() { Format = "DD/MM/YYYY HH:mm:ss" })
+                    }
+
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    @Html.ExtLabelRequireFor(model => model.MaterialCode, Model.ShowUpdate)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @if (!Model.ShowUpdate)
+                    {
+                        @Html.ExtTextBoxFor(model => model.MaterialCode, new { @class = "form-control", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.ExtTextBoxAddOnFor(model => model.MaterialCode, CustomControlConstants.AddOn.Search, "#modalMaterialCodeSelect", new { style = "width:100%", @id = "txtMaterialCode" })
+                    }
+                </div>
+
+                <div class="col-lg-2">
+                    @Html.ExtLabelRequireFor(model => model.MaterialName, Model.ShowUpdate)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @Html.ExtTextBoxFor(model => model.MaterialName, new { @class = "form-control", @readonly = "readonly", @id = "txtMaterialName" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    @Html.ExtLabelRequireFor(model => model.PrcordNo, Model.ShowUpdate)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @if (!Model.ShowUpdate)
+                    {
+                        @Html.ExtTextBoxFor(model => model.PrcordNo, new { @class = "form-control", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.ExtTextBoxFor(model => model.PrcordNo, new { @class = "form-control" })
+                    }
+
+                </div>
+
+                <div class="col-lg-2">
+                    @Html.ExtLabelRequireFor(model => model.PrtdvrNo, Model.ShowUpdate)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @if (!Model.ShowUpdate)
+                    {
+                        @Html.ExtTextBoxFor(model => model.PrtdvrNo, new { @class = "form-control", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.ExtTextBoxFor(model => model.PrtdvrNo, new { @class = "form-control" })
+                    }
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    @Html.ExtLabelRequireFor(model => model.AcceptanceClassification, Model.ShowUpdate)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @Html.ExtTextBoxFor(model => model.AcceptanceClassification, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtLabelRequireFor(model => model.BailmentClassification, Model.ShowUpdate)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @Html.ExtTextBoxFor(model => model.BailmentClassification, new { @class = "form-control", @readonly = "readonly", @id = "txtBailmentClass" })
+                </div>
+            </div>
+            <div class="row form-group">
+                <hr style="border-top: 1px solid #f2dede;" />
+            </div>
+        <div class="row">
+            <div class="col-lg-2 form-group"></div>
+            <div class="col-lg-5 form-group">
+                <label>Material LotNo</label>
+
+            </div>
+            <div class="col-lg-5 form-group">
+                <label>Quantity</label>
+            </div>
+        </div>
+        <div class="row">
+            @if (Model.ShowUpdate)
+            {
+                <div class="col-lg-2 padding-right-5">
+                    <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(1) ">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-2 padding-right-5">
+                    <button class="btn btn-flat btn-default" type="button" disabled="disabled">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            
+            <div class="col-lg-5 form-group">
+                @if (!Model.ShowUpdate)
+                {
+                    @Html.ExtTextBoxFor(model => model.MaterialLotNo1, new {@class = "form-control", @readonly = "readonly"})
+                }
+                else
+                {
+                    @Html.ExtTextBoxFor(model => model.MaterialLotNo1, new {@class = "form-control"})
+                }
+
+            </div>
+            <div class="col-lg-5 form-group">
+                @if (!Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.Quantity1, new NumberOption() {NumberOfDecimal = 2}, new {@class = "form-control", @readonly = "readonly"})
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.Quantity1, new NumberOption() {NumberOfDecimal = 2})
+                }
+            </div>
+        </div>
+        <div class="row">
+            @if (Model.ShowUpdate)
+            {
+                <div class="col-lg-2">
+                    <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(2) ">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-2">
+                    <button class="btn btn-flat btn-default" type="button" disabled="disabled">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            
+            <div class="col-lg-5 form-group">
+                @if (!Model.ShowUpdate)
+                {
+                    @Html.ExtTextBoxFor(model => model.MaterialLotNo2, new {@class = "form-control", @readonly = "readonly"})
+                }
+                else
+                {
+                    @Html.ExtTextBoxFor(model => model.MaterialLotNo2, new {@class = "form-control"})
+                }
+
+            </div>
+            <div class="col-lg-5 form-group">
+                @if (!Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.Quantity2, new NumberOption() {NumberOfDecimal = 2}, new {@class = "form-control", @readonly = "readonly"})
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.Quantity2, new NumberOption() {NumberOfDecimal = 2})
+                }
+
+            </div>
+        </div>
+            
+        <div class="row">
+            @if (Model.ShowUpdate)
+            {
+                <div class="col-lg-2">
+                    <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(3) ">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-2">
+                    <button class="btn btn-flat btn-default" type="button" disabled="disabled">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            
+            <div class="col-lg-5 form-group">
+                @if (!Model.ShowUpdate)
+                {
+                    @Html.ExtTextBoxFor(model => model.MaterialLotNo3, new {@class = "form-control", @readonly = "readonly"})
+                }
+                else
+                {
+                    @Html.ExtTextBoxFor(model => model.MaterialLotNo3, new {@class = "form-control"})
+                }
+            </div>
+            <div class="col-lg-5 form-group">
+                @if (!Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.Quantity3, new NumberOption() {NumberOfDecimal = 2}, new {@class = "form-control", @readonly = "readonly"})
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.Quantity3, new NumberOption() {NumberOfDecimal = 2})
+                }
+
+            </div>
+        </div>
+        <div class="row">
+            @if (Model.ShowUpdate)
+            {
+                <div class="col-lg-2">
+                    <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(4) ">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-2">
+                    <button class="btn btn-flat btn-default" type="button" disabled="disabled">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+
+            <div class="col-lg-5 form-group">
+                @if (!Model.ShowUpdate)
+                {
+                    @Html.ExtTextBoxFor(model => model.MaterialLotNo4, new {@class = "form-control", @readonly = "readonly"})
+                }
+                else
+                {
+                    @Html.ExtTextBoxFor(model => model.MaterialLotNo4, new {@class = "form-control"})
+                }
+            </div>
+            <div class="col-lg-5 form-group">
+                @if (!Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.Quantity4, new NumberOption() {NumberOfDecimal = 2}, new {@class = "form-control", @readonly = "readonly"})
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.Quantity4, new NumberOption() {NumberOfDecimal = 2})
+                }
+
+            </div>
+        </div>
+            
+        <div class="row">
+            @if (Model.ShowUpdate)
+            {
+                <div class="col-lg-2">
+                    <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(5) ">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-2">
+                    <button class="btn btn-flat btn-default" type="button" disabled="disabled">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            <div class="col-lg-5 form-group">
+                @if (!Model.ShowUpdate)
+                {
+                    @Html.ExtTextBoxFor(model => model.MaterialLotNo5, new {@class = "form-control", @readonly = "readonly"})
+                }
+                else
+                {
+                    @Html.ExtTextBoxFor(model => model.MaterialLotNo5, new {@class = "form-control"})
+                }
+
+            </div>
+            <div class="col-lg-5 form-group">
+                @if (!Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.Quantity5, new NumberOption() {NumberOfDecimal = 2}, new {@class = "form-control", @readonly = "readonly"})
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.Quantity5, new NumberOption() {NumberOfDecimal = 2})
+                }
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        @if (Model.ShowUpdate)
+        {
+            <button type="submit" class="btn btn-default btn-flat btn-less-5-chars" id="btnOk">OK</button>
+        }
+        <button class="btn btn-default btn-flat btn-less-5-chars" type="button" data-dismiss="modal">Cancel</button>
+    </div>
+}
+<script>
+    function clearRow(index) {
+        $("#MaterialLotNo" + String(index)).val("");
+        $("#Quantity" + String(index)).val("0.00");
+    }
+    
+</script>
+<script>
+    $().ready(function () {
+        //$.validator.unobtrusive.parse("#updateSubscreentcf032f");
+        function isEmpty(str) {
+            return (!str || 0 === str.length);
+        }
+        $.validator.addMethod("MaterialLotNo1",
+            function (value, element, params) {
+                
+                var thiserror = "";
+                if (isEmpty(value)) {
+                    // var range = JSON.parse(params);
+                    for (var i = 0; i < params.length; i++) {
+                        if (!isEmpty($(params[i]).val())) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                return true;
+
+            },
+            "Please input data for this required field.");
+
+        $.validator.addMethod("PalletNo",
+            function (value, element, params) {
+                var thiserror = "";
+                if (isEmpty(value)) {
+                    thiserror = "Please input data for this required field.";
+                    return false;
+                }
+                var row = $('#Row').val(),
+                    bay = $('#Bay').val(),
+                    level = $('#Level').val();
+                var check = true;
+                $.ajax({
+                    url: '/Inquiry/InquiryBase/PalletNo032fExit',
+                    data: {
+                        palletNo: value,
+                        row: row,
+                        bay: bay,
+                        level: level
+                    },
+                    type: "Options",
+                    async: false,
+                    success: function (response) {
+                        if (!response.Success) {
+                            thiserror = "This pallet is being used !";
+                            check = false;
+                        }
+                    }
+
+                });
+                return check;
+
+
+            }, "This pallet is being used !");
+
+        $.validator.addMethod("MaterialCode",
+            function (value, element, params) {
+                var thiserror = "";
+                if (isEmpty(value)) {
+                    thiserror = "Please input data for this required field.";
+                    return false;
+                }
+                var check = true;
+                if (!isEmpty($(params).val())) {
+                    var prcordNo = $('#PrcordNo').val(),
+                        prtdvrNo = $('#PrtdvrNo').val();
+                    $.ajax({
+                        url: '/Inquiry/InquiryBase/MaterialCode032fExit',
+                        data: {
+                            prcordNo: prcordNo,
+                            prtdvrNo: prtdvrNo,
+                            material: value
+                        },
+                        type: "Options",
+                        async: false,
+                        success: function (response) {
+                             
+                            if (!response.Success) {
+                                thiserror = "There is no data for this P. O. No.. and Partial Delivery for this material in database !";
+                                check = false;
+                            }
+                        }
+
+                    });
+                }
+                
+                return check;
+
+            }, "There is no data for this P. O. No.. and Partial Delivery for this material in database !");
+
+        $.validator.addMethod("material_same",
+            function (value, element, params) {
+
+                var thiserror = "";
+                if (!isEmpty(value)) {
+                   // var range = JSON.parse(params);
+                    for (var i = 0; i < params.length; i++) {
+                        if (!isEmpty($(params[i]).val())) {
+                            if (value === $(params[i]).val()) {
+                                thiserror = "This lot-no is been used !";
+                                return false;
+                            }
+                        }
+                    }
+                }
+                return true;
+            },
+            "This lot-no is been used !");
+
+
+        $.validator.addMethod("material_quality",
+            function (value, element, params) {
+
+                var thiserror = "";
+                if (!isEmpty($(params).val()) && $(params).val() != '0.00') {
+                    if (isEmpty(value)) {
+                        thiserror = "Material lot-no cannot be empty !";
+                        return false;
+                    }
+                }
+                return true;
+            },
+            "Material lot-no cannot be empty !");
+
+        $('#updateSubscreentcf032f').validate({
+            rules: {
+                MaterialCode: {
+                    required: true,
+                    MaterialCode: '#PrcordNo'
+                },
+                PalletNo: {
+                    required: true,
+                    PalletNo:true
+                },
+                StorageDate: {
+                    required: true
+                },
+                MaterialLotNo1: {
+                    MaterialLotNo1: ['#MaterialLotNo2','#MaterialLotNo3', '#MaterialLotNo4', '#MaterialLotNo5']
+                },
+                MaterialLotNo2: {
+                    material_same: ['#MaterialLotNo1','#MaterialLotNo3', '#MaterialLotNo4', '#MaterialLotNo5'],
+                    material_quality: '#Quantity2'
+                },
+                MaterialLotNo3: {
+                    material_same: ['#MaterialLotNo1','#MaterialLotNo2', '#MaterialLotNo4', '#MaterialLotNo5'],
+                    material_quality: '#Quantity3'
+                },
+                MaterialLotNo4: {
+                    material_same: ['#MaterialLotNo1','#MaterialLotNo2', '#MaterialLotNo3', '#MaterialLotNo5'],
+                    material_quality: '#Quantity4'
+                },
+                MaterialLotNo5: {
+                    material_same: ['#MaterialLotNo1','MaterialLotNo2', '#MaterialLotNo3', '#MaterialLotNo4'],
+                    material_quality: '#Quantity5'
+                },
+            },
+            messages: {
+                MaterialCode : {
+                    required: "Please input data for this required field.",
+                    MaterialCode: "There is no data for this P. O. No.. and Partial Delivery for this material in database !"
+                },
+                StorageDate: {
+                    required: "Please input data for this required field."
+                },
+                PalletNo: {
+                    required: "Please input data for this required field.",
+                    PalletNo: "This pallet is being used !"
+                },
+                MaterialLotNo1: {
+                    MaterialLotNo1: "Material lot-no cannot be empty !"
+                },
+            }
+            //highlight: function (element) {
+            //    $(element).closest('.control-group').removeClass('success').addClass('error');
+            //},
+            //unhighlight: function (element) {
+            //    $(element).closest('.control-group').removeClass('error').addClass('success');
+            //},
+            //success: function (element) {
+            //    //element.text('OK!').addClass('valid');
+            //}
+        });
+        $.validator.unobtrusive.parse("#updateSubscreentcf032f");
+    });
+</script>

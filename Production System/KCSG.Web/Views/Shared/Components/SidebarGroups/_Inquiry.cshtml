@@ -1,0 +1,174 @@
+﻿@using KCSG.Domain.Interfaces.Services
+
+@{
+    // Find service which handles identity information.
+    var identityService = DependencyResolver.Current.GetService<IIdentityService>();
+
+    // Find available screens.
+    var availableScreens = identityService.FindAccessibleScreens(HttpContext.Current.User.Identity);
+
+}
+
+@if (identityService.IsScreenAccessible(availableScreens, new[]
+{
+    "TCFC011F", "TCFC012F", "TCFC013F", "TCFC014F", "TCFC015F", "TCFC021F",
+    "TCFC031F","TCFC033F","TCFC035F"}))
+
+{
+    <li class="treeview">
+        <a href="javascript:void(0);">
+            <i class="glyphicon glyphicon-search"></i>
+            <span>Inquiry</span>
+            <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+        </a>
+        <ul class="treeview-menu">
+            
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC011F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryByMaterialName", new {Area = "Inquiry"})"
+           data-toggle="tooltip"
+           title="Inquiry by Material Name">
+            <i class="fa fa-circle-o"></i>Inquiry by Material Name
+        </a>
+    </li>
+}
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC012F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryByPreProductName", new {Area = "Inquiry"})"
+           data-toggle="tooltip"
+           title="Inquiry by Pre-Product Name">
+            <i class="fa fa-circle-o"></i>Inquiry by Pre-Product Name
+        </a>
+    </li>
+}
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC013F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryByExternalPreProductName", new {Area = "Inquiry"})"
+           data-toggle="tooltip"
+           title="Inquiry by External Pre-Product Name">
+            <i class="fa fa-circle-o"></i>Inquiry by External Pre-Product Name
+        </a>
+    </li>
+}
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC014F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryByProductName", new {Area = "Inquiry"})"
+           data-toggle="tooltip"
+           title="Inquiry by Product Name">
+            <i class="fa fa-circle-o"></i>Inquiry by Product Name
+        </a>
+    </li>
+}
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC015F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryBySupplierName", new {Area = "Inquiry"})"
+           data-toggle="tooltip"
+           title="Inquiry by Supplier Name ">
+            <i class="fa fa-circle-o"></i>Inquiry by Supplier Name
+        </a>
+    </li>
+}
+
+
+
+
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC021F"))
+{
+    <li>
+        <a href="/Inquiry/InquiryByWarehouseLocation/Index"
+           data-toggle="tooltip"
+           title="Inquiry by Warehouse Location">
+            <i class="fa fa-circle-o"></i>Inquiry by Warehouse Location
+        </a>
+    </li>
+}
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC031F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryByShelfStatus", new {Area = "Inquiry"})"
+           data-toggle="tooltip"
+           title="Inquiry by Raw Material Shelf Status">
+            <i class="fa fa-circle-o"></i>Inquiry by Raw Material Shelf Status
+        </a>
+    </li>
+}
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC033F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryByShelfStatus", new {Area = "Inquiry", type = 1})"
+           data-toggle="tooltip"
+           title="Inquiry by Pre-product Shelf Status">
+            <i class="fa fa-circle-o"></i>Inquiry by Pre-product Shelf Status
+        </a>
+    </li>
+}
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC035F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryByShelfStatus", new {Area = "Inquiry", type = 2})"
+           data-toggle="tooltip"
+           title="Inquiry by Product Shelf Status">
+            <i class="fa fa-circle-o"></i>Inquiry by Product Shelf Status
+        </a>
+    </li>
+}
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC041F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryByPreProductCode", new {Area = "Inquiry"})"
+           data-toggle="tooltip"
+           title="Inquiry by Pre-Product Code">
+            <i class="fa fa-circle-o"></i>Inquiry by Pre-Product Code
+        </a>
+    </li>
+}
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC051F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryByProductCode", new {Area = "Inquiry"})"
+           data-toggle="tooltip"
+           title="Inquiry by Product Code">
+            <i class="fa fa-circle-o"></i>Inquiry by Product Code
+        </a>
+    </li>
+}
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC071F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryKneadingLineNo", new {Area = "Inquiry"})"
+           data-toggle="tooltip"
+           title="Inquiry by Line No">
+            <i class="fa fa-circle-o"></i>Inquiry by Line No
+        </a>
+    </li>
+}
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC061F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryKneadingCommandNo", new {Area = "Inquiry"})"
+           data-toggle="tooltip"
+           title="Inquiry by Command No">
+            <i class="fa fa-circle-o"></i>Inquiry by Command No
+        </a>
+    </li>
+}
+@if (identityService.IsScreenAccessible(availableScreens, "TCFC081F"))
+{
+    <li>
+        <a href="@Url.Action("Index", "InquiryKneadingLotNo", new {Area = "Inquiry"})"
+           data-toggle="tooltip"
+           title="Inquiry by Lot No">
+            <i class="fa fa-circle-o"></i>Inquiry by Lot No
+        </a>
+    </li>
+}
+        </ul>
+    </li>
+}

@@ -1,0 +1,48 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.SearchCriteriaModel
+
+
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <span>Search Criteria</span>
+    </div>
+    <div class="panel-body">
+        <div class="row form-group">
+            <div class="col-lg-2">
+                @Html.ExtLabelFor(model => model.Mode)
+            </div>
+            <div class="col-lg-3" style="padding: 0">
+                @Html.ExtRadioButtonFor(model => model.Mode, EnumsHelper.GetListItemsWithDescription<Constants.EnvMode>(Constants.EnvMode.SpecLine).OrderBy(i => int.Parse(i.Value)), new { }, true, 6)
+            </div>
+
+            <div class="col-lg-2"><label>Location<i class="required" aria-required="true">*</i></label></div>
+            <div class="col-lg-3">@Html.ExtDropDownListFor(m => m.Location, (IEnumerable<SelectListItem>)ViewBag.ListLocation)</div>
+
+
+        </div>
+
+        <div class="row form-group">
+            <div class="col-lg-2">
+                @Html.ExtLabelFor(model => model.StartDate)
+            </div>
+            <div class="col-lg-3">
+                @Html.ExtDateTimeFor(model => model.StartDate, new DateTimeOption() { Format = "DD/MM/YYYY" })
+            </div>
+
+            <div class="col-lg-2">
+                @Html.ExtLabelFor(model => model.EndDate)
+            </div>
+
+            <div class="col-lg-3">
+                @Html.ExtDateTimeFor(m => m.EndDate, new DateTimeOption() { Format = "DD/MM/YYYY" })
+            </div>
+
+            <div class="col-lg-2">
+                <input type="submit" class="btn btn-default btn-flat btn-less-5-chars" value="Go">
+            </div>
+        </div>
+    </div>
+</div>

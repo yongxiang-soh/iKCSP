@@ -1,0 +1,63 @@
+﻿@using KCSG.Domain.Interfaces.Services
+
+@{
+    // Find service which handles identity information.
+    var identityService = DependencyResolver.Current.GetService<IIdentityService>();
+
+    // Find available screens.
+    var availableScreens = identityService.FindAccessibleScreens(HttpContext.Current.User.Identity);
+}
+
+
+@if (identityService.IsScreenAccessible(availableScreens, new[] { "TCSC011F", "TCSC021F", "TCSC031F", "TCSC041F" }))
+{
+    <li class="treeview">
+        <a href="javascript:void(0);">
+            <i class="fa fa-cog"></i>
+            <span>System Management</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCSC011F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StartEndSystem", new {Area = "SystemManagement"})">
+                        <i class="fa fa-circle-o"></i> System Start/End
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCSC021F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "DailyProcess", new {Area = "SystemManagement"})">
+                        <i class="fa fa-circle-o"></i> Daily Process
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCSC031F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "MonthlyProcess", new {Area = "SystemManagement"})">
+                        <i class="fa fa-circle-o"></i> Monthly Process
+                    </a>
+                </li>
+            }
+
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCSC041F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "MasterDatabase", new {Area = "SystemManagement"})">
+                        <i class="fa fa-circle-o"></i> Master Database
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </li>
+}

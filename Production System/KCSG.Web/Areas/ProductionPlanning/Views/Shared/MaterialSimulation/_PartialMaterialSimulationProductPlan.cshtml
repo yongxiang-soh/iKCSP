@@ -1,0 +1,198 @@
+﻿@using System.Text
+@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.ProductionPlanning.ViewModels.MaterialSimulation.ProductPlanViewModel
+
+@using (Html.BeginForm("", ""))
+{
+    <div class="panel panel-danger">
+        <div class="panel-heading"> Production Plan Simulation - TCPP054F</div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-8">
+                        @Html.ExtLabelFor(m => m.From)
+                    </div>
+                    <div class="col-lg-4">
+                        @Html.ExtTextBoxFor(model => model.From, new {@disabled = true})
+                    </div>
+                </div>
+                <div class="col-lg-1 ">
+                    <label class="center-block" style="width: 10px">~</label>
+                </div>
+                <div class="col-lg-5">
+                    <div class="col-lg-4">
+                        @Html.ExtTextBoxFor(model => model.To, new {@disabled = true})
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-8">
+                    <div class="col-lg-6">
+                        @Html.ExtLabelFor(m => m.Line)
+                    </div>
+                    <div class="col-lg-6" style="padding-left: 0px">
+                        @Html.ExtRadioButtonFor(model => model.Line, EnumHelper.GetSelectList(typeof (Constants.KndLine), Constants.KndLine.Conventional).OrderBy(i => i.Text), null, true, 6)
+                    </div>
+                </div>
+            </div>
+            @{ var width = Model.productName.Count() * 150; }
+            <div class="row form-group">
+                <div class="col-lg-12" id="dvMegabit" style="display: none">
+                    <div class="jsgrid" style="position: relative; height: auto; width: 100%">
+                        <div class="jsgrid-grid-body">
+                            <table class="jsgrid-table" style="min-width: 100%; width: @width px;">
+                                <tr class="jsgrid-header-row">
+                                    <th style="width: 150px">Production Date</th>
+                                    @{
+    @*foreach (var name in Model.productName)
+    {
+                            <th style="width: 150px">
+                                @name.F03_PreProductName
+                            </th>
+    }*@
+                                        int j;
+                                        for(j = 1; j < 5;j++)
+    {
+        <th style="width: 150px">
+           Preproduct @j
+        </th>
+    }
+                                    }
+                                </tr>
+
+                                @{
+                                    int o = 0;
+                                    foreach (var preProductPlanSimuItem in Model.LstPreProductPlanSimuItem)
+                                    {
+                                        var s = o%2 == 0 ? "jsgrid-alt-row" : "jsgrid-row";
+                                        o++;
+                                        <tr class='@s'>
+                                            <td style="width: 150px">@preProductPlanSimuItem.Date</td>
+                                            @for (j = 1; j < 5; j++) { 
+                                            @*@foreach (var name in Model.productName)
+                                            {*@
+                                                var item = preProductPlanSimuItem.PreproductISimulerItems.Where(i => i.KndLine).FirstOrDefault(i => i.Code==j);
+                                                <td style="width: 150px" onclick=" onSelectCell(this) ">
+
+                                                    @if (item != null)
+                                                    {
+                                                        @Html.Hidden("date", preProductPlanSimuItem.Date)
+                                                        @Html.Hidden("Code", item.PreProductCode)
+                                                        @Html.Hidden("productName",item.Name)
+                                                        @item.Simulation
+                                                        @Html.Hidden("hdPopUp", item.SimulationPopUpItems)
+                                                    }
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="col-lg-12" id="dvConventional">
+                    <div class="jsgrid" style="position: relative; height: auto; width: 100%">
+                       <div class="jsgrid-grid-body">
+                            <table class="jsgrid-table" style="min-width: 100%; width: @width px;">
+                                <tr class="jsgrid-header-row">
+                                    <th style="width: 150px">Production Date</th>
+                                    @{
+    @*foreach (var name in Model.productName)
+    {
+                            <th style="width: 150px">
+                                @name.F03_PreProductName
+                            </th>
+    }*@
+                                        for(j = 1; j < 5;j++)
+                                        {
+                                            <th style="width: 150px">
+                                                Preproduct @j
+                                            </th>
+                                        }
+                                    }
+                                </tr>
+
+                                @{
+                                    j = 0;
+                                    foreach (var preProductPlanSimuItem in Model.LstPreProductPlanSimuItem)
+                                    {
+
+                                        var m = j%2 == 0 ? "jsgrid-alt-row" : "jsgrid-row";
+                                        j++;
+                                        <tr class='@m'>
+                                            <td style="width: 150px">@preProductPlanSimuItem.Date</td>
+                                            @for (j = 1; j < 5; j++) { 
+                                            @*@foreach (var name in Model.productName)
+                                            {*@
+                                                var item = preProductPlanSimuItem.PreproductISimulerItems.Where(i => !i.KndLine).FirstOrDefault(i => i.Code == j);
+                                                <td style="width: 150px" onclick=" onSelectCell(this) ">
+                                                    @if (item != null)
+                                                    {
+                                                        @Html.Hidden("date", preProductPlanSimuItem.Date)
+                                                        @Html.Hidden("Code", item.PreProductCode)
+                                                        @Html.Hidden("productName",item.Name)
+                                                        @Html.Hidden("lot", item.Lot)
+                                                        @Html.Hidden("hdPopUp", item.SimulationPopUpItems)
+                                                        @item.Simulation
+                                                    }
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+
+                            </table>
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <div class="col-lg-12">
+                    <button type="button" class="btn btn-default btn-flat btn-less-5-chars" onclick="ShowPopUp()" >OK</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+@using (Html.ExtModalFor("popup", ExtModal.ModalSize.Large, ""))
+{
+    using (Html.ExtModalBodyFor())
+    {
+    }
+    using (Html.ExtModalFooterFor())
+    {
+        <button class="btn btn-flat btn-default btn-less-5-chars" data-dismiss="modal">Close</button>
+    }
+
+}
+<script>
+    $().ready(function () {
+        var request = $("#gerenaFrom").serialize();
+        request += "&Line =" + $("#Line[checked]").val();
+        gridHelper.searchObject("PreproductGrid", request);
+        $("input[name='Line']").change(function () {
+            if ($(this).val() == 0) {
+                $("#dvConventional").hide();
+                $("#dvMegabit").show();
+            } else {
+                $("#dvMegabit").hide();
+                $("#dvConventional").show();
+            }
+        });
+    });
+</script>

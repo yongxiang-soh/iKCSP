@@ -1,0 +1,2286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{29CDD4F1-1B27-460A-B642-0C55D85AA0BB}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KCSG.Web</RootNamespace>
+    <AssemblyName>KCSG.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;REALTIME_CONNECTION_LOG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.SignalR, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.SignalR.3.0.2\lib\net40\Autofac.Integration.SignalR.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.1\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Activities" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\EnvironmentManagement\Views\EnvironmenBase\" />
+    <Folder Include="Areas\Inquiry\Views\InquiryBase\" />
+    <Folder Include="Areas\KneadingCommand\Views\Shared\" />
+    <Folder Include="Areas\PreProductManagement\Views\Shared\" />
+    <Folder Include="Areas\ProductionPlanning\ViewModels\PrePdtMkp\" />
+    <Folder Include="Areas\ProductionPlanning\Views\Common\" />
+    <Folder Include="Areas\SystemManagement\Views\Shared\" />
+    <Folder Include="obj\" />
+    <Folder Include="Scripts\areas\createTabletisingCommand\" />
+    <Folder Include="Scripts\areas\materialShelfStatus\" />
+    <Folder Include="Views\Shared\Components\SidebarGroups\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_GlobalResources\CommunicationResource.designer.cs">
+      <DependentUpon>CommunicationResource.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\EnvironmentResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EnvironmentResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\InQuiryResource.designer.cs">
+      <DependentUpon>InQuiryResource.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\MaterialResource.Designer.cs">
+      <DependentUpon>MaterialResource.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\MessageResource.Designer.cs">
+      <DependentUpon>MessageResource.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\PreProductManagementResources.Designer.cs">
+      <DependentUpon>PreProductManagementResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\ProductManagementResources.Designer.cs">
+      <DependentUpon>ProductManagementResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_GlobalResources\TabletisingResources.Designer.cs">
+      <DependentUpon>TabletisingResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="App_Start\AutoFacConfig.cs" />
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Areas\Communication\Controllers\MessageController.cs" />
+    <Compile Include="Areas\Communication\Controllers\WeighingEquipmentController.cs" />
+    <Compile Include="Areas\Communication\ViewModels\WeighingEquipmentViewModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\AvailabilityDataEditController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\AvailabilityTabletisingMachineController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\CalculationOfControlLimitController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\CleanlinessDataInputController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\ControlLimitEditController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\CreepingAndRollSpeedDurationController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\AvailabilityMixingRollMachineController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\CreepingAndRollSpeedDataEditController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\EnvironmentDataDurationController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\EnvironmentDataEditController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\CreepingAndRollSpeedDataOneDayController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\EnvironmentDataOneDayController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\LotDataCleanupController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\LotDataSamplingController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\XRTemperatureManagementController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\Controllers\ProductMasterManagementController.cs" />
+    <Compile Include="Areas\EnvironmentManagement\EnvironmentManagementAreaRegistration.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\AvailabilityDataEdit\AvailabilityDataEditViewModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\AvailabilityMixingRollMachine\AvailabilityMixingRollMachineViewModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\CalculationOfControlLimit\CalculationOfControlLimitViewModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\CleanlinessDataInputModel\CleanlinessDataInputModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\CommondModel\SearchCriteriaModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\ControlLimitEdit\ControlLimitEditViewModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\CreepingAndRollSpeedDataEdit\CreepingAndRollSpeedDataEditViewModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\CreepingAndRollSpeedDuration\CreepingAndRollSpeedDurationModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\EnvironmentDataDuration\EnvironmentDataDurationViewModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\EnvironmentDataEdit\EnvironmentDataEditViewModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\CreepingAndRollSpeedDataOneDay\CreepingAndRollSpeedDataOneDayViewModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\EnvironmentDataOneDay\EnvironmentDataOneDayViewModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\LotDataCleanup\LotDataCleanupViewModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\LotDataSampling\LotDataSamplingModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\PrevAndNextDay\PrevAndNextDay.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\ProductMasterManagement\ProductMasterManagementViewModel.cs" />
+    <Compile Include="Areas\EnvironmentManagement\ViewModels\XRTemperatureManagement\XRTemperatureManagementModel.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryKneadingLotNoController.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByWarehouseLocation\InquiryByProductShelfStatusEmptyModelView.cs" />
+    <Compile Include="Areas\KneadingCommand\ViewModels\InputOfKneadingCommand\InitializeKneadingCommandInputViewModel.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\ProductCerfiticateConsumedListController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\PreProductReceivedConsumedListController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\MaterialReceivedConsumedListController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\PreProductRetrievalRecordController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\MaterialRetrievalRecordController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\ProductCertificationRecordController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\ProductShippingRecordController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\ProductMovementRecordController.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByWarehouseLocation\InquiryByProductShelfStatusExternalPreProductModelView.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\PreProductMovementRecordController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\MaterialMovementRecordController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\ProductMovementHistoryController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\PreproductMovementHistoryController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\MaterialMovementHistoryController.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByWarehouseLocation\InquiryByPreProductShelfStatusEmptyModelView.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByWarehouseLocation\InquiryByProductShelfStatusModelView.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\ProductStockController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\PreProductStockController.cs" />
+    <Compile Include="Areas\ManagementReport\Controllers\MaterialStockController.cs" />
+    <Compile Include="Areas\ManagementReport\ManagementReportAreaRegistration.cs" />
+    <Compile Include="Areas\ManagementReport\ViewModels\ManagementReportViewModel\DeleteReportTableRecordViewModel.cs" />
+    <Compile Include="Areas\ManagementReport\ViewModels\ManagementReportViewModel\FindReportTableColumnsViewModel.cs" />
+    <Compile Include="Areas\ManagementReport\ViewModels\ManagementReportViewModel\FindReportTableRecordsViewModel.cs" />
+    <Compile Include="Areas\ManagementReport\ViewModels\ManagementReportViewModel\InsertReportTableRecordViewModel.cs" />
+    <Compile Include="Areas\ManagementReport\ViewModels\ManagementReportViewModel\MaterialSimulationViewModel.cs" />
+    <Compile Include="Areas\ManagementReport\ViewModels\ManagementReportViewModel\ReportStartEndSystemViewModel.cs" />
+    <Compile Include="Areas\ManagementReport\ViewModels\ManagementReportViewModel\UpdateManagementReportViewModel.cs" />
+    <Compile Include="Areas\ManagementReport\ViewModels\ManagementReportViewModel\UpdateReportTableRecordViewModel.cs" />
+    <Compile Include="Areas\ManagementReport\ViewModels\MaterialStock\MaterialStockSearchViewModel.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByWarehouseLocation\InquiryBySupplierPalletModelView.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByWarehouseLocation\InquiryByPreProductShelfStatusModelView.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\FontStorageOfSupplierPalletController.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\FontStorageOfSupplierPallet\FontStorageOfSupplierPalletViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\ForcedRetrievalOfRejectedMaterial\ReplyThirdControllerViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\MaterialPostReceptionInput\FindPostReceptionInputMaterialViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\ReStorageOfMaterial\FindMaterialLotNoViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\RetrieveOfMaterial\PostResultProceedViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\StockTakingOfMaterial\RequestRestoreMaterialViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\StockTakingOfMaterial\StockMaterialComResponseViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\PrintLabelViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\StorageEmptyContainerC2Reply.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\StorePreProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ForcedRetrievalOfProduct\ForceRetrievalProductRespondViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ProductShippingCommand\ReplyThirdCommunicationViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\RetrievalOfExternalPreProduct\CommunicationResponseMessageViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\RetrievalOfOutOfSpecPreProduct\RetrievalOutOfSpectPreProductC3ViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StockTakingOfProduct\FindProductConfirmDetailViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StockTakingOfProduct\RestorageProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StockTakingOfProduct\StockTakingRespondRestoreViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StorageOfExternalPreProduct\StorageOfExternalPreProductC3ViewModel.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\Controllers\PreProductChargingController.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\Models\PreProductCharging\PreProductChargingViewModel.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\ViewModels\ExternalLabelSettingViewModel.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\ViewModels\InternalLabelSettingViewModel.cs" />
+    <Compile Include="Attributes\IntModelBinder.cs" />
+    <Compile Include="Attributes\DoubleModelBinder.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByWarehouseLocation\InquiryRawMaterialShelfStatusModelView.cs" />
+    <Compile Include="Attributes\MvcActionRequestFilter.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Common\CommonAreaRegistration.cs" />
+    <Compile Include="Areas\Common\Controllers\CommonController.cs" />
+    <Compile Include="Areas\Common\ViewModels\CommonViewModel.cs" />
+    <Compile Include="Areas\Common\ViewModels\LoginItem.cs" />
+    <Compile Include="Areas\Communication\CommunicationSubSystemAreaRegistration.cs" />
+    <Compile Include="Areas\Communication\Controllers\AWMaterialController.cs" />
+    <Compile Include="Areas\Communication\Controllers\AWPreProductController.cs" />
+    <Compile Include="Areas\Communication\Controllers\AWProductController.cs" />
+    <Compile Include="Areas\Communication\Controllers\BaseCommucationController.cs" />
+    <Compile Include="Areas\Communication\Controllers\ConveyorStatusController.cs" />
+    <Compile Include="Areas\Communication\ViewModels\ConveyorStatusViewModel.cs" />
+    <Compile Include="Areas\Communication\ViewModels\DetailInformationViewModel.cs" />
+    <Compile Include="Areas\Communication\ViewModels\GeneralInformatrionViewModel.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryByExternalPreProductNameController.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryBaseController.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryByMaterialNameController.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryByProductCodeController.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryByPreProductCodeController.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryByPreProductNameController.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryByProductNameController.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryBySupplierNameController.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryByWarehouseLocationController.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryKneadingCommandNoController.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryKneadingLineNoController.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryKneadingCommandNo\InquiryByExternalPreProductNameSearchViewModel.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByExternalPreProductName\InquiryByExternalPreProductNameSearchViewModel.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByMaterialName\InquiryByMaterialNameSearchViewModel.cs" />
+    <Compile Include="Areas\Inquiry\InquiryAreaRegistration.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByProductCode\InquiryByProductCodeSearchViewModel.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByPreProductCode\InquiryByPreProductCodeSearchViewModel.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByPreProductName\InquiryByPreProductNameSearchViewModel.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByProductName\InquiryByProductNameSearchViewModel.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryBySupplierName\InquiryBySupplierNameSearchViewModel.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByWarehouseLocation\InquiryByWarehouseLocationSearchViewModel.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByWarehouseLocation\InquiryOutOfSignPictureModelView.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByWarehouseLocation\InquiryByLocaltionMaterialStatusModelView.cs" />
+    <Compile Include="Areas\KneadingCommand\Controllers\InputOfKneadingCommandController.cs" />
+    <Compile Include="Areas\KneadingCommand\Controllers\KneadingStartEndController.cs" />
+    <Compile Include="Areas\KneadingCommand\KneadingCommandAreaRegistration.cs" />
+    <Compile Include="Areas\KneadingCommand\ViewModels\InputOfKneadingCommand\InputOfKneadingCommandSearchViewModel.cs" />
+    <Compile Include="Areas\KneadingCommand\ViewModels\InputOfKneadingCommand\PrintInputKneadingCommandViewModel.cs" />
+    <Compile Include="Areas\KneadingCommand\ViewModels\KneadingCommandControlViewModel.cs" />
+    <Compile Include="Areas\KneadingCommand\ViewModels\KneadingStartEnd\StartKneadingCommandViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\RetrieveOfMaterial\FindPalletDetailViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\RetrieveOfMaterial\FindPalletsViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\RetrieveOfMaterial\UnassignPalletsViewModel.cs" />
+    <Compile Include="Areas\Inquiry\Controllers\InquiryByShelfStatusController.cs" />
+    <Compile Include="Areas\Inquiry\ViewModels\InquiryByShelfStatus\InquiryByMaterialShelfStatusSearchViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\Controllers\ForcedRetrievalOfPreProductController.cs" />
+    <Compile Include="Areas\PreProductManagement\Controllers\RetrievalOfPreProductController.cs" />
+    <Compile Include="Areas\PreProductManagement\Controllers\StockTakingPreProductController.cs" />
+    <Compile Include="Areas\PreProductManagement\Controllers\StorageOfEmptyContainerController.cs" />
+    <Compile Include="Areas\PreProductManagement\Controllers\StorageOfPreProductController.cs" />
+    <Compile Include="Areas\PreProductManagement\PreProductManagementAreaRegister.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\AnalyzeStockTakingForMovingViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\FindConveyorViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\FindEmptyContainerViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\FindPrePdtShfStsViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\FindStockTakingPreProductViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\ForceRetrievalResponseMessageViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\RestoreContainerViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\RetrievalOfPreProductViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\RetrieveForcedRetrievalPreProductViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\RetrievePreProductContainerOkViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\RetrieveStockTakingPreProductViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\StockTakingPreProductViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\StorageOfEmptyContainerViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\StorageOfPreProductUc6ViewModel.cs" />
+    <Compile Include="Areas\PreProductManagement\ViewModels\StoragePreProductIntoWarehouseViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\MasterList\MasterListPrintViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\MaterialSimulation\ProductPlanPopUp.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\ForcedRetrievalOfProductController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\InterFloorMovementOfProductController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\OutOfPlanProductController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\ProductCertificationController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\ProductShippingCommandController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\ProductShippingPlanningController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\RestorageOfProductController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\RetrievalOfEmptyProductPalletController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\StorageOfEmptyProductPalletController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\RetrievalOfOutOfSpecPreProductController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\StorageOfExternalPreProductController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\RetrievalOfExternalPreProductController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\StockTakingOfProductController.cs" />
+    <Compile Include="Areas\ProductManagement\Controllers\StorageOfProductController.cs" />
+    <Compile Include="Areas\ProductManagement\ProductManagementAreaRegistration.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ForcedRetrievalOfProduct\ForcedRetrievalOfProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\OutOfPlanProduct\OutOfPlanProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\InterFloorMovementOfProduct\InterFloorMovementOfProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ProductCertification\AnalyzeProductCertificationViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ProductCertification\PrintProductCertificationViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ProductCertification\ProductCertificationSearchViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ProductCertification\ProductCertificationViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ProductShippingCommand\ExportProductShippingCommandViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ProductShippingCommand\ProductShippingCommandDetailViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ProductShippingCommand\ProductShippingCommandViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ReStorageOfProduct\ReStorageOfProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\RetrievalOfEmptyProductPallet\RetrievalOfEmptyProductPalletViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StorageOfEmptyProduct\StorageOfEmptyProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StockTakingOfProduct\StockTakingOfProductConfirmViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\RetrievalOfOutOfSpecPreProduct\RetrievalOfOutOfSpecPreProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StorageOfExternalPreProduct\StorageOfExternalPreProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\RetrievalOfExternalPreProduct\ExternalPreProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\RetrievalOfExternalPreProduct\FindTableListingLineViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\RetrievalOfExternalPreProduct\RetrievalOfExternalPreProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StockTakingOfProduct\FindProductDetailViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StockTakingOfProduct\FindStockTakingOfProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StockTakingOfProduct\RetrieveProductDetailViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StockTakingOfProduct\StockTakingOfProductViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ProductShippingPlanning\ProductShippingPlanningSearchViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\ProductShippingPlanning\ProductShippingPlanningViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StorageOfProductSelectedViewModel.cs" />
+    <Compile Include="Areas\ProductManagement\ViewModels\StorageOfProductViewModel.cs" />
+    <Compile Include="Areas\SystemManagement\Controllers\MasterDatabaseController.cs" />
+    <Compile Include="Areas\SystemManagement\ViewModels\DeleteTableRecordViewModel.cs" />
+    <Compile Include="Areas\SystemManagement\ViewModels\FindTableColumnsViewModel.cs" />
+    <Compile Include="Areas\SystemManagement\ViewModels\FindTableRecordsViewModel.cs" />
+    <Compile Include="Areas\SystemManagement\ViewModels\InsertTableRecordViewModel.cs" />
+    <Compile Include="Areas\SystemManagement\ViewModels\UpdateTableRecordViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\AcceptanceOfMaterialController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\RestorageOfMaterialController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\RetrievalOfSupplierPalletController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\InterFloorMovementOfMaterialController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\MaterialPostReceptionInputController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\MaterialReceptionInputController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\RetrievalOfWarehousePalletController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\RetrieveOfMaterialController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\StockTakingOfMaterialController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\StorageOfMaterialController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\StorageOfSupplementaryMaterialController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\StorageOfSupplierPalletController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\StorageOfWarehousePalletController.cs" />
+    <Compile Include="Areas\MaterialManagement\MaterialManagementAreaRegistration.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\InterFloorMovementOfMaterialController\InterFloorMovementOfMaterialViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\ForcedRetrievalOfRejectedMaterial\AssignRejectedMaterialViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\MaterialPostReceptionInput\MaterialPostReceptionInputViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\MaterialReceptionInput\MaterialReceptionViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\MaterialReceptionInput\MaterialReceptionSearchViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\ReStorageOfMaterial\RestorageMaterialContainerViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\ReStorageOfMaterial\RestorageMaterialViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\RetrievalOfSupplierPallet\RetrievalOfSupplierPalletViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\RetrievalOfWarehousePallet\RetrievalOfWarehousePalletViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\RetrieveOfMaterial\DetailPalletViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\RetrieveOfMaterial\RetrieveOfMaterialViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\StockTakingOfMaterial\StockTakingOfMaterialViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\StorageOfSupplementaryMaterial\StorageOfSupplementaryMaterialViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\StorageOfSupplementaryMaterial\StorageOfSupplementMaterialSearchViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\ReStorageOfMaterial\UnassignMaterialViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\StorageOfMaterial\StorageOfMaterialViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\StorageOfSupplierPallet\StorageOfSupplierPalletSearchViewModel.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\StorageOfSupplierPallet\StorageOfSupplierPalletViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\Controllers\BaseController.cs" />
+    <Compile Include="Areas\MaterialManagement\Controllers\ForcedRetrievalOfRejectedMaterialController.cs" />
+    <Compile Include="Areas\ProductionPlanning\Controllers\MasterListController.cs" />
+    <Compile Include="Areas\ProductionPlanning\Controllers\MaterialController.cs" />
+    <Compile Include="Areas\ProductionPlanning\Controllers\MaterialRequirementListController.cs" />
+    <Compile Include="Areas\ProductionPlanning\Controllers\MaterialSimulationController.cs" />
+    <Compile Include="Areas\ProductionPlanning\Controllers\PdtPlnController.cs" />
+    <Compile Include="Areas\ProductionPlanning\Controllers\PrePdtMkpController.cs" />
+    <Compile Include="Areas\ProductionPlanning\Controllers\PreProductController.cs" />
+    <Compile Include="Areas\ProductionPlanning\Controllers\PreProductPlanController.cs" />
+    <Compile Include="Areas\ProductionPlanning\Controllers\ProductController.cs" />
+    <Compile Include="Areas\ProductionPlanning\Controllers\SubMaterialMasterController.cs" />
+    <Compile Include="Areas\ProductionPlanning\ProductionPlanningAreaRegistration.cs" />
+    <Compile Include="Areas\MaterialManagement\ViewModels\AcceptanceOfMaterial\AcceptanceOfMaterialViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\MasterList\MasterListSearchViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\MaterialRequirementList\MaterialReqListSearchViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\MaterialSimulation\MaterialSimulationViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\MaterialSimulation\MaterialViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\MaterialSimulation\ProductPlanViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\Material\MaterialSearchViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\Material\MaterialViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\Material\SupplierCodeSelectViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\PckMtr\PckMtrViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\PdtPln\PdtPlnSearchViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\PdtPln\PdtPlnViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\PreProductPlan\PreProductPlanSearchViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\PreProductPlan\PreProductPlanViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\Product\ProductSearchViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\Product\ProductViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\PreProduct\PrePdtMkpViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\PreProduct\PreProductSearchViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\PreProduct\PreProductViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\SubMaterialMasters\SubMaterialSearchViewModel.cs" />
+    <Compile Include="Areas\ProductionPlanning\ViewModels\SubMaterialMasters\SubMaterialViewModel.cs" />
+    <Compile Include="Areas\SystemManagement\Controllers\DailyProcessController.cs" />
+    <Compile Include="Areas\SystemManagement\Controllers\MonthlyProcessController.cs" />
+    <Compile Include="Areas\SystemManagement\Controllers\StartEndSystemController.cs" />
+    <Compile Include="Areas\SystemManagement\SystemManagementAreaRegistration.cs" />
+    <Compile Include="Areas\SystemManagement\ViewModels\StartEndSystemViewModel.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\Controllers\ManagementOfProductLabelController.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\Controllers\CreateTabletisingCommandController.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\Controllers\TabletisingStartStopController.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\Models\EndTabletisingViewModel.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\Models\ManagementOfProductLabel\ManagementOfProductLabelViewModel.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\Models\TabletisingStartStop\TabletisingStartStopViewModel.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\TabletisingCommandSubSystemAreaRegistration.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\ViewModels\FindTabletisingKneadingCommandViewModel.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\ViewModels\ProductPlanningValidationItem.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\ViewModels\TabletisingKneadingCommandListViewModel.cs" />
+    <Compile Include="Areas\TabletisingCommandSubSystem\ViewModels\UpdateLowerTableViewModel.cs" />
+    <Compile Include="Attributes\MvcAuthorizeAttribute.cs" />
+    <Compile Include="Attributes\MvcExceptionFilter.cs" />
+    <Compile Include="Attributes\SignalrCookieAuthenticateAttribute.cs" />
+    <Compile Include="AutoMapperProfiles\DataToDomainMappingProfile.cs" />
+    <Compile Include="AutoMapperProfiles\DomainToDataMappingProfile.cs" />
+    <Compile Include="AutoMapperProfiles\DomainToViewModelMappingProfile.cs" />
+    <Compile Include="AutoMapperProfiles\ViewModelToDomainMappingProfile.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Hubs\C2Hub.cs" />
+    <Compile Include="Hubs\C1Hub.cs" />
+    <Compile Include="Hubs\C3Hub.cs" />
+    <Compile Include="Hubs\C4Hub.cs" />
+    <Compile Include="Hubs\NoteHub.cs" />
+    <Compile Include="Hubs\NotificationHub.cs" />
+    <Compile Include="Infrastructure\SubmitButtonSelector.cs" />
+    <Compile Include="Models\ExternalLabelCollection.cs" />
+    <Compile Include="Models\InternalLabelCollection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ConfigurationService.cs" />
+    <Compile Include="Services\IdentityService.cs" />
+    <Compile Include="Services\LabelPrintService.cs" />
+    <Compile Include="Services\NotificationService.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Validators\MinAttribute.cs" />
+    <Compile Include="Validators\GreaterThanAttribute.cs" />
+    <Compile Include="ViewModels\MessageResponseViewModel.cs" />
+    <Compile Include="ViewModels\Pagination.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\ExportTemplates\Export-ConsumerProductList.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ConsumerPreProductList.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ConsumerMaterialList.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByProductNameNotCertifiedReport.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByProductNameReport.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ReportByProductName.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ReportByProductNameAll.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ReportByProductNameNotCertified.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ReportByMaterialName.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ReportByMaterialNameAll.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ReportByMaterialNameBailment.html" />
+    <Content Include="App_Data\ExportTemplates\Export-PreProductlRetrievalRecordEmpty.html" />
+    <Content Include="App_Data\ExportTemplates\Export-PreProductlRetrievalRecord.html" />
+    <Content Include="App_Data\ExportTemplates\Export-MaterialRetrievalRecordEmpty.html" />
+    <Content Include="App_Data\ExportTemplates\Export-MaterialRetrievalRecord.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ProductCertificationRecord.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ProductShippingRecord.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ProductMovementRecord.html" />
+    <Content Include="App_Data\ExportTemplates\Export-PreProductMovementRecord.html" />
+    <Content Include="App_Data\ExportTemplates\Export-MaterialMovementRecord.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ProductMovementHistory.html" />
+    <Content Include="App_Data\ExportTemplates\Export-PreproductMovementHistory.html" />
+    <Content Include="App_Data\ExportTemplates\Export-MaterialMovementHistory.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ProductPalletList.html" />
+    <Content Include="App_Data\ExportTemplates\Export-PreProductContainerList.html" />
+    <Content Include="App_Data\ExportTemplates\Export-MaterialPalletList.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ExternalProductShelf.html" />
+    <Content Include="App_Data\ExportTemplates\Export-MaterialSheif.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ExternalPreProductShelf.html" />
+    <Content Include="App_Data\ExportTemplates\Export-PreProductShelf.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ReportProductName.html" />
+    <Content Include="App_Data\ExportTemplates\Export-ReportProductNameAll.html" />
+    <Content Include="App_Data\ExportTemplates\Export-SupplementaryMaterialName.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByProductNameAll.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByProductNameNotCertified.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByProductName.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryBySupplierNameAll.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryBySupplierNameBailment.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryBySupplierName.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByMaterialName.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByMaterialNameAll.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByMaterialNameBailment.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByExtPreProductName.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByPreProductName.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByExtPreProductNameAll.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByPreProductNameAll.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByExtPreProductNameExternal.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InquiryByPreProductNameExternal.html" />
+    <Content Include="App_Data\ExportTemplates\PreProductPlan.html" />
+    <Content Include="App_Data\ExportTemplates\MaterialRequirementList-Export.html" />
+    <Content Include="App_Data\ExportTemplates\ProductShippingCommand.html" />
+    <Content Include="App_Data\ExportTemplates\ExportCleanlinessDataInput.html" />
+    <Content Include="App_Data\ExportTemplates\Stocklist-Certificated-Item-Uncertificated.html" />
+    <Content Include="App_Data\ExportTemplates\Stocklist-Certificated-Item-OutOfSpec.html" />
+    <Content Include="App_Data\ExportTemplates\Stocklist-Certificated-Item.html" />
+    <Content Include="App_Data\ExportTemplates\Export-InputKneadingCommand.html" />
+    <Content Include="App_Data\LabelPrint\External\Atm.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\External\Buzen.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\External\Chippac.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\External\Piece.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\External\Renesas.txt" />
+    <Content Include="App_Data\LabelPrint\External\Stlgg.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\External\Sts.txt" />
+    <Content Include="App_Data\LabelPrint\Internal\Atm.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\Internal\AtmKap.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\Internal\Buzen.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\Internal\PieceSmall.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\Internal\Piece.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\Internal\Renesas.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\Internal\Stlgg.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\Internal\Sts.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\LabelPrint\Pre-Product\Label.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\EnvironmentManagement\Views\AvailabilityTabletisingMachine\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\Shared\_partialTemperature.cshtml" />
+    <Content Include="App_Data\ExportTemplates\MasterList-Export-Material.html" />
+    <Content Include="App_Data\ExportTemplates\MasterList-Export-PreProduct.html" />
+    <Content Include="App_Data\ExportTemplates\MasterList-Export-Product.html" />
+    <Content Include="Content\AdminLTE\AdminLTE-Font.css" />
+    <Content Include="Content\AdminLTE\AdminLTE.min.css" />
+    <Content Include="Content\AdminLTE\authorized-layout.css" />
+    <Content Include="Content\AdminLTE\screens\screen-master-list.css" />
+    <Content Include="Content\AdminLTE\skin-blue.min.css" />
+    <Content Include="Content\AdminLTE\skin-gray-light-login.css" />
+    <Content Include="Content\AdminLTE\skin-gray-light-validation-messages.css" />
+    <Content Include="Content\AdminLTE\skin-gray-light.css" />
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-modal-bs3patch.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\theme\bower_components\bootstrap-social\.gitignore" />
+    <Content Include="Content\theme\bower_components\bootstrap-social\bootstrap-social.css" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\js\npm.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\theme\bower_components\bootstrap\Gruntfile.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\grunt\bs-commonjs-generator.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\grunt\bs-raw-files-generator.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\affix.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\alert.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\button.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\carousel.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\collapse.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\dropdown.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\modal.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\popover.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\scrollspy.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\tab.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\tooltip.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\transition.js" />
+    <Content Include="Content\theme\bower_components\bootstrap\package.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\average%28%29.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\column%28%29.title%28%29.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\columns%28%29.order%28%29.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnAddDataAndDisplay.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnAddTr.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnColumnIndexToVisible.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnDataUpdate.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnDisplayRow.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnDisplayStart.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnFakeRowspan.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnFilterAll.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnFilterClear.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnFilterOnReturn.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnFindCellRowIndexes.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnFindCellRowNodes.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnGetAdjacentTr.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnGetColumnData.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnGetColumnIndex.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnGetHiddenNodes.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnGetTd.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnGetTds.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnLengthChange.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnMultiFilter.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnPagingInfo.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnProcessingIndicator.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnReloadAjax.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnSetFilteringDelay.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnSortNeutral.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnStandingRedraw.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\fnVisibleToColumnIndex.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\index.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\page.jumpToData%28%29.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\api\sum%28%29.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\features\alphabetSearch\dataTables.alphabetSearch.css" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\features\alphabetSearch\dataTables.alphabetSearch.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\features\alphabetSearch\dataTables.alphabetSearch.min.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\features\lengthLinks\dataTables.lengthLinks.css" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\features\lengthLinks\dataTables.lengthLinks.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\features\lengthLinks\dataTables.lengthLinks.min.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\features\searchHighlight\dataTables.searchHighlight.css" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\features\searchHighlight\dataTables.searchHighlight.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\features\searchHighlight\dataTables.searchHighlight.min.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\filtering\index.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\filtering\row-based\range_dates.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\filtering\row-based\range_numbers.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\filtering\row-based\TableTools.ShowSelectedOnly.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\filtering\type-based\accent-neutralise.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\filtering\type-based\html.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\filtering\type-based\phoneNumber.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\index.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\1\dataTables.bootstrap.css" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\1\dataTables.bootstrap.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\2\dataTables.bootstrap.css" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\2\dataTables.bootstrap.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\2\dataTables.bootstrap.min.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\2\index.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\3\dataTables.bootstrap.css" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\3\dataTables.bootstrap.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\3\dataTables.bootstrap.min.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\3\index.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\images\sort_asc.png" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\images\sort_asc_disabled.png" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\images\sort_both.png" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\images\sort_desc.png" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\bootstrap\images\sort_desc_disabled.png" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\font-awesome\bootstrap.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\font-awesome\dataTables.fontAwesome.css" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\font-awesome\datatables.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\font-awesome\foundation.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\foundation\dataTables.foundation.css" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\foundation\dataTables.foundation.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\foundation\dataTables.foundation.min.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\foundation\images\sort_asc.png" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\foundation\images\sort_asc_disabled.png" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\foundation\images\sort_both.png" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\foundation\images\sort_desc.png" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\foundation\images\sort_desc_disabled.png" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\foundation\index.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\jqueryui\dataTables.jqueryui.css" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\jqueryui\dataTables.jqueryui.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\jqueryui\dataTables.jqueryui.min.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\jqueryui\index.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\pagination\ellipses.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\pagination\extjs.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\pagination\four_button.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\pagination\index.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\pagination\input.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\pagination\jPaginator\dataTables.jPaginator.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\pagination\scrolling.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\pagination\select.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\alt-string.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\anti-the.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\chinese-string.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\currency.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\custom-data-source\dom-checkbox.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\custom-data-source\dom-select.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\custom-data-source\dom-text.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\date-dd-MMM-yyyy.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\date-de.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\date-eu.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\date-euro.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\date-uk.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\datetime-moment.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\datetime-us.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\enum.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\file-size.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\formatted-numbers.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\index.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\ip-address.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\monthYear.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\natural.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\num-html.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\numeric-comma.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\percent.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\persian.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\scientific.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\signed-num.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\stringMonthYear.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\time.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\title-numeric.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\title-string.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\turkish-string.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\type-detection\currency.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\type-detection\date-uk.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\type-detection\file-size.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\type-detection\formatted-num.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\type-detection\index.html" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\type-detection\ip-address.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\type-detection\num-html.js" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\type-detection\numeric-comma.js" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\.gitignore" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\docs\api\responsive.index%28%29.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\docs\api\responsive.rebuild%28%29.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\docs\api\responsive.recalc%28%29.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\docs\option\responsive.breakpoints.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\docs\option\responsive.details.renderer.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\docs\option\responsive.details.target.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\docs\option\responsive.details.type.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\docs\option\responsive.details.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\docs\option\responsive.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\child-rows\column-control.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\child-rows\custom-renderer.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\child-rows\disable-child-rows.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\child-rows\index.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\child-rows\right-column.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\child-rows\whole-row-control.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\display-control\auto.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\display-control\classes.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\display-control\complexHeader.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\display-control\fixedHeader.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\display-control\index.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\display-control\init-classes.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\index.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\initialisation\ajax.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\initialisation\className.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\initialisation\default.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\initialisation\index.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\initialisation\new.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\initialisation\option.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\styling\bootstrap.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\styling\compact.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\styling\foundation.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\styling\index.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\styling\jqueryui.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\styling\scrolling.xml" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\js\dataTables.responsive.js" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\License.txt" />
+    <Content Include="Content\theme\bower_components\datatables\license.txt" />
+    <Content Include="Content\theme\bower_components\datatables\media\css\dataTables.bootstrap.css" />
+    <Content Include="Content\theme\bower_components\datatables\media\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\theme\bower_components\datatables\media\css\dataTables.foundation.css" />
+    <Content Include="Content\theme\bower_components\datatables\media\css\dataTables.foundation.min.css" />
+    <Content Include="Content\theme\bower_components\datatables\media\css\dataTables.jqueryui.css" />
+    <Content Include="Content\theme\bower_components\datatables\media\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\theme\bower_components\datatables\media\css\jquery.dataTables.css" />
+    <Content Include="Content\theme\bower_components\datatables\media\css\jquery.dataTables.min.css" />
+    <Content Include="Content\theme\bower_components\datatables\media\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\theme\bower_components\datatables\media\images\favicon.ico" />
+    <Content Include="Content\theme\bower_components\datatables\media\images\sort_asc.png" />
+    <Content Include="Content\theme\bower_components\datatables\media\images\sort_asc_disabled.png" />
+    <Content Include="Content\theme\bower_components\datatables\media\images\sort_both.png" />
+    <Content Include="Content\theme\bower_components\datatables\media\images\sort_desc.png" />
+    <Content Include="Content\theme\bower_components\datatables\media\images\sort_desc_disabled.png" />
+    <Content Include="Content\theme\bower_components\datatables\media\js\dataTables.bootstrap.js" />
+    <Content Include="Content\theme\bower_components\datatables\media\js\dataTables.bootstrap.min.js" />
+    <Content Include="Content\theme\bower_components\datatables\media\js\dataTables.foundation.js" />
+    <Content Include="Content\theme\bower_components\datatables\media\js\dataTables.foundation.min.js" />
+    <Content Include="Content\theme\bower_components\datatables\media\js\dataTables.jqueryui.js" />
+    <Content Include="Content\theme\bower_components\datatables\media\js\dataTables.jqueryui.min.js" />
+    <Content Include="Content\theme\bower_components\datatables\media\js\jquery.dataTables.js" />
+    <Content Include="Content\theme\bower_components\datatables\media\js\jquery.dataTables.min.js" />
+    <Content Include="Content\theme\bower_components\datatables\media\js\jquery.js" />
+    <Content Include="Content\theme\bower_components\flot.tooltip\js\excanvas.min.js" />
+    <Content Include="Content\theme\bower_components\flot.tooltip\js\jquery.flot.js" />
+    <Content Include="Content\theme\bower_components\flot.tooltip\js\jquery.flot.tooltip.js" />
+    <Content Include="Content\theme\bower_components\flot.tooltip\js\jquery.flot.tooltip.min.js" />
+    <Content Include="Content\theme\bower_components\flot.tooltip\js\jquery.flot.tooltip.source.js" />
+    <Content Include="Content\theme\bower_components\flot\.gitignore" />
+    <Content Include="Content\theme\bower_components\flot\examples\ajax\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\annotating\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-interacting\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-multiple\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\date.js" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\background.png" />
+    <Content Include="Content\theme\bower_components\flot\examples\basic-options\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\basic-usage\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\canvas\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\categories\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\examples.css" />
+    <Content Include="Content\theme\bower_components\flot\examples\image\hs-2004-27-a-large-web.jpg" />
+    <Content Include="Content\theme\bower_components\flot\examples\image\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\interacting\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\navigate\arrow-down.gif" />
+    <Content Include="Content\theme\bower_components\flot\examples\navigate\arrow-left.gif" />
+    <Content Include="Content\theme\bower_components\flot\examples\navigate\arrow-right.gif" />
+    <Content Include="Content\theme\bower_components\flot\examples\navigate\arrow-up.gif" />
+    <Content Include="Content\theme\bower_components\flot\examples\navigate\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\percentiles\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\realtime\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\resize\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\selection\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\series-errorbars\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\series-pie\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\series-toggle\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\series-types\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\shared\jquery-ui\jquery-ui.min.css" />
+    <Content Include="Content\theme\bower_components\flot\examples\stacking\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\symbols\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\threshold\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\tracking\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\visitors\index.html" />
+    <Content Include="Content\theme\bower_components\flot\examples\zooming\index.html" />
+    <Content Include="Content\theme\bower_components\flot\excanvas.js" />
+    <Content Include="Content\theme\bower_components\flot\excanvas.min.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.colorhelpers.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.canvas.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.categories.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.crosshair.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.errorbars.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.fillbetween.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.image.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.navigate.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.pie.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.resize.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.selection.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.stack.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.symbol.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.threshold.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.flot.time.js" />
+    <Content Include="Content\theme\bower_components\flot\jquery.js" />
+    <Content Include="Content\theme\bower_components\flot\LICENSE.txt" />
+    <Content Include="Content\theme\bower_components\font-awesome\.gitignore" />
+    <Content Include="Content\theme\bower_components\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\theme\bower_components\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\theme\bower_components\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\theme\bower_components\holderjs\.gitattributes" />
+    <Content Include="Content\theme\bower_components\holderjs\.gitignore" />
+    <Content Include="Content\theme\bower_components\holderjs\gulpfile.js" />
+    <Content Include="Content\theme\bower_components\holderjs\holder.js" />
+    <Content Include="Content\theme\bower_components\holderjs\src\augment.js" />
+    <Content Include="Content\theme\bower_components\holderjs\src\holder.js" />
+    <Content Include="Content\theme\bower_components\holderjs\src\ondomready.js" />
+    <Content Include="Content\theme\bower_components\holderjs\src\polyfills.js" />
+    <Content Include="Content\theme\bower_components\holderjs\test\.gitignore" />
+    <Content Include="Content\theme\bower_components\holderjs\test\image.jpg" />
+    <Content Include="Content\theme\bower_components\holderjs\test\index.html" />
+    <Content Include="Content\theme\bower_components\jquery\dist\jquery.js" />
+    <Content Include="Content\theme\bower_components\jquery\dist\jquery.min.js" />
+    <Content Include="Content\theme\bower_components\jquery\MIT-LICENSE.txt" />
+    <Content Include="Content\theme\bower_components\jquery\src\ajax.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\ajax\jsonp.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\ajax\load.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\ajax\parseJSON.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\ajax\parseXML.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\ajax\script.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\ajax\var\nonce.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\ajax\var\rquery.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\ajax\xhr.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\attributes.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\attributes\attr.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\attributes\classes.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\attributes\prop.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\attributes\support.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\attributes\val.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\callbacks.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\core.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\core\access.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\core\init.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\core\parseHTML.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\core\ready.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\core\var\rsingleTag.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\css.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\css\addGetHookIf.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\css\curCSS.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\css\defaultDisplay.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\css\hiddenVisibleSelectors.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\css\support.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\css\swap.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\css\var\cssExpand.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\css\var\getStyles.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\css\var\isHidden.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\css\var\rmargin.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\css\var\rnumnonpx.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\data.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\data\accepts.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\data\Data.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\data\var\data_priv.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\data\var\data_user.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\deferred.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\deprecated.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\dimensions.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\effects.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\effects\animatedSelector.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\effects\Tween.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\event.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\event\ajax.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\event\alias.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\event\support.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\exports\amd.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\exports\global.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\intro.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\jquery.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\manipulation.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\manipulation\support.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\manipulation\var\rcheckableType.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\manipulation\_evalUrl.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\offset.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\outro.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\queue.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\queue\delay.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\selector-native.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\selector-sizzle.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\selector.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\serialize.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\sizzle\dist\sizzle.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\sizzle\dist\sizzle.min.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\traversing.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\traversing\findFilter.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\traversing\var\rneedsContext.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\var\arr.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\var\class2type.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\var\concat.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\var\hasOwn.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\var\indexOf.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\var\pnum.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\var\push.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\var\rnotwhite.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\var\slice.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\var\strundefined.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\var\support.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\var\toString.js" />
+    <Content Include="Content\theme\bower_components\jquery\src\wrap.js" />
+    <Content Include="Content\theme\bower_components\metisMenu\dist\metisMenu.css" />
+    <Content Include="Content\theme\bower_components\metisMenu\dist\metisMenu.js" />
+    <Content Include="Content\theme\bower_components\metisMenu\dist\metisMenu.min.css" />
+    <Content Include="Content\theme\bower_components\metisMenu\dist\metisMenu.min.js" />
+    <Content Include="Content\theme\bower_components\metisMenu\Gruntfile.js" />
+    <Content Include="Content\theme\bower_components\metisMenu\src\metisMenu.css" />
+    <Content Include="Content\theme\bower_components\metisMenu\src\metisMenu.js" />
+    <Content Include="Content\theme\bower_components\mocha\media\logo.svg" />
+    <Content Include="Content\theme\bower_components\mocha\mocha.css" />
+    <Content Include="Content\theme\bower_components\mocha\mocha.js" />
+    <Content Include="Content\theme\bower_components\morrisjs\.gitignore" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\area-as-line.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\area.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\bar-colors.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\bar-no-axes.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\bar.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\days.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\decimal-custom-hover.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\diagonal-xlabels-bar.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\diagonal-xlabels.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\donut-colors.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\donut-formatter.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\donut.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\dst.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\events.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\goals.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\lib\example.css" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\lib\example.js" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\months-no-smooth.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\negative.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\no-grid.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\non-continuous.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\non-date.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\quarters.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\resize.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\stacked_bars.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\timestamps.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\updating.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\weeks.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\years.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\examples\_template.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\Gruntfile.js" />
+    <Content Include="Content\theme\bower_components\morrisjs\morris.css" />
+    <Content Include="Content\theme\bower_components\morrisjs\morris.js" />
+    <Content Include="Content\theme\bower_components\morrisjs\morris.min.js" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\specs.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\viz\examples.js" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\viz\exemplary\area0.png" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\viz\exemplary\bar0.png" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\viz\exemplary\line0.png" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\viz\exemplary\stacked_bar0.png" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\viz\test.html" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\viz\visual_specs.js" />
+    <Content Include="Content\theme\bower_components\raphael\dev\amdDev.js" />
+    <Content Include="Content\theme\bower_components\raphael\dev\index.js" />
+    <Content Include="Content\theme\bower_components\raphael\dev\require.js" />
+    <Content Include="Content\theme\bower_components\raphael\license.txt" />
+    <Content Include="Content\theme\bower_components\raphael\raphael-min.js" />
+    <Content Include="Content\theme\bower_components\raphael\raphael.js" />
+    <Content Include="Content\theme\dist\css\sb-admin-2.css" />
+    <Content Include="Content\theme\dist\css\timeline.css" />
+    <Content Include="Content\theme\dist\js\sb-admin-2.js" />
+    <Content Include="Content\theme\js\flot-data.js" />
+    <Content Include="Content\theme\js\morris-data.js" />
+    <Content Include="Content\theme\LeftMenu.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Images\home_image_01.jpg" />
+    <Content Include="Images\home_image_02.jpg" />
+    <Content Include="Images\kyocera-small-logo.png" />
+    <Content Include="Images\Ok.png" />
+    <Content Include="Images\exclamation_mark.png" />
+    <Content Include="Images\kyocera-logo.png" />
+    <Content Include="Images\loading-Red.gif" />
+    <Content Include="Scripts\AdminLTE\app.js" />
+    <Content Include="Scripts\AdminLTE\app.min.js" />
+    <Content Include="Scripts\angular\angular.min.js" />
+    <Content Include="Scripts\angular\modules\tabletising-command\controllers\create-tabletising-command.controller.js" />
+    <Content Include="Scripts\angular\controllers\productconsumer.controller.js" />
+    <Content Include="Scripts\angular\controllers\preproductconsumer.controller.js" />
+    <Content Include="Scripts\angular\controllers\managementreportconsumer.controller.js" />
+    <Content Include="Scripts\angular\controllers\database-management.controller.js" />
+    <Content Include="Scripts\angular\controllers\storageOfPreProduct.controller.js" />
+    <Content Include="Scripts\angular\modules\tabletising-command\enumerations\create-tabletising-step.enum.js" />
+    <Content Include="Scripts\angular\modules\tabletising-command\services\tabletising-command.service.js" />
+    <Content Include="Scripts\angular\plugins\angular-validator.js" />
+    <Content Include="Scripts\angular\plugins\angular-validator.min.js" />
+    <Content Include="Scripts\angular\services\angular-datetime-service.js" />
+    <Content Include="Scripts\angular\services\productconsumer.service.js" />
+    <Content Include="Scripts\angular\services\preproductconsumer.service.js" />
+    <Content Include="Scripts\angular\services\managementreportconsumer.service.js" />
+    <Content Include="Scripts\angular\services\toastr.service.js" />
+    <Content Include="Scripts\angular\ui-bootstrap-tpls-2.2.0.min.js" />
+    <Content Include="Scripts\areas\acceptanceOfMaterial\acceptanceOfMaterial.js" />
+    <Content Include="Scripts\areas\automatedWarehouse\awPreProduct.js" />
+    <Content Include="Scripts\areas\automatedWarehouse\awProduct.js" />
+    <Content Include="Scripts\areas\automatedWarehouse\awMaterial.js" />
+    <Content Include="Scripts\areas\AvailabilityDataEdit\availabilityDataEdit.js" />
+    <Content Include="Scripts\areas\CalculationOfControlLimit\CalculationOfControlLimit.js" />
+    <Content Include="Scripts\areas\CleanlinessDataInput\CleanlinessDataInput.js" />
+    <Content Include="Scripts\areas\Communication\Communication1.js" />
+    <Content Include="Scripts\areas\Communication\Conveyor.js" />
+    <Content Include="Scripts\areas\Communication\WeighingEquipment.js" />
+    <Content Include="Scripts\areas\ControlLimitEdit\controlLimitEdit.js" />
+    <Content Include="Scripts\areas\CreepingAndRollSpeedDataEdit\CreepingAndRollSpeedDataEdit.js" />
+    <Content Include="Scripts\areas\CreepingAndRollSpeedDuration\CreepingAndRollSpeedDuration.js" />
+    <Content Include="Scripts\areas\dailyprocess\dailyProcess.js" />
+    <Content Include="Scripts\areas\environmentManagement\availabilityTabletisingMachine.js" />
+    <Content Include="Scripts\areas\environmentManagement\environmentDataDurationDay.js" />
+    <Content Include="Scripts\areas\environmentManagement\availabilityMixingRollMachine.js" />
+    <Content Include="Scripts\areas\EnvironmentDataEdit\environmentDataEdit.js" />
+    <Content Include="Scripts\areas\environmentManagement\creepingAndRollSpeedDataOneDay.js" />
+    <Content Include="Scripts\areas\environmentManagement\environmentDataOneDay.js" />
+    <Content Include="Scripts\areas\FontStorageOfSupplierPallet\FontStorageOfSupplierPallet.js" />
+    <Content Include="Scripts\areas\ForcedRetrievalOfPreProduct\ForcedRetrievalofPreProduct.js" />
+    <Content Include="Scripts\areas\forcedRetrievalOfProduct\forcedRetrievalOfProduct.js" />
+    <Content Include="Scripts\areas\innerfloormovementofmaterial\innerFloorMovementOfMaterial.js" />
+    <Content Include="Scripts\areas\forcedRetrievalOfRejectedMaterial\forcedRetrievalOfRejectedMaterial.js" />
+    <Content Include="Scripts\areas\inputofkneadingcommand\inputOfKneadingCommand.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryByExternalPreProductName.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryKneadingLotNo.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryKneadingCommandNo.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryByProductCode.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryByPreProductCode.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryByMaterialName.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryByPreProductName.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryByProductName.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryBySupplierName.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryBase.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryByWarehouseLocation.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryKneadLineNo.js" />
+    <Content Include="Scripts\areas\interFloorMovementOfProduct\interFloorMovementOfProduct.js" />
+    <Content Include="Scripts\areas\kneadStartEndControl\kneadStartEndControl.js" />
+    <Content Include="Scripts\areas\LotDataCleanup\lotDataCleanup.js" />
+    <Content Include="Scripts\areas\LotDataSampling\LotDataSampling.js" />
+    <Content Include="Scripts\areas\managementofproductlabel\managementOfProductLabel.js" />
+    <Content Include="Scripts\areas\managementreport\PreProductStock.js" />
+    <Content Include="Scripts\areas\managementreport\MaterialStock.js" />
+    <Content Include="Scripts\areas\masterList\masterList.js" />
+    <Content Include="Scripts\areas\materialManagement\materialManagement.js" />
+    <Content Include="Scripts\areas\materialPostReceptionInput\materialPostReceptionInput.js" />
+    <Content Include="Scripts\areas\MaterialReqList\MaterialReqList.js" />
+    <Content Include="Scripts\areas\inquiry\inquiryByShelfStatus.js" />
+    <Content Include="Scripts\areas\materialSimulation\materialSimulation.js" />
+    <Content Include="Scripts\areas\material\material.js" />
+    <Content Include="Scripts\areas\monthlyprocess\monthlyprocess.js" />
+    <Content Include="Scripts\areas\prePdtPln\prePdtPln.js" />
+    <Content Include="Scripts\areas\preproductmanagement\storageOfEmptyContainer.js" />
+    <Content Include="Scripts\areas\preproduct\prepdtmkp.js" />
+    <Content Include="Scripts\areas\preproduct\preproduct.js" />
+    <Content Include="Scripts\areas\pdtpln\pdtpln.js" />
+    <Content Include="Scripts\areas\productmanagement\outofplanProduct.js" />
+    <Content Include="Scripts\areas\productmanagement\productcertification.js" />
+    <Content Include="Scripts\areas\productmanagement\productShippingCommand.js" />
+    <Content Include="Scripts\areas\productmanagement\productShippingPlanning.js" />
+    <Content Include="Scripts\areas\productmanagement\retrievalOfExternalPreProduct.js" />
+    <Content Include="Scripts\areas\productmanagement\stockTakingOfProduct.js" />
+    <Content Include="Scripts\areas\ProductMasterManagement\productMasterManagement.js" />
+    <Content Include="Scripts\areas\product\product.js" />
+    <Content Include="Scripts\areas\restorageOfMaterial\restorageOfMaterial.js" />
+    <Content Include="Scripts\areas\ReStorageOfProduct\restorageOfProduct.js" />
+    <Content Include="Scripts\areas\RetrievalOfEmptyProductPallet\retrievalOfEmptyProductPallet.js" />
+    <Content Include="Scripts\areas\RetrievalOfOutOfSpecPreProduct\RetrievalOfOutOfSpecPreProduct.js" />
+    <Content Include="Scripts\areas\RetrievalOfPreProduct\retrievalOfPreProduct.js" />
+    <Content Include="Scripts\areas\retrievalOfSupplierPallet\retrievalOfSupplierPallet.js" />
+    <Content Include="Scripts\areas\retrievalOfWarehousePallet\retrievalOfWarehousePallet.js" />
+    <Content Include="Scripts\areas\signalrCommon.js" />
+    <Content Include="Scripts\areas\stockTakingOfMaterial\stockTakingOfMaterialC1.js" />
+    <Content Include="Scripts\areas\retrievalMaterial\retrievalMaterial.js" />
+    <Content Include="Scripts\areas\stockTakingOfPreProduct\stockTakingOfPreProduct.js" />
+    <Content Include="Scripts\areas\StorageOfEmptyProductPallet\storageOfEmptyProducPallet.js" />
+    <Content Include="Scripts\areas\StorageOfExternalPreProduct\storageOfExternalPreProduct.js" />
+    <Content Include="Scripts\areas\storageOfMaterial\StorageOfMaterial.js" />
+    <Content Include="Scripts\areas\storageOfProduct\storageOfProduct.js" />
+    <Content Include="Scripts\areas\storageOfSupplementaryMaterial\storageOfSupplementary.js" />
+    <Content Include="Scripts\areas\stockTakingOfMaterial\stockTakingOfMaterial.js" />
+    <Content Include="Scripts\areas\storageofsupplierpallet\storageOfSupplierPallet.js" />
+    <Content Include="Scripts\areas\storeofwarehousepallet\storeOfWarehousePallet.js" />
+    <Content Include="Scripts\areas\SubMaterialMasters\SubMaterialMasters.js" />
+    <Content Include="Scripts\areas\SystemStartEnd\systemStartEnd.js" />
+    <Content Include="Scripts\areas\tabletising\preProductCharging.js" />
+    <Content Include="Scripts\areas\tabletising\tabletisingCommand.js" />
+    <Content Include="Scripts\areas\XRTemperatureManagement\XRTemperatureManagement.js" />
+    <Content Include="Scripts\autoNumeric.js" />
+    <Content Include="Scripts\BlockUI.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-tagsinput.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Config\ConnectionString.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\ProductionPlanning\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\ProductionPlanning\Views\Shared\Material\_PartialViewEditMaterial.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\Material\Index.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\Product\Index.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\Shared\Product\_PartialViewEditProduct.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\ProductionPlanning\Views\Shared\Product\_PartialViewAddSup.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\PreProduct\Index.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\Shared\PreProduct\_PartialViewEditPreProduct.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\Shared\PreProduct\_PartialViewEditPrePdtMkp.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\PdtPln\Index.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\Shared\PdtPln\_PartialViewEditPdtPln.cshtml" />
+    <Content Include="Scripts\chartjs\Chart.bundle.js" />
+    <Content Include="Scripts\chartjs\Chart.js" />
+    <Content Include="Scripts\cldr.js" />
+    <Content Include="Scripts\cldr\event.js" />
+    <Content Include="Scripts\cldr\supplemental.js" />
+    <Content Include="Scripts\cldr\unresolved.js" />
+    <Content Include="Scripts\controls\DatePicker.js" />
+    <Content Include="Scripts\Custom.js" />
+    <Content Include="Scripts\datatables.bootstrap.min.js" />
+    <Content Include="Scripts\dragdrop.uploadfile.js" />
+    <Content Include="Scripts\dropzone.js" />
+    <Content Include="Scripts\editGrid.js" />
+    <Content Include="Scripts\globalize.js" />
+    <Content Include="Scripts\globalize\currency.js" />
+    <Content Include="Scripts\globalize\date.js" />
+    <Content Include="Scripts\globalize\message.js" />
+    <Content Include="Scripts\globalize\number.js" />
+    <Content Include="Scripts\globalize\plural.js" />
+    <Content Include="Scripts\globalize\relative-time.js" />
+    <Content Include="Scripts\globalize\unit.js" />
+    <Content Include="Scripts\helper\commonHelper.js" />
+    <Content Include="Scripts\areas\commond\commonSearchHelper.js" />
+    <Content Include="Scripts\highcharts.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Communication\Views\Shared\_PartialViewGeneralInfomation.cshtml" />
+    <Content Include="Areas\Communication\Views\Shared\_PartialDetailInfomation.cshtml" />
+    <Content Include="Areas\Communication\Views\AWMaterial\Index.cshtml" />
+    <Content Include="Areas\Communication\Views\AWPreProduct\Index.cshtml" />
+    <Content Include="Areas\Communication\Views\AWProduct\Index.cshtml" />
+    <Content Include="Areas\Communication\Views\ConveyorStatus\index.cshtml" />
+    <Content Include="Scripts\jquery-code-scanner.js" />
+    <Content Include="Scripts\jquery.flurry.min.js" />
+    <Content Include="Scripts\jQuery.print.min.js" />
+    <Content Include="Scripts\ng-table-4.0.0\ng-table.css" />
+    <Content Include="Scripts\ng-table-4.0.0\ng-table.js" />
+    <Content Include="Scripts\ng-table-4.0.0\ng-table.min.css" />
+    <Content Include="Scripts\ng-table-4.0.0\ng-table.min.js" />
+    <Content Include="Views\Shared\_PartialViewEditProductCertification.cshtml" />
+    <Content Include="Views\Shared\_PartialViewEditProductShippingPlan.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByMaterialName\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByShelfStatus\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\Shared\_ShowButtonCommand.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\InquiryByWarehouseLocation\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\Shared\_LocationMaterialStatusModal.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\Shared\_OutOfSignPicture.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\web.config" />
+    <Content Include="App_Code\MyHelper.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByPreProductCode\Index.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\Shared\MaterialSimulation\_PartialProductionPlan.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByPreProductName\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByExternalPreProductName\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryBySupplierName\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByProductCode\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByProductName\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryKneadingLineNo\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryKneadingLotNo\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryKneadingCommandNo\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC032F.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\ManagementReport\Views\MaterialStock\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\web.config" />
+    <Content Include="Areas\ManagementReport\Views\PreProductStock\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\ProductStock\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\web.config" />
+    <Content Include="Areas\ProductManagement\Views\ForcedRetrievalOfProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\InterFloorMovementOfProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\OutOfPlanProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\ProductCertification\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\ProductShippingCommand\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\ProductShippingPlanning\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\RestorageOfProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\RetrievalOfEmptyProductPallet\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\RetrievalOfExternalPreProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\RetrievalOfOutOfSpecPreProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\Shared\_PartialStorageOfProduct.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\Shared\OutOfPlanProduct\_PartialViewEditOutOfPlanProduct.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\StockTakingOfProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\StorageOfEmptyProductPallet\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\StorageOfExternalPreProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\StorageOfProduct\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC034F.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC038F.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC03AF.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC036F.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\ManagementReport\Views\MaterialMovementHistory\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\PreproductMovementHistory\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\ProductMovementHistory\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\MaterialMovementRecord\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\PreProductMovementRecord\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\ProductMovementRecord\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\ProductShippingRecord\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\ProductCertificationRecord\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC037F.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC03BF.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\ManagementReport\Views\MaterialRetrievalRecord\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialPrintProductCertification.cshtml" />
+    <Content Include="Areas\TabletisingCommandSubSystem\Views\Shared\_PartialDetailTabletising.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\PreProductRetrievalRecord\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\MaterialReceivedConsumedList\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\PreProductReceivedConsumedList\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\ProductCerfiticateConsumedList\Index.cshtml" />
+    <Content Include="Areas\Communication\Views\WeighingEquipment\Index.cshtml" />
+    <Content Include="Areas\TabletisingCommandSubSystem\Views\PreProductCharging\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\EnvironmentDataOneDay\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\web.config" />
+    <Content Include="Areas\EnvironmentManagement\Views\EnvironmentDataDuration\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\CalculationOfControlLimit\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\LotDataCleanup\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\Shared\SearchCriteria.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\CleanlinessDataInput\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\ProductMasterManagement\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\ControlLimitEdit\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\XRTemperatureManagement\Index.cshtml" />
+    <Content Include="App_Data\LabelPrint\Settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\EnvironmentManagement\Views\Shared\Search.cshtml" />
+    <Content Include="App_Data\Screens\Settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\EnvironmentManagement\Views\LotDataSampling\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\AvailabilityMixingRollMachine\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\CreepingAndRollSpeedDataEdit\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\CreepingAndRollSpeedDataOneDay\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\AvailabilityDataEdit\Index.cshtml" />
+    <Content Include="App_Data\LabelPrint\InternalLabels.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\_bootstrap-datetimepicker.less" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap-datetimepicker-build.less" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\toastr.less" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Content\bootstrap\badges.less" />
+    <Content Include="Content\bootstrap\bootstrap.less" />
+    <Content Include="Content\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\bootstrap\button-groups.less" />
+    <Content Include="Content\bootstrap\buttons.less" />
+    <Content Include="Content\bootstrap\carousel.less" />
+    <Content Include="Content\bootstrap\close.less" />
+    <Content Include="Content\bootstrap\code.less" />
+    <Content Include="Content\bootstrap\component-animations.less" />
+    <Content Include="Content\bootstrap\dropdowns.less" />
+    <Content Include="Content\bootstrap\forms.less" />
+    <Content Include="Content\bootstrap\glyphicons.less" />
+    <Content Include="Content\bootstrap\grid.less" />
+    <Content Include="Content\bootstrap\input-groups.less" />
+    <Content Include="Content\bootstrap\jumbotron.less" />
+    <Content Include="Content\bootstrap\labels.less" />
+    <Content Include="Content\bootstrap\list-group.less" />
+    <Content Include="Content\bootstrap\media.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Content\bootstrap\modals.less" />
+    <Content Include="Content\bootstrap\navbar.less" />
+    <Content Include="Content\bootstrap\navs.less" />
+    <Content Include="Content\bootstrap\normalize.less" />
+    <Content Include="Content\bootstrap\pager.less" />
+    <Content Include="Content\bootstrap\pagination.less" />
+    <Content Include="Content\bootstrap\panels.less" />
+    <Content Include="Content\bootstrap\popovers.less" />
+    <Content Include="Content\bootstrap\print.less" />
+    <Content Include="Content\bootstrap\progress-bars.less" />
+    <Content Include="Content\bootstrap\responsive-embed.less" />
+    <Content Include="Content\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\bootstrap\scaffolding.less" />
+    <Content Include="Content\bootstrap\tables.less" />
+    <Content Include="Content\bootstrap\theme.less" />
+    <Content Include="Content\bootstrap\thumbnails.less" />
+    <Content Include="Content\bootstrap\tooltip.less" />
+    <Content Include="Content\bootstrap\type.less" />
+    <Content Include="Content\bootstrap\utilities.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\wells.less" />
+    <Content Include="Content\bootstrap\mixins\alerts.less" />
+    <Content Include="Content\bootstrap\mixins\background-variant.less" />
+    <Content Include="Content\bootstrap\mixins\border-radius.less" />
+    <Content Include="Content\bootstrap\mixins\buttons.less" />
+    <Content Include="Content\bootstrap\mixins\center-block.less" />
+    <Content Include="Content\bootstrap\mixins\clearfix.less" />
+    <Content Include="Content\bootstrap\mixins\forms.less" />
+    <Content Include="Content\bootstrap\mixins\gradients.less" />
+    <Content Include="Content\bootstrap\mixins\grid.less" />
+    <Content Include="Content\bootstrap\mixins\grid-framework.less" />
+    <Content Include="Content\bootstrap\mixins\hide-text.less" />
+    <Content Include="Content\bootstrap\mixins\image.less" />
+    <Content Include="Content\bootstrap\mixins\labels.less" />
+    <Content Include="Content\bootstrap\mixins\list-group.less" />
+    <Content Include="Content\bootstrap\mixins\nav-divider.less" />
+    <Content Include="Content\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="Content\bootstrap\mixins\opacity.less" />
+    <Content Include="Content\bootstrap\mixins\pagination.less" />
+    <Content Include="Content\bootstrap\mixins\panels.less" />
+    <Content Include="Content\bootstrap\mixins\progress-bar.less" />
+    <Content Include="Content\bootstrap\mixins\reset-filter.less" />
+    <Content Include="Content\bootstrap\mixins\reset-text.less" />
+    <Content Include="Content\bootstrap\mixins\resize.less" />
+    <Content Include="Content\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="Content\bootstrap\mixins\size.less" />
+    <Content Include="Content\bootstrap\mixins\tab-focus.less" />
+    <Content Include="Content\bootstrap\mixins\table-row.less" />
+    <Content Include="Content\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="Content\bootstrap\mixins\text-overflow.less" />
+    <Content Include="Content\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\theme\bower_components\bootstrap\.bower.json" />
+    <Content Include="Content\theme\bower_components\bootstrap\bower.json" />
+    <Content Include="Content\theme\bower_components\bootstrap\CHANGELOG.md" />
+    <Content Include="Content\theme\bower_components\bootstrap\LICENSE" />
+    <Content Include="Content\theme\bower_components\bootstrap\package.json" />
+    <Content Include="Content\theme\bower_components\bootstrap\README.md" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\theme\bower_components\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\theme\bower_components\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\theme\bower_components\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\theme\bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\theme\bower_components\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\theme\bower_components\bootstrap\grunt\.jshintrc" />
+    <Content Include="Content\theme\bower_components\bootstrap\grunt\configBridge.json" />
+    <Content Include="Content\theme\bower_components\bootstrap\grunt\sauce_browsers.yml" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\.jscsrc" />
+    <Content Include="Content\theme\bower_components\bootstrap\js\.jshintrc" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\.csscomb.json" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\.csslintrc" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\alerts.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\badges.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\bootstrap.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\breadcrumbs.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\button-groups.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\buttons.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\carousel.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\close.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\code.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\component-animations.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\dropdowns.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\forms.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\glyphicons.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\grid.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\input-groups.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\jumbotron.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\labels.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\list-group.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\media.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\modals.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\navbar.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\navs.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\normalize.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\pager.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\pagination.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\panels.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\popovers.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\print.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\progress-bars.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\responsive-embed.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\responsive-utilities.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\scaffolding.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\tables.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\theme.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\thumbnails.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\tooltip.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\type.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\utilities.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\variables.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\wells.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\alerts.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\buttons.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\center-block.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\forms.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\gradients.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\grid.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\image.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\labels.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\list-group.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\opacity.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\pagination.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\panels.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\resize.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\size.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\table-row.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="Content\theme\bower_components\bootstrap\nuget\bootstrap.less.nuspec" />
+    <Content Include="Content\theme\bower_components\bootstrap\nuget\bootstrap.nuspec" />
+    <Content Include="Content\theme\bower_components\bootstrap\nuget\MyGet.ps1" />
+    <Content Include="Content\theme\bower_components\bootstrap-social\.bower.json" />
+    <Content Include="Content\theme\bower_components\bootstrap-social\.editorconfig" />
+    <Content Include="Content\theme\bower_components\bootstrap-social\bootstrap-social.less" />
+    <Content Include="Content\theme\bower_components\bootstrap-social\bootstrap-social.scss" />
+    <Content Include="Content\theme\bower_components\bootstrap-social\bower.json" />
+    <Content Include="Content\theme\bower_components\bootstrap-social\README.md" />
+    <Content Include="Content\theme\bower_components\datatables\.bower.json" />
+    <Content Include="Content\theme\bower_components\datatables\bower.json" />
+    <Content Include="Content\theme\bower_components\datatables\Contributing.md" />
+    <Content Include="Content\theme\bower_components\datatables\Readme.md" />
+    <Content Include="Content\theme\bower_components\datatables\media\images\Sorting icons.psd" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\.bower.json" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\make.sh" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\README.md" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Afrikaans.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Albanian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Arabic.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Azerbaijan.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Bangla.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Belarusian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Bulgarian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Catalan.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Chinese.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Chinese-traditional.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Croatian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Czech.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Danish.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Dutch.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\English.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Estonian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Filipino.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Finnish.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\French.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Galician.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Georgian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\German.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Greek.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Gujarati.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Hebrew.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Hindi.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Hungarian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Icelandic.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Indonesian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Indonesian-Alternative.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Irish.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Italian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Japanese.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Korean.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Latvian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Lithuanian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Macedonian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Malay.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Norwegian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Persian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Polish.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Portuguese.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Portuguese-Brasil.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Romanian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Russian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Serbian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Slovak.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Slovenian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Spanish.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Swahili.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Swedish.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Tamil.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Thai.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Turkish.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Ukranian.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Urdu.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Uzbek.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\i18n\Vietnamese.lang" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\integration\jqueryui\dataTables.jqueryui.scss" />
+    <Content Include="Content\theme\bower_components\datatables-plugins\sorting\.DS_Store" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\.bower.json" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\bower.json" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\make.sh" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\Readme.md" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\css\responsive.bootstrap.scss" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\css\responsive.dataTables.scss" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\css\responsive.foundation.scss" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\css\responsive.jqueryui.scss" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\.DS_Store" />
+    <Content Include="Content\theme\bower_components\datatables-responsive\examples\initialisation\.DS_Store" />
+    <Content Include="Content\theme\bower_components\flot\.bower.json" />
+    <Content Include="Content\theme\bower_components\flot\.travis.yml" />
+    <Content Include="Content\theme\bower_components\flot\API.md" />
+    <Content Include="Content\theme\bower_components\flot\component.json" />
+    <Content Include="Content\theme\bower_components\flot\CONTRIBUTING.md" />
+    <Content Include="Content\theme\bower_components\flot\FAQ.md" />
+    <Content Include="Content\theme\bower_components\flot\flot.jquery.json" />
+    <Content Include="Content\theme\bower_components\flot\Makefile" />
+    <Content Include="Content\theme\bower_components\flot\NEWS.md" />
+    <Content Include="Content\theme\bower_components\flot\package.json" />
+    <Content Include="Content\theme\bower_components\flot\PLUGINS.md" />
+    <Content Include="Content\theme\bower_components\flot\README.md" />
+    <Content Include="Content\theme\bower_components\flot\examples\ajax\data-eu-gdp-growth.json" />
+    <Content Include="Content\theme\bower_components\flot\examples\ajax\data-eu-gdp-growth-1.json" />
+    <Content Include="Content\theme\bower_components\flot\examples\ajax\data-eu-gdp-growth-2.json" />
+    <Content Include="Content\theme\bower_components\flot\examples\ajax\data-eu-gdp-growth-3.json" />
+    <Content Include="Content\theme\bower_components\flot\examples\ajax\data-eu-gdp-growth-4.json" />
+    <Content Include="Content\theme\bower_components\flot\examples\ajax\data-eu-gdp-growth-5.json" />
+    <Content Include="Content\theme\bower_components\flot\examples\ajax\data-japan-gdp-growth.json" />
+    <Content Include="Content\theme\bower_components\flot\examples\ajax\data-usa-gdp-growth.json" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\africa" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\antarctica" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\asia" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\australasia" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\backward" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\etcetera" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\europe" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\factory" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\iso3166.tab" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\leapseconds" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\northamerica" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\pacificnew" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\solar87" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\solar88" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\solar89" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\southamerica" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\systemv" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\yearistype.sh" />
+    <Content Include="Content\theme\bower_components\flot\examples\axes-time-zones\tz\zone.tab" />
+    <Content Include="Content\theme\bower_components\flot.tooltip\.bower.json" />
+    <Content Include="Content\theme\bower_components\flot.tooltip\bower.json" />
+    <Content Include="Content\theme\bower_components\font-awesome\.bower.json" />
+    <Content Include="Content\theme\bower_components\font-awesome\.npmignore" />
+    <Content Include="Content\theme\bower_components\font-awesome\bower.json" />
+    <Content Include="Content\theme\bower_components\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\theme\bower_components\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\theme\bower_components\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\theme\bower_components\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\core.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\extras.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\fixed-width.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\font-awesome.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\icons.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\larger.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\list.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\mixins.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\path.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\spinning.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\stacked.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\less\variables.less" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_core.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_extras.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_icons.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_larger.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_list.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_mixins.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_path.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_spinning.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_stacked.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\_variables.scss" />
+    <Content Include="Content\theme\bower_components\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Content\theme\bower_components\holderjs\.bower.json" />
+    <Content Include="Content\theme\bower_components\holderjs\.jshintrc" />
+    <Content Include="Content\theme\bower_components\holderjs\bower.json" />
+    <Content Include="Content\theme\bower_components\holderjs\composer.json" />
+    <Content Include="Content\theme\bower_components\holderjs\package.json" />
+    <Content Include="Content\theme\bower_components\holderjs\README.md" />
+    <Content Include="Content\theme\bower_components\jquery\.bower.json" />
+    <Content Include="Content\theme\bower_components\jquery\bower.json" />
+    <Content Include="Content\theme\bower_components\jquery\dist\jquery.min.map" />
+    <Content Include="Content\theme\bower_components\jquery\src\sizzle\dist\sizzle.min.map" />
+    <Content Include="Content\theme\bower_components\metisMenu\.bower.json" />
+    <Content Include="Content\theme\bower_components\metisMenu\bower.json" />
+    <Content Include="Content\theme\bower_components\metisMenu\LICENSE" />
+    <Content Include="Content\theme\bower_components\metisMenu\package.json" />
+    <Content Include="Content\theme\bower_components\metisMenu\README.md" />
+    <Content Include="Content\theme\bower_components\mocha\.bower.json" />
+    <Content Include="Content\theme\bower_components\mocha\bower.json" />
+    <Content Include="Content\theme\bower_components\mocha\History.md" />
+    <Content Include="Content\theme\bower_components\mocha\LICENSE" />
+    <Content Include="Content\theme\bower_components\mocha\Readme.md" />
+    <Content Include="Content\theme\bower_components\morrisjs\.bower.json" />
+    <Content Include="Content\theme\bower_components\morrisjs\.travis.yml" />
+    <Content Include="Content\theme\bower_components\morrisjs\bower.json" />
+    <Content Include="Content\theme\bower_components\morrisjs\bower.travis.json" />
+    <Content Include="Content\theme\bower_components\morrisjs\package.json" />
+    <Content Include="Content\theme\bower_components\morrisjs\README.md" />
+    <Content Include="Content\theme\bower_components\morrisjs\less\morris.core.less" />
+    <Content Include="Content\theme\bower_components\morrisjs\lib\morris.area.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\lib\morris.bar.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\lib\morris.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\lib\morris.donut.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\lib\morris.grid.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\lib\morris.hover.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\lib\morris.line.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\commas_spec.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\hover_spec.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\label_series_spec.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\pad_spec.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\parse_time_spec.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\area\area_spec.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\bar\bar_spec.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\bar\colours.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\donut\donut_spec.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\grid\auto_grid_lines_spec.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\grid\set_data_spec.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\grid\y_label_format_spec.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\lib\line\line_spec.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\support\placeholder.coffee" />
+    <Content Include="Content\theme\bower_components\morrisjs\spec\viz\run.sh" />
+    <Content Include="Content\theme\bower_components\raphael\.bower.json" />
+    <Content Include="Content\theme\bower_components\raphael\bower.json" />
+    <Content Include="Content\theme\less\mixins.less" />
+    <Content Include="Content\theme\less\sb-admin-2.less" />
+    <Content Include="Content\theme\less\variables.less" />
+    <Content Include="Scripts\chartjs\Chart.bundle.js" />
+    <Content Include="Scripts\chartjs\Chart.js" />
+    <Content Include="Scripts\cldr.js" />
+    <Content Include="Scripts\cldr\event.js" />
+    <Content Include="Scripts\cldr\supplemental.js" />
+    <Content Include="Scripts\cldr\unresolved.js" />
+    <Content Include="Scripts\controls\DatePicker.js" />
+    <Content Include="Scripts\Custom.js" />
+    <Content Include="Scripts\datatables.bootstrap.min.js" />
+    <Content Include="Scripts\dragdrop.uploadfile.js" />
+    <Content Include="Scripts\dropzone.js" />
+    <Content Include="Scripts\editGrid.js" />
+    <Content Include="Scripts\globalize.js" />
+    <Content Include="Scripts\globalize\currency.js" />
+    <Content Include="Scripts\globalize\date.js" />
+    <Content Include="Scripts\globalize\message.js" />
+    <Content Include="Scripts\globalize\number.js" />
+    <Content Include="Scripts\globalize\plural.js" />
+    <Content Include="Scripts\globalize\relative-time.js" />
+    <Content Include="Scripts\globalize\unit.js" />
+    <Content Include="Scripts\areas\commond\commonSearchHelper.js" />
+    <Content Include="Scripts\helper\constants.js" />
+    <Content Include="Scripts\helper\gridHelper.js" />
+    <Content Include="Scripts\helper\multiselectHelper.js" />
+    <Content Include="Scripts\helper\numberHelper.js" />
+    <Content Include="Scripts\helper\suggestionHelper.js" />
+    <Content Include="Scripts\highcharts.js" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\_bootstrap-datetimepicker.less" />
+    <Content Include="Content\bootstrap-datetimepicker-build.less" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\wells.less" />
+    <Content Include="Content\bootstrap\variables.less" />
+    <Content Include="Content\bootstrap\utilities.less" />
+    <Content Include="Content\bootstrap\type.less" />
+    <Content Include="Content\bootstrap\tooltip.less" />
+    <Content Include="Content\bootstrap\thumbnails.less" />
+    <Content Include="Content\bootstrap\theme.less" />
+    <Content Include="Content\bootstrap\tables.less" />
+    <Content Include="Content\bootstrap\scaffolding.less" />
+    <Content Include="Content\bootstrap\responsive-utilities.less" />
+    <Content Include="Content\bootstrap\responsive-embed.less" />
+    <Content Include="Content\bootstrap\progress-bars.less" />
+    <Content Include="Content\bootstrap\print.less" />
+    <Content Include="Content\bootstrap\popovers.less" />
+    <Content Include="Content\bootstrap\panels.less" />
+    <Content Include="Content\bootstrap\pagination.less" />
+    <Content Include="Content\bootstrap\pager.less" />
+    <Content Include="Content\bootstrap\normalize.less" />
+    <Content Include="Content\bootstrap\navs.less" />
+    <Content Include="Content\bootstrap\navbar.less" />
+    <Content Include="Content\bootstrap\modals.less" />
+    <Content Include="Content\bootstrap\mixins\vendor-prefixes.less" />
+    <Content Include="Content\bootstrap\mixins\text-overflow.less" />
+    <Content Include="Content\bootstrap\mixins\text-emphasis.less" />
+    <Content Include="Content\bootstrap\mixins\table-row.less" />
+    <Content Include="Content\bootstrap\mixins\tab-focus.less" />
+    <Content Include="Content\bootstrap\mixins\size.less" />
+    <Content Include="Content\bootstrap\mixins\responsive-visibility.less" />
+    <Content Include="Content\bootstrap\mixins\resize.less" />
+    <Content Include="Content\bootstrap\mixins\reset-text.less" />
+    <Content Include="Content\bootstrap\mixins\reset-filter.less" />
+    <Content Include="Content\bootstrap\mixins\progress-bar.less" />
+    <Content Include="Content\bootstrap\mixins\panels.less" />
+    <Content Include="Content\bootstrap\mixins\pagination.less" />
+    <Content Include="Content\bootstrap\mixins\opacity.less" />
+    <Content Include="Content\bootstrap\mixins\nav-vertical-align.less" />
+    <Content Include="Content\bootstrap\mixins\nav-divider.less" />
+    <Content Include="Content\bootstrap\mixins\list-group.less" />
+    <Content Include="Content\bootstrap\mixins\labels.less" />
+    <Content Include="Content\bootstrap\mixins\image.less" />
+    <Content Include="Content\bootstrap\mixins\hide-text.less" />
+    <Content Include="Content\bootstrap\mixins\grid.less" />
+    <Content Include="Content\bootstrap\mixins\grid-framework.less" />
+    <Content Include="Content\bootstrap\mixins\gradients.less" />
+    <Content Include="Content\bootstrap\mixins\forms.less" />
+    <Content Include="Content\bootstrap\mixins\clearfix.less" />
+    <Content Include="Content\bootstrap\mixins\center-block.less" />
+    <Content Include="Content\bootstrap\mixins\buttons.less" />
+    <Content Include="Content\bootstrap\mixins\border-radius.less" />
+    <Content Include="Content\bootstrap\mixins\background-variant.less" />
+    <Content Include="Content\bootstrap\mixins\alerts.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Content\bootstrap\media.less" />
+    <Content Include="Content\bootstrap\list-group.less" />
+    <Content Include="Content\bootstrap\labels.less" />
+    <Content Include="Content\bootstrap\jumbotron.less" />
+    <Content Include="Content\bootstrap\input-groups.less" />
+    <Content Include="Content\bootstrap\grid.less" />
+    <Content Include="Content\bootstrap\glyphicons.less" />
+    <Content Include="Content\bootstrap\forms.less" />
+    <Content Include="Content\bootstrap\dropdowns.less" />
+    <Content Include="Content\bootstrap\component-animations.less" />
+    <Content Include="Content\bootstrap\code.less" />
+    <Content Include="Content\bootstrap\close.less" />
+    <Content Include="Content\bootstrap\carousel.less" />
+    <Content Include="Content\bootstrap\buttons.less" />
+    <Content Include="Content\bootstrap\button-groups.less" />
+    <Content Include="Content\bootstrap\breadcrumbs.less" />
+    <Content Include="Content\bootstrap\bootstrap.less" />
+    <Content Include="Content\bootstrap\badges.less" />
+    <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Areas\Communication\Views\web.config" />
+    <Content Include="Scripts\jquery-code-scanner.js" />
+    <Content Include="Scripts\jquery.flurry.min.js" />
+    <Content Include="Scripts\jQuery.print.min.js" />
+    <!--<Content Include="Areas\Inquiry\Views\InquiryByMaterialName\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByShelfStatus\Index.cshtml" />-->
+    <!--<Content Include="Areas\Inquiry\Views\Shared\_ShowButtonCommand.cshtml">-->
+    <!--<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\InquiryByWarehouseLocation\Index.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\Shared\_LocationMaterialStatusModal.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\Shared\_OutOfSignPicture.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\web.config" />
+    <Content Include="App_Code\MyHelper.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByPreProductCode\Index.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\Shared\MaterialSimulation\_PartialProductionPlan.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByPreProductName\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByExternalPreProductName\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryBySupplierName\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByProductCode\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryByProductName\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryKneadingLineNo\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryKneadingLotNo\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\InquiryKneadingCommandNo\Index.cshtml" />
+    <Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC032F.cshtml">-->
+    <!--
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>-->
+    <!--<Content Include="Areas\ManagementReport\Views\MaterialStock\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\web.config" />
+    <Content Include="Areas\ManagementReport\Views\PreProductStock\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\ProductStock\Index.cshtml" />-->
+    <!--<Content Include="Areas\ProductManagement\Views\web.config" />
+    <Content Include="Areas\ProductManagement\Views\ProductCertification\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\ProductShippingCommand\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\ProductShippingPlanning\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\RestorageOfProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\RetrievalOfEmptyProductPallet\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\RetrievalOfExternalPreProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\RetrievalOfOutOfSpecPreProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\Shared\_PartialStorageOfProduct.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\Shared\OutOfPlanProduct\_PartialViewEditOutOfPlanProduct.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\StockTakingOfProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\StorageOfEmptyProductPallet\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\StorageOfExternalPreProduct\Index.cshtml" />
+    <Content Include="Areas\ProductManagement\Views\StorageOfProduct\Index.cshtml" />-->
+    <!--<Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC034F.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>-->
+    <!--<Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC038F.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>-->
+    <!--<Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC03AF.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC036F.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>-->
+    <!--<Content Include="Areas\ManagementReport\Views\MaterialMovementHistory\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\PreproductMovementHistory\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\ProductMovementHistory\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\MaterialMovementRecord\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\PreProductMovementRecord\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\ProductMovementRecord\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\ProductShippingRecord\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\ProductCertificationRecord\Index.cshtml" />-->
+    <!--<Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC037F.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\Inquiry\Views\Shared\_SubscreenTCFC03BF.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>-->
+    <!--<Content Include="Areas\ManagementReport\Views\MaterialRetrievalRecord\Index.cshtml" />-->
+    <!--<Content Include="Areas\ManagementReport\Views\PreProductRetrievalRecord\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\MaterialReceivedConsumedList\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\PreProductReceivedConsumedList\Index.cshtml" />
+    <Content Include="Areas\ManagementReport\Views\ProductCerfiticateConsumedList\Index.cshtml" />-->
+    <!--<Content Include="Areas\EnvironmentManagement\Views\LotDataSampling\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\AvailabilityMixingRollMachine\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\CreepingAndRollSpeedDataEdit\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\AvailabilityTabletisingMachine\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\CreepingAndRollSpeedDataOneDay\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\CreepingAndRollSpeedDuration\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\Shared\_partialChart.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\Shared\_prevandnextday.cshtml" />-->
+    <Content Include="Areas\EnvironmentManagement\Views\CreepingAndRollSpeedDuration\Index.cshtml" />
+    <Content Include="Areas\EnvironmentManagement\Views\Shared\CleanlinessDataInput\_partialExportCleanlinessDataInput.cshtml" />
+    <Content Include="App_Data\LabelPrint\ExternalLabels.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Areas\EnvironmentManagement\Views\EnvironmentDataEdit\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\FontStorageOfSupplierPallet\Index.cshtml" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Scripts\jquery-2.2.4.min.map" />
+    <Content Include="Areas\MaterialManagement\Views\MaterialReceptionInput\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\web.config" />
+    <Content Include="Areas\MaterialManagement\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\Shared\MaterialReceptionInput\_PartialViewEditMaterialReception.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\MaterialPostReceptionInput\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\Shared\MaterialPostReceptionInput\_PartialViewPostReception.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\StorageOfMaterial\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\RetrieveOfMaterial\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\AcceptanceOfMaterial\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\StockTakingOfMaterial\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\Shared\StockTakingOfMaterial\_GridResult.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\StorageOfSupplementaryMaterial\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\Shared\StorageOfSupplementaryMaterial\_PartialViewEditStorageOfSupplementaryMaterial.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\StockTakingOfMaterial\IndexC1.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\InterFloorMovementOfMaterial\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\ForcedRetrievalOfRejectedMaterial\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\RetrievalOfSupplierPallet\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\Shared\RetrievalMaterial\_PartialViewDetailPallet.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\StorageOfWarehousePallet\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\StorageOfSupplierPallet\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\RestorageOfMaterial\Index.cshtml" />
+    <Content Include="Areas\MaterialManagement\Views\RetrievalOfWarehousePallet\Index.cshtml" />
+    <Content Include="Areas\Common\Views\Common\_PartialSelectView.cshtml" />
+    <Content Include="Areas\Common\Views\web.config" />
+    <Content Include="Areas\KneadingCommand\Views\web.config" />
+    <Content Include="Areas\KneadingCommand\Views\InputOfKneadingCommand\Index.cshtml" />
+    <Content Include="Areas\SystemManagement\Views\MasterDatabase\Index.cshtml" />
+    <Content Include="Areas\KneadingCommand\Views\KneadingStartEnd\Index.cshtml" />
+    <Content Include="Areas\PreProductManagement\Views\web.config" />
+    <Content Include="Areas\PreProductManagement\Views\StorageOfEmptyContainer\Index.cshtml" />
+    <Content Include="Areas\PreProductManagement\Views\RetrievalOfPreProduct\Index.cshtml" />
+    <Content Include="Areas\PreProductManagement\Views\ForcedRetrievalOfPreProduct\Index.cshtml" />
+    <Content Include="Areas\PreProductManagement\Views\StockTakingPreProduct\Index.cshtml" />
+    <Content Include="Areas\PreProductManagement\Views\StorageOfPreProduct\Index.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\MasterList\Index.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\MaterialRequirementList\Index.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\MaterialSimulation\Index.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\Shared\MaterialSimulation\_PartialViewMaterialSimulationMaterial.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\Shared\MaterialSimulation\_PartialMaterialSimulationProductPlan.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\Shared\SubMaterialMaster\_PartialSubMaterial.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\PreProductPlan\Index.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\Shared\PreProductPlan\_PartialViewEditPreProductPlan.cshtml" />
+    <Content Include="Areas\ProductionPlanning\Views\SubMaterialMaster\Index.cshtml" />
+    <Content Include="Areas\SystemManagement\Views\web.config" />
+    <Content Include="Areas\SystemManagement\Views\StartEndSystem\Index.cshtml" />
+    <Content Include="Areas\SystemManagement\Views\DailyProcess\Index.cshtml" />
+    <Content Include="Areas\SystemManagement\Views\MonthlyProcess\Index.cshtml" />
+    <Content Include="Scripts\angular\services\database-management.service.js" />
+    <Content Include="Areas\TabletisingCommandSubSystem\Views\Shared\_PartialEndTabletising.cshtml" />
+    <Content Include="Areas\TabletisingCommandSubSystem\Views\TabletisingStartStop\Index.cshtml" />
+    <Content Include="Areas\TabletisingCommandSubSystem\Views\web.config" />
+    <Content Include="Areas\TabletisingCommandSubSystem\Views\ManagementOfProductLabel\Index.cshtml" />
+    <Content Include="Areas\TabletisingCommandSubSystem\Views\CreateTabletisingCommand\Index.cshtml" />
+    <Content Include="packages.config" />
+    <Content Include="Scripts\jquery-2.2.4.js" />
+    <Content Include="Scripts\jquery-2.2.4.min.js" />
+    <Content Include="Scripts\jquery-custom-validators\jquery-numeric-greater.validator.js" />
+    <Content Include="Scripts\jquery-custom-validators\jquery-validation-handler.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.dataTables.js" />
+    <Content Include="Scripts\jquery.datatables.min.js" />
+    <Content Include="Scripts\jgrowl\jquery.jgrowl.css" />
+    <Content Include="Scripts\jgrowl\jquery.jgrowl.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
+    <Content Include="Scripts\jquery.tokeninput.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Properties\PublishProfiles\deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\KCSG.pubxml" />
+    <None Include="Properties\PublishProfiles\Local publish.pubxml" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jsgrid-1.4.1\i18n\jsgrid-es.js" />
+    <Content Include="Scripts\jsgrid-1.4.1\jsGrid-default-settings.js" />
+    <Content Include="Scripts\jsgrid-1.4.1\jsgrid-theme.css" />
+    <Content Include="Scripts\jsgrid-1.4.1\jsgrid-theme.min.css" />
+    <Content Include="Scripts\jsgrid-1.4.1\jsgrid.css" />
+    <Content Include="Scripts\jsgrid-1.4.1\jsgrid.js" />
+    <Content Include="Scripts\jsgrid-1.4.1\jsgrid.min.css" />
+    <Content Include="Scripts\jsgrid-1.4.1\jsgrid.min.js" />
+    <Content Include="Scripts\maskedinput\jquery.maskedinput.js" />
+    <Content Include="Scripts\maskedinput\jquery.maskedinput.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\multiselect.js" />
+    <Content Include="Scripts\nprogress.js" />
+    <Content Include="Scripts\remark-attachment.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Components\_Navigationbar.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\Components\_Sidebar.cshtml" />
+    <Content Include="Views\Home\CommunicationC1.cshtml" />
+    <None Include="Views\Shared\Components\_Sidebar.bak" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KCSG.Core\KCSG.Core.csproj">
+      <Project>{5DA4AF64-C5DB-42AA-990D-55306C21E84A}</Project>
+      <Name>KCSG.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KCSG.Data\KCSG.Data.csproj">
+      <Project>{D39D17FF-D8A2-4B55-BB33-DDBBBFF0EA91}</Project>
+      <Name>KCSG.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KCSG.Domain\KCSG.Domain.csproj">
+      <Project>{fde39488-f6b6-4bcb-856e-5d5113d26f1c}</Project>
+      <Name>KCSG.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\CommunicationResource.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>CommunicationResource.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\InQuiryResource.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>InQuiryResource.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\MaterialResource.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>MaterialResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\MessageResource.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>MessageResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\PreProductManagementResources.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>PreProductManagementResources.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\ProductManagementResources.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ProductManagementResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\TabletisingResources.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>TabletisingResources.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\EnvironmentResource.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>EnvironmentResource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugWithoutLogin|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UnauthenticatedDebug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;UNAUTHORIZED_DEBUG, GOING_MERRY</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>9176</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:9176/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

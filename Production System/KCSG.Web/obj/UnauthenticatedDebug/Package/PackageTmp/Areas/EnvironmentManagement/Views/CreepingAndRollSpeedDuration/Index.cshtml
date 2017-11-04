@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Creeping and Roll Speed (Duration)";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript" src="~/Scripts/areas/CreepingAndRollSpeedDuration/CreepingAndRollSpeedDuration.js"></script>
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.CreepingAndRollSpeedDurationModel
+@using (Ajax.BeginForm("Search", new AjaxOptions() { HttpMethod = "Post", OnSuccess = "onSuccess" }))
+{
+   @Html.Partial("SearchCriteria", Model.SearchCriteriaModel)
+
+}
+<div class="col-lg-12">
+    @Html.Partial("_partialTemperature", Model.LeftModel)
+    @Html.Partial("_partialTemperature", Model.RightModel)
+    @Html.Partial("_partialTemperature", Model.RollModel)
+</div>
+

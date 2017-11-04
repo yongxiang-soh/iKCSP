@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.ScreenId = "TCEN043F";
+    ViewBag.Title = "Lot Data Cleanup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.LotDataCleanup.LotDataCleanupViewModel
+@using KCSG.jsGrid.MVC
+@using KCSG.Core;
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls;
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC;
+@using Resources
+<script src="~/Scripts/areas/LotDataCleanup/lotDataCleanup.js"></script>
+<form id="newForm">
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <span>Lot Data Cleanup [TCEN043F]</span>
+            </div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div class="col-lg-2">@Html.LabelFor(model => model.OldCutOffDate)</div>
+                    <div class="col-lg-3">
+                        @Html.ExtTextBoxFor(model => model.OldCutOffDate, new { @readonly = "true" })
+                    </div>
+                    <div class="col-lg-1">@Html.LabelFor(model => model.OldCutOfTime)</div>
+                    <div class="col-lg-2">
+                        @Html.ExtTextBoxFor(model => model.OldCutOfTime, new { @readonly = "true" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-2">@Html.LabelFor(model => model.Lot1)</div>
+                    <div class="col-lg-3">
+                        @Html.ExtNumberFor(model => model.Lot1, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 99999, NumberOfDecimal = 0 }, new { @readonly = "true" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-2">@Html.ExtLabelFor(model => model.NewCutOfDate)</div>
+                    <div class="col-lg-3">
+                        @Html.ExtDateTimeFor(model => model.NewCutOfDate, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                    </div>
+                    <div class="col-lg-1">@Html.ExtLabelFor(model => model.NewCutOfTime)</div>
+                    <div class="col-lg-2">
+                        @Html.ExtDateTimeFor(model => model.NewCutOfTime, new DateTimeOption() { Format = "HH:mm" })
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-flat btn-default btn-less-5-chars" type="button" onclick=" Test() ">Test</button>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-2">@Html.LabelFor(model => model.Lot2)</div>
+                    <div class="col-lg-3">
+                        @Html.ExtNumberFor(model => model.Lot2, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 99999, NumberOfDecimal = 0 })
+                    </div>
+                </div>
+
+                <div class="row form-group col-lg-12">
+                    <button class="btn btn-flat btn-default btn-less-5-chars" type="button" onclick=" Go() ">Go</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</form>

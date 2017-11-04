@@ -1,0 +1,196 @@
+﻿@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model KCSG.Web.Areas.ManagementReport.ViewModels.ManagementReportViewModel.FindReportTableRecordsViewModel
+<div class="col-lg-12">
+    <h3 class="page-header" style="margin-top: 0">
+        Product Certified/Shipped List - TCFC203F
+    </h3>
+</div>
+
+<div class="col-lg-12"
+     ng-app="MasterDatabaseModule"
+     ng-controller="ProductConsumerController">
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">Search Criteria</div>
+
+        <div class="panel-body">
+
+            <!-- Table selection (row)-->
+            <div class="col-xs-3">
+                <!-- Table label -->
+                @Html.ExtLabelFor(model => model.YearMonth)
+            </div>
+            <div class="col-xs-3">
+
+                @Html.ExtDateTimeFor(model => model.YearMonth, new DateTimeOption() { Format = "MM/YYYY", ViewMode = "months" })
+
+            </div>
+            <div class="col-xs-1"></div>
+            <div>
+                <!-- Print search button -->
+                <button class="btn btn-default btn-less-5-chars"
+                        ng-click="clickRefresh()">
+                    @*<span class="glyphicon glyphicon-search"></span>*@
+                    <span>Go</span>
+                </button>
+            </div>
+        </div>
+        <br />
+
+    </div>
+
+    @*<form class="panel-body"
+          name="tableFormView"
+          novalidate
+          style="overflow-x: scroll;">*@
+    <div class="panel panel-danger">
+        <form class="panel-body"
+              name="tableFormView"
+              novalidate>
+            <table class="table table-responsive">
+                <thead>
+                    <tr class="jsgrid-header-row">
+                        <th>Product Code</th>
+                        <th>Product Name</th>
+                        <th>Remainder (Prev)</th>
+                        <th>Certified</th>
+                        <th>Shipped</th>
+                        <th>Remainder (Curr)</th>
+                        <th>Update date</th>
+                        <th style="display: none">Year Month</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in displayedTable"
+                        ng-click="selectItem(item)"
+                        ng-class="selectedRow == item ? 'bg-danger' : '' ">
+                        <td>
+                            {{item.ProductCode}}
+                        </td>
+                        <td>
+                            {{item.ProductName}}
+                        </td>
+                        <td style="text-align: right">
+                            <span ng-hide="inUpdateMode && item == selectedRow">
+                                {{item.Remainst}}
+                            </span>
+                            <input id="Remain" class="form-control"
+                                   ng-show="inUpdateMode && item == selectedRow"
+                                   type="text" onKeyPress="if(this.value.length==10) return false;"
+                                   ng-model="updateItem.Remain" />
+                        </td>
+                        <td style="text-align: right">
+                            <span ng-hide="inUpdateMode && item == selectedRow">
+                                {{item.Recievedst}}
+                            </span>
+                            <input id="Recieved" class="form-control"
+                                   ng-show="inUpdateMode && item == selectedRow"
+                                   type="text" onKeyPress="if(this.value.length==10) return false;"
+                                   ng-model="updateItem.Recieved" />
+                        </td>
+                        <td style="text-align: right">
+                            <span ng-hide="inUpdateMode && item == selectedRow">
+                                {{item.Usedst}}
+                            </span>
+                            <input id="Used" class="form-control"
+                                   ng-show="inUpdateMode && item == selectedRow"
+                                   type="text" onKeyPress="if(this.value.length==10) return false;"
+                                   ng-model="updateItem.Used" />
+                        </td>
+                        <td style="text-align: right">{{item.Remaincurrst}}</td>
+                        <td style="text-align: right">{{item.Updatedatest}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <br />
+        </form>
+    </div>
+        <div>
+            <div class="col-lg-8 text-left" style="padding-top: 20px !important">
+
+
+
+
+                <!-- Confirm edit item button -->
+                <button class="btn btn-default btn-less-5-chars"
+                        ng-disabled="displayedTable.length == 0 || inUpdateMode || displayedTable == null"
+                        ng-click="PrintItem()">
+                    <span>Print</span>
+                </button>
+                <!-- Confirm edit item button -->
+                <button class="btn btn-default btn-less-5-chars"
+                        ng-disabled="selectedRow == null || displayedTable.length == 0 || !inUpdateMode|| displayedTable == null"
+                        @*ng-show="inUpdateMode"*@
+                        ng-click="confirmItemUpdate()">
+                    <span>Update</span>
+                </button>
+
+                <!-- Update item button -->
+                @*<button ng-disabled="displayedTable.length == 0|| displayedTable == null"
+                            ng-show="!inUpdateMode"
+                            ng-click="toggleItemUpdate()"
+                            class="btn btn-flat btn-default">
+                        <span ng-if="!inUpdateMode">Update</span>
+                    </button>*@
+                <!-- Update item button -->
+                @*<button ng-disabled="displayedTable.length == 0|| displayedTable == null"
+                            ng-show="inUpdateMode"
+                            ng-click="cancelItemUpdate()"
+                            class="btn btn-flat btn-default">
+                        <span ng-if="inUpdateMode">Cancel</span>
+                    </button>*@
+                <!-- Recalculate item button -->
+                <button class="btn btn-default btn-more-8-chars"
+                        ng-disabled="displayedTable.length == 0 || displayedTable == null|| !inUpdateMode || selectedRow == null"
+                        ng-click="reloaditem()">
+                    <span>Re-calculate</span>
+                </button>
+
+            </div>
+        </div>
+        <div class="col-lg-4 text-right">
+            <ul uib-pagination
+                items-per-page="30"
+                total-items="Total"
+                max-size="3"
+                first-text="First"
+                previous-text="Prev"
+                next-text="Next"
+                last-text="Last"
+                boundary-links="true"
+                ng-model="selectedTableView.page"
+                ng-change="pageChanged()"></ul>
+        </div>
+        <!-- Button section -->
+        <div class="row">
+
+        </div>
+    </div>
+
+
+<style>
+    input, select, textarea {
+        max-width: none;
+    }
+</style>
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-2.2.0.min.js"></script>
+<script src="~/Scripts/angular/services/productconsumer.service.js"></script>
+<script src="~/Scripts/angular/services/toastr.service.js"></script>
+<script src="~/Scripts/angular/controllers/productconsumer.controller.js"></script>
+@*<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<!--Reference the autogenerated SignalR hub script. -->
+<script src="~/signalr/hubs"></script>*@
+<style>
+    .modal-dialog {
+        padding: auto;
+        left: 0px;
+    }
+</style>

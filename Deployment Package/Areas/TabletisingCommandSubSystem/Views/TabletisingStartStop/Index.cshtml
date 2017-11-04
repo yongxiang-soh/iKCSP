@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.ScreenId = "TCMD021F";
+    ViewBag.Title = "Tabletising Start/Stop Control";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.TabletisingCommandSubSystem.Models.TabletisingStartStop.TabletisingStartStopViewModel
+@using KCSG.Core;
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+<script src="~/Scripts/areas/tabletising/tabletisingCommand.js"></script>
+<script>
+        var formUrl = {
+            urlCheckStatus: '@Url.Action("CheckStatus", "TabletisingStartStop")'   }
+    </script>
+
+
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">List of Tabletising Command</div>
+        <div class="panel-body">
+            <div class="col-lg-12 form-group">
+                @Html.Grid(Model.GridTabletising)
+            </div>
+            <div class="col-md-12 form-group">
+                <button class="btn btn-flat btn-default btn-more-5-chars" id="btnEquilibrium" onclick=" Equilibrium() ">Equilibrium</button>
+                <button class="btn btn-flat btn-default btn-less-5-chars " id="btnSelect" onclick=" Selected() ">Select</button>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <div class="col-lg-12 form-group">
+                @Html.Grid(Model.GridTabletisingSelected)
+            </div>
+            <div class="col-lg-12 form-group">
+                <button class="btn btn-flat btn-default btn-less-5-chars" id="btnPrint" onclick=" Print() ">Print</button>
+                <button class="btn btn-flat btn-default btn-more-5-chars " id="btnContainer" onclick=" ContainerSet() ">Container Set</button>
+                <button class="btn btn-flat btn-default btn-less-5-chars" id="btnStart" onclick=" StartTabletising() ">Start</button>
+                <button class="btn btn-flat btn-default btn-less-5-chars" id="btnEnd" onclick=" CheckValidationButtonEnd() ">End</button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div id="rederageForm">
+    
+</div>
+@using (Html.ExtModalFor("endForm", ExtModal.ModalSize.Medium, "Actual Storage"))
+{
+    using (Html.ExtModalBodyFor())
+    {
+    }
+    using (Html.ExtModalFooterFor("text-right"))
+    {
+        @*<button class="btn btn-teal" type="button" id="btnOk" onclick="selectTabletingLine()">OK</button>
+        <button class="btn btn-teal" type="button" data-dismiss="modal">Cancel</button>*@
+    }
+}
+
+
+

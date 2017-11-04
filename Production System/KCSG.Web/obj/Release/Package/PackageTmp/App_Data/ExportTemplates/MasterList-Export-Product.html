@@ -1,0 +1,56 @@
+﻿
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th colspan="2"
+            class="text-center">** PRODUCT MASTER LIST **</th>
+    </tr>
+    <tr>
+        <td class="pull-left">[TCFC173P]</td>
+        <td class="pull-right"> {{currentDate}}</td>
+
+    </tr>
+    <tr>
+        <td colspan="2" class="pull-right">
+             {{companyName}} </td>
+    </tr>
+    </thead>
+</table>
+<b>< Product List ></b>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>Product Code<br/>Product Name</th>
+            <th>Pre-product Code<br/>End User Code</th>
+            <th> Unit</th>
+            <th>Tablet Size<br/>Tablet Type</th>
+            <th>Tablet Qty<br/>Kneading Time</th>
+            <th>Yield Rate<br/>Pack. Unit</th>
+            <th>Factor<br/>Needtime</th>
+            <th>St. Period<br/>Shelf Life</th>
+            <th>Inner Label Req<br/>Low Temp. Class</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {{#data}}
+        <tr>
+            <td>{{F09_ProductCode}}<br/>{{F09_ProductDesp}}</td>
+            <td>{{F09_PreProductCode}}<br/>{{F09_EndUserCode}}</td>
+            <!--<td>{{F09_Unit}}</td>-->
+            <td>Kg</td>
+            <td>{{F09_TabletSize}} 	&nbsp;	&nbsp; x &nbsp;	&nbsp; {{F09_TabletSize2}}<br/>{{F09_TabletType}}</td>
+            <td>{{F09_TabletAmount}}<br/>{{F09_KneadingTime}}</td>
+            <td>{{F09_YieldRate}} %<br/>{{F09_PackingUnit}}</td>
+          
+            <td>{{F09_Factor}}<br/>{{F09_NeedTime}}</td>
+            <td>{{F09_StdStkMtn}}<br/>{{F09_ValidPeriod}}</td>
+            <td>{{InnerLabelReq}}<br/>{{Temperature}}</td>
+        </tr>
+        {{/data}}
+    </tbody>
+</table>
+<br />
+
+
+

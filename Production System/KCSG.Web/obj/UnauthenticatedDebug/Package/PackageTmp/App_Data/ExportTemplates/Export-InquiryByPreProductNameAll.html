@@ -1,0 +1,145 @@
+﻿<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th style="text-align: center">** STOCK LIST ( Normal Item) **</th>
+    </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC084P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td>< Pre-Product ></td>
+            <td></td>
+        </tr>        
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>Pre-Product Code</th>
+            <th>Pre-Product Name</th>
+            <th>Lot No.</th>
+            <th>C.Code</th>
+            <th>R.B.L</th>
+            <th class="text-align-right">Quantity (Kg)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {{#normal}}
+        {{#PrintPreProductNameGroup}}
+        {{#PrintPreProductNameGroupItem}}
+        {{#FindPrintPreProductNameItem}}
+        <tr>
+            <td>{{PreProductCode}}</td>
+            <td>{{PreProductName}}</td>
+            <td>{{PreProductLotNo}}</td>
+            <td>{{ContainerCode}}</td>
+            <td>{{ShelfNo}}</td>
+            <td class="text-align-right">{{AmountString}}</td>
+        </tr>
+        {{/FindPrintPreProductNameItem}}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-align-right">Lot Total:</td>
+				<td class="text-align-right">{{LotTotalString}}</td>
+            </tr>
+        {{/PrintPreProductNameGroupItem}}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-align-right">Preproduct Total:</td>
+                <td class="text-align-right">{{PreproductTotalString}}</td>
+            </tr>
+        {{/PrintPreProductNameGroup}}
+    {{/normal}}
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th style="text-align: center">** STOCK LIST ( External Item ) **</th>
+        </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC085P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td>< Pre-Product ></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>Pre-Product Code</th>
+            <th>Pre-Product Name</th>
+            <th>Lot No.</th>
+            <th>PalletNo</th>
+            <th>R.B.L</th>
+            <th class="pull-right">Quantity (Kg)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {{#external}}
+        {{#PrintPreProductNameGroup}}
+        {{#PrintPreProductNameGroupItem}}
+        {{#FindPrintPreProductNameItem}}
+        <tr>
+            <td>{{OutsidePreProductCode}}</td>
+            <td>{{PreProductName}}</td>
+            <td>{{OutsidePreProductLotNo}}</td>
+            <td>{{PalletNo}}</td>
+            <td>{{ShelfNo}}</td>
+            <td class="pull-right">{{AmountString}}</td>
+        </tr>
+        {{/FindPrintPreProductNameItem}}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="pull-right">Lot Total:</td>
+                <td class="pull-right">{{LotTotalString}}</td>
+            </tr>
+        {{/PrintPreProductNameGroupItem}}
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="pull-right">Preproduct Total:</td>
+                <td class="pull-right">{{PreproductTotalString}}</td>
+            </tr>
+        {{/PrintPreProductNameGroup}}
+        {{/external}}
+    </tbody>
+</table>

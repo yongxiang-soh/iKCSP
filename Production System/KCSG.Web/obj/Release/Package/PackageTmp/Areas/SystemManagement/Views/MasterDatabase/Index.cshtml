@@ -1,0 +1,296 @@
+﻿@{
+    ViewBag.Title = "Database maintainance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href="~/Content/AdminLTE/master-data-management.css" rel="stylesheet" />
+
+<div class="col-lg-12"
+     ng-app="MasterDatabaseModule"
+     ng-controller="MasterDatabaseController"
+     ng-init="loadTables()">
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">Search Criteria</div>
+
+        <div class="panel-body">
+
+            <!-- Table selection (row)-->
+            <div class="row">
+                <!-- Table label -->
+                <div class="col-lg-4">
+                    <span class="control-label">Table</span>
+                </div>
+
+                <!-- Table dropdown list -->
+                <div class="col-lg-8">
+                    <select ng-options="table as table.Name for table in tableSelection.tables"
+                            ng-model="selectedTableView.table"
+                            ng-change="clickRefresh()"
+                            class="form-control"></select>
+                </div>
+            </div>
+            <br />
+
+            <!-- Record amount selection (row) -->
+            <div class="row">
+                <!-- Record label -->
+                <div class="col-lg-4">
+                    <span class="control-label">Records per page</span>
+                </div>
+
+                <!-- Table dropdown list -->
+                <div class="col-lg-8">
+                    <select ng-options="record as record for record in tableSelection.records"
+                            ng-model="selectedTableView.records"
+                            ng-change="clickRefresh()"
+                            class="form-control"></select>
+                </div>
+            </div>
+            <br />
+
+            <!-- Button section -->
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <!-- Reload table button -->
+                    <button class="btn "
+                            ng-click="clickRefresh()"
+                            ng-disabled="selectedTableView == null || selectedTableView.table == null"
+                            ng-hide="inUpdateMode">
+                        <span class="glyphicon glyphicon-refresh"></span>
+                        <span>Refresh</span>
+                    </button>
+
+                    <!-- Create a new record (button)-->
+                    <button class="btn btn-primary"
+                            data-toggle="modal"
+                            data-target="#insertRecordModal"
+                            ng-disabled="displayedTable == null || inUpdateMode == true"
+                            ng-hide="inUpdateMode">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span>Create</span>
+                    </button>
+
+                    <!-- Delete item button -->
+                    <button class="btn btn-danger"
+                            ng-disabled="selectedRow == null || displayedTable == null || inUpdateMode == true"
+                            ng-hide="inUpdateMode"
+                            ng-click="confirmDeleteItem()">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        <span>Delete</span>
+                    </button>
+
+                    <!-- Update item button -->
+                    <button ng-disabled="displayedTable == null"
+                            ng-click="toggleItemUpdate()"
+                            ng-class="!inUpdateMode ? 'btn btn-primary' : 'btn btn-danger'">
+                        <span ng-hide="inUpdateMode"
+                              class="glyphicon glyphicon-edit"></span>
+                        <span ng-hide="!inUpdateMode"
+                              class="glyphicon glyphicon-remove"></span>
+                        <span>Update</span>
+                    </button>
+
+                    <!-- Export table to Excel button -->
+                    
+
+                </div>
+            </div>
+
+        </div>
+
+        <form class="panel-body"
+              name="tableFormView"
+              novalidate
+              style="overflow-x: scroll;">
+
+            <table class="table table-responsive table-condensed">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th ng-repeat="header in displayedTable.Headers"
+                            class="text-center">{{header.Column}}</th>
+                    </tr>
+                </thead>
+                <tbody ng-if="displayedTable.Body != null && displayedTable.Body.Rows != null && displayedTable.Body.Rows.length > 0">
+                    <tr ng-repeat="row in displayedTable.Body.Rows track by $index"
+                        ng-class="selectedRow == row ? 'bg-danger' : '' ">
+                        <td >
+                            <div ng-hide="!inUpdateMode || selectedRow != row">
+
+                                <!-- Button which cancel row from being selected (In update mode) -->
+                                <button class="btn btn-sm btn-danger"
+                                        ng-click="cancelItemUpdate()">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+
+                                <!-- Button which cancel row from being updated (In update mode) -->
+                                <button class="btn btn-sm btn-primary"
+                                        ng-disabled="!tableFormView.$valid"
+                                        ng-click="confirmItemUpdate()">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                </button>
+                            </div>
+                        </td>
+                        <td ng-repeat="header in displayedTable.Headers"
+                            class="text-center"
+                            ng-click="selectItem(row)"
+                            ng-init="itemName = initializeGuid()">
+
+                            <span ng-hide="(inUpdateMode && selectedRow == row)">{{findDataDisplay(row[header.Column])}}</span>
+
+                            <!-- Input controls which are used for updating value in a row of table -->
+                            <div ng-hide="!inUpdateMode || selectedRow != row">
+                                
+                                <div>
+                                    <b>{{header.Column}}</b>
+                                </div>
+                                
+                                <div ng-class="header.IsNullable == 'NO' ? 'input-group': ''">
+                                    <input name="{{itemName}}"
+                                           class="form-control"
+                                           ng-model="updateItem[header.Column]"
+                                           type="{{findInputType(header.Type)}}"
+                                           maxlength="{{findInputType(header.Type) == 'text' ? header.MaxLength : null}}"
+                                           max="{{findInputType(header.Type) != 'text' ? header.MaxLength : null}}"
+                                           ng-required="header.IsNullable == 'NO'" />
+
+                                    <span class="input-group-addon"
+                                          ng-show="header.IsNullable == 'NO'">
+                                        <span class="fa fa-warning"></span>
+                                    </span>
+                                </div>
+                                
+
+                            </div>
+
+
+                            <ul class="validation-summary-errors"
+                                ng-show="inUpdateMode && updateItem != null">
+                                <li ng-show="tableFormView[itemName].$error.required && tableFormView[itemName].$dirty"
+                                    class="input-validation-error">Required</li>
+                            </ul>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+        </form>
+
+        <div class="text-center">
+            <ul uib-pagination
+                items-per-page="selectedTableView.records"
+                total-items="displayedTable.Body.Total"
+                first-text="<<"
+                previous-text="<"
+                next-text=">"
+                last-text=">>"
+                max-size="20"
+                ng-model="selectedTableView.page"
+                boundary-link-numbers="true"
+                ng-change="pageChanged()"></ul>
+        </div>
+
+        <div id="insertRecordModal"
+             class="modal fade"
+             tabindex="-1"
+             role="dialog">
+            <div class="modal-dialog"
+                 role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title">
+                            Create record into {{selectedTableView.table.Name}}
+                        </h4>
+                    </div>
+                    <form name="insertItemModalForm"
+                          class="modal-body">
+
+                        <div ng-repeat="column in displayedTable.Headers track by $index">
+
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div class="col-lg-3">
+                                        <span class="pull-right control-label">{{column.Column}}</span>
+                                    </div>
+                                    <div class="col-lg-9">
+                                        <div ng-switch="findColumnDataType(column.Type)">
+
+                                            <!-- Base on the column type to set input type -->
+                                            <!-- Input group is only for required element -->
+                                            <div ng-class="column.IsNullable == 'NO' ? 'input-group' : ''">
+                                                <input class="form-control"
+                                                       ng-model="insertItem.data[$index].Value"
+                                                       type="{{findInputType(column.Type)}}"
+                                                       placeholder="{{column.IsNullable == 'NO' ? 'This field is required': ''}}"
+                                                       name="{{column.Column}}"
+                                                       ng-required="column.IsNullable == 'NO'"
+                                                       ng-maxlength="column.MaxLength"
+                                                       maxlength="{{findInputType(column.Type) == 'text' ? column.MaxLength : null}}"
+                                                       max="{{findInputType(column.Type) == 'number' ? column.MaxLength : null}}" />
+
+                                                <!-- The warning icon is only for required item. Ordinal items don't have it -->
+                                                <span ng-show="column.IsNullable == 'NO'"
+                                                      class="input-group-addon">
+                                                    <span class="fa fa-warning"
+                                                          ng-show="column.IsNullable == 'NO'"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+
+
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn "
+                                data-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="button"
+                                class="btn btn-primary"
+                                ng-click="insertTableRecord()"
+                                ng-disabled="!insertItemModalForm.$valid">
+                            Save changes
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    input, select, textarea {
+        max-width: none;
+    }
+</style>
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-2.2.0.min.js"></script>
+<script src="~/Scripts/angular/services/database-management.service.js"></script>
+<script src="~/Scripts/angular/services/toastr.service.js"></script>
+<script src="~/Scripts/angular/controllers/database-management.controller.js"></script>
+
+<style>
+    .modal-dialog {
+        padding: auto;
+        left: 0px;
+    }
+
+</style>

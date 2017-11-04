@@ -1,0 +1,11 @@
+﻿{
+  "Atm": "~/App_Data/LabelPrint/External/Atm.txt",
+  "Buzen": "~/App_Data/LabelPrint/External/Buzen.txt",
+  "Piece": "~/App_Data/LabelPrint/External/Piece.txt",
+  "PieceSmall": "~/App_Data/LabelPrint/External/PieceSmall.txt",
+  "Renesas": "~/App_Data/LabelPrint/External/Renesas.txt",
+  "Stlgg": "~/App_Data/LabelPrint/External/Stlgg.txt",
+  "Sts": "~/App_Data/LabelPrint/External/Sts.txt",
+  "Chippac": "~/App_Data/LabelPrint/External/Chippac.txt",
+  "GTBF": "~/App_Data/LabelPrint/External/GTBF.txt"
+}

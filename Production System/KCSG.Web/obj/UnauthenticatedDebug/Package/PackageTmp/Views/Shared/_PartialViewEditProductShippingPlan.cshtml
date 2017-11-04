@@ -1,0 +1,166 @@
+﻿@using System.Web.Mvc.Ajax
+@using System.Web.Mvc.Html
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.ProductManagement.ViewModels.ProductShippingPlanning.ProductShippingPlanningViewModel
+@using (Ajax.BeginForm("Edit", "ProductShippingPlanning", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess(data, status, xhr)", Confirm = Model.IsCreate? "Ready to add?":"Ready to update?" }, new { @id = "addNewForm" }))
+{
+
+    @Html.HiddenFor(model => model.IsCreate)
+    @*@Html.HiddenFor(model => model.F67_PrePdtLotNo)
+    @Html.HiddenFor(model => model.F67_ProductFlg)*@
+    @Html.HiddenFor(m => m.KndLine, new { id = "hdfKndLine" })
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            @if (Model.IsCreate)
+            {
+                <span> Add Product Shipping Plan - TCPR032F </span>
+            }
+            else
+            {
+                <span> Update Product Shipping Plan - TCPR032F </span>
+            }
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F44_ShipCommandNo)
+                    </div>
+                    <div class="col-lg-8">
+
+                        @Html.ExtTextBoxFor(model => model.F44_ShipCommandNo, new {@readonly = "readonly", @id = "txtShippingNo", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F44_ProductCode)
+                    </div>
+                    <div class="col-lg-8">
+                        @if (Model.IsCreate)
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.F44_ProductCode, CustomControlConstants.AddOn.Search, "#modalProductCodeSelect", new { @id = "txtProductCode" })
+                            <span class="field-validation-error" style="margin-left: auto; margin-right: auto"><span id="errorProCode" hidden></span></span>
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.F44_ProductCode, CustomControlConstants.AddOn.Search, "", new { style = "cursor: not-allowed", @class = "form-control" })
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F09_ProductDesp)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtTextBoxFor(model => model.F09_ProductDesp, new { style = "  cursor: not-allowed", @readonly = "readonly", @id = "txtProductName" })
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F44_ShpRqtAmt)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtNumberFor(model => model.F44_ShpRqtAmt, new NumberOption() { NumberOfDecimal = 2, Max = 99999999.00 }, new { @autofocus = "autofocus" })
+                        @*@Html.ExtTextBoxFor(model => model.F44_ShpRqtAmt, new { style = "width:100%; margin-left:-5px;", onchange = "return false;", autofocus = true })*@
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F44_ProductLotNo)
+                    </div>
+                    <div class="col-lg-8">                                            
+                            @Html.ExtTextBoxAddOnFor(model => model.F44_ProductLotNo, CustomControlConstants.AddOn.Search, "#modalProductLotNoParameter", new { @id = "txtProductLotNo" })
+                            <span class="field-validation-error" style="margin-left: auto; margin-right: auto"><span id="errorProLotNo" hidden></span></span>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.DeliveryDate)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtDateTimeFor(model => model.DeliveryDate, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F44_EndUserCode)
+                    </div>
+                    <div class="col-lg-8">
+                        @if (Model.IsCreate)
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.F44_EndUserCode, CustomControlConstants.AddOn.Search, "#modalEndUserCodeSelect", new { @id = "txtEndUserCode" })
+
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.F44_EndUserCode, CustomControlConstants.AddOn.Search, "", new { style = "cursor: not-allowed", @class = "form-control" })
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F10_EndUserName)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtTextBoxFor(model => model.F10_EndUserName, new { style = "  cursor: not-allowed", @readonly = "readonly", @id = "txtEndUserName" })
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-default btn-flat btn-less-5-chars">OK</button>
+            <button type="button" class="btn btn-default btn-flat btn-less-5-chars" onclick=" hideFormProdShip() ">Cancel</button>
+        </div>
+
+
+
+    </div>
+}
+
+
+<script type="text/javascript">
+    $().ready(function () {
+        @if (Model.IsCreate)
+        {
+         <text>
+        $("#F44_ShipCommandNo").text
+        </text>
+
+        
+        }
+        else
+        { <text>
+        $("#F09_ProductDesp").focus();
+        </text>
+        }
+        $.validator.unobtrusive.parse('#addNewForm');
+
+        $("#formPlaceholder").onload
+    });
+
+    //$("#addNewForm")
+    //    .submit(function(event) {
+    //        event.preventDefault();
+    //        $.ajax({
+    //            //url: formUrlProdShip.urlEdit,        
+    //            url: "/ProductShippingPlanning/Edit",
+    //            type: 'GET',
+    //            success: function (data) {
+    //                if (data) {
+    //                    alert('The same record exists in database!');
+    //                    return false;
+    //                }
+    //            }
+    //        });
+    //    });
+</script>
+

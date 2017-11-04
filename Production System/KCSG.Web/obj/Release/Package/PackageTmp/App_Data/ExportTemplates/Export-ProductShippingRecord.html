@@ -1,0 +1,66 @@
+﻿<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th style="text-align: center">** SHIPPING RESULT LIST **</th>
+    </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC00151]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td>< Product ></td>
+            <td></td>
+        </tr>        
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th style="vertical-align: text-top;">Shipping No.<br/> </th>
+            <th>Product Code<br/>Product Name</th>
+            <th style="vertical-align: text-top;">Delivery<br/></th>            
+            <th>End User Code<br/>End User Name</th>
+            <th style="vertical-align: text-top;">Retrieval Date<br/></th>
+            <th style="vertical-align: text-top;">Lot No.<br/></th>
+            <th class="text-align-right" style="vertical-align: text-top;">Quantity (Kg)</th>            
+        </tr>        
+    </thead>
+
+    <tbody>
+    {{#GroupItemses}}
+    {{#FindPrintManagementReportItem}}
+    <tr>
+        <td>{{ShippingNo}}<br/></td>
+        <td>{{ProductCode}}<br/>{{ProductName}}</td>
+        <td>{{Delivery}}<br/></td>
+        <td>{{EndUserCode}}<br/>{{EndUserName}}</td>
+        <td>{{RetrievalDate}}</td>
+        <td>{{LotNo}}</td>
+        <td class="text-align-right">{{Quantityst}}</td>
+    </tr>
+    {{/FindPrintManagementReportItem}}
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="text-align-right">Total:</td>
+        <td class="text-align-right">{{Totalgroup}}</td>
+    </tr>
+        {{/GroupItemses}}
+    </tbody>  
+    <tfoot>
+     
+    </tfoot> 
+</table>

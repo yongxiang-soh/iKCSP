@@ -1,0 +1,59 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Domain.Interfaces.Services
+@using KCSG.Domain.Models
+@{
+
+    const string area = "ProductManagement";
+
+    // Find service which handles identity information.
+    var identityService = DependencyResolver.Current.GetService<IIdentityService>();
+
+    // Find configuration service.
+    var configurationService = DependencyResolver.Current.GetService<IConfigurationService>();
+
+    // Find available screens.
+    var availableScreens = identityService.FindAccessibleScreens(HttpContext.Current.User.Identity);
+
+    // Find list of screens of product management system.
+    List<ScreenInformation> screens = new List<ScreenInformation>();
+    if (configurationService.Areas != null && configurationService.Areas.ContainsKey(area))
+    {
+        screens = configurationService.Areas[area];
+    }
+}
+
+@if (identityService.IsScreenAccessible(availableScreens, screens.Select(x => x.Id).ToArray()))
+{
+    <li class="treeview">
+        <a href="javascript:void(0);">
+            <i class="fa fa-table" aria-hidden="true"></i>
+            <span>Product Management</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            
+            @{
+                var screenIndex = 1;
+            }
+            @foreach (var screenInformation in screens)
+            {
+                if (!identityService.IsScreenAccessible(availableScreens, screenInformation.Id))
+                {
+                    continue;
+                }
+
+                <li>
+                    <a href="@Url.Action(screenInformation.Action, screenInformation.Controller, new {area})"
+                       data-toggle=" tooltip"
+                       title="@screenInformation.Name">
+                        <span>@string.Format("{0}. {1}", screenIndex, screenInformation.Name)</span>
+                    </a>
+                </li>
+
+                screenIndex++;
+            }
+        </ul>
+    </li>
+}

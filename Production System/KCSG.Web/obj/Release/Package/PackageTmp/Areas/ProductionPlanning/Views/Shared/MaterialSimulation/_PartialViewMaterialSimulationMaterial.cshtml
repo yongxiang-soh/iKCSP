@@ -1,0 +1,89 @@
+﻿@using KCSG.Core.CustomControls
+    @model KCSG.Web.Areas.ProductionPlanning.ViewModels.MaterialSimulation.MaterialViewModel
+
+
+@using (Html.BeginForm("", "")) {
+    <div class="panel panel-danger">
+        <div class="panel-heading">Simulation - TCPP053F</div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-3">
+                        @Html.ExtLabelFor(m => m.MaterialCode)
+                    </div>
+                    <div class="col-xs-9">
+                        @Html.ExtTextBoxFor(model => model.MaterialCode, new {@disabled = true})
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-3">
+                        @Html.ExtLabelFor(m => m.MaterialName)
+                    </div>
+                    <div class="col-xs-9">
+                        @Html.ExtTextBoxFor(model => model.MaterialName, new {@disabled = true})
+                    </div>
+                </div>
+            </div>
+            <div>
+                <canvas id="myChart" height="400"></canvas>
+            </div>
+        </div>
+    </div>
+ }
+<script>
+    @{ var a = new MvcHtmlString(Model.Chart.Keys.Aggregate("'", (current, key) => current + (key + "','")).TrimEnd(Convert.ToChar("'")).TrimEnd(',')); }
+    
+    var myChart = new Chart($("#myChart"), {
+        type: 'line',
+        data: {
+            labels:[@a],
+            datasets: [{
+                label: 'Material simulation',
+                data: [@Model.Chart.Values.Aggregate("", (current, key) => current + (key + ",")).TrimEnd(',')],
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: "rgba(75,192,192,0.4)",
+                borderColor: "rgba(75,192,192,1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+            }]
+        },
+        options: {
+            //title: {
+            //    display: true,
+            //    text: 'Material Simulation'
+            //},
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    scaleLabel: {
+                        display: true,
+                        fontSize:20,
+                        labelString: 'Quantity'
+                    }
+                }],
+                xAxes: [{
+                    scaleLabel: {
+                    display: true,
+                    fontSize:20,
+                    labelString: 'Date'
+                    }
+                }]
+            },
+            maintainAspectRatio: false
+        }
+    });
+</script>

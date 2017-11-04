@@ -1,0 +1,13 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Domain.Interfaces.Inquiry
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.Inquiry.ViewModels.InquiryByWarehouseLocation.InquiryOutOfSignPictureModelView
+<div class="panel panel-danger">
+    <div class="panel-heading">Search Out-of-sign Picture - TCFC039F</div>
+    <div class="panel-body">
+     @Html.Grid(Model.Grid)
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default btn-flat btn-less-5-chars" type="button" data-dismiss="modal">Cancel</button>
+</div>

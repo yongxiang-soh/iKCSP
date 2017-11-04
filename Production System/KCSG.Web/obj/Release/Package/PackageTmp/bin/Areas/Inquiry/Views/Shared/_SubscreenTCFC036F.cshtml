@@ -1,0 +1,911 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.Inquiry.ViewModels.InquiryByWarehouseLocation.InquiryByProductShelfStatusModelView
+
+<style>
+    input.error {
+        border: 1px solid #b94a48;
+    }
+
+    .error {
+        color: #b94a48;
+    }
+    #locationMaterialStatus .modal-dialog.modal-lg {
+        width: 1024px
+    }
+</style>
+
+
+@using (Ajax.BeginForm("UpdateSubscreentcf036f", "InquiryBase", new AjaxOptions() { HttpMethod = "POST", Confirm = "Ready to update ?", OnSuccess = "InquiryBase.onUpdateSubscreentcf036fSuccess" }, new { @id = "updateSubscreentcf036f" }))
+{
+    @Html.HiddenFor(m => m.SearchCondition)
+    @Html.HiddenFor(m => m.Row)
+    @Html.HiddenFor(m => m.Bay)
+    @Html.HiddenFor(m => m.Level)
+    <div class="panel panel-danger">
+        <div class="panel-heading">Inquiry by Product Shelf Status Picture2 - TCFC036F</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelFor(model => model.ShelfNo)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @Html.ExtTextBoxFor(model => model.ShelfNo, new { @class = "form-control",@readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelFor(model => model.ShelfStatus)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @Html.ExtTextBoxFor(model => model.ShelfStatus, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.PalletNo,Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtTextBoxFor(model => model.PalletNo, new {@class = "form-control"})
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.PalletNo, new { @class = "form-control", @readonly = "readonly" })
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.StorageDate, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtDateTimeFor(model => model.StorageDate, new DateTimeOption() { Format = "DD/MM/YYYY HH:mm:ss" })
+                        }
+                        else
+                        {
+                            @Html.ExtDateTimeFor(model => model.StorageDate, new DateTimeOption() { Format = "DD/MM/YYYY HH:mm:ss" },new { @readonly = "readonly" })                            
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-3">
+                        <label>Product Classification</label>
+                    </div>
+                    <div class="col-lg-9 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtRadioButtonFor(model => model.ProductClassification, EnumsHelper.GetListItemsWithDescription<Constants.ProductClassification>(Model.ProductClassification), null, true, 3)
+                        }
+                        else
+                        {
+                            @Html.ExtRadioButtonFor(model => model.ProductClassification, EnumsHelper.GetListItemsWithDescription<Constants.ProductClassification>(Model.ProductClassification), new { @disabled = "disabled" }, true, 3)
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row form-group">
+                <hr style="border-top: 1px solid #f2dede;" />
+            </div>
+            <div class="row">
+                @if (Model.ShowUpdate)
+                {
+                    <div class="col-lg-1 form-group"></div>
+                }
+                <div class="col-lg-@(Model.ShowUpdate ? "3" : "4") form-group ">
+                    <label>Product Code</label>
+                </div>
+                <div class="col-lg-2 form-group">
+                    <label>Pre-Product LotNo</label>
+                </div>
+                <div class="col-lg-2 form-group">
+                    <label>Product LotNo</label>
+                </div>
+                <div class="col-lg-1 form-group">
+                    <label>Pack Qty</label>
+                </div>
+                <div class="col-lg-1 form-group">
+                    <label>Fraction</label>
+                </div>
+                <div class="col-lg-2 form-group">
+                    <label>Quantity</label>
+                </div>
+            </div>
+            <div class="row">
+                @if (Model.ShowUpdate)
+                {
+                    <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                        <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(1) ">
+                            <i class="fa fa-trash-o"></i> Clear
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                        <button class="btn btn-flat btn-default" type="button" disabled="disabled">
+                            <i class="fa fa-trash-o"></i> Clear
+                        </button>
+                    </div>
+                }
+                <div class="col-lg-3 form-group padding-left-5 padding-right-5">
+                    @if (Model.ShowUpdate)
+                    {
+                        @Html.ExtTextBoxAddOnFor(model => model.ProductCode1, CustomControlConstants.AddOn.Search, "#modalProductCodeSelect", new {style = "width:100%", @id = "txtProductCode1"})
+                    }
+                    else
+                    {
+                       @Html.ExtTextBoxAddOnFor(model => model.ProductCode1, CustomControlConstants.AddOn.Search, null, new { style = "width:100%", @id = "txtProductCode1"})
+                    }
+
+                </div>
+                <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                    @if (Model.ShowUpdate)
+                    {
+                        @Html.ExtTextBoxFor(model => model.PreProductLotNo1, new { })
+                    }
+                    else
+                    {
+                        @Html.ExtTextBoxFor(model => model.PreProductLotNo1, new { @disabled = "disabled" })
+                    }
+                    
+                </div>
+                <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                    @Html.ExtTextBoxFor(model => model.ProductLotNo1, new { @readonly = "readonly" })
+                </div>
+                <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                    @if (Model.ShowUpdate)
+                    {
+                        @Html.ExtNumberFor(model => model.PackQty1, new NumberOption() { NumberOfDecimal = 0,Max = 999 }, new {@Class = "text-right" })
+                    }
+                    else
+                    {
+                        @Html.ExtNumberFor(model => model.PackQty1, new NumberOption() { NumberOfDecimal = 0, Max = 999 }, new { @disabled = "disabled", @Class = "text-right" })
+                    }
+
+                </div>
+                <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                    @if (Model.ShowUpdate)
+                    {
+                        @Html.ExtNumberFor(model => model.Fraction1, new NumberOption() { NumberOfDecimal = 2,Max = 999.99 }, new { @Class = "text-right" })
+                    }
+                    else
+                    {
+                        @Html.ExtNumberFor(model => model.Fraction1, new NumberOption() { NumberOfDecimal = 2, Max = 999.99 }, new { @disabled = "disabled", @Class = "text-right" })
+                    }
+
+                </div>
+                <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                    @if (Model.ShowUpdate)
+                    {
+                        @Html.ExtNumberFor(model => model.Quantity1, new NumberOption() { NumberOfDecimal = 2, Max = 9999.99 }, new { @Class = "text-right" })
+                    }
+                    else
+                    {
+                        @Html.ExtNumberFor(model => model.Quantity1, new NumberOption() { NumberOfDecimal = 2, Max = 9999.99 }, new { @disabled = "disabled", @Class = "text-right" })
+                    }
+                    
+                </div>
+            </div>
+        <div class="row">
+            @if (Model.ShowUpdate)
+            {
+                <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                    <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(2) ">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                    <button class="btn btn-flat btn-default" type="button" disabled="disabled">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            
+
+            <div class="col-lg-3 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtTextBoxAddOnFor(model => model.ProductCode2, CustomControlConstants.AddOn.Search, "#modalProductCodeSelect", new {style = "width:100%", @id = "txtProductCode2"})
+                }
+                else
+                {
+                    @Html.ExtTextBoxAddOnFor(model => model.ProductCode2, CustomControlConstants.AddOn.Search, null, new {style = "width:100%", @id = "txtProductCode2"})
+                }
+            </div>
+            <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtTextBoxFor(model => model.PreProductLotNo2, new {})
+                }
+                else
+                {
+                    @Html.ExtTextBoxFor(model => model.PreProductLotNo2, new {@disabled = "disabled"})
+                }
+
+
+            </div>
+            <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                @Html.ExtTextBoxFor(model => model.ProductLotNo2, new {@readonly = "readonly"})
+
+            </div>
+            <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.PackQty2, new NumberOption() {NumberOfDecimal = 0, Max = 999}, new {@Class = "text-right"})
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.PackQty2, new NumberOption() {NumberOfDecimal = 0, Max = 999}, new { @disabled = "disabled", @Class = "text-right"})
+                }
+
+            </div>
+            <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.Fraction2, new NumberOption() {NumberOfDecimal = 2, Max = 999.99}, new {@Class = "text-right"})
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.Fraction2, new NumberOption() {NumberOfDecimal = 2, Max = 999.99}, new { @disabled = "disabled", @Class = "text-right"})
+                }
+
+            </div>
+            <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.Quantity2, new NumberOption() {NumberOfDecimal = 2, Max = 9999.99}, new {@Class = "text-right"})
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.Quantity2, new NumberOption() {NumberOfDecimal = 2, Max = 9999.99}, new { @disabled = "disabled", @Class = "text-right"})
+                }
+
+            </div>
+
+        </div>
+            
+            <div class="row">
+                @if (Model.ShowUpdate)
+                {
+                    <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                        <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(3) ">
+                            <i class="fa fa-trash-o"></i> Clear
+                        </button>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                        <button class="btn btn-flat btn-default" type="button" disabled="disabled">
+                            <i class="fa fa-trash-o"></i> Clear
+                        </button>
+                    </div>
+                }
+                <div class="col-lg-3 form-group padding-left-5 padding-right-5">
+                    @if (Model.ShowUpdate)
+                    {
+                        @Html.ExtTextBoxAddOnFor(model => model.ProductCode3, CustomControlConstants.AddOn.Search, "#modalProductCodeSelect", new { style = "width:100%", @id = "txtProductCod3" })
+                    }
+                    else
+                    {
+                        @Html.ExtTextBoxAddOnFor(model => model.ProductCode3, CustomControlConstants.AddOn.Search, null, new { style = "width:100%", @id = "txtProductCode3" })
+                    }
+                </div>
+                <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                    @if (Model.ShowUpdate)
+                    {
+                        @Html.ExtTextBoxFor(model => model.PreProductLotNo3, new { })
+                    }
+                    else
+                    {
+                        @Html.ExtTextBoxFor(model => model.PreProductLotNo3, new { @disabled = "disabled" })
+                    }
+
+                </div>
+                <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                    @Html.ExtTextBoxFor(model => model.ProductLotNo3, new { @readonly = "readonly" })
+                </div>
+                <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                    @if (Model.ShowUpdate)
+                    {
+                        @Html.ExtNumberFor(model => model.PackQty3, new NumberOption() { NumberOfDecimal = 0, Max = 999 }, new { @Class = "text-right" })
+                    }
+                    else
+                    {
+                        @Html.ExtNumberFor(model => model.PackQty3, new NumberOption() { NumberOfDecimal = 0, Max = 999 }, new { @disabled = "disabled", @Class = "text-right" })
+                    }
+
+                </div>
+                <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                    @if (Model.ShowUpdate)
+                    {
+                        @Html.ExtNumberFor(model => model.Fraction3, new NumberOption() { NumberOfDecimal = 2, Max = 999.99 }, new { @Class = "text-right" })
+                    }
+                    else
+                    {
+                        @Html.ExtNumberFor(model => model.Fraction3, new NumberOption() { NumberOfDecimal = 2, Max = 999.99 }, new { @disabled = "disabled", @Class = "text-right" })
+                    }
+
+                </div>
+                <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                    @if (Model.ShowUpdate)
+                    {
+                        @Html.ExtNumberFor(model => model.Quantity3, new NumberOption() { NumberOfDecimal = 2, Max = 9999.99 }, new { @Class = "text-right" })
+                    }
+                    else
+                    {
+                        @Html.ExtNumberFor(model => model.Quantity3, new NumberOption() { NumberOfDecimal = 2, Max = 9999.99 }, new { @disabled = "disabled", @Class = "text-right" })
+                    }
+
+                </div>
+                
+            </div>
+            
+        <div class="row">
+            @if (Model.ShowUpdate)
+                {
+                <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                    <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(4) ">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                    <button class="btn btn-flat btn-default" type="button" disabled="disabled">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            <div class="col-lg-3 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtTextBoxAddOnFor(model => model.ProductCode4, CustomControlConstants.AddOn.Search, "#modalProductCodeSelect", new { style = "width:100%", @id = "txtProductCode4" })
+                }
+                else
+                {
+                    @Html.ExtTextBoxAddOnFor(model => model.ProductCode4, CustomControlConstants.AddOn.Search, null, new { style = "width:100%", @id = "txtProductCode4" })
+                }
+            </div>
+            <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtTextBoxFor(model => model.PreProductLotNo4, new { })
+                }
+                else
+                {
+                    @Html.ExtTextBoxFor(model => model.PreProductLotNo4, new { @disabled = "disabled" })
+                }
+
+            </div>
+            <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                @Html.ExtTextBoxFor(model => model.ProductLotNo4, new { @readonly = "readonly" })
+            </div>
+            <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.PackQty4, new NumberOption() { NumberOfDecimal = 0, Max = 999 }, new { @Class = "text-right" })
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.PackQty4, new NumberOption() { NumberOfDecimal = 0, Max = 999 }, new { @disabled = "disabled", @Class = "text-right" })
+                }
+
+            </div>
+            <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.Fraction4, new NumberOption() { NumberOfDecimal = 2, Max = 999.99 }, new { @Class = "text-right" })
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.Fraction4, new NumberOption() { NumberOfDecimal = 2, Max = 999.99 }, new { @disabled = "disabled", @Class = "text-right" })
+                }
+
+            </div>
+            <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.Quantity4, new NumberOption() { NumberOfDecimal = 2 }, new { @Class = "text-right" })
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.Quantity4, new NumberOption() { NumberOfDecimal = 2 }, new { @disabled = "disabled", @Class = "text-right" })
+                }
+            </div>
+        </div>
+            
+        <div class="row">
+            @if (Model.ShowUpdate)
+                {
+                <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                    <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(5) ">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                    <button class="btn btn-flat btn-default" type="button" disabled="disabled">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+                </div>
+            }
+            <div class="col-lg-3 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtTextBoxAddOnFor(model => model.ProductCode5, CustomControlConstants.AddOn.Search, "#modalProductCodeSelect", new { style = "width:100%", @id = "txtProductCode5" })
+                }
+                else
+                {
+                    @Html.ExtTextBoxAddOnFor(model => model.ProductCode5, CustomControlConstants.AddOn.Search, null, new { style = "width:100%", @id = "txtProductCode5" })
+                }
+            </div>
+            <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtTextBoxFor(model => model.PreProductLotNo5, new { })
+                }
+                else
+                {
+                    @Html.ExtTextBoxFor(model => model.PreProductLotNo5, new { @disabled = "disabled" })
+                }
+
+            </div>
+            <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                @Html.ExtTextBoxFor(model => model.ProductLotNo5, new { @readonly = "readonly" })
+            </div>
+            <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.PackQty5, new NumberOption() { NumberOfDecimal = 0, Max = 999 }, new { @Class = "text-right" })
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.PackQty5, new NumberOption() { NumberOfDecimal = 0, Max = 999 }, new { @disabled = "disabled", @Class = "text-right" })
+                }
+
+            </div>
+            <div class="col-lg-1 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.Fraction5, new NumberOption() { NumberOfDecimal = 2, Max = 999.99 }, new { @Class = "text-right" })
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.Fraction5, new NumberOption() { NumberOfDecimal = 2, Max = 999.99 }, new { @disabled = "disabled", @Class = "text-right" })
+                }
+
+            </div>
+            <div class="col-lg-2 form-group padding-left-5 padding-right-5">
+                @if (Model.ShowUpdate)
+                {
+                    @Html.ExtNumberFor(model => model.Quantity5, new NumberOption() { NumberOfDecimal = 2, Max = 9999.99 }, new { @Class = "text-right" })
+                }
+                else
+                {
+                    @Html.ExtNumberFor(model => model.Quantity5, new NumberOption() { NumberOfDecimal = 2, Max = 9999.99 }, new { @disabled = "disabled", @Class = "text-right" })
+                }
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+         @if (Model.ShowUpdate)
+         {
+            <button type="submit" class="btn btn-default btn-flat btn-less-5-chars" id="btnOk" >OK</button>
+         }
+        <button class="btn btn-default btn-flat btn-less-5-chars" type="button" data-dismiss="modal">Cancel</button>
+    </div>
+}
+<script>
+    function clearRow(index) {
+        //$("#updateSubscreentcf036f").validate().resetForm();
+
+        $("span[data-valmsg-for=ProductCode" + String(index) + "]").html("");
+        $("input[name='ProductCode" + String(index) + "']").removeClass("input-validation-error");
+
+        $("span[data-valmsg-for=PreProductLotNo" + String(index) + "]").html("");
+        $("#PreProductLotNo" + String(index)).removeClass("input-validation-error");
+
+        $("span[data-valmsg-for=ProductLotNo" + String(index) + "]").html("");
+        $("#ProductLotNo" + String(index)).removeClass("input-validation-error");
+
+        $("span[data-valmsg-for=PackQty" + String(index) + "]").html("");
+        $("#PackQty" + String(index)).removeClass("input-validation-error");
+
+        $("span[data-valmsg-for=Fraction" + String(index) + "]").html("");
+        $("#Fraction" + String(index)).removeClass("input-validation-error");
+
+        $("span[data-valmsg-for=Quantity" + String(index) + "]").html("");
+        $("#Quantity" + String(index)).removeClass("input-validation-error");
+        
+        $("input[name='ProductCode" + String(index) + "']").val("");
+        $("input[name='PreProductLotNo" + String(index) + "']").val("");
+        $("input[name='ProductLotNo" + String(index) + "']").val("");
+        $("input[name='PackQty" + String(index) + "']").val(0);
+        $("input[name='Fraction" + String(index) + "']").autoNumeric('set', 0);
+        $("input[name='Quantity" + String(index) + "']").autoNumeric('set', 0);
+        
+    }
+</script>
+<script>
+    $().ready(function () {
+        $.validator.unobtrusive.parse("#updateSubscreentcf036f");
+        function isEmpty(str) {
+            return (!str || 0 === str.length);
+        }
+
+        $.validator.addMethod("PalletNo",
+            function (value, element, params) {
+                var thiserror = "";
+                var check = true;
+                if (!isEmpty(value)) {
+                    var row = $('#Row').val(),
+                    bay = $('#Bay').val(),
+                    level = $('#Level').val();
+                    $.ajax({
+                        url: '/Inquiry/InquiryBase/PalletNo036fExit',
+                        data: {
+                            palletNo: value,
+                            row: row,
+                            bay: bay,
+                            level: level
+                        },
+                        type: "Options",
+                        async: false,
+                        success: function (response) {
+                            if (!response.Success) {
+                                thiserror = "This pallet is being used !";
+                                check = false;
+                            }
+                        }
+
+                    });
+                }
+                return check;
+
+            }, "This pallet is being used !");
+
+        
+
+
+        $.validator.addMethod("productcode1",
+            function (value, element, params) {
+
+                var thiserror = "";
+                if (isEmpty(value)) {
+                    // var range = JSON.parse(params);
+                    for (var i = 0; i < params.length; i++) {
+                        if (!isEmpty($(params[i]).val())) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                return true;
+
+            },
+            "At least one line must be valid, please input data !");
+
+        $.validator.addMethod("requireProductCode",
+            function (value, element, params) {
+                
+                var thiserror = "";
+                if (value === "") {
+                    // var range = JSON.parse(params);
+                    for (var i = 0; i < params.length; i++) {
+                        if (i === 0) {
+                            
+                            if (!isEmpty($(params[i]).val())) {
+                                if (isEmpty(value)) {
+                                    thiserror = "Please input data for this required field.";
+                                    return false;
+                                }
+                            }
+                        } else {
+                            
+                            if ($(params[i]).val() !== "0" && !isEmpty($(params[i]).val())) {
+                                if (isEmpty(value)) {
+                                    thiserror = "Please input data for this required field.";
+                                    return false;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                return true;
+            },
+            "Please input data for this required field.");
+
+        $.validator.addMethod("requirePreProductLotNoPackquality",
+            function (value, element, params) {
+                
+                var thiserror = "";
+                if (!isEmpty($(params).val())) {
+                    if (isEmpty(value)) {
+                        thiserror = "Please input data for this required field.";
+                        return false;
+                    }
+                }
+                return true;
+            },
+            "Please input data for this required field.");
+
+        $.validator.addMethod("packqualityMorethanzero",
+            function (value, element, params) {
+                if (parseInt(value) == 0 && parseInt($(params).val()) > 0) {
+                    return false;
+                }
+                return true;
+            },
+            "Pack quantity must be more than zero !");
+
+        $.validator.addMethod("FractionlessthanPackingunit",
+            function (value, element, params) {
+                var thiserror = "";
+                var check = true;
+                if (!isEmpty($(params).val())) {
+                    $.ajax({
+                        url: '/Inquiry/InquiryBase/FractionlessthanPackingunit',
+                        data: {
+                            fraction: value,
+                            productCode: $(params).val()
+                        },
+                        type: "Options",
+                        async: false,
+                        success: function (response) {
+                            if (!response.Success) {
+                                thiserror = "Fraction cannot be more than the packing unit !";
+                                check = false;
+                            }
+                        }
+
+                    });
+                }
+                
+                return check;
+            },
+            "Fraction cannot be more than the packing unit !");
+
+        //	If user changed value of [Pallet No] (current [Pallet No] is not [Pallet No] when the form is beling loaded): if the new value is already existed in the table TX57_PdtShf, the system will show a warning message with content: “This pallet is being used !”. Set focus on [Pallet No] field.
+        $("input[name='PalletNo']").rules("add", { PalletNo: true });
+
+        //	If [Product Code] is NOT blank then [Pre-Product LotNo] AND [Pack Qty.] must be mandatory. Ser focus on [Pre-Prodduct LotNo] field.
+        $("input[name='PreProductLotNo1']").rules("add", { requirePreProductLotNoPackquality: "input[name='ProductCode1']" });
+        $("input[name='PackQty1']").rules("add", { requirePreProductLotNoPackquality: "input[name='ProductCode1']" });
+
+        $("input[name='PreProductLotNo2']").rules("add",  {requirePreProductLotNoPackquality : "input[name='ProductCode2']" });
+        $("input[name='PackQty2']").rules("add", { requirePreProductLotNoPackquality: "input[name='ProductCode2']" });
+
+        $("input[name='PreProductLotNo3']").rules("add",  {requirePreProductLotNoPackquality: "input[name='ProductCode3']" });
+        $("input[name='PackQty3']").rules("add", { requirePreProductLotNoPackquality: "input[name='ProductCode3']" });
+
+        $("input[name='PreProductLotNo4']").rules("add",  {requirePreProductLotNoPackquality: "input[name='ProductCode4']" });
+        $("input[name='PackQty4']").rules("add", { requirePreProductLotNoPackquality: "input[name='ProductCode4']" });
+
+        $("input[name='PreProductLotNo5']").rules("add",  {requirePreProductLotNoPackquality: "input[name='ProductCode5']" });
+        $("input[name='PackQty5']").rules("add",  { requirePreProductLotNoPackquality: "input[name='ProductCode5']" });
+
+        //	If [Pre-Product LotNo] OR [Pack Qty.] is not blank then [Product Code] must be mandatory. Set focus on [Product Code] field
+        $("input[name='ProductCode1']").rules("add", { requireProductCode: ["input[name='PreProductLotNo1']", "input[name='PackQty1']"] });
+        $("input[name='ProductCode2']").rules("add", { requireProductCode: ["input[name='PreProductLotNo2']", "input[name='PackQty2']"] });
+        $("input[name='ProductCode3']").rules("add", { requireProductCode: ["input[name='PreProductLotNo3']", "input[name='PackQty3']"] });
+        $("input[name='ProductCode4']").rules("add", { requireProductCode: ["input[name='PreProductLotNo4']", "input[name='PackQty4']"] });
+        $("input[name='ProductCode5']").rules("add", { requireProductCode: ["input[name='PreProductLotNo5']", "input[name='PackQty5']"] });
+
+        //	If all 5 of [Product Code] all left blank then system will show a warning message with content “At least one line must be valid, please input data !”. Set focus on the first [Product Code] field.
+        $("input[name='ProductCode1']").rules("add", { productcode1: ["input[name='ProductCode2']", "input[name='ProductCode3']", "input[name='ProductCode4']", "input[name='ProductCode5']"] });
+
+        //	If all conditions above are passed then system checks duplicate Product Code row as below: 
+         //	Check rows whose [Product Code] AND [Pre-Product LotNo] are NOT blank: if there is at least 2 rows having the same [Product Code] and [Pre-Product LotNo] then the system shows a warning message with content “The inputted product code and pre-product lot-no is duplicated !”.
+
+
+        $.validator.addMethod("productcodePreproductLotnoSame",
+            function (value, element, params) {
+                var thiserror = "";
+                var productCode1 = value.trim();
+                var preProductLot1 = $(params[0]).val().trim();
+                if (!isEmpty(productCode1) && !isEmpty(preProductLot1)) {
+
+                    for (var i = 0; i < params[1].length; i++) {
+                        var productCode = $(params[1][i].ProductCode).val().trim();
+                        var preProductLot = $(params[1][i].PreProductLotNo).val().trim();
+                        if (productCode1 === productCode && preProductLot1 === preProductLot) {
+                            thiserror = "The inputted product code and pre-product lot-no is duplicated !";
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            },
+            "The inputted product code and pre-product lot-no is duplicated !");
+
+        //$("input[name='ProductCode1']").rules("add", { productcodePreproductLotnoSame: ["input[name=PreProductLotNo1]", [{ "ProductCode": "input[name=ProductCode2]", "PreProductLotNo": "input[name=PreProductLotNo2]" }, { "ProductCode": "input[name=ProductCode3]", "PreProductLotNo": "input[name=PreProductLotNo3]" }, { "ProductCode": "input[name=ProductCode4]", "PreProductLotNo": "input[name=PreProductLotNo4]" }, { "ProductCode": "input[name=ProductCode5]", "PreProductLotNo": "input[name=PreProductLotNo5]" } ]] });
+        $("input[name='ProductCode2']").rules("add", { productcodePreproductLotnoSame: ["input[name='PreProductLotNo2']", [{ "ProductCode": "input[name='ProductCode1']", "PreProductLotNo": "input[name='PreProductLotNo1']" }, { "ProductCode": "input[name='ProductCode3']", "PreProductLotNo": "input[name='PreProductLotNo3']" }, { "ProductCode": "input[name='ProductCode4']", "PreProductLotNo": "input[name='PreProductLotNo4']" }, { "ProductCode": "input[name='ProductCode5']", "PreProductLotNo": "input[name='PreProductLotNo5']" }]] });
+        $("input[name='ProductCode3']").rules("add", { productcodePreproductLotnoSame: ["input[name='PreProductLotNo3']", [{ "ProductCode": "input[name='ProductCode1']", "PreProductLotNo": "input[name='PreProductLotNo1']" }, { "ProductCode": "input[name='ProductCode2']", "PreProductLotNo": "input[name='PreProductLotNo2']" }, { "ProductCode": "input[name='ProductCode4']", "PreProductLotNo": "input[name='PreProductLotNo4']" }, { "ProductCode": "input[name='ProductCode5']", "PreProductLotNo": "input[name='PreProductLotNo5']" }]] });
+        $("input[name='ProductCode4']").rules("add", { productcodePreproductLotnoSame: ["input[name='PreProductLotNo4']", [{ "ProductCode": "input[name='ProductCode1']", "PreProductLotNo": "input[name='PreProductLotNo1']" }, { "ProductCode": "input[name='ProductCode2']", "PreProductLotNo": "input[name='PreProductLotNo2']" }, { "ProductCode": "input[name='ProductCode3']", "PreProductLotNo": "input[name='PreProductLotNo3']" }, { "ProductCode": "input[name='ProductCode5']", "PreProductLotNo": "input[name='PreProductLotNo5']" }]] });
+        $("input[name='ProductCode5']").rules("add", { productcodePreproductLotnoSame: ["input[name='PreProductLotNo5']", [{ "ProductCode": "input[name='ProductCode1']", "PreProductLotNo": "input[name='PreProductLotNo1']" }, { "ProductCode": "input[name='ProductCode2']", "PreProductLotNo": "input[name='PreProductLotNo2']" }, { "ProductCode": "input[name='ProductCode3']", "PreProductLotNo": "input[name='PreProductLotNo3']" }, { "ProductCode": "input[name='ProductCode4']", "PreProductLotNo": "input[name='PreProductLotNo4']" }]] });
+
+        //	If [Pack Qty.]  = 0 AND [Fraction] > 0 then the system shows a warning message with content “Pack quantity must be more than zero !”. Set focus on [Pack Qty.] field
+        $("input[name='PackQty1']").rules("add", { packqualityMorethanzero: "input[name='Fraction1']" });
+        $("input[name='PackQty2']").rules("add", { packqualityMorethanzero: "input[name='Fraction2']" });
+        $("input[name='PackQty3']").rules("add", { packqualityMorethanzero: "input[name='Fraction3']" });
+        $("input[name='PackQty4']").rules("add", { packqualityMorethanzero: "input[name='Fraction4']" });
+        $("input[name='PackQty5']").rules("add", { packqualityMorethanzero: "input[name='Fraction5']" });
+        
+        //	If [Fraction] > Packing Unit (retrieved from CBR 19 above) then the system shows a warning message with content “Fraction cannot be more than the packing unit !”. Set focus on [Fraction] field
+        $("input[name='Fraction1']").rules("add", { FractionlessthanPackingunit: "input[name='ProductCode1']" });
+        $("input[name='Fraction2']").rules("add", { FractionlessthanPackingunit: "input[name='ProductCode2']" });
+        $("input[name='Fraction3']").rules("add", { FractionlessthanPackingunit: "input[name='ProductCode3']" });
+        $("input[name='Fraction4']").rules("add", { FractionlessthanPackingunit: "input[name='ProductCode4']" });
+        $("input[name='Fraction5']").rules("add", { FractionlessthanPackingunit: "input[name='ProductCode5']" });
+        
+
+        //        	If [Product Classification] = “Normal”
+        //	Count record from table TX56_TbtPdt as statement below:
+        //        SELECT 
+        //        COUNT(*)
+        //        FROM 
+        //        TX56_TbtPdt
+        //        WHERE 
+        //        F56_PrePdtLotNo = [Pre-Product LotNo]
+        //	AND F56_ProductCode = [Product Code]
+        //	AND (F56_status = '3' 	or F56_status = '4');
+        //	If return number = 0 then the system shows a warning message with content “The product lot no. has not been tabletised !”. Set focus on [Product Code] field.
+        //	If [Product Classification] = “Out of Plan”
+        //	Count record from table TX58_OutPlantPdt as statement below:
+        //        SELECT 
+        //        COUNT(*)
+        //        FROM 
+        //        TX58_OutPlanPdt
+        //        WHERE 
+        //        F58_PrePdtLotNo = [Pre-Product LotNo]
+        //	AND F58_Productcode = [Product Code]
+        //	AND (F58_Status = '3' 	or F58_Status = '4');
+        //	If return number = 0 then the system shows a warning message with content “The product lot no. has not been tabletised !”. Set focus on [Product Code] field.
+
+        $.validator.addMethod("productLotNoNotbeentabletised",
+            function (value, element, params) {
+
+                var thiserror = "";
+                var check = true;
+                if (!isEmpty($(params).val()) && !isEmpty(value)) {
+                    var productClassification = $("input[name=ProductClassification]:checked").val();
+                    $.ajax({
+                        url: '/Inquiry/InquiryBase/ProductLotNoNotbeentabletised',
+                        data: {
+                            productCode: $(params).val(),
+                            preProductLotNo: value,
+                            productClassification: productClassification
+                        },
+                        type: "Options",
+                        async: false,
+                        success: function (response) {
+                            if (!response.Success) {
+                                thiserror = "The product lot no. has not been tabletised !";
+                                check = false;
+                            }
+                        }
+
+                    });
+                }
+
+                return check;
+            },
+            "The product lot no. has not been tabletised !");
+        $("input[name='PreProductLotNo1']").rules("add", { productLotNoNotbeentabletised: "input[name='ProductCode1']" });
+        $("input[name='PreProductLotNo2']").rules("add", { productLotNoNotbeentabletised: "input[name='ProductCode2']" });
+        $("input[name='PreProductLotNo3']").rules("add", { productLotNoNotbeentabletised: "input[name='ProductCode3']" });
+        $("input[name='PreProductLotNo4']").rules("add", { productLotNoNotbeentabletised: "input[name='ProductCode4']" });
+        $("input[name='PreProductLotNo5']").rules("add", { productLotNoNotbeentabletised: "input[name='ProductCode5']" });
+        $("input[name='PreProductLotNo1']").rules("add", { productLotNoNotbeentabletised: "input[name='ProductCode1']" });
+
+        $.validator.addMethod("requireProductLotNo",
+            function (value, element, params) {
+
+                if (!isEmpty($(params[0]).val()) && !isEmpty($(params[1]).val())) {
+                    if (isEmpty(value)) {
+                        thiserror = "Please input data for this required field.";
+                        return false;
+                    }
+                }
+                return true;
+            },
+            "Please input data for this required field.");
+
+        $("input[name='ProductLotNo1']").rules("add", { requireProductLotNo: ["input[name='ProductCode1']","input[name='PreProductLotNo1']"] });
+        $("input[name='ProductLotNo2']").rules("add", { requireProductLotNo: ["input[name='ProductCode2']", "input[name='PreProductLotNo2']"] });
+        $("input[name='ProductLotNo3']").rules("add", { requireProductLotNo: ["input[name='ProductCode3']", "input[name='PreProductLotNo3']"] });
+        $("input[name='ProductLotNo4']").rules("add", { requireProductLotNo: ["input[name='ProductCode4']", "input[name='PreProductLotNo4']"] });
+        $("input[name='ProductLotNo5']").rules("add", { requireProductLotNo: ["input[name='ProductCode5']", "input[name='PreProductLotNo5']"] });
+
+
+        $.validator.addMethod("quantitylessthan9999",
+            function (value, element, params) {
+                 
+                if (parseInt(value) >= 10000) {
+                    return false;
+                }
+                return true;
+            },
+            "The max value of Quatity is 9999.99");
+        $('input[name=Quantity1]').rules("add", { quantitylessthan9999: true });
+        $('input[name=Quantity2]').rules("add", { quantitylessthan9999: true });
+        $('input[name=Quantity3]').rules("add", { quantitylessthan9999: true });
+        $('input[name=Quantity4]').rules("add", { quantitylessthan9999: true });
+        $('input[name=Quantity5]').rules("add", { quantitylessthan9999: true });
+
+        $('[data-target*="modalProductCodeSelect"]').click(function () {
+            $('#txtProductCode').attr({
+                'id': "txt" + $('#txtProductCode').attr('name'),
+            });
+            $(this).prev().attr("id", "txtProductCode");
+        });
+        $('input[name=ProductCode1], input[name=PreProductLotNo1], input[name=ProductCode2], input[name=PreProductLotNo2],input[name=ProductCode3],input[name=PreProductLotNo3], input[name=ProductCode4],input[name=PreProductLotNo4],input[name=ProductCode5],input[name=PreProductLotNo5]').change(function () {
+            var elementIndex = $(this).attr("name").substr($(this).attr("name").length - 1, 1);
+            var productcode = $('input[name=ProductCode' + elementIndex + ']').val();
+            var preProductLotNo = $('input[name=PreProductLotNo' + elementIndex + ']').val();
+            var productClassification = $("input[name=ProductClassification]:checked").val();
+            if (productcode !== "" && preProductLotNo !== "") {
+                $.ajax({
+                    url: '/Inquiry/InquiryBase/GetProductLotNo036f',
+                    data: {
+                        productcode: productcode,
+                        preProductLotNo: preProductLotNo,
+                        productClassification: productClassification
+                    },
+                    type: "Options",
+                    success: function (data) {
+                        $('input[name=ProductLotNo' + elementIndex + ']').val(data.response);
+                        $.unblockUI();
+                    }
+                });
+            }
+        });
+
+        $('input[name=PackQty1], input[name=Fraction1],input[name=ProductCode1], input[name=PackQty2], input[name=Fraction2],input[name=ProductCode2],input[name=PackQty3], input[name=Fraction3],input[name=ProductCode3], input[name=PackQty4], input[name=Fraction4],input[name=ProductCode4],input[name=PackQty5], input[name=Fraction5],input[name=ProductCode5]').change(function () {
+            var elementIndex = $(this).attr("name").substr($(this).attr("name").length - 1, 1);
+            var productcode = $('input[name=ProductCode' + elementIndex + ']').val();
+            var packQty = $('input[name=PackQty' + elementIndex + ']').val();
+            var fraction = $('input[name=Fraction' + elementIndex + ']').val();
+            if (productcode !== "" && packQty !== "" && fraction !== "") {
+                $.ajax({
+                    url: '/Inquiry/InquiryBase/GetPackingUnit036f',
+                    data: {
+                        productcode: productcode
+                    },
+                    type: "Options",
+                    success: function (data) {
+                        var quantity = parseFloat(packQty) * parseFloat(data.response) + parseFloat(fraction);
+                        if (quantity > 9999.99) {
+                            $('input[name=Quantity' + elementIndex + ']').val(quantity);
+                        } else {
+                            $('input[name=Quantity' + elementIndex + ']').autoNumeric('set', quantity);
+                        }
+                        $.unblockUI();
+                    }
+                });
+            }
+        });
+    });
+</script>

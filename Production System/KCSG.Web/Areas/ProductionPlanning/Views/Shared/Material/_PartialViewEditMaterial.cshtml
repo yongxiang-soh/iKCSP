@@ -1,0 +1,253 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.ProductionPlanning.ViewModels.Material.MaterialViewModel
+@using (Ajax.BeginForm("Edit", "Matertial", new AjaxOptions() {HttpMethod = "POST", OnSuccess = "onSuccess"}, new {@id = "addNewForm"}))
+{
+    //Html.EnableClientValidation();
+    @Html.HiddenFor(model => model.IsCreate)
+    @Html.HiddenFor(model => model.F01_AddDate)
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            @if (Model.IsCreate)
+            {
+                <span>Add Material Master DB - TCPP012F</span>
+            }
+            else
+            {
+                <span>Update Material Master DB - TCPP012F</span>
+            }
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.F01_MaterialCode)
+                    </div>
+                    <div class="col-xs-6">
+                        @if (Model.IsCreate)
+                        {
+                            @Html.ExtTextBoxFor(model => model.F01_MaterialCode, new {style = "width:100%; margin-left:-5px;", onchange = "return false;", autofocus = true})
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.F01_MaterialCode, new {style = "margin-left:-5px;", @readonly = "readonly", @id = "disabledInput", @class = "form-control"})
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.F01_MaterialDsp)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxFor(model => model.F01_MaterialDsp, new {style = "width:100%"})
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-4">
+                    <div class="col-xs-6">
+                        @Html.ExtLabelFor(model => model.F01_SupplierCode)
+                    </div>
+                    <div class="col-xs-6">
+                        @Html.ExtTextBoxAddOnFor(model => model.F01_SupplierCode, CustomControlConstants.AddOn.Search, "#modalSupplierCodeSelect", new {@id = "txtSupplierCode"})
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="col-xs-6">
+                        @Html.ExtLabelFor(model => model.F01_Color)
+                    </div>
+                    <div class="col-xs-6">
+                        @Html.ExtTextBoxFor(model => model.F01_Color)
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.F01_State)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtTextBoxFor(model => model.F01_State)
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.F01_PackingUnit)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @if (Model.IsCreate)
+                        {
+                            @Html.ExtNumberFor(model => model.F01_PackingUnit, new NumberOption() {NumberOfDecimal = 2,Max = 9999.99}, new {style = "width:100%"})
+                        }
+                        else
+                        {
+                            @Html.ExtNumberFor(model => model.F01_PackingUnit, new NumberOption() {NumberOfDecimal = 2,Max = 9999.99}, new {style = "width:100%"})
+                            @*@Html.ExtTextBoxFor(model => model.F01_PackingUnit, new { style = "width:100%;height: 26px;border-radius: 0px; cursor: not-allowed", @readonly = "readonly", @id = "disabledInput", @class = "form-control" })*@
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.F01_Price)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtNumberFor(model => model.F01_Price, new NumberOption() {NumberOfDecimal = 2,Max = 99999.99}, new {style = "width:100%"})
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.F01_Unit)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtTextBoxFor(model => model.F01_Unit, new {@readonly = true})
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.F01_Department)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtTextBoxFor(model => model.F01_Department)
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.F01_EMP)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtNumberFor(model => model.F01_EMP, new NumberOption() { NumberOfDecimal = 2,Max = 9999999.99})
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.F01_ModifyClass)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtTextBoxFor(model => model.F01_ModifyClass)
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.F01_FactoryClass)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtTextBoxFor(model => model.F01_FactoryClass)
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.F01_Point)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtTextBoxFor(model => model.F01_Point)
+                    </div>
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-lg-4">@Html.ExtLabelFor(m => m.F01_EntrustedClass)</div>
+                    <div class="col-lg-8">
+                        @Html.ExtRadioButtonFor(m => m.F01_EntrustedClass, EnumHelper.GetSelectList(typeof (Constants.Bailment), Constants.Bailment.Normal))
+                    </div>
+                </div>
+                <div class="col-xs-6">
+
+                    <div class="col-lg-4">@Html.ExtLabelFor(m => m.F01_LiquidClass)</div>
+                    <div class="col-lg-8">
+                        @Html.ExtRadioButtonFor(m => m.F01_LiquidClass, EnumHelper.GetSelectList(typeof (Constants.Liquid), Constants.Liquid.Powder))
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-xs-6">
+
+                    <div class="col-lg-4">@Html.ExtLabelFor(m => m.F01_RtrPosCls)</div>
+                    <div class="col-lg-8">
+                        @Html.ExtRadioButtonFor(m => m.F01_RtrPosCls, EnumsHelper.GetListItemsWithDescription<Constants.RetrievalLocation>(Constants.RetrievalLocation.Both).OrderBy(i => i.Value))
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="col-lg-4">@Html.ExtLabelFor(m => m.F01_MsrMacSndFlg)</div>
+                    <div class="col-lg-8">
+                        @Html.ExtRadioButtonFor(m => m.F01_MsrMacSndFlg, EnumHelper.GetSelectList(typeof (Constants.F52_MsrMacCls), Constants.F52_MsrMacCls.Conv))
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <button type="submit" class="btn btn-flat btn-default btn-less-5-chars">OK</button>
+                    <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" hideForm() ">Cancel</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+
+<script>
+    $(document).ready(function() {
+        $.validator.unobtrusive.parse('#addNewForm');
+        var $inputs = $('#addNewForm :input');
+
+
+        //    $inputs.change(function () {
+        //        //alert(this.value.length);
+        //    });
+
+        //    $('#modalSupplierCodeSelect').on('show.bs.modal', function (e) {
+        //        $.ajax({
+        //            url: formUrl.urlLoadSupplierCode,
+        //            type: "GET",
+        //            success: function (data) {
+        //                $("#modalSupplierCodeSelect .modal-body").html(data);
+        //                $("#modalSupplierCodeSelect .modal-header .modal-title").text("Supplier Code");
+
+        //            },
+        //            error: function (data) {
+        //                console.log(data);
+        //            }
+        //        });
+        //    });
+    });
+    //function searchSupplierCode() {
+    //    var request = {
+    //        SupplierCode: $("#txtSupplierCodeSearch").val().trim()
+    //    };
+    //    gridHelper.searchObject("SupplierGrid", request);
+    //}
+    //function loadSupplierCode() {
+    //    $.ajax({
+    //        url: formUrl.urlLoadSupplierCode,
+    //        type: "GET",
+    //        success: function (data) {
+    //            $("#modalSupplierCodeSelect .modal-body").html(data);
+    //            $("#modalSupplierCodeSelect .modal-header .modal-title").text("Supplier Code");
+
+    //        },
+    //        error: function (data) {
+    //            console.log(data);
+    //        }
+    //    });
+    //}
+
+    //function selectSupplier() {
+    //    $('#modalSupplierCodeSelect').modal('toggle');
+    //    var supplierCode = gridHelper.getSelectedItem("SupplierGrid").F04_SupplierCode;
+
+    //    $('#F01_SupplierCode').val(supplierCode);
+
+    //}
+
+</script>

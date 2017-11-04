@@ -1,0 +1,8 @@
+﻿@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.PrevAndNextDay.PrevAndNextDay
+    @{
+        var ctr = @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+    }
+<div class="col-lg-12">
+    <a href="@Url.Action("Index",ctr, new { environmentDate  = Model.prevDay})" class="btn btn-flat btn-default btn-less-5-chars">Prev Day</a>
+    <a href="@Url.Action("Index",ctr,new { environmentDate  = Model.nextDay})" class="btn btn-flat btn-default btn-less-5-chars">Next Day</a>
+</div>

@@ -1,0 +1,9 @@
+﻿@media screen and (max-width : 1199px){
+	/*
+		Style for search panel (displayed on the Search Creteria)
+		Contain OK & Clear button.
+	*/
+	.search-panel{
+		margin-top: 5px;
+	}
+}

@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.ScreenId = "TCPR141F";
+    ViewBag.Title = "Inputting Data of Out-of-plan's Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.ProductManagement.ViewModels.OutOfPlanProduct.OutOfPlanProductViewModel
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@section scripts{    
+    <script>
+        var message = {
+            MSG01: ' @KCSG.Core.Constants.Constants.Messages.SystemManagement_MSG1',
+            MSG22: ' @KCSG.Core.Constants.Constants.Messages.SystemManagement_MSG22',
+            MSG28: ' @KCSG.Core.Constants.Constants.Messages.SystemManagement_MSG28'
+            
+        }
+        var formUrl = {
+            urlEdit: '@Url.Action("Edit", "OutOfPlanProduct")',
+            urlDelete: '@Url.Action("Delete", "OutOfPlanProduct")'
+        }
+    </script>    
+    <script src="~/Scripts/areas/productmanagement/outofplanProduct.js"></script>
+}
+<div class="col-lg-12">
+
+    @using (Html.BeginForm("", ""))
+    {
+        <div class="panel panel-danger" id="searchForm">
+            <div class="panel-heading">Search Criteria</div>
+            <div class="panel-body">
+
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.ProductCode)
+                </div>
+
+                <div class="col-lg-3">
+                    @Html.ExtTextBoxFor(model => model.ProductCode, new { @id = "txtProductCodeSearch", maxlength = "12" })
+                    <span class="field-validation-error"><span id="errorProductCode" hidden></span></span>
+                </div>                
+
+                <div class="col-lg-4 search-button-panel">
+
+                    <button type="button"
+                            class="btn btn-default btn-flat btn-less-5-chars"
+                            id="btnSearch" onclick="return OutOfPlanProduct.onSearch();">
+                        Go
+                    </button>
+                    <button type="button" class="btn btn-default btn-flat  btn-less-5-chars" onclick="Clear(this,'OutOfPlanProductGrid')">Clear</button>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+
+        <div class="panel-heading">List of Out of plan's product</div>
+
+        <div class="panel-body">
+
+            <div class="col-lg-12 form-group"
+                 ondblclick="UpdateItem()">
+                @Html.Grid(Model.GridOutOfPlanProduct)
+            </div>
+
+            <div class="col-md-12">
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnAdd" onclick=" OutOfPlanProduct.addNew() ">
+                    Add
+                </button>
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnUpdate"
+                        style="margin-left: 7px;margin-right: 7px "
+                        onclick=" OutOfPlanProduct.updateItem()">
+                    Update
+                </button>
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnDelete" onclick=" OutOfPlanProduct.deleteItem() ">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="formPlaceholder"></div>
+</div>
+

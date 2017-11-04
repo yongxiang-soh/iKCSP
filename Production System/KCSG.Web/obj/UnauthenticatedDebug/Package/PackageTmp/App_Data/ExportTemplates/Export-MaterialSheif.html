@@ -1,0 +1,84 @@
+﻿<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th style="text-align: center">** ALL SHELF LIST **</th>
+    </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC091P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td>< Material ></td>
+            <td></td>
+        </tr>        
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>R.B.L</th>
+            <th>P.No</th>
+            <th>Material Code</th>            
+            <th>Material Name</th>
+            <th>P.O.No</th>
+            <th>P.D</th>
+            <th>S DATE</th>
+            <th>S TIME</th>
+            <th>BF</th>            
+            <th>AF</th>            
+            <th>LOT.NO</th>            
+            <th class="text-align-right">Quantity (Kg)</th>            
+        </tr>        
+    </thead>
+
+    <tbody>
+    {{#groupitems}}  
+       {{#FindPrintMaterialSheifItem}}        
+    <tr>
+        <td>{{RBL}}</td>            
+        <td>{{PalletNo}}</td>            
+        <td>{{MaterialCode}}</td>
+        <td>{{MaterialName}}</td>
+        <td>{{PONo}}</td>
+        <td>{{PD}}</td>			
+        <td>{{SDate}}</td>
+        <td>{{Stime}}</td>
+        <td>{{BF}}</td>
+        <td>{{AF}}</td>
+        <td>{{LotNo}}</td>
+        <td class="text-align-right">{{Quantityst}}</td>            
+    </tr>
+        {{/FindPrintMaterialSheifItem}}
+        
+        <tr>
+            <td colspan="6"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-align-right">Total:</td>
+            <td class="text-align-right">{{Total}}</td>
+        </tr> 
+    {{/groupitems}}
+    </tbody>  
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>        
+    </tfoot> 
+</table>

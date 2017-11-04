@@ -1,0 +1,46 @@
+﻿
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th colspan="3"
+            class="text-center">** MATERIAL REQUIREMENT LIST **</th>
+    </tr>
+    <tr>
+        <td class="pull-left">[TCPP081F]</td>
+        <td class=""></td>
+        <td class="pull-right">{{currentDate}}</td>
+    </tr>
+    <tr>
+        <td class="pull-left">Production Month: {{yearMonth}}</td>
+        <td class=""></td>
+        <td class="pull-right">{{companyName}} </td>
+    </tr>
+    </thead>
+</table>
+<b>< Material Requirement List ></b>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>Material Code</th>
+            <th>Material Name</th>
+            <th class="text-align-right">Material Requirement Qty</th>
+            <th>Unit</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+
+        {{#data}}
+        <tr>
+            <td>{{F01_MaterialCode}}</td>
+            <td>{{F01_MaterialDsp}}</td>
+            <td class="text-align-right">{{totalAmount}}</td>
+            <td>{{unit}}</td>
+        </tr>
+        {{/data}}
+    </tbody>
+</table>
+<br />
+
+
+

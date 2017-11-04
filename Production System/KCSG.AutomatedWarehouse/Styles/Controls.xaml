@@ -1,0 +1,87 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+                    xmlns:systemMessageKind="clr-namespace:KCSG.AutomatedWarehouse.Enumeration">
+
+    <!-- Root label style of configurator -->
+    <Style x:Key="RootLabel"
+           BasedOn="{StaticResource {x:Type TextBlock}}"
+           TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+
+    <!-- Field label style of Configurator window -->
+    <Style x:Key="ControlLabel"
+           BasedOn="{StaticResource {x:Type TextBlock}}"
+           TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="TextAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="5"/>
+    </Style>
+    
+    <!-- Configurator confirm button -->
+    <Style x:Key="ConfirmButton"
+           BasedOn="{StaticResource {x:Type Button}}"
+           TargetType="Button">
+        <Setter Property="Height" Value="32"/>
+        <Setter Property="Width" Value="64"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="0, 5, 0, 5"/>
+    </Style>
+
+    <Style x:Key="LevelLevelFirst" 
+           BasedOn="{StaticResource {x:Type TextBlock}}"
+           TargetType="TextBlock">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Margin" Value="20, 0, 20, 0"/>
+    </Style>
+
+    <!-- Field label style of Configurator window -->
+    <Style x:Key="SystemMessageBoxLabel"
+           BasedOn="{StaticResource {x:Type TextBlock}}"
+           TargetType="TextBlock">
+        
+        <Style.Triggers>
+            
+            <!--Information system message box-->
+            <DataTrigger Binding="{Binding Type}" Value="{x:Static systemMessageKind:MessageType.Information}">
+                <Setter Property="Foreground" Value="Blue"></Setter>
+            </DataTrigger>
+
+            <!--Error system message box-->
+            <DataTrigger Binding="{Binding Type}" Value="{x:Static systemMessageKind:MessageType.Error}">
+                <Setter Property="Foreground" Value="Red"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </DataTrigger>
+
+            <!--Success system message box-->
+            <DataTrigger Binding="{Binding Type}" Value="{x:Static systemMessageKind:MessageType.Success}">
+                <Setter Property="Foreground" Value="Green"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </DataTrigger>
+
+            <!--Status request message box-->
+            <DataTrigger Binding="{Binding Type}" Value="{x:Static systemMessageKind:MessageType.StatusRequest}">
+                <Setter Property="Foreground" Value="Purple"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </DataTrigger>
+
+            <!--Sent request message box-->
+            <DataTrigger Binding="{Binding Type}" Value="{x:Static systemMessageKind:MessageType.Broadcast}">
+                <Setter Property="Foreground" Value="DarkGreen"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </DataTrigger>
+
+            <!--Receive request message box-->
+            <DataTrigger Binding="{Binding Type}" Value="{x:Static systemMessageKind:MessageType.Receive}">
+                <Setter Property="Foreground" Value="Sienna"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+            </DataTrigger>
+            
+        </Style.Triggers>
+        <!--<Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="TextAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="5"/>-->
+    </Style>
+    
+</ResourceDictionary>

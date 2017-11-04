@@ -1,0 +1,174 @@
+﻿@{
+    ViewBag.ScreenId = "TCEN012F";
+    ViewBag.Title = "Environment Data Duration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/chartjs/Chart.js"></script>
+    <script src="~/Scripts/areas/environmentManagement/environmentDataDurationDay.js"></script>
+}
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.SearchCriteriaModel
+
+
+<div class="col-lg-12">
+    @using (Ajax.BeginForm("Search", "EnvironmentDataDuration", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "EnvironmentDataDurationDay.onSuccess" }, new { @id = "environmentDataOneDay" }))
+    {
+        @Html.Partial("SearchCriteria", Model)
+    }
+    <div class="panel panel-danger">
+        <div class="panel panel-heading">
+            Environment Data (Duration)
+        </div>
+        <div class="panel panel-body">
+            <div class="row form-group">
+                <div class="col-lg-8" id="chartTemperContent">
+                    <canvas id="chartTemper" width="400" height="150"></canvas>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">High</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="temHigh" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">Low</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="temLow" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">UCL</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="temUcl" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">LCL</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="temLcl"  readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">Cp</div>
+                            <div class="col-lg-8">
+                                <input type="text"  id="temCp" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">Cpk</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="temCpk" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">Range</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="temRanger" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">Mean</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="temMean" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">Sigma</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="temSignma" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-8" id="chartHumContent">
+                    <canvas id="humidity" width="400" height="150"></canvas>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">High</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="hHigh" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">Low</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="hLow" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">UCL</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="hUcl" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">LCL</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="hLcl" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">Cp</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="hCp" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">Cpk</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="hCpk" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">Range</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="hRanger" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">Mean</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="hMean" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">Sigma</div>
+                            <div class="col-lg-8">
+                                <input type="text" id="hSignma" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

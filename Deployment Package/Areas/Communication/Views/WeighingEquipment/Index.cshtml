@@ -1,0 +1,134 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.Communication.ViewModels.WeighingEquipmentViewModel
+@{
+    ViewBag.Title = "Weighing Equipment Controller";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/areas/Communication/WeighingEquipment.js"></script>
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <span>General Information</span>
+    </div>
+    <form id="frmSearch">
+        <div class="panel-body">
+
+            <div class="row form-group">
+                <div class="col-xs-7">
+                    <div class="panel panel-danger">
+                        <div class="panel-body " style="height: 128px">
+                            <div class="form-group row">
+                                @Html.ExtRadioButtonFor(m => m.ViewSelect, EnumsHelper.GetListItemsWithDescription<Constants.ViewSelectedC4>(Constants.ViewSelectedC4.Monitor), new {onclick = "ChangeViewSelected(this)", @style = "margin-top: 10px;"}, true, 5)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <div class="panel panel-danger">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    @Html.ExtLabelFor(m => m.Status)
+                                </div>
+                                <div class="col-lg-6">
+                                    @Html.ExtTextBoxFor(m => m.Status)
+                                </div>
+                                <div class="col-lg-2">
+                                    @Html.CheckBox("cbkStatus")
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-4">
+                                    @Html.ExtLabelFor(m => m.Model)
+                                </div>
+                                <div class="col-lg-6">
+                                    @Html.ExtTextBoxFor(m => m.Model)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="panel  panel-danger">
+                <div class="panel-body">
+                    <div class="col-xs-12">
+                        @Html.ExtRadioButtonFor(m => m.SelectData, EnumsHelper.GetListItemsWithDescription<Constants.SelectData>(Constants.SelectData.AllData), new {onclick = "ChangeStatusRequest(this)", @class = "center"}, true, 4)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <div class="col-lg-4">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(m => m.Date)
+                        </div>
+                        <div class="col-lg-8">
+                            @Html.ExtDateTimeFor(m => m.Date, new DateTimeOption() {Format = "DD/MM/YYYY"})
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(m => m.CodeNo)
+                        </div>
+                        <div class="col-lg-8">
+                            @Html.ExtTextBoxFor(m => m.CodeNo)
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="col-lg-3">
+                            @Html.ExtLabelFor(m => m.Line)
+                        </div>
+                        <div class="col-lg-6">
+                            @Html.ExtDropDownListFor(m => m.Line, EnumHelper.GetSelectList(typeof (Constants.Line)))
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="button" value="Go" id="btnGo" onclick="Search()" class="btn btn-flat btn-less-5-chars btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <div id="dvMonitor">
+                        @Html.TextArea("aaa", new {@class = "form-control"})
+                    </div>
+                    <div id="dvMaterial" style="display: none">
+                        @Html.Grid(Model.MaterialGrid)
+                    </div>
+                    <div id="dvPreproduct" style="display: none">
+                        @Html.Grid(Model.PreproductGrid)
+                    </div>
+                    <div id="dvRetrieval" style="display: none">
+                        @Html.Grid(Model.RetrievalGrid)
+                    </div>
+                    <div id="dvKneadingCommand" style="display: none">
+                        @Html.Grid(Model.KneadingCommandGrid)
+                    </div>
+
+                    <div id="dvKneadingResult" style="display: none">
+                        @Html.Grid(Model.KneadingResultsGrid)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-12">
+                    <button type="button" class="btn btn-flat btn-default .btn-more-8-chars" onclick=" SendMaterial() ">Send Material Master</button>
+                    <button type="button" class="btn btn-flat btn-default .btn-more-8-chars" id="btnDelete" onclick=" SendPreproduct() ">Send Pre-product Master</button>
+                    <button type="button" class="btn btn-flat btn-default btn-less-5-chars" id="btnEnd" onclick=" Delete() " disabled="disabled">Delete</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    
+    
+</script>

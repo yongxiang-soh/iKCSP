@@ -1,0 +1,46 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Domain.Interfaces.Services
+@{
+    // Find service which handles identity information.
+    var identityService = DependencyResolver.Current.GetService<IIdentityService>();
+
+    // Find available screens.
+    var availableScreens = identityService.FindAccessibleScreens(HttpContext.Current.User.Identity);
+
+}
+
+@if (identityService.IsScreenAccessible(availableScreens, new[] {"TCPS031F", "TCPS041F"}))
+{
+    <li class="treeview">
+        <a href="javascript:void(0);">
+            <i class="fa fa-terminal" aria-hidden="true"></i>
+            <span>Kneading Command</span>
+            <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+        </a>
+        <ul class="treeview-menu">
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPS031F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "InputOfKneadingCommand", new {Area = "KneadingCommand"})"
+                       data-toggle="tooltip"
+                       title="Input of Kneading Command">
+                        <i class="fa fa-circle-o"></i>Input of Kneading Command
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPS041F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "KneadingStartEnd", new {Area = "KneadingCommand"})"
+                       data-toggle="tooltip"
+                       title="Start/End">
+                        <i class="fa fa-circle-o"></i>Start/End
+                    </a>
+                </li>
+            }
+        </ul>
+    </li>
+}

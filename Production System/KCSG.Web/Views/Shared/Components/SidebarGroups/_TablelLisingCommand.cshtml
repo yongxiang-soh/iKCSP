@@ -1,0 +1,64 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Domain.Interfaces.Services
+@{
+    // Find service which handles identity information.
+    var identityService = DependencyResolver.Current.GetService<IIdentityService>();
+
+    // Find available screens.
+    var availableScreens = identityService.FindAccessibleScreens(HttpContext.Current.User.Identity);
+}
+
+@if (identityService.IsScreenAccessible(availableScreens, new[] { "TCMD011F", "TCMD021F", "TCMD031F", "TCMD051F" }))
+{
+    <li class="treeview">
+        <a href="javascript:void(0);">
+            <i class="fa fa-terminal" aria-hidden="true"></i>
+            <span>Tabletising Command</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            @if (identityService.IsScreenAccessible(availableScreens, "TCMD011F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "CreateTabletisingCommand", new {Area = "TabletisingCommandSubSystem"})" data-toggle="tooltip"
+                       title="Create Tabletising Command">
+                        <i class="fa fa-circle-o"></i>Create Tabletising Command
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCMD021F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "TabletisingStartStop", new {Area = "TabletisingCommandSubSystem"})" data-toggle="tooltip"
+                       title="Tabletising Start/Stop Control">
+                        <i class="fa fa-circle-o"></i>Tabletising Start/Stop Control
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCMD031F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "ManagementOfProductLabel", new {Area = "TabletisingCommandSubSystem"})" data-toggle="tooltip"
+                       title="Management of Product Label">
+                        <i class="fa fa-circle-o"></i>Management of Product Label
+                    </a>
+                </li>
+            }
+            
+            @if (identityService.IsScreenAccessible(availableScreens, "TCMD051F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "PreProductCharging", new {Area = "TabletisingCommandSubSystem"})" data-toggle="tooltip"
+                       title="Pre-Product Charging Control">
+                        <i class="fa fa-circle-o"></i>Pre-Product Charging Control
+                    </a>
+                </li>
+            }
+        </ul>
+    </li>
+
+}

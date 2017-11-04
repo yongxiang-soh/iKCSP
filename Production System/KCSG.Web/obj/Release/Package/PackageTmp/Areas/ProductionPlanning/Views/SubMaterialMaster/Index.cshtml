@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.ScreenId = "TCPP034F";
+    ViewBag.Title = "Sup. Material Master DB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.ProductionPlanning.ViewModels.SubMaterialMasters.SubMaterialSearchViewModel
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+<script src="/Scripts/areas/SubMaterialMasters/SubMaterialMasters.js" type="text/javascript"></script>
+
+<script>
+    var formUrl = {
+        urlEdit: '@Url.Action("Edit", "SubMaterialMaster")',
+        urlDelete: '@Url.Action("Delete", "SubMaterialMaster")'
+    }
+</script>
+
+
+
+<div class="col-lg-12">
+
+    @using (Html.BeginForm("", ""))
+    {
+        <div class="panel panel-danger" id="searchForm">
+            <div class="panel-heading">Search Criteria</div>
+            <div class="panel-body">
+               <div class="col-xs-3">
+                    @Html.ExtLabelFor(model => model.MaterialCode)
+                </div>
+                <div class="col-xs-3">
+                    @Html.ExtTextBoxFor(model => model.MaterialCode, new {@id = "txtCodeSearch"})
+                </div>
+                <div class="col-xs-5">
+                    <button type="button" class="btn btn-flat btn-default btn-less-5-chars" id="btnSearch" onclick=" search() ">Search</button>
+                    <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick="Clear(this)">Clear</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger" id="searchForm">
+        <div class="panel-heading">List of Sup. Material</div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.Grid(Model.Grid)
+                </div>
+            <div class="form-group">
+                <button class="btn btn-flat btn-default btn-less-5-chars" id="btnAdd" onclick=" addNew() ">Add</button>
+                <button class="btn btn-default btn-flat btn-less-5-chars" id="btnUpdate" onclick=" UpdateItem() ">Update</button>
+                <button class="btn btn-flat btn-default btn-less-5-chars" id="btnDelete" onclick=" deleteItem() ">Delete</button>
+            </div>
+
+            </div>
+      </div>
+</div>
+
+      
+
+<div class="col-md-12" style="margin-top: 20px;">
+     <div id="formPlaceholder"></div>
+ </div>

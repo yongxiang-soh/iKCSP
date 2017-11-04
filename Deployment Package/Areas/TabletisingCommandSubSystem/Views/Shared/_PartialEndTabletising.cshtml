@@ -1,0 +1,126 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@using Resources
+@model KCSG.Web.Areas.TabletisingCommandSubSystem.Models.EndTabletisingViewModel
+
+@using (Ajax.BeginForm("End", "TabletisingStartStop", new AjaxOptions() {HttpMethod = "POST", OnSuccess = "onSuccess(data)", Confirm = TabletisingResources.MSG21}, new {@id = "addNewForm"}))
+{
+    @Html.HiddenFor(model => model.CommandNo)
+    @Html.HiddenFor(model=>model.PreProductLotNo)
+    <div class="col-lg-12">
+        <div class="panel" id="searchForm">
+            <div class="panel-body">
+                <div class="form-group row">
+                    <div class="col-lg-4">@Html.ExtLabelFor(m => m.ProductCode)</div>
+                    <div class="col-lg-8">
+                        @Html.ExtTextBoxFor(m => m.ProductCode, new { @readonly = true })
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-4">@Html.ExtLabelFor(m => m.ProductName)</div>
+                    <div class="col-lg-8">
+                        @Html.ExtTextBoxFor(m => m.ProductName, new {@readonly = true})
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-4">@Html.ExtLabelFor(m => m.LotNo)</div>
+                    <div class="col-lg-8">
+                        @Html.ExtTextBoxFor(m => m.LotNo, new {@readonly = true})
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-4">@Html.ExtLabelFor(m => m.Package)</div>
+                    <div class="col-lg-8">
+                        @Html.ExtNumberFor(m => m.Package, new NumberOption() {NumberOfDecimal = 0,Max= 9999})
+                        <span class="field-validation-error"><span id="errorPackage" hidden></span></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-4">@Html.ExtLabelFor(m => m.Fraction)</div>
+                    <div class="col-lg-8">
+                        @Html.ExtNumberFor(m => m.Fraction, new NumberOption() {NumberOfDecimal = 2,Max=999.99})
+                        @Html.HiddenFor(m => m.PackingUnit)
+                        <span class="field-validation-error"><span id="errorList" hidden></span></span>
+                    </div>
+                </div>
+                <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" ok() ">OK</button>
+                <button class="btn btn-flat btn-default btn-less-5-chars" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $().ready(function() {
+        @*$.validate.addMethod("CheckFraction", function (value, element) {
+            var parckUnit = $("#PackingUnit").val();
+            return value <= parckUnit;
+        }, "@Resources.TabletisingResources.MSG27");*@
+        $("#addNewForm").validate({
+            rule:
+            {
+                Fraction: { CheckFraction: true }
+            }
+        });
+        $.validator.unobtrusive.parse('#addNewForm');
+
+        $('#Fraction').keyup(function() {
+            var hasValue = this.value.length > 0;
+            $("#errorList").text("").hide();
+        });
+        $('#Package').keyup(function () {
+            var hasValue = this.value.length > 0;
+            $("#errorPackage").text("").hide();
+        });
+
+    });
+    function CheckRequired() {
+        var isChecked = true;
+        if ($("#Package").val() == null || $("#Package").val() == "") {
+            $("#errorPackage").text("Please input data for this required field.").show();
+            isChecked = false;
+        }
+        if ($("#Fraction").val() == null || $("#Fraction").val() == "") {
+            $("#errorList").text("Please input data for this required field.").show();
+            isChecked = false;
+        }
+        if (!isChecked)
+            return false;
+        return true;
+    }
+    ok = function () {
+        var packageNumber = parseFloat($("#Package").val());
+        var fraction = parseFloat($("#Fraction").val());
+        var packUnit = parseFloat($("#PackingUnit").val());
+        if (!CheckRequired())
+            return;
+        if (packageNumber <= 0) {
+            $("#errorPackage").text("Pack Quantity must be more than zero.").show();
+            return;
+        }
+        if (fraction < -0.005) {
+            $("#errorList").text("Value is out of range.").show();
+            return;
+        }
+        if (fraction > packUnit) {
+            $("#errorList").text("Fraction cannot be more than the packing unit.").show();
+            return;
+        }
+        $("#errorList").text("").hide();
+        $("#addNewForm").submit();
+
+    }
+
+    function onSuccess(data) {
+        var commandNo = gridHelper.getSelectedItem("TabletisingGrid").F41_KndCmdNo;
+        var lotNo = gridHelper.getSelectedItem("TabletisingGrid").F41_PrePdtLotNo;
+        if (data.Success) {
+            showMessage(data,"","");
+        }
+        $('#endForm').modal('toggle');
+        setTimeout(function () {
+            search(commandNo, lotNo);
+            $.unblockUI();
+        }, 3000);
+    }
+
+</script>

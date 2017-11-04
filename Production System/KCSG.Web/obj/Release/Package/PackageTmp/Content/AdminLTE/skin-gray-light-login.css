@@ -1,0 +1,49 @@
+﻿/*
+    This style file is for applying to Login page.
+    This makes login page be responsive.
+*/
+
+/*
+	General body settings.
+*/
+body {
+    background-color: #d2d6de;
+}
+
+/*
+	Logo container style.
+*/
+.logo-panel{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+/*
+	Style for login-logo
+*/
+.login-logo{
+	margin-left:auto;
+	margin-right:auto;
+    max-height: 100px;
+}
+
+/*
+	Conditions:
+		* height <= 480
+*/
+@media screen and (max-height: 480px) {
+	
+    .login-controls-container{
+		margin-top: 0px;
+	}
+}
+
+@media screen and 
+(
+	min-height: 480px
+) 
+{
+    .login-controls-container{
+		margin-top: 100px;
+	}
+}

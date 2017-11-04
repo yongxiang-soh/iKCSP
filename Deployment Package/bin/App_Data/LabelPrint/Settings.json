@@ -1,0 +1,42 @@
+﻿{
+  "InternalPrinters": [
+    {
+      "Ip": "\\\\192.168.2.231\\Zebra",
+      "Terminal": "A021",
+      "Port": 0,
+      "IsEnabled": true,
+      "IsUsbPrinter": true
+    },
+    {
+      "Ip": "\\\\192.168.2.115\\Zebra",
+      "Terminal": "A015",
+      "Port": 0,
+      "IsEnabled": true,
+      "IsUsbPrinter": true
+    }
+  ],
+  "ExternalPrinters": [
+    {
+      "Ip": "\\\\192.168.2.231\\BigZebra",
+      "Terminal": "A021",
+      "Port": 0,
+      "IsEnabled": true,
+      "IsUsbPrinter": true
+    },
+    {
+      "Ip": "\\\\192.168.2.115\\BigZebra",
+      "Terminal": "A015",
+      "Port": 0,
+      "IsEnabled": true
+    }
+  ],
+  "PreProductPrinters": [
+    {
+      "Ip": "\\\\A02\\BigZebra",
+      "Terminal": "A002",
+      "Port": 27015,
+      "IsUsbPrinter": true,
+      "IsEnabled": true
+    }
+  ]
+}

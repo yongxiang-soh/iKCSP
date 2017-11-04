@@ -1,0 +1,165 @@
+﻿<style>
+    .title-table, .content-table {
+        border-collapse: collapse;
+        min-width: 100%;
+    }
+
+        .title-table th, td {
+            border: 0 solid transparent;
+        }
+
+        .content-table th {
+            border: 1px solid black;
+        }
+
+        .content-table td {
+            border: 1px solid black;
+        }
+        .table-bordered td, .table-bordered th{
+    border-color: black !important;
+}
+</style>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th style="text-align: center">** RAW MATERIAL RETRIEVAL REPORT **</th>
+    </tr>
+    </thead>
+</table>
+<br/>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC111P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>        
+    </tbody>
+</table>
+<br/>
+<br/>
+<!--loop 1 here-->
+
+<table class="table table-responsive table-bordered" style="font-family:courier;">
+
+    <tbody>
+    
+    <tr>
+        
+        <td colspan="2">CMD NO:</td>
+        <td colspan="2">Production Line:</td>
+        <td colspan="5">Pre-Product Code:</td>
+        <td colspan="4">Pre-Product Name:</td>
+        <td colspan="3">LOT No:</td>
+    </tr>
+    <tr>
+        <td colspan="5">O.Date-Time:</td>
+        <td colspan="2">1</td>
+        <td colspan="2">2</td>
+        <td colspan="2">3</td>
+        <td colspan="2">4</td>
+        <td colspan="2">5</td>
+        <td>Total</td>
+    </tr>
+    <tr>
+        <td>No.</td>
+        <td>Material Code</td>
+        <td>Material Name</td>
+        <td>Material Lot No</td>
+        <td>S.Charged Qty</td>
+        <td>Charg Qty</td>
+        <td></td>
+        <td>Charg Qty</td>
+        <td></td>
+        <td>Charg Qty</td>
+        <td></td>
+        <td>Charg Qty</td>
+        <td></td>
+        <td>Charg Qty</td>
+        <td></td>
+        <td></td>
+    </tr>
+    
+    <!--//loop 2 here-->
+    <tr>
+        <td>{{No}}</td>
+        <td>{{MaterialCode}}</td>
+        <td>{{MaterialName}}</td>
+        <td>{{MaterialLotNo}}</td>
+        <td>{{Scharged}}</td>
+        <td class="text-align-right">{{Charge1}}</td>
+        <td>{{Chargev1}}</td>
+        <td class="text-align-right">{{Charge2}}</td>
+        <td>{{Chargev2}}</td>
+        <td class="text-align-right">{{Charge3}}</td>
+        <td>{{Chargev3}}</td>
+        <td class="text-align-right">{{Charge4}}</td>
+        <td>{{Chargev4}}</td>
+        <td class="text-align-right">{{Charge5}}</td>
+        <td>{{Chargev5}}</td>
+        <td>{{Total}}</td>
+    </tr>
+    <!--end loop 2-->
+       
+        
+    <tr>
+        <td colspan="4"></td>
+        <td colspan="11"></td>
+        <td></td>
+    </tr>
+    <!--<tr>
+        <td>{{SDate}}<br/>{{RBL}}</td>
+        <td>{{Stime}}<br/>{{PalletNo}}</td>
+        <td>{{Conveyor}}<br/>{{PONo}}</td>
+        <td>{{SRF}}<br/>{{PD}}</td>
+        <td>{{MaterialCode}}</td>
+        <td>{{MaterialName}}</td>
+        <td>{{LotNo}}</td>
+        <td>{{PU}}</td>
+        <td>{{Unit}}</td>
+        <td>{{Quantity}}</td>
+    </tr>-->
+    
+
+    
+    </tbody>  
+    <!--<tfoot>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total: {{Total}}</td>
+    </tr>        
+    </tfoot>--> 
+
+</table>
+
+<br />
+<br />
+<!--end loop 1-->
+<br/>
+<br/>
+<table class="col-xs-4 table-bordered" style="table-layout: fixed;float: right">
+            <tr>
+                <td>Manager</td>
+                <td>Material</td>
+                <td>Charging</td>
+                <td>Weighing</td>
+            </tr>
+    <tr style="height:60px !important">
+        <td> <br/> </td>
+        <td> <br/> </td>
+        <td> <br/> </td>
+        <td> <br/> </td>
+    </tr>
+        </table>

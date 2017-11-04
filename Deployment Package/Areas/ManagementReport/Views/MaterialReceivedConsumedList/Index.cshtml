@@ -1,0 +1,207 @@
+﻿@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@{
+    ViewBag.Title = "";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model KCSG.Web.Areas.ManagementReport.ViewModels.ManagementReportViewModel.FindReportTableRecordsViewModel
+<div class="col-lg-12">
+    <h3 class="page-header" style="margin-top: 0">
+        Material Received/Consumed List - TCFC201F
+    </h3>
+</div>
+
+<div class="col-lg-12"
+     ng-app="MasterDatabaseModule"
+     ng-controller="ManagementReportConsumerController">
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">Search Criteria</div>
+
+        <div class="panel-body">
+
+            <!-- Table selection (row)-->
+            <div class="col-xs-3">
+                <!-- Table label -->
+                @Html.ExtLabelFor(model => model.YearMonth)
+            </div>
+            <div class="col-xs-3">
+
+                @Html.ExtDateTimeFor(model => model.YearMonth, new DateTimeOption() { Format = "MM/YYYY", ViewMode = "months" })
+
+            </div>
+            <div class="col-xs-1"></div>
+            <div>
+                <!-- Print search button -->
+                <button class="btn btn-default btn-less-5-chars"
+                        ng-click="clickRefresh()">
+                    @*<span class="glyphicon glyphicon-search"></span>*@
+                    <span>Go</span>
+                </button>
+            </div>
+        </div>
+        <br />
+
+    </div>
+
+    @*<form class="panel-body"
+          name="tableFormView"
+          novalidate
+          style="overflow-x: scroll;">*@
+    <div class="panel panel-danger">
+        <form class="panel-body"
+              name="tableFormView"
+              novalidate>
+
+            <table class="table table-responsive">
+                <thead>
+                    <tr class="jsgrid-header-row">
+                        <th>Material Code</th>
+                        <th>Material Name</th>
+                        <th>Remainder (Prev)</th>
+                        <th>Received</th>
+                        <th>Consumed</th>
+                        <th>Remainder (Curr)</th>
+                        <th>Update date</th>
+                        <th style="display: none">Year Month</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in displayedTable"
+                        ng-click="selectItem(item)"
+                        ng-class="selectedRow == item ? 'bg-danger' : '' ">
+                        <td>
+                            {{item.MaterialCode}}
+                        </td>
+                        <td>
+                            {{item.MaterialName}}
+                        </td>
+                        <td style="text-align: right">
+                            <span ng-hide="inUpdateMode && item == selectedRow">
+                                {{item.Remainst}}
+                            </span>
+                            <input id="Remain" type="text" onKeyPress="if(this.value.length==10) return false;" class="form-control"
+                                   ng-show="inUpdateMode && item == selectedRow"
+                                   ng-model="updateItem.Remain" />
+                        </td>
+                        <td style="text-align: right">
+                            <span ng-hide="inUpdateMode && item == selectedRow">
+                                {{item.Receivedst}}
+                            </span>
+                            <input id="Recieved" type="text" onKeyPress="if(this.value.length==10) return false;" maxlength="10" class="form-control"
+                                   ng-show="inUpdateMode && item == selectedRow"
+                                   ng-model="updateItem.Recieved" />
+                        </td>
+                        <td style="text-align: right">
+                            <span ng-hide="inUpdateMode && item == selectedRow">
+                                {{item.Usedst}}
+                            </span>
+                            <input id="Used" type="text" onKeyPress="if(this.value.length==10) return false;" maxlength="8" class="form-control"
+                                   ng-show="inUpdateMode && item == selectedRow"
+                                   ng-model="updateItem.Used" />
+                        </td>
+                        <td style="text-align: right">{{item.Remaincurrst}}</td>
+                        <td style="text-align: right">{{item.Updatedatest}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <br />
+        </form>
+        <div>
+            <div class="col-lg-8 text-left" style="padding-top: 20px !important">
+
+
+
+
+                <!-- Confirm edit item button -->
+                <button class="btn btn-default btn-less-5-chars"
+                        ng-disabled="displayedTable.length == 0 ||displayedTable == null || inUpdateMode"
+                        ng-click="PrintItem()">
+                    <span>Print</span>
+                </button>
+                <!-- Confirm edit item button -->
+                <button class="btn btn-default btn-less-5-chars"
+                        ng-disabled="displayedTable.length == 0 ||selectedRow == null || displayedTable == null || !inUpdateMode"
+                        @*ng-show="inUpdateMode"*@
+                        ng-click="confirmItemUpdate()">
+                    <span>Update</span>
+                </button>
+
+                <!-- Update item button -->
+                @*<button ng-disabled="displayedTable.length == 0 ||displayedTable == null"
+                        ng-show="!inUpdateMode"
+                        ng-click="toggleItemUpdate()"
+                        class="btn btn-flat btn-default">
+                    <span ng-if="!inUpdateMode">Update</span>
+                </button>*@
+                <!-- Update item button -->
+                @*<button ng-disabled="displayedTable.length == 0 ||displayedTable == null"
+                        ng-show="inUpdateMode"
+                        ng-click="cancelItemUpdate()"
+                        class="btn btn-flat btn-default">
+                    <span ng-if="inUpdateMode">Cancel</span>
+                </button>*@
+                <!-- Recalculate item button -->
+                <button class="btn btn-default btn-more-8-chars"
+                        ng-disabled="displayedTable.length == 0 ||displayedTable == null || !inUpdateMode || selectedRow == null"
+                        ng-click="reloaditem()">
+                    <span>Re-calculate</span>
+                </button>
+
+            </div>
+            <div class="col-lg-4 text-right">
+                <ul uib-pagination
+                    items-per-page="30"
+                    max-size="3"
+                    total-items="Total"
+                    first-text="First"
+                    previous-text="Prev"
+                    next-text="Next"
+                    last-text="Last"
+                    boundary-links="true"
+                    ng-model="selectedTableView.page"
+                    ng-change="pageChanged()"></ul>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Button section -->
+
+</div>
+
+
+<style>
+    input, select, textarea {
+        max-width: none;
+    }
+</style>
+<script>
+    function addCommas(nStr) {
+        nStr += '';
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+    }
+</script>
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/ui-bootstrap-tpls-2.2.0.min.js"></script>
+<script src="~/Scripts/angular/services/managementreportconsumer.service.js"></script>
+<script src="~/Scripts/angular/services/toastr.service.js"></script>
+<script src="~/Scripts/angular/controllers/managementreportconsumer.controller.js"></script>
+@*<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<!--Reference the autogenerated SignalR hub script. -->
+<script src="~/signalr/hubs"></script>*@
+<style>
+    .modal-dialog {
+        padding: auto;
+        left: 0px;
+    }
+</style>

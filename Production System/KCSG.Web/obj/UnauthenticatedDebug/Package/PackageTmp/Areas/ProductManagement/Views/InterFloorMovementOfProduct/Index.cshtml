@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.ScreenId = "TCPR081F";
+    ViewBag.Title = "Inter-floor Movement Of Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.ProductManagement.ViewModels.InterFloorMovementOfProduct.InterFloorMovementOfProductViewModel
+@using KCSG.Core;
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+
+@*<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<script src="~/Scripts/areas/signalrCommon.js"></script>
+<script src="/signalr/hubs"></script>*@
+<script src="~/Scripts/areas/interFloorMovementOfProduct/interFloorMovementOfProduct.js"></script>
+
+<div class="col-md-12">
+
+    @using (Ajax.BeginForm("TranferInterFloor", "InterFloorMovementOfProduct", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess" }, new { @id = "div-tranfer-interfloor" }))
+    {
+        <div class="panel panel-danger">
+            <div class="panel-heading">Move Criteria</div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-3">
+                        <div class="col-xs-4 text-center">
+                            @Html.ExtLabelFor(m => m.From)
+                        </div>
+                        <div class="col-xs-4">
+                            @Html.ExtNumberFor(model => model.From, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 0,Min = 0,Max = 3},new{@readonly="true"})
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="text-center">Floor</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-1" style="text-align:center">
+                        <label>~</label>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="col-xs-4 text-center">
+                            @Html.ExtLabelFor(m => m.To)
+                        </div>
+                        <div class="col-xs-4">
+                            @Html.ExtNumberFor(model => model.To, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 3 },new{@readonly="true"})
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="text-center">Floor</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>
+
+                <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" clickOK() ">OK</button>
+            </div>
+        </div>
+    }
+</div>
+
+
+

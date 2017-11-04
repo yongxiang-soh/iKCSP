@@ -1,0 +1,192 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Domain.Interfaces.Services
+@{
+    // Find service which handles identity information.
+    var identityService = DependencyResolver.Current.GetService<IIdentityService>();
+
+    // Find available screens.
+    var availableScreens = identityService.FindAccessibleScreens(HttpContext.Current.User.Identity);
+}
+
+@if (identityService.IsScreenAccessible(availableScreens, new[] { "TCRM011F", "TCRM021F", "TCRM031F", "TCRM041F", "TCRM051F", "TCRM061F", "TCRM071F", "TCRM081F", "TCRM091F", "TCRM111F", "TCRM121F", "TCRM131F", "TCRM151F" }))
+{
+    <li class="treeview">
+        <a href="javascript:void(0);">
+            <i class="fa fa-table"></i>
+            <span>Material Management</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM011F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "MaterialReceptionInput", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Material Reception Input">
+                        <i class="fa fa-circle-o"></i>Material Reception Input
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM021F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "MaterialPostReceptionInput", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Material Post Reception Input">
+                        <i class="fa fa-circle-o"></i>Material Post Reception Input
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM031F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StorageOfMaterial", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Storage of Material">
+                        <i class="fa fa-circle-o"></i>Storage of Material
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM041F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "AcceptanceOfMaterial", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Acceptance of raw material">
+                        <i class="fa fa-circle-o"></i>Acceptance of raw material
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM051F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "RestorageOfMaterial", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Re-storage of Material">
+                        <i class="fa fa-circle-o"></i>Re-storage of Material
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM061F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StorageOfSupplementaryMaterial", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Storage of Supplementary Material">
+                        <i class="fa fa-circle-o"></i>Storage of Supplementary Material
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM071F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "RetrieveOfMaterial", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Retrieve of Material">
+                        <i class="fa fa-circle-o"></i>Retrieve of Material
+                    </a>
+                </li>
+            }
+
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM081F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StockTakingOfMaterial", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Stock-taking of Material">
+                        <i class="fa fa-circle-o"></i>Stock-taking of Material
+                    </a>
+                </li>
+
+                @*<li>
+                    <a href="@Url.Action("IndexC1", "StockTakingOfMaterial", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Stock-taking of Raw Material">
+                        <i class="fa fa-circle-o"></i>Stock-taking of Raw Material
+                    </a>
+                </li>*@
+            }
+
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM091F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "InterFloorMovementOfMaterial", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Inter-Floor Movement Of Material">
+                        <i class="fa fa-circle-o"></i>Inter-Floor Movement Of Material
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM101F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StorageOfWarehousePallet", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Storage Of Warehouse Pallet">
+                        <i class="fa fa-circle-o"></i>Storage Of Warehouse Pallet
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM111F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "RetrievalOfWarehousePallet", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Retrieve of Warehouse Pallet">
+                        <i class="fa fa-circle-o"></i>Retrieve of Warehouse Pallet
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM121F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StorageOfSupplierPallet", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Storage of Supplier Pallet">
+                        <i class="fa fa-circle-o"></i>Storage of Supplier Pallet
+                    </a>
+                </li>
+            }
+
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM131F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "RetrievalOfSupplierPallet", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Retrieval of Supplier pallet">
+                        <i class="fa fa-circle-o"></i>Retrieval of Supplier pallet
+                    </a>
+                </li>
+
+
+
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCRM151F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "ForcedRetrievalOfRejectedMaterial", new {Area = "MaterialManagement"})"
+                       data-toggle="tooltip"
+                       title="Forced Retrieval of Rejected Material">
+                        <i class="fa fa-circle-o"></i>Forced Retrieval of Rejected Material
+                    </a>
+                </li>
+            }
+        </ul>
+    </li>
+}

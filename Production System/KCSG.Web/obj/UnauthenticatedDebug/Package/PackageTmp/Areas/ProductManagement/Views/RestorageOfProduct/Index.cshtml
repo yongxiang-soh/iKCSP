@@ -1,0 +1,231 @@
+﻿@{
+    ViewBag.ScreenId = "TCPR071F";
+    ViewBag.Title = "Re-storage of Product";
+    if (string.IsNullOrEmpty(Model.PalletNo))
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+   }
+    if (Model.isChecked == true)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@model KCSG.Web.Areas.ProductManagement.ViewModels.ReStorageOfProduct.ReStorageOfProductViewModel
+    
+
+<script src="~/Scripts/areas/ReStorageOfProduct/restorageOfProduct.js"></script>
+<Style>
+    .removePadding {
+        padding: 0 !important;
+        padding-right: 5px !important;
+    }
+</Style>
+<script>
+    var formUrl = {
+        urlDeAssign: '@Url.Action("DeAssignProduct", "RestorageOfProduct", new {area = "ProductManagement"})',
+        urlRestorage: '@Url.Action("Restorage", "RestorageOfProduct", new { area = "ProductManagement" })',
+        urlGetData: '@Url.Action("GetData", "RestorageOfProduct", new {area = "ProductManagement"})',
+        urlCheckConveyorCode: '@Url.Action("CheckConveyorAndDeviceStatus", "RestorageOfProduct", new { area = "ProductManagement" })'
+    }
+</script>
+@using (Ajax.BeginForm("RestoreProduct", "RestorageOfProduct", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess(data)" }, new { @id = "restorageProduct" }))
+{
+        <div class="col-lg-12">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <span>Search Criteria</span>
+                </div>
+                <div class="panel-body">
+                    <div class="col-lg-3">&nbsp;</div>
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">@Html.LabelFor(model => model.PalletNo)<span style="color: red">*</span></div>
+                        <div class="col-lg-8">
+                            @Html.ExtTextBoxAddOnFor(model => model.PalletNo, CustomControlConstants.AddOn.Search, "#modalPalletNoSelect", new {@id = "txtPalletNo", @onchange = "ShowData()"})
+                        </div>
+                    </div>
+                    <div class="col-lg-3">&nbsp;</div>
+
+                </div>
+
+                <div class="panel-body">
+                    <div class="row form-group">
+                        <div class="col-lg-1">
+                            &nbsp;
+                        </div>
+                        <div class="col-lg-2 removePadding">@Html.LabelFor(model => model.ProductCode1)</div>
+                        <div class="col-lg-2 removePadding">@Html.LabelFor(model => model.ProductName1)</div>
+                        <div class="col-lg-2 removePadding">@Html.LabelFor(model => model.PreProductLotNo1)</div>
+                        <div class="col-lg-1 removePadding">@Html.LabelFor(model => model.LotNo1)</div>
+                        <div class="col-lg-1 removePadding">@Html.LabelFor(model => model.PackUnit1)</div>
+                        <div class="col-lg-1 removePadding">@Html.LabelFor(model => model.Remainder1)</div>
+                        <div class="col-lg-1 removePadding">@Html.LabelFor(model => model.Fraction1)</div>
+                        <div class="col-lg-1 removePadding">@Html.LabelFor(model => model.Total1)</div>
+                        
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-1">
+                            <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(1) ">
+                                <i class="fa fa-trash-o"></i> Clear
+                            </button>
+                        </div>
+                        <div class="col-lg-2 removePadding">
+                            @Html.ExtTextBoxFor(model => model.ProductCode1)
+                            <span class="field-validation-error"><span id="errorProductList" hidden></span></span>
+                        </div>
+                        
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.ProductName1)</div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.PreProductLotNo1)</div>
+                        <div class="col-lg-1 removePadding">@Html.ExtTextBoxFor(model => model.LotNo1)</div>
+                        <div class="col-lg-1 removePadding">@Html.ExtNumberFor(model => model.PackUnit1, new NumberOption() { NumberOfDecimal = 2 })</div>
+                        <div class="col-lg-1 removePadding">
+                            @Html.ExtNumberFor(model => model.Remainder1, new NumberOption() { NumberOfDecimal =0})
+                            <span class="field-validation-error"><span id="error-remainder1" hidden></span></span>
+                        </div>
+
+                        <div class="col-lg-1 removePadding">
+                            @Html.ExtNumberFor(model => model.Fraction1, new NumberOption() { NumberOfDecimal = 2 })
+                            <span class="field-validation-error"><span id="error-fraction1" hidden></span></span>
+                        </div>
+                        
+                        <div class="col-lg-1 removePadding">@Html.ExtNumberFor(model => model.Total1, new NumberOption() { NumberOfDecimal = 2 })</div>
+                        @Html.HiddenFor(model=>model.EndDate1)
+                        @Html.HiddenFor(model=>model.CertificationDate1)
+                        @Html.HiddenFor(model=>model.CertificationFlag1)
+                        @Html.HiddenFor(model=>model.AddDate1)
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-1">
+                            <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(2) ">
+                                <i class="fa fa-trash-o"></i> Clear
+                            </button>
+                        </div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.ProductCode2)</div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.ProductName2)</div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.PreProductLotNo2)</div>
+                        <div class="col-lg-1 removePadding">@Html.ExtTextBoxFor(model => model.LotNo2)</div>
+                        <div class="col-lg-1 removePadding">@Html.ExtNumberFor(model => model.PackUnit2, new NumberOption() { NumberOfDecimal = 2 })</div>
+                        <div class="col-lg-1 removePadding">
+                            @Html.ExtNumberFor(model => model.Remainder2, new NumberOption() { NumberOfDecimal = 0 })
+                            <span class="field-validation-error"><span id="error-remainder2" hidden></span></span>
+                        </div>
+
+                        <div class="col-lg-1 removePadding">
+                            @Html.ExtNumberFor(model => model.Fraction2, new NumberOption() { NumberOfDecimal = 2 })
+                            <span class="field-validation-error"><span id="error-fraction2" hidden></span></span>
+                        </div>
+                        
+                        <div class="col-lg-1 removePadding">@Html.ExtNumberFor(model => model.Total2, new NumberOption() { NumberOfDecimal = 2 })</div>
+                        @Html.HiddenFor(model => model.EndDate2)
+                        @Html.HiddenFor(model => model.CertificationDate2)
+                        @Html.HiddenFor(model => model.CertificationFlag2)
+                        @Html.HiddenFor(model => model.AddDate2)
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-1">
+                            <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(3) ">
+                                <i class="fa fa-trash-o"></i> Clear
+                            </button>
+                        </div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.ProductCode3)</div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.ProductName3)</div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.PreProductLotNo3)</div>
+                        <div class="col-lg-1 removePadding">@Html.ExtTextBoxFor(model => model.LotNo3)</div>
+                        <div class="col-lg-1 removePadding">@Html.ExtNumberFor(model => model.PackUnit3, new NumberOption() { NumberOfDecimal = 2 })</div>
+                        <div class="col-lg-1 removePadding">
+                            @Html.ExtNumberFor(model => model.Remainder3, new NumberOption() { NumberOfDecimal = 0 })
+                            <span class="field-validation-error"><span id="error-remainder3" hidden></span></span>
+                        </div>
+
+                        <div class="col-lg-1 removePadding">
+                            @Html.ExtNumberFor(model => model.Fraction3, new NumberOption() { NumberOfDecimal = 2 })
+                            <span class="field-validation-error"><span id="error-fraction3" hidden></span></span>
+                        </div>
+                        
+                        <div class="col-lg-1 removePadding">@Html.ExtNumberFor(model => model.Total3, new NumberOption() { NumberOfDecimal = 2 })</div>
+                        @Html.HiddenFor(model => model.EndDate3)
+                        @Html.HiddenFor(model => model.CertificationDate3)
+                        @Html.HiddenFor(model => model.CertificationFlag3)
+                        @Html.HiddenFor(model => model.AddDate3)
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-1">
+                            <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(4) ">
+                                <i class="fa fa-trash-o"></i> Clear
+                            </button>
+                        </div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.ProductCode4)</div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.ProductName4)</div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.PreProductLotNo4)</div>
+                        <div class="col-lg-1 removePadding">@Html.ExtTextBoxFor(model => model.LotNo4)</div>
+                        <div class="col-lg-1 removePadding">@Html.ExtNumberFor(model => model.PackUnit4, new NumberOption() { NumberOfDecimal = 2 })</div>
+                        <div class="col-lg-1 removePadding">
+                            @Html.ExtNumberFor(model => model.Remainder4, new NumberOption() { NumberOfDecimal = 0 })
+                            <span class="field-validation-error"><span id="error-remainder4" hidden></span></span>
+                        </div>
+
+                        <div class="col-lg-1 removePadding">
+                            @Html.ExtNumberFor(model => model.Fraction4, new NumberOption() { NumberOfDecimal = 2 })
+                            <span class="field-validation-error"><span id="error-fraction4" hidden></span></span>
+                        </div>
+                        
+                        <div class="col-lg-1 removePadding">@Html.ExtNumberFor(model => model.Total4, new NumberOption() { NumberOfDecimal = 2 })</div>
+                        @Html.HiddenFor(model => model.EndDate4)
+                        @Html.HiddenFor(model => model.CertificationDate4)
+                        @Html.HiddenFor(model => model.CertificationFlag4)
+                        @Html.HiddenFor(model => model.AddDate4)
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-1">
+                            <button class="btn btn-flat btn-default" type="button" onclick=" clearRow(5) ">
+                                <i class="fa fa-trash-o"></i> Clear
+                            </button>
+                        </div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.ProductCode5)</div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.ProductName5)</div>
+                        <div class="col-lg-2 removePadding">@Html.ExtTextBoxFor(model => model.PreProductLotNo5)</div>
+                        <div class="col-lg-1 removePadding">@Html.ExtTextBoxFor(model => model.LotNo5)</div>
+                        <div class="col-lg-1 removePadding">@Html.ExtNumberFor(model => model.PackUnit5, new NumberOption() { NumberOfDecimal = 2 })</div>
+                        <div class="col-lg-1 removePadding">
+                            @Html.ExtNumberFor(model => model.Remainder5, new NumberOption() { NumberOfDecimal = 0 })
+                            <span class="field-validation-error"><span id="error-remainder5" hidden></span></span>
+                        </div>
+
+                        <div class="col-lg-1 removePadding">
+                            @Html.ExtNumberFor(model => model.Fraction5, new NumberOption() { NumberOfDecimal = 2 })
+                            <span class="field-validation-error"><span id="error-fraction5" hidden></span></span>
+                        </div>
+                        
+                        <div class="col-lg-1 removePadding">@Html.ExtNumberFor(model => model.Total5, new NumberOption() { NumberOfDecimal = 2 })</div>
+                        @Html.HiddenFor(model => model.EndDate5)
+                        @Html.HiddenFor(model => model.CertificationDate5)
+                        @Html.HiddenFor(model => model.CertificationFlag5)
+                        @Html.HiddenFor(model => model.AddDate5)
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-12">
+                            <button type="button" class="btn btn-default btn-flat btn-more-5-chars" id="btnReStorage" onclick=" ReStorage() ">Re-storage</button>
+                            <button type="button" class="btn btn-default btn-flat btn-more-5-chars" id="btnDeAssign" onclick=" DeAssign() ">De-assign</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+}
+<script type="text/javascript">
+    $().ready(function() {
+        @if (!string.IsNullOrEmpty(Model.PalletNo))
+        {
+            <text>
+        ShowData();
+        </text>
+        }
+    });
+</script>

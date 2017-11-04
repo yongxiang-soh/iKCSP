@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.ScreenId = "TCEN013F";
+    ViewBag.Title = "Calculation of Control Limit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/chartjs/Chart.js"></script>
+<script src="~/Scripts/areas/CalculationOfControlLimit/CalculationOfControlLimit.js"></script>
+}
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.CalculationOfControlLimit.CalculationOfControlLimitViewModel
+@using KCSG.jsGrid.MVC
+@using KCSG.Core;
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls;
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC;
+@using Resources
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <span>Calculation Date</span>
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-lg-2">
+                    @Html.LabelFor(model => model.EnvMode)
+                </div>
+                <div class="col-lg-6" style="padding: 0">
+                    @Html.ExtRadioButtonFor(model => model.EnvMode, EnumsHelper.GetListItemsWithDescription<Constants.EnvMode>(Constants.EnvMode.SpecLine).OrderBy(i => int.Parse(i.Value)), new { }, true, 6)
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.StartDate)
+                </div>
+                <div class="col-lg-3">
+                    @Html.ExtDateTimeFor(model => model.StartDate, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                </div>
+
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.EndDate)
+                </div>
+
+                <div class="col-lg-3">
+                    @Html.ExtDateTimeFor(m => m.EndDate, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                    <span class="field-validation-error"><span id="errorEndDate" hidden></span></span>
+                </div>
+
+                <div class="col-lg-2">
+                    <button class="btn btn-default btn-flat btn-less-5-chars" onclick="Go()">Go</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-danger">
+        <div class="panel panel-heading">
+            Calculation of Control Limit
+        </div>
+        <div class="panel panel-body">
+            @*<div class="col-lg-12 form-group">
+                <div class="col-lg-2">
+                    @Html.LabelFor(model => model.DurationFrom)
+                </div>
+                <div class="col-lg-3">
+                    @Html.ExtDateTimeFor(model => model.DurationFrom, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                </div>
+
+                <div class="col-lg-1">
+                    @Html.LabelFor(model => model.DurationTo)
+                </div>
+
+                <div class="col-lg-3">
+                    @Html.ExtDateTimeFor(m => m.DurationTo, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                </div>
+            </div>*@
+            <div class="col-lg-12 form-group">
+                <div id="dvTempGrid" class="jsgrid" style="position: relative; height: auto; min-width: 100%; max-width: 100%;">
+                    <div class="jsgrid-grid-header jsgrid-header-scrollbar" style=" overflow: auto;">
+                        <table class="jsgrid-table" style="min-width: 100%; width: 1086px;overflow-y: auto">
+                            <tbody>
+                            <tr class="jsgrid-header-row">
+                                <th  style="width: 50px;">
+                                </th>
+                                <th style="width: 210px;">Temperature</th>
+                                <th  style="width: 210px;">Humidity</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                    @Html.Grid(Model.Grid)
+                </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Domain.Interfaces.Inquiry
+@model KCSG.Web.Areas.Inquiry.ViewModels.InquiryByShelfStatus.InquiryByShelfStatusSearchViewModel
+@{
+    var inquiryCommonDomain = DependencyResolver.Current.GetService<IInquiryCommonDomain>();
+    var lsRow = "01";
+    if (Model.SearchCondition == Constants.InquirySearchConditionShelfStatus.SecondRow) { lsRow = "02"; }
+    var maxLevel = 0;
+    var maxBay = 0;
+    var title = "";
+    if (Model.Type == Constants.InquirySearchConditionWarehouseLocation.Material)
+    {
+        maxLevel = 8;
+        maxBay = 13;
+        title = "Material Shelf Status";
+    }
+
+    if (Model.Type == Constants.InquirySearchConditionWarehouseLocation.PreProduct)
+    {
+        maxLevel = 7;
+        maxBay = 8;
+        title = "Pre-product Shelf Status";
+    }
+
+    if (Model.Type == Constants.InquirySearchConditionWarehouseLocation.Product)
+    {
+        maxLevel =8;
+        maxBay = 9;
+        title = "Product Shelf Status";
+    }
+
+}
+<div class="panel panel-danger">
+    @Html.HiddenFor(m => m.SearchCondition)
+    @Html.HiddenFor(m => m.Type)
+    <div class="panel-heading">@title</div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table" style='margin: auto; width: @(Model.Type != Constants.InquirySearchConditionWarehouseLocation.Material ? "60%" : "100%")'>
+                <tbody>
+                    <tr><td colspan="@(maxBay+2)" style="text-align: right">Level</td></tr>
+                    @for (int level = maxLevel; level >= 1; level--)
+                    {
+                        <tr>
+                            <td></td>
+                            @for (int bay = 1; bay <= maxBay; bay++)
+                            {
+                                <td>
+                                    @{
+                                        var label = @inquiryCommonDomain.GetLabelByStatus(Model.Type, inquiryCommonDomain.GetShelfStatus(Model.Type, lsRow, string.Format("{0:00}", bay), string.Format("{0:00}", level)));
+                                    }
+                                    @if (!string.IsNullOrEmpty(label))
+                                    {
+                                        <button class="btn btn-default btn-flat btn-less-5-chars" data-row="@lsRow" data-bay="@bay" data-level="@level" onclick="InquiryByShelfStatus.onFunction(this)" style="width: 60px">
+                                            @label
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-default btn-flat btn-less-5-chars" data-row="@lsRow" data-bay="@bay" data-level="@level" onclick="InquiryByShelfStatus.onFunction(this)" style="width: 60px">&nbsp; &nbsp;&nbsp;</button>
+                                    }
+                                </td>
+                            }
+                            <td style="text-align:center; vertical-align:middle;">@(level)</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>Bay</td>
+                        @for (int bay = 1; bay <= maxBay; bay++)
+                        {
+                            <td ><button class="btn-less-5-chars" style="width: 60px; border: none;background-color: #ffffff">@bay</button></td>
+                         }
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

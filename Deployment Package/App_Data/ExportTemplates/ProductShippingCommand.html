@@ -1,0 +1,67 @@
+﻿<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th class="text-center">** PICKING SHIPPING LIST **</th>
+    </tr>
+    </thead>
+</table>
+<br/>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <td class="col-lg-2">Shipping No.: {{shippingNo}}</td>
+        <td class="col-lg-2"></td>
+        <td class="col-lg-3"></td>
+        <td class="col-lg-3"></td><td  class="text-align-right">{{currentTime}}</td>
+    </tr>
+	<tr>
+        <td class="col-lg-2">Product Code: {{productCode}}</td>
+	    <td class="col-lg-2"></td>
+	    <td class="col-lg-3"></td>
+        <td class="col-lg-3"></td><td  class="text-align-right">{{companyName}}</td>
+    </tr>
+	<tr>
+        <td class="col-lg-2">Product Name: {{productName}}</td>
+        <td class="col-lg-2"></td>
+        <td class="col-lg-3"></td>
+        <td class="col-lg-3"></td><td class="col-lg-2"></td>
+    </tr>
+    </thead>
+</table>
+<br/>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th class="text-center">Shipped Amount</th>
+            <th class="text-center">Package Amount</th>
+            <th class="text-center">Product Lot No</th>
+            <th class="text-center">Shelf No</th>
+            <th class="text-center">Pallet No.</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#items.items}}
+        <tr>
+            <td class="text-center">{{F40_Amount}}</td>
+            <td class="text-center">{{F40_PackageAmount}}</td>
+            <td class="text-center">{{F40_ProductLotNo}}</td>
+            <td class="text-center">{{F51_ShelfRow}}</td>
+            <td class="text-center">{{F40_PalletNo}}</td>
+        </tr>
+        {{/items.items}}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-align-right">Grand Total:</td>   
+            {{#items}}
+            <td class="text-align-center">{{Total}}</td>
+            {{/items}}
+        </tr>        
+    </tfoot> 
+</table>

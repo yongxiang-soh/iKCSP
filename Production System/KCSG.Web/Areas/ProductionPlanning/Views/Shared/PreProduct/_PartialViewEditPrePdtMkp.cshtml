@@ -1,0 +1,255 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.ProductionPlanning.ViewModels.PreProduct.PrePdtMkpViewModel
+
+<script>
+    var formUrlPrePdtMat = {
+        urlEdit: '@Url.Action("Edit", "PrePdtMkp")'
+    }
+</script>
+
+
+
+
+@using (Html.BeginForm("Edit", "PrePdtMkp", FormMethod.Post, new { id = "formAddPdtMkp" }))
+{<div class="col-lg-12">
+
+ @Html.HiddenFor(model => model.IsCreate)
+ @Html.HiddenFor(model => model.F02_AddDate)
+ <div class="panel panel-danger">
+ <div class="panel-heading">
+     @if (Model.IsCreate)
+     {
+         <span>Add Material - TCPP023F</span>
+     }
+     else
+     {
+        <span>Update Material - TCPP023F</span>
+     }
+ </div>
+ <div class="panel-body">
+     <div class="row form-group">
+         <div class="col-xs-12">
+             <span class="field-validation-error" id="errorList" style="display: none">
+                    </span>
+         </div>
+     </div>
+
+     <div class="row form-group">
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F02_PreProductCode, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtTextBoxFor(model => model.F02_PreProductCode, new {@readonly = "readonly"})
+             </div>
+         </div>
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F03_PreProductName, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtTextBoxFor(model => model.F03_PreProductName, new {@readonly = "readonly", @id = "txtPreProductName"})
+             </div>
+         </div>
+     </div>
+
+     <div class="row form-group">
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F02_MaterialCode, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+
+                 @if (Model.IsCreate)
+                 {
+                                @*@Html.ExtAutoSuggestionFor(model => model.F02_MaterialCode, "Material", "GetMaterialCode", "txtMaterialCode")*@
+                     @Html.ExtTextBoxAddOnFor(model => model.F02_MaterialCode, CustomControlConstants.AddOn.Search, "#modalMaterialCodeSelect", new {@clas = "form-control", @id = "txtMaterialCode"})
+                 }
+                 else
+                 {
+                     @Html.ExtTextBoxAddOnFor(model => model.F02_MaterialCode, CustomControlConstants.AddOn.Search, "", new {@class = "form-control", @id = "txtMaterialCode"})
+                     @Html.HiddenFor(model => model.F02_MaterialCode)
+                 }
+
+
+             </div>
+         </div>
+
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F01_MaterialName, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtTextBoxFor(model => model.F01_MaterialName, new {@readonly = "readonly", @id = "txtMaterialName"})
+             </div>
+         </div>
+     </div>
+
+     <div class="row form-group">
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F01_LiquidClass, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtTextBoxFor(model => model.F01_LiquidClass, new {@readonly = "readonly", id = "txtLiquid"})
+             </div>
+         </div>
+
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F02_LoadPosition, new { @class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtTextBoxFor(model => model.F02_LoadPosition)
+             </div>
+         </div>
+     </div>
+
+     <div class="row form-group">
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                
+                 @Html.ExtLabelFor(model => model.F02_3FLayinAmount, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+
+
+                 @Html.ExtNumberAddOnFor(model => model.F02_3FLayinAmount, CustomControlConstants.AddOn.Text, "Kg", new NumberOption() {NumberOfDecimal = 2, Min = 0.00, Max = 999999.99})
+
+
+             </div>
+         </div>
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+
+                 @Html.ExtLabelFor(model => model.F02_LayinPriority, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtNumberFor(model => model.F02_LayinPriority, new NumberOption() {NumberOfDecimal = 0, Min = 0, Max = 99})
+             </div>
+         </div>
+     </div>
+
+     <div class="row form-group">
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+               @Html.ExtLabelFor(model => model.F02_4FLayinAmount, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+
+                 @Html.ExtNumberAddOnFor(model => model.F02_4FLayinAmount, CustomControlConstants.AddOn.Text, "Kg", new NumberOption() { NumberOfDecimal = 2, Min = 0.00, Max = 999999.99 })
+
+             </div>
+         </div>
+
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F02_ThrawSeqNo, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtNumberFor(model => model.F02_ThrawSeqNo, new NumberOption() {NumberOfDecimal = 0, Min = 0, Max = 99})
+             </div>
+         </div>
+     </div>
+
+     <div class="row form-group">
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F02_PotSeqNo, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtNumberFor(model => model.F02_PotSeqNo, new NumberOption() {NumberOfDecimal = 0, Min = 0, Max = 9}, new { @readonly = "readonly" })
+             </div>
+         </div>
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F02_MsrSeqNo, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtNumberFor(model => model.F02_MsrSeqNo, new NumberOption() {NumberOfDecimal = 0, Min = 0, Max = 9}, new { @readonly = "readonly" })
+             </div>
+         </div>
+     </div>
+
+     <div class="row form-group">
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F02_WeighingMethod, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtRadioButtonFor(m => m.F02_WeighingMethod, EnumHelper.GetSelectList(typeof (Constants.WeighingMethod)), new {onchange="updateStatus()"})
+             </div>
+         </div>
+
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F02_Addtive, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtRadioButtonFor(m => m.F02_Addtive, EnumHelper.GetSelectList(typeof (Constants.Additive)))
+             </div>
+         </div>
+     </div>
+
+     <div class="row form-group">
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F02_MilingFlag1, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtRadioButtonFor(m => m.F02_MilingFlag1, EnumsHelper.GetListItemsWithDescription<Constants.Crushing>())
+             </div>
+         </div>
+
+         <div class="col-xs-6">
+             <div class="col-xs-6">
+                 @Html.ExtLabelFor(model => model.F02_MilingFlag2, new {@class = "padding-top-10"})
+             </div>
+             <div class="col-xs-6">
+                 @Html.ExtRadioButtonFor(m => m.F02_MilingFlag2, EnumsHelper.GetListItemsWithDescription<Constants.Crushing>())
+             </div>
+         </div>
+     </div>
+
+     <button type="button" class="btn btn-flat btn-default btn-less-5-chars " id="btnSavePreProductMaterial" onclick=" save() ">OK</button>
+     <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" hideFormPrePdtMkp() ">Cancel</button>
+ </div>
+ </div>
+ </div>
+    
+}
+
+
+
+<script type="text/javascript">
+
+    updateStatus = function () {
+        
+    }
+
+    $(document).ready(function () {
+        $.validator.unobtrusive.parse('#formAddPdtMkp');
+        $("#F02_LoadPosition").focus();
+       
+        $("input[name='F02_WeighingMethod']").change(function () {
+            if ($(this).val() == 0) {
+                $("#F02_PotSeqNo").val("");
+                $("#F02_PotSeqNo").attr("disabled", true).attr("readonly", true);
+                $("#F02_MsrSeqNo").val("");
+                $("#F02_MsrSeqNo").attr("disabled", true).attr("readonly", true);
+            } else {
+                $("#F02_PotSeqNo").val("");
+                $("#F02_PotSeqNo").attr("disabled", false).attr("readonly", false);
+                $("#F02_MsrSeqNo").val("");
+                $("#F02_MsrSeqNo").attr("disabled", false).attr("readonly", false);
+            }
+        });
+
+        updateStatus();
+    });
+
+
+</script>

@@ -1,0 +1,78 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KCSG.Web", "KCSG.Web\KCSG.Web.csproj", "{29CDD4F1-1B27-460A-B642-0C55D85AA0BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KCSG.Core", "KCSG.Core\KCSG.Core.csproj", "{5DA4AF64-C5DB-42AA-990D-55306C21E84A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KCSG.Data", "KCSG.Data\KCSG.Data.csproj", "{D39D17FF-D8A2-4B55-BB33-DDBBBFF0EA91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KCSG.Domain", "KCSG.Domain\KCSG.Domain.csproj", "{FDE39488-F6B6-4BCB-856E-5D5113D26F1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KCSG.AutomatedWarehouse", "KCSG.AutomatedWarehouse\KCSG.AutomatedWarehouse.csproj", "{72308BC6-63EB-4C61-91E9-FF0C804F8A77}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		UnAuthorizedDebug|Any CPU = UnAuthorizedDebug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29CDD4F1-1B27-460A-B642-0C55D85AA0BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29CDD4F1-1B27-460A-B642-0C55D85AA0BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29CDD4F1-1B27-460A-B642-0C55D85AA0BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29CDD4F1-1B27-460A-B642-0C55D85AA0BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29CDD4F1-1B27-460A-B642-0C55D85AA0BB}.UnAuthorizedDebug|Any CPU.ActiveCfg = UnauthenticatedDebug|Any CPU
+		{29CDD4F1-1B27-460A-B642-0C55D85AA0BB}.UnAuthorizedDebug|Any CPU.Build.0 = UnauthenticatedDebug|Any CPU
+		{5DA4AF64-C5DB-42AA-990D-55306C21E84A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DA4AF64-C5DB-42AA-990D-55306C21E84A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DA4AF64-C5DB-42AA-990D-55306C21E84A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DA4AF64-C5DB-42AA-990D-55306C21E84A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DA4AF64-C5DB-42AA-990D-55306C21E84A}.UnAuthorizedDebug|Any CPU.ActiveCfg = UnauthenticatedDebug|Any CPU
+		{5DA4AF64-C5DB-42AA-990D-55306C21E84A}.UnAuthorizedDebug|Any CPU.Build.0 = UnauthenticatedDebug|Any CPU
+		{D39D17FF-D8A2-4B55-BB33-DDBBBFF0EA91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D39D17FF-D8A2-4B55-BB33-DDBBBFF0EA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D39D17FF-D8A2-4B55-BB33-DDBBBFF0EA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D39D17FF-D8A2-4B55-BB33-DDBBBFF0EA91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D39D17FF-D8A2-4B55-BB33-DDBBBFF0EA91}.UnAuthorizedDebug|Any CPU.ActiveCfg = UnauthenticatedDebug|Any CPU
+		{D39D17FF-D8A2-4B55-BB33-DDBBBFF0EA91}.UnAuthorizedDebug|Any CPU.Build.0 = UnauthenticatedDebug|Any CPU
+		{FDE39488-F6B6-4BCB-856E-5D5113D26F1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDE39488-F6B6-4BCB-856E-5D5113D26F1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDE39488-F6B6-4BCB-856E-5D5113D26F1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDE39488-F6B6-4BCB-856E-5D5113D26F1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDE39488-F6B6-4BCB-856E-5D5113D26F1C}.UnAuthorizedDebug|Any CPU.ActiveCfg = UnauthenticatedDebug|Any CPU
+		{FDE39488-F6B6-4BCB-856E-5D5113D26F1C}.UnAuthorizedDebug|Any CPU.Build.0 = UnauthenticatedDebug|Any CPU
+		{72308BC6-63EB-4C61-91E9-FF0C804F8A77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72308BC6-63EB-4C61-91E9-FF0C804F8A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72308BC6-63EB-4C61-91E9-FF0C804F8A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72308BC6-63EB-4C61-91E9-FF0C804F8A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72308BC6-63EB-4C61-91E9-FF0C804F8A77}.UnAuthorizedDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72308BC6-63EB-4C61-91E9-FF0C804F8A77}.UnAuthorizedDebug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://10.16.48.222:8080/tfs/kcsg
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = KCSG.Web\\KCSG.Web.csproj
+		SccProjectName1 = KCSG.Web
+		SccLocalPath1 = KCSG.Web
+		SccProjectUniqueName2 = KCSG.Core\\KCSG.Core.csproj
+		SccProjectName2 = KCSG.Core
+		SccLocalPath2 = KCSG.Core
+		SccProjectUniqueName3 = KCSG.Data\\KCSG.Data.csproj
+		SccProjectName3 = KCSG.Data
+		SccLocalPath3 = KCSG.Data
+		SccProjectUniqueName4 = KCSG.Domain\\KCSG.Domain.csproj
+		SccProjectName4 = KCSG.Domain
+		SccLocalPath4 = KCSG.Domain
+		SccProjectUniqueName5 = KCSG.AutomatedWarehouse\\KCSG.AutomatedWarehouse.csproj
+		SccProjectName5 = KCSG.AutomatedWarehouse
+		SccLocalPath5 = KCSG.AutomatedWarehouse
+	EndGlobalSection
+EndGlobal

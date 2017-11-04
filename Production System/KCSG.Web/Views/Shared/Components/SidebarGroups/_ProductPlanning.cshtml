@@ -1,0 +1,119 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Domain.Interfaces.Services
+@{
+    // Find identity service from DI.
+    var identityService = DependencyResolver.Current.GetService<IIdentityService>();
+
+    // Find terminal no from request.
+    var terminalNo = identityService.FindTerminalNo(HttpContext.Current.User.Identity);
+
+    // Find available screens.
+    var availableScreens = identityService.FindAccessibleScreens(HttpContext.Current.User.Identity);
+
+}
+
+@if (identityService.IsScreenAccessible(availableScreens, new[] { "TCPP011F", "TCPP012F", "TCPP021F", "TCPP022F", "TCPP031F", "TCPP032F", "TCPP034F", "TCPP035F", "TCPP041F", "TCPP042F", "TCPP051F", "TCPP052F", "TCPP053F", "TCPP054", "TCPP061F", "TCPP071F", "TCPP072F", "TCPP081F" }))
+{
+    <li class="treeview">
+        <a href="javascript:void(0);">
+            <i class="fa fa-product-hunt"></i>
+            <span>Production Planning</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPP011F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "Material", new {Area = "ProductionPlanning"})" data-toggle="tooltip"
+                       title=" Material Master DB">
+                        <i class="fa fa-circle-o"></i> Material Master DB
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPP021F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "PreProduct", new {Area = "ProductionPlanning"})" data-toggle="tooltip"
+                       title="Pre-Product Master DB">
+                        <i class="fa fa-circle-o"></i> Pre-Product Master DB
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPP031F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "Product", new {Area = "ProductionPlanning"})" data-toggle="tooltip"
+                       title="Product Master DB">
+                        <i class="fa fa-circle-o"></i> Product Master DB
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPP034F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "SubMaterialMaster", new {Area = "ProductionPlanning"})" data-toggle="tooltip"
+                       title=" Sup. Material Master DB">
+                        <i class="fa fa-circle-o"></i> Sup. Material Master DB
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPP041F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "PdtPln", new {Area = "ProductionPlanning"})" data-toggle="tooltip"
+                       title="Production Planning">
+                        <i class="fa fa-circle-o"></i> Production Planning
+                    </a>
+                </li>
+            }
+
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPP051F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "MaterialSimulation", new {Area = "ProductionPlanning"})" data-toggle="tooltip"
+                       title="Material Simulation">
+                        <i class="fa fa-circle-o"></i> Material Simulation
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPP061F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "MasterList", new {Area = "ProductionPlanning"})" data-toggle="tooltip"
+                       title="Master List">
+                        <i class="fa fa-circle-o"></i> Master List
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPP071F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "PreProductPlan", new {Area = "ProductionPlanning"})" data-toggle="tooltip"
+                       title="Pre-Product Plan Input">
+                        <i class="fa fa-circle-o"></i> Pre-Product Plan Input
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPP081F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "MaterialRequirementList", new {Area = "ProductionPlanning"})" data-toggle="tooltip"
+                       title="Material Requirement List">
+                        <i class="fa fa-circle-o"></i> Material Requirement List
+                    </a>
+                </li>
+            }
+        </ul>
+    </li>
+}

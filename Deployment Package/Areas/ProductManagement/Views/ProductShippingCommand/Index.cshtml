@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.ScreenId = "TCPR041F";
+    ViewBag.Title = "Product Shipping Command";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using KCSG.Core;
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@using System.Diagnostics
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.ProductManagement.ViewModels.ProductShippingCommand.ProductShippingCommandViewModel
+
+
+<script src="~/Scripts/areas/productmanagement/productShippingCommand.js"></script>
+
+<script src="~/Scripts/jQuery.print.min.js"></script>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <span>Search Criteria</span>
+        </div>
+        <div class="panel-body">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                <label style="margin-left: -14px">Shipping No.</label>
+            </div>
+            <div class="col-xs-2">
+                <input id="ShippingNo"
+                       name="ShippingNo"
+                       type="text"
+                       maxlength="8"
+                       class="form-control" autofocus />
+            </div>
+            <div class="col-lg-4">
+                <button class="btn btn-flat btn-default btn-less-5-chars"
+                        onclick="searchProductShippingCommand()">
+                    <span>Go</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <span>List of Product Shipping Command</span>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.Grid(Model.ProductShippingCommandGrid)
+            </div>
+            <div>
+                <button id="btnAssign"
+                        class="btn btn-default btn-flat btn-less-5-chars"
+                        disabled="disabled"
+                        onclick="assignProductShippingCommand()">
+                    <span>Assign</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>    
+
+
+<div id="productShippingDetailsContainer" class="col-lg-12">
+    @Html.Hidden("PalletNos")
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <div>
+                    @Html.Grid(Model.ProductShippingCommandDetailsGrid)
+                </div>
+            </div>
+            <div>
+                @*<div class="col-lg-9">*@
+                <button id="btnPrint"
+                        class="btn btn-default btn-flat btn-less-5-chars"
+                        disabled="disabled"
+                        onclick="exportShippingCommand()">
+                    <span>Print</span>
+                </button>
+
+                <button id="btnRestorage"
+                        class="btn btn-default btn-flat" disabled="disabled"
+                        onclick="Restorage()">
+                    <span>Re-storage</span>
+                </button>
+
+                <button id="btnRetrieval"
+                        class="btn btn-default btn-flat btn-less-5-chars"
+                        disabled="disabled" onclick="Retrieval()">
+                    <span>Retrieval</span>
+                </button>
+
+                <button id="btnUnassignProductShippingCommand"
+                        disabled="disabled"
+                        class="btn btn-default btn-flat btn-less-5-chars"
+                        onclick="unassignProductShippingCommand(event)">
+                    <span>De-assign</span>
+                </button>
+                @*</div>*@
+                <div style="float: right">
+                    <div class="form-inline">
+                        <label style="padding-right: 20px">Total</label>
+                        @Html.ExtNumberFor(m => m.Total, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Max = double.MaxValue}, new {@readonly = true})
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+</div>
+
+
+
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="formPlaceholder"></div>
+</div>
+
+<div id="productShippingCommandPrintArea"></div>

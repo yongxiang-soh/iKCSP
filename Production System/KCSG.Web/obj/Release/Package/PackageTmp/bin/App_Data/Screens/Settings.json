@@ -1,0 +1,745 @@
+﻿{
+  "Production Planning": {
+    "Area": "ProductionPlanning",
+    "Screens": [
+      {
+        "Id": "TCPP011F",
+        "Name": "Material Master DB",
+        "Action": "Index",
+        "Controller": "Material"
+      },
+      {
+        "Id": "TCPP021F",
+        "Name": "Pre-Product Master DB",
+        "Action": "Index",
+        "Controller": "PreProduct"
+      },
+      {
+        "Id": "TCPP031F",
+        "Name": "Product Master DB",
+        "Action": "Index",
+        "Controller": "Product"
+      },
+      {
+        "Id": "TCPP034F",
+        "Name": "Sup. Material Master DB",
+        "Action": "Index",
+        "Controller": "SubMaterialMaster"
+      },
+      {
+        "Id": "TCPP041F",
+        "Name": "Production Planning",
+        "Action": "Index",
+        "Controller": "PdtPln"
+      },
+      {
+        "Id": "TCPP051F",
+        "Name": "Material Simulation",
+        "Action": "Index",
+        "Controller": "MaterialSimulation"
+      },
+      {
+        "Id": "TCPP061F",
+        "Name": "Master List",
+        "Action": "Index",
+        "Controller": "MasterList"
+      },
+      {
+        "Id": "TCPP071F",
+        "Name": "Pre-Product Plan Input",
+        "Action": "Index",
+        "Controller": "PreProductPlan"
+      },
+      {
+        "Id": "TCPP081F",
+        "Name": "Material Requirement List",
+        "Action": "Index",
+        "Controller": "MaterialRequirementList"
+      }
+    ]
+  },
+  "Material Management": {
+    "Area": "MaterialManagement",
+    "Screens": [
+      {
+        "Id": "TCRM011F",
+        "Name": "Material Reception Input",
+        "Action": "Index",
+        "Controller": "MaterialReceptionInput"
+      },
+      {
+        "Id": "TCRM021F",
+        "Name": "Material Post-reception Input",
+        "Action": "Index",
+        "Controller": "MaterialPostReceptionInput"
+      },
+      {
+        "Id": "TCRM031F",
+        "Name": "Storage of Material",
+        "Action": "Index",
+        "Controller": "StorageOfMaterial"
+      },
+      {
+        "Id": "TCRM041F",
+        "Name": "Acceptance of Material",
+        "Action": "Index",
+        "Controller": "AcceptanceOfMaterial"
+      },
+      {
+        "Id": "TCRM051F",
+        "Name": "Re-storage of Material",
+        "Action": "Index",
+        "Controller": "RestorageOfMaterial"
+      },
+      {
+        "Id": "TCRM061F",
+        "Name": "Storage of Supplementary Material",
+        "Action": "Index",
+        "Controller": "StorageOfSupplementaryMaterial"
+      },
+      {
+        "Id": "TCRM071F",
+        "Name": "Retrieval of Material",
+        "Action": "Index",
+        "Controller": "RetrieveOfMaterial"
+      },
+      {
+        "Id": "TCRM081F",
+        "Name": "Stock-taking of Material",
+        "Action": "Index",
+        "Controller": "StockTakingOfMaterial"
+      },
+      {
+        "Id": "TCRM091F",
+        "Name": "Inter-floor Movement of Material",
+        "Action": "Index",
+        "Controller": "InterFloorMovementOfMaterial"
+      },
+      {
+        "Id": "TCRM101F",
+        "Name": "Storage of Warehouse Pallet",
+        "Action": "Index",
+        "Controller": "StorageOfWarehousePallet"
+      },
+      {
+        "Id": "TCRM111F",
+        "Name": "Retrieval of Warehouse Pallet",
+        "Action": "Index",
+        "Controller": "RetrievalOfWarehousePallet"
+      },
+      {
+        "Id": "TCRM123F",
+        "Name": "Storage of Supplier Pallet",
+        "Action": "Index",
+        "Controller": "FontStorageOfSupplierPallet"
+      },
+      {
+        "Id": "TCRM131F",
+        "Name": "Retrieval of Supplier pallet",
+        "Action": "Index",
+        "Controller": "RetrievalOfSupplierPallet"
+      },
+      {
+        "Id": "TCRM151F",
+        "Name": "Forced Retrieval of Rejected Material",
+        "Action": "Index",
+        "Controller": "ForcedRetrievalOfRejectedMaterial"
+      }
+    ]
+  },
+  "Product Management": {
+    "Area": "ProductManagement",
+    "Screens": [
+      {
+        "Id": "TCPR011F",
+        "Name": "Storage of Product",
+        "Action": "Index",
+        "Controller": "StorageOfProduct"
+      },
+      {
+        "Id": "TCPR021F",
+        "Name": "Product Certification Management",
+        "Action": "Index",
+        "Controller": "ProductCertification"
+      },
+      {
+        "Id": "TCPR031F",
+        "Name": "Product Shipping Planning",
+        "Action": "Index",
+        "Controller": "ProductShippingPlanning"
+      },
+      {
+        "Id": "TCPR041F",
+        "Name": "Product Shipping Command",
+        "Action": "Index",
+        "Controller": "ProductShippingCommand"
+      },
+      {
+        "Id": "TCPR051F",
+        "Name": "Forced Retrieval of Product",
+        "Action": "Index",
+        "Controller": "ForcedRetrievalOfProduct"
+      },
+      {
+        "Id": "TCPR061F",
+        "Name": "Stock-taking of Product",
+        "Action": "Index",
+        "Controller": "StockTakingOfProduct"
+      },
+      {
+        "Id": "TCPR071F",
+        "Name": "Re-storage of Product",
+        "Action": "Index",
+        "Controller": "RestorageOfProduct"
+      },
+      {
+        "Id": "TCPR081F",
+        "Name": "Inter-floor Movement of Product",
+        "Action": "Index",
+        "Controller": "InterFloorMovementOfProduct"
+      },
+      {
+        "Id": "TCPR091F",
+        "Name": "Storage of External Pre-Product",
+        "Action": "Index",
+        "Controller": "StorageOfExternalPreProduct"
+      },
+      {
+        "Id": "TCPR101F",
+        "Name": "Retrieval of External Pre-Product",
+        "Action": "Index",
+        "Controller": "RetrievalOfExternalPreProduct"
+      },
+      {
+        "Id": "TCPR111F",
+        "Name": "St/Re of Out-of-Spec Pre-Product",
+        "Action": "Index",
+        "Controller": "RetrievalOfOutOfSpecPreProduct"
+      },
+      {
+        "Id": "TCPR121F",
+        "Name": "Storage of Empty Product Pallet",
+        "Action": "Index",
+        "Controller": "StorageOfEmptyProductPallet"
+      },
+      {
+        "Id": "TCPR131F",
+        "Name": "Retrieval of Empty Product Pallet",
+        "Action": "Index",
+        "Controller": "RetrievalOfEmptyProductPallet"
+      },
+      {
+        "Id": "TCPR141F",
+        "Name": "Input of Out-of-plan’s Product",
+        "Action": "Index",
+        "Controller": "OutOfPlanProduct"
+      }
+    ]
+  },
+  "Pre-product Management":{
+	"Area": "PreProductManagement",
+    "Screens": [
+      {
+        "Id": "TCIP011F",
+        "Name": "Storage of Empty Container",
+        "Action": "Index",
+        "Controller": "StorageOfEmptyContainer"
+      },
+	  {
+        "Id": "TCIP021F",
+        "Name": "Storage of Pre-product",
+        "Action": "Index",
+        "Controller": "StorageOfPreProduct"
+      },
+	  {
+        "Id": "TCIP031F",
+        "Name": "Retrieval of Pre-product",
+        "Action": "Index",
+        "Controller": "RetrievalOfPreProduct"
+      },
+	  {
+        "Id": "TCIP041F",
+        "Name": "Stock-taking of Pre-product",
+        "Action": "Index",
+        "Controller": "StockTakingPreProduct"
+      },
+	  {
+        "Id": "TCIP061F",
+        "Name": "Forced Retrieval of Pre-product",
+        "Action": "Index",
+        "Controller": "ForcedRetrievalOfPreProduct"
+      }
+	]
+  },
+  "Inquiry": {
+    "Area": "Inquiry",
+    "Screens": [
+      {
+        "Id": "TCFC011F",
+        "Name": "Inquiry by Material Name",
+        "Action": "Index",
+        "Controller": "InquiryByMaterialName"
+      },
+      {
+        "Id": "TCFC012F",
+        "Name": "Inquiry by Pre-Product Name",
+        "Action": "Index",
+        "Controller": "InquiryByPreProductName"
+      },
+      {
+        "Id": "TCFC013F",
+        "Name": "Inquiry by External Pre-Product Name",
+        "Action": "Index",
+        "Controller": "InquiryByExternalPreProductName"
+      },
+      {
+        "Id": "TCFC014F",
+        "Name": "Inquiry by Product Name",
+        "Action": "Index",
+        "Controller": "InquiryByProductName"
+      },
+      {
+        "Id": "TCFC015F",
+        "Name": "Inquiry by Supplier Name",
+        "Action": "Index",
+        "Controller": "InquiryBySupplierName"
+      },
+      {
+        "Id": "TCFC021F",
+        "Name": "Inquiry by Warehouse Location",
+        "Action": "Index",
+        "Controller": "InquiryByWarehouseLocation"
+      },
+      {
+        "Id": "TCFC031F",
+        "Name": "Inquiry by Raw Material Shelf Status",
+        "Action": "Index",
+        "Controller": "InquiryByShelfStatus"
+      },
+      {
+        "Id": "TCFC033F",
+        "Name": "Inquiry by Pre-product Shelf Status",
+        "Action": "Index",
+        "Controller": "InquiryByShelfStatus",
+        "Routes": {
+          "type": 1 
+        }
+      },
+      {
+        "Id": "TCFC035F",
+        "Name": "Inquiry by Product Shelf Status",
+        "Action": "Index",
+        "Controller": "InquiryByShelfStatus",
+        "Routes": {
+          "type": 2
+        }
+      },
+      {
+        "Id": "TCFC041F",
+        "Name": "Inquiry by Pre-Product Code",
+        "Action": "Index",
+        "Controller": "InquiryByPreProductCode"
+      },
+      {
+        "Id": "TCFC051F",
+        "Name": "Inquiry by Product Code",
+        "Action": "Index",
+        "Controller": "InquiryByProductCode"
+      },
+      {
+        "Id": "TCFC071F",
+        "Name": "Inquiry by Line No",
+        "Action": "Index",
+        "Controller": "InquiryKneadingLineNo"
+      },
+      {
+        "Id": "TCFC061F",
+        "Name": "Inquiry by Command No",
+        "Action": "Index",
+        "Controller": "InquiryKneadingCommandNo"
+      },
+      {
+        "Id": "TCFC081F",
+        "Name": "Inquiry by Lot No",
+        "Action": "Index",
+        "Controller": "InquiryKneadingLotNo"
+      }
+    ]
+  },
+  "Kneading Command":{
+  "Area": "KneadingCommand",
+    "Screens": [
+      {
+        "Id": "TCPS031F",
+        "Name": "Input of Kneading Command",
+        "Action": "Index",
+        "Controller": "InputOfKneadingCommand"
+      } ,{
+        "Id": "TCPS041F",
+        "Name": "Kneading Start/End Control",
+        "Action": "Index",
+        "Controller": "KneadingStartEnd"
+      }]
+  },
+  "Tabletising Command": {
+    "Area": "TabletisingCommandSubSystem",
+    "Screens": [
+      {
+        "Id": "TCMD011F",
+        "Name": "Create Tabletising Command",
+        "Action": "Index",
+        "Controller": "CreateTabletisingCommand"
+      },
+      {
+        "Id": "TCMD021F",
+        "Name": "Tabletising Start/Stop Control",
+        "Action": "Index",
+        "Controller": "TabletisingStartStop"
+      },
+      {
+        "Id": "TCMD031F",
+        "Name": "Management of Product Label",
+        "Action": "Index",
+        "Controller": "ManagementOfProductLabel"
+      },
+      {
+        "Id": "TCMD051F",
+        "Name": "Pre-product Charging Control",
+        "Action": "Index",
+        "Controller": "PreProductCharging"
+      }
+    ]
+  },
+  "Management Report": {
+    "Area": "ManagementReport",
+    "Screens": [
+      {
+        "Id": "TCSS016F",
+        "Name": "Material Stock List",
+        "Action": "Index",
+        "Controller": "MaterialStock"
+      },
+      {
+        "Id": "TCFC083P",
+        "Name": "Supplementary Material Stock List",
+        "Action": null,
+        "Controller": null,
+        "Properties": {
+          "onclick": "exportSupplementaryMaterialStock(event)"
+        }
+      },
+      {
+        "Id": "TCSS017F",
+        "Name": "Pre-product Stock List",
+        "Action": "Index",
+        "Controller": "PreProductStock"
+      },
+      {
+        "Id": "TCSS018F",
+        "Name": "Product Stock List",
+        "Action": "Index",
+        "Controller": "ProductStock"
+      },
+      {
+        "Id": "TCFC091P",
+        "Name": "Material Shelf List",
+        "Action": null,
+        "Controller": null,
+        "Properties": {
+          "onclick": "exportMetarialShelt(event)"
+        }
+      },
+      {
+        "Id": "TCFC092P",
+        "Name": "Pre-product Shelf List",
+        "Action": null,
+        "Controller": null,
+        "Properties": {
+          "onclick": "exportPreProductShelt(event)"
+        }
+      },
+      {
+        "Id": "TCFC093P",
+        "Name": "External Pre-product Shelf List",
+        "Action": null,
+        "Controller": null,
+        "Properties": {
+          "onclick": "exportExtPreProductShelt(event)"
+        }
+      },
+      {
+        "Id": "TCFC094P",
+        "Name": "Product Shelf List",
+        "Action": null,
+        "Controller": null,
+        "Properties": {
+          "onclick": "exportProductShelt(event)"
+        }
+      },
+      {
+        "Id": "TCFC095P",
+        "Name": "Material Pallet List",
+        "Action": null,
+        "Controller": null,
+        "Properties": {
+          "onclick": "exportMetarialPallet(event)"
+        }
+      },
+      {
+        "Id": "TCFC096P",
+        "Name": "Pre-product Container List",
+        "Action": null,
+        "Controller": null,
+        "Properties": {
+          "onclick": "exportPreProductContainer(event)"
+        }
+      },
+      {
+        "Id": "TCFC097P",
+        "Name": "Product Pallet List",
+        "Action": null,
+        "Controller": null,
+        "Properties": {
+          "onclick": "exportProductPallet(event)"
+        }
+      },
+      {
+        "Id": "TCFC111P",
+        "Name": "Material Retrieval Record",
+        "Action": "Index",
+        "Controller": "MaterialRetrievalRecord"
+      },
+      {
+        "Id": "TCFC121P",
+        "Name": "Pre-product Retrieval Record",
+        "Action": "Index",
+        "Controller": "PreProductRetrievalRecord"
+      },
+      {
+        "Id": "TCFC101P",
+        "Name": "Material Movement History List",
+        "Action": "Index",
+        "Controller": "MaterialMovementHistory"
+      },
+      {
+        "Id": "TCFC102P",
+        "Name": "Pre-product Movement History List",
+        "Action": "Index",
+        "Controller": "PreproductMovementHistory"
+      },
+      {
+        "Id": "TCFC106P",
+        "Name": "Product Movement History List",
+        "Action": "Index",
+        "Controller": "ProductMovementHistory"
+      },
+      {
+        "Id": "TCFC104P",
+        "Name": "Material Movement Record",
+        "Action": "Index",
+        "Controller": "MaterialMovementRecord"
+      },
+      {
+        "Id": "TCFC105P",
+        "Name": "Pre-product Movement Record",
+        "Action": "Index",
+        "Controller": "PreProductMovementRecord"
+      },
+      {
+        "Id": "TCFC103P",
+        "Name": "Product Movement Record",
+        "Action": "Index",
+        "Controller": "ProductMovementRecord"
+      },
+      {
+        "Id": "TCFC151P",
+        "Name": "Product Shipping Record",
+        "Action": "Index",
+        "Controller": "ProductShippingRecord"
+      },
+      {
+        "Id": "TCFC161P",
+        "Name": "Product Certification Record",
+        "Action": "Index",
+        "Controller": "ProductCertificationRecord"
+      },
+      {
+        "Id": "TCFC201F",
+        "Name": "Material Received/ Consumed List",
+        "Action": "Index",
+        "Controller": "MaterialReceivedConsumedList"
+      },
+      {
+        "Id": "TCFC202F",
+        "Name": "Pre-product Received/ Consumed List",
+        "Action": "Index",
+        "Controller": "PreProductReceivedConsumedList"
+      },
+      {
+        "Id": "TCFC203F",
+        "Name": "Product Certified/ Shipped List",
+        "Action": "Index",
+        "Controller": "ProductCerfiticateConsumedList"
+      }
+    ]
+  },
+  "Communication": {
+    "Area": "Communication",
+    "Screens": [
+      {
+        "Id": "AWT001",
+        "Name": "Automated Warehouse Controller - Material (C001)",
+        "Action": "Index",
+        "Controller": "AWMaterial"
+      },
+      {
+        "Id": "AWT002",
+        "Name": "Automated Warehouse Controller – Preproduct (C002)",
+        "Action": "Index",
+        "Controller": "AWPreProduct"
+      },
+      {
+        "Id": "AWT003",
+        "Name": "Automated Warehouse Controller – Product (C003)",
+        "Action": "Index",
+        "Controller": "AWProduct"
+      },
+      {
+        "Id": "AWT004",
+        "Name": "Weighing Equipment Controller (C004)",
+        "Action": "Index",
+        "Controller": "WeighingEquipment"
+      }
+    ]
+  },
+  "System Management": {
+    "Area": "SystemManagement",
+    "Screens": [
+      {
+        "Id": "TCSC011F",
+        "Name": "System Start/End",
+        "Action": "Index",
+        "Controller": "StartEndSystem"
+      },
+      {
+        "Id": "TCSC021F",
+        "Name": "Daily Process",
+        "Action": "Index",
+        "Controller": "DailyProcess"
+      },
+      {
+        "Id": "TCSC031F",
+        "Name": "Monthly Process",
+        "Action": "Index",
+        "Controller": "MonthlyProcess"
+      },
+      {
+        "Id": "TCSC041F",
+        "Name": "Database Maintenance",
+        "Action": "Index",
+        "Controller": "MasterDatabase"
+      }
+    ]
+  },
+  "Environment Management": {
+    "Area": "EnvironmentManagement",
+    "Screens": [
+      {
+        "Id": "TCEN011F",
+        "Name": "Environment Data (One Day)",
+        "Action": "Index",
+        "Controller": "EnvironmentDataOneDay"
+      },
+      {
+        "Id": "TCEN012F",
+        "Name": "Environment Data (Duration)",
+        "Action": "Index",
+        "Controller": "EnvironmentDataDuration"
+      },
+      {
+        "Id": "TCEN013F",
+        "Name": "Calculation of Control Limit",
+        "Action": "Index",
+        "Controller": "CalculationOfControlLimit"
+      },
+      {
+        "Id": "TCEN021F",
+        "Name": "Availability of Mixing Roll Machine ",
+        "Action": "Index",
+        "Controller": "AvailabilityMixingRollMachine"
+      },
+      {
+        "Id": "TCEN022F",
+        "Name": "Availability of Tabletising Machine",
+        "Action": "Index",
+        "Controller": "AvailabilityTabletisingMachine"
+      },
+      {
+        "Id": "TCEN023F",
+        "Name": "Creeping and Roll Speed (One Day) ",
+        "Action": "Index",
+        "Controller": "CreepingAndRollSpeedDataOneDay"
+      },
+      {
+        "Id": "TCEN024F",
+        "Name": "Creeping and Roll Speed (Duration) ",
+        "Action": "Index",
+        "Controller": "CreepingAndRollSpeedDuration"
+      },
+      {
+        "Id": "TCEN031F",
+        "Name": "Cleanliness Data Input",
+        "Action": "Index",
+        "Controller": "CleanlinessDataInput"
+      },
+      {
+        "Id": "TCEN041F",
+        "Name": "X-R Temperature Management",
+        "Action": "Index",
+        "Controller": "XRTemperatureManagement"
+      },
+      {
+        "Id": "TCEN042F",
+        "Name": "Lot Data Sampling",
+        "Action": "Index",
+        "Controller": "LotDataSampling"
+      },
+      {
+        "Id": "TCEN043F",
+        "Name": "Lot Data Cleanup",
+        "Action": "Index",
+        "Controller": "LotDataCleanup"
+      },
+      {
+        "Id": "TCEN044F",
+        "Name": "Product Master Management",
+        "Action": "Index",
+        "Controller": "ProductMasterManagement"
+      },
+      {
+        "Id": "TCEN072F",
+        "Name": "Environment Data Edit",
+        "Action": "Index",
+        "Controller": "EnvironmentDataEdit"
+      },
+      {
+        "Id": "TCEN073F",
+        "Name": "Availability Data Edit",
+        "Action": "Index",
+        "Controller": "AvailabilityDataEdit"
+      },
+      {
+        "Id": "TCEN074F",
+        "Name": "Control Limit Edit",
+        "Action": "Index",
+        "Controller": "ControlLimitEdit"
+      },
+      {
+        "Id": "TCEN075F",
+        "Name": "Creeping and Roll Speed Data Edit",
+        "Action": "Index",
+        "Controller": "CreepingAndRollSpeedDataEdit"
+      }
+    ]
+  }
+}

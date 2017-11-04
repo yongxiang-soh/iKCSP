@@ -1,0 +1,273 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@using NumberOption = KCSG.Core.CustomControls.NumberOption
+@model KCSG.Web.Areas.ProductionPlanning.ViewModels.PreProduct.PreProductViewModel
+
+<script>
+    var formUrlPrePdtMkp = {
+        urlEdit: '@Url.Action("Edit", "PrePdtMkp")',
+         urlDelete: '@Url.Action("Delete", "PrePdtMkp")',
+         urlCancel: '@Url.Action("Cancel", "PrePdtMkp")',
+        urlGetMaterialName: '@Url.Action("GetMaterialName", "Material")'
+    }
+</script>
+
+
+@using (Ajax.BeginForm("Edit", "PreProduct", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "hideFormPreProduct" }, new { @id = "addNewFormPreProduct" }))
+{
+
+    @Html.HiddenFor(model => model.IsCreate)
+    @Html.HiddenFor(model => model.F03_AddDate)
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+
+            @if (Model.IsCreate)
+            {
+                <span>Add Pre-Product Master DB - TCPP022F</span>
+            }
+            else
+            {
+                <span>Update Pre-Product Master DB - TCPP022F</span>
+            }
+        </div>
+
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F03_PreProductCode)
+                    </div>
+                    <div class="col-lg-8 form-group">
+                        @(Model.IsCreate ? Html.ExtTextBoxFor(model => model.F03_PreProductCode,new{onkeyup = "OnChangePreproductCode()"})
+                                         : Html.ExtTextBoxFor(model => model.F03_PreProductCode, new { @readonly = "readonly" }))
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F03_PreProductName)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtTextBoxFor(model => model.F03_PreProductName, new { @id = "F03_PreProductName", onkeyup = "OnChangePreproductName()" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        @Html.ExtLabelFor(model => model.TmpRetTime)
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 form-group">
+                        @Html.ExtNumberFor(model => model.Days, new NumberOption() {NumberOfDecimal = 0, Min = 0, Max = 9}, null,false)
+                    </div>
+                    <div class="col-lg-1 col-md-2 col-sm-2 col-xs-12" style="padding: 0px">
+                        Days 
+                    </div>
+                    <div class="col-lg-3  form-group " style="padding-left: 0px;" >
+                        @Html.ExtDateTimeFor(model => model.TmpRetTime, new DateTimeOption() {Format = "HH:mm", IsValidationMessageSupported = true})
+                    </div>
+
+                    <div class="col-lg-1 text-center">hh:mm</div>
+
+                    <div class="col-lg-12">
+                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12"></div>
+                        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                            @Html.ValidationMessageFor(model => model.TmpRetTime)
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        @Html.ExtLabelFor(model => model.F03_ContainerType)
+                    </div>
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 form-group">
+                        @if (Model.IsCreate)
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.F03_ContainerType, CustomControlConstants.AddOn.Search, "#modalContainerTypeSelect", new { @id = "txtContainerType" })
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.F03_ContainerType, CustomControlConstants.AddOn.Search, "#modalContainerTypeSelect", new { @id = "txtContainerType" })
+                        }
+
+                    </div>
+                </div>
+            </div>
+            
+
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F03_MixMode)
+                    </div>
+                    <div class="col-lg-8 form-group">
+                        @Html.ExtTextBoxFor(model => model.F03_MixMode)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        @Html.ExtLabelFor(model => model.MixDate1)
+                    </div>
+                    <div class="col-lg-6 col-md-10 col-sm-10 col-xs-8">
+                        @Html.ExtDateTimeFor(model => model.MixDate1, new DateTimeOption() { Format = "HH:mm:ss" })
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-center">hh:mm:ss</div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F03_BatchLot)
+                    </div>
+                    <div class="col-lg-8 form-group">
+                        @Html.ExtNumberFor(model => model.F03_BatchLot, new NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 9 })
+                        @*@Html.ExtTextBoxFor(model => model.F03_BatchLot, new {Type = "number", min = 0, max = 9, style = "width:100%"})*@
+                    </div>
+
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.MixDate2)
+                    </div>
+                    <div class="col-lg-6 col-md-10 col-sm-10 col-xs-8">
+                        @Html.ExtDateTimeFor(model => model.MixDate2, new DateTimeOption() { Format = "HH:mm:ss", MinDate = "01/01/1980" })
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-center">hh:mm:ss</div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F03_LotNoEnd)
+                    </div>
+                    <div class="col-lg-8 form-group">
+                        @Html.ExtTextBoxFor(model => model.F03_LotNoEnd, new {type="number",max="99",min="0"})
+                    </div>
+
+                </div>
+                <div class="col-lg-6 form-group">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.MixDate3)
+                    </div>
+                    <div class="col-lg-6 col-md-10 col-sm-10 col-xs-8">
+                        @Html.ExtDateTimeFor(model => model.MixDate3, new DateTimeOption() { Format = "HH:mm:ss" })
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-center">hh:mm:ss</div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F03_Point)
+                    </div>
+                    <div class="col-lg-8 form-group">
+                        @Html.ExtTextBoxFor(model => model.F03_Point)
+                    </div>
+                </div>
+                <div class="col-lg-6 form-group">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F03_YieldRate)
+                    </div>
+                    <div class="col-lg-8 form-group">
+                        @Html.ExtNumberAddOnFor(model => model.F03_YieldRate, CustomControlConstants.AddOn.Text, "&#37;", new NumberOption() { NumberOfDecimal = 1, Min = 0.00, Max = 999 })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        <b>@Html.ExtLabelFor(model => model.F03_LowTmpClass)</b>
+                    </div>
+                    <div class="col-lg-8 form-group">
+                        @Html.ExtRadioButtonFor(m => m.F03_LowTmpClass, EnumHelper.GetSelectList(typeof(Constants.Temperature), Constants.Temperature.Low))
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        <b>@Html.ExtLabelFor(model => model.F03_KneadingLine)</b>
+                    </div>
+                    <div class="col-lg-8 form-group">
+                        @Html.ExtRadioButtonFor(m => m.F03_KneadingLine, KCSG.Core.Helper.EnumsHelper.GetListItemsWithDescription<Constants.F39_KneadingLine>(Model.F03_KneadingLine == null ? Constants.F39_KneadingLine.ConventionalB : (Constants.F39_KneadingLine)Enum.Parse(typeof(Constants.F39_KneadingLine), Model.F03_KneadingLine)))
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+                        <b>Material<span style="color: red">*</span></b>
+                    </div>
+                </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-12">
+                        <div class="col-lg-12">
+                            @Html.Grid(Model.Grid)
+                            <span class="field-validation-error"><span id="materialListError" hidden></span></span>
+                        </div>
+
+                    </div>
+                </div>
+
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+                        <button type="button"
+                                class="btn btn-flat btn-default btn-less-5-chars"
+                                id="btnAdd"
+                                onclick=" addMaterial() ">
+                            Add
+                        </button>
+                        <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" UpdateMaterial() " id="btnUpdateMaterial" disabled>Update</button>
+                        <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" deleteMaterial() " id="btnDeleteMaterial" disabled>Delete</button>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <div id="editMaterialArea"></div>
+                </div>
+            </div>
+
+                    <div class="col-lg-12">
+                        <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" SavePreProduct() ">OK</button>
+                        <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" CancelPreproduct() ">Cancel</button>
+                    </div>
+                </div>
+            </div>
+    
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+       $.validator.unobtrusive.parse('#addNewFormPreProduct');
+        $('#PreproductMaterialGrid').on('change', 'input[type="radio"]', function () {
+          var counterChecked = 0;
+            this.checked ? counterChecked++ : counterChecked--;
+            if (counterChecked > 0) {
+                $('#btnDeleteMaterial').prop("disabled", false);
+                $('#btnUpdateMaterial').prop("disabled", false);
+            } else {
+                $('#btnDeleteMaterial').prop("disabled", true);
+                $('#btnUpdateMaterial').prop("disabled", true);
+            }
+        });
+    });
+   
+</script>

@@ -1,0 +1,143 @@
+﻿<style>
+    .title-table, .content-table {
+        border-collapse: collapse;
+        min-width: 100%;
+    }
+
+        .title-table th, td {
+            border: 0 solid transparent;
+        }
+
+        .content-table th {
+            border: 1px solid black;
+        }
+
+        .content-table td {
+            border: 1px solid black;
+        }
+        .table-bordered td, .table-bordered th{
+    border-color: black !important;
+}
+</style>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th style="text-align: center">** PRE-PRODUCT RETRIVAL REPORT **</th>
+    </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC121P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>        
+    </tbody>
+</table>
+<!--loop 1 here-->
+{{#FindPrintManagementReportItem}}
+<table class="table table-responsive table-bordered" style="font-family:courier;">
+
+    <tbody>
+    
+    <tr>
+        
+        <td rowspan="2">R</td>
+        <td colspan="3">Pre-Product Code: {{PreProductCode}}</td>
+        <td colspan="3">Pre-Product Name: {{PreProductName}}</td>
+    </tr>    
+    <tr>
+        <td colspan="3">LOT.NO: {{LotNo}}</td>
+        <td colspan="3">Receive Quantity: {{ReceiveQuantityst}}</td>
+    </tr>
+    <tr>
+        <td rowspan="5">P</td>
+        <td >Product Code</td>
+        <td >{{r11}}</td>
+        <td >{{r21}}</td>
+        <td >{{r31}}</td>
+        <td >{{r41}}</td>
+        <td>{{r51}}</td>
+    </tr>
+    <tr>
+        <td >Product Name</td>
+        <td>{{r12}}</td>
+        <td>{{r22}}</td>
+        <td>{{r32}}</td>
+        <td>{{r42}}</td>
+        <td>{{r52}}</td>
+    </tr>
+    <tr>
+        <td >LOTNO</td>
+        <td>{{r13}}</td>
+        <td>{{r23}}</td>
+        <td>{{r33}}</td>
+        <td>{{r43}}</td>
+        <td>{{r53}}</td>
+    </tr>
+    <tr>
+        <td >Valid Quantity</td>
+        <td>{{r14}}</td>
+        <td>{{r24}}</td>
+        <td>{{r34}}</td>
+        <td>{{r44}}</td>
+        <td>{{r54}}</td>
+    </tr>
+    <tr>
+        <td >Lose</td>
+        <td>{{r15}}</td>
+        <td>{{r25}}</td>
+        <td>{{r35}}</td>
+        <td>{{r45}}</td>
+        <td>{{r55}}</td>
+    </tr>
+    <tr>
+        <td>L</td>
+        <td >Fraction</td>
+        <td>{{r16}}</td>
+        <td>{{r26}}</td>
+        <td>{{r36}}</td>
+        <td>{{r46}}</td>
+        <td>{{r56}}</td>
+    </tr>
+    <tr>
+        <td>R: Receive <br/> P: Pay <br/> L: Leftovers<br/><br/>      Note </td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td></td>
+    </tr>
+    </tbody>  
+
+</table>
+{{/FindPrintManagementReportItem}}
+<br />
+<br />
+<!--end loop 1-->
+<table class="col-xs-6 table-bordered" style="table-layout: fixed;float: right">
+            <tr>
+                <td style="text-align: center"> Manager </td>
+                <td style="text-align: center"> Material </td>
+                <td style="text-align: center"> Worker1 </td>
+                <td style="text-align: center"> Worker2 </td> 
+                <td style="text-align: center"> Worker3 </td>
+            </tr>
+    <tr style="height:60px !important">
+        <td> <br/> </td>
+        <td> <br/> </td>
+        <td> <br/> </td>
+        <td> <br/> </td>
+        <td> <br/> </td>
+    </tr>
+        </table>

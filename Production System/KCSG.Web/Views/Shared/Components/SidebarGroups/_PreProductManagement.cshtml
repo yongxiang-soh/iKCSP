@@ -1,0 +1,78 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Domain.Interfaces.Services
+@{
+    var identityService = DependencyResolver.Current.GetService<IIdentityService>();
+
+    // Find available screens.
+    var availableScreens = identityService.FindAccessibleScreens(HttpContext.Current.User.Identity);
+}
+
+@if (identityService.IsScreenAccessible(availableScreens, new[] { "TCIP011F", "TCIP021F", "TCIP022F", "TCIP023F", "TCIP024F", "TCIP031F", "TCIP041F", "TCIP043F", "TCIP042F", "TCIP061F" }))
+{
+    <li class="treeview">
+        <a href="javascript:void(0);">
+            <i class="fa fa-wrench"></i>
+            <span>Pre-product Management</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right" ></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            
+            @if (identityService.IsScreenAccessible(availableScreens, "TCIP011F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StorageOfEmptyContainer", new {Area = "PreProductManagement"})"
+                       data-toggle="tooltip"
+                       title="Storage of Empty Container">
+                        <i class="fa fa-circle-o"></i>Storage of Empty Container
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCIP021F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StorageOfPreProduct", new {Area = "PreProductManagement"})"
+                       data-toggle="tooltip"
+                       title="Storage of Pre-product">
+                        <i class="fa fa-circle-o"></i>Storage of Pre-product
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCIP031F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "RetrievalOfPreProduct", new {Area = "PreProductManagement"})"
+                       data-toggle="tooltip"
+                       title="Retrieval of Pre-product">
+                        <i class="fa fa-circle-o"></i>Retrieval of Pre-product
+                    </a>
+                </li>
+            }
+            
+            @if (identityService.IsScreenAccessible(availableScreens, "TCIP041F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StockTakingPreProduct", new {Area = "PreProductManagement"})"
+                       data-toggle="tooltip"
+                       title="Stock-Taking of Pre-product">
+                        <i class="fa fa-circle-o"></i>Stock-taking of Pre-product
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCIP061F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "ForcedRetrievalOfPreProduct", new {Area = "PreProductManagement"})"
+                       data-toggle="tooltip"
+                       title="Forced Retrieval of Pre-product">
+                        <i class="fa fa-circle-o"></i>Forced Retrieval of Pre-product
+                    </a>
+                </li>
+            }
+        </ul>
+    </li>
+}

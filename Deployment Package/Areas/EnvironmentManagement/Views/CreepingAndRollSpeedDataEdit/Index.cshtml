@@ -1,0 +1,221 @@
+﻿@{
+    ViewBag.ScreenId = "TCEN023F";
+    ViewBag.Title = "Creeping and Roll Speed Data Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/chartjs/Chart.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/areas/CreepingAndRollSpeedDataEdit/CreepingAndRollSpeedDataEdit.js"></script>
+}
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.CreepingAndRollSpeedDataEdit.CreepingAndRollSpeedDataEditViewModel
+@using System.Globalization
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls;
+@using KCSG.Core.Helper
+@{
+    var environmentDate = DateTime.ParseExact(Model.EnvironmentDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+    var nexDay = environmentDate.AddDays(1);
+    var preDay = environmentDate.AddDays(-1);
+}
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <span>Search Criteria</span>
+        </div>
+        <div class="panel-body">
+            <form id="formCreepingAndRollSpeedDataEdit">
+                <div class="row form-group">
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.EnvMode)
+                    </div>
+                    <div class="col-lg-6" style="padding: 0">
+                        @Html.ExtRadioButtonFor(model => model.EnvMode, EnumsHelper.GetListItemsWithDescription<Constants.EnvMode>(Constants.EnvMode.SpecLine).OrderBy(i => int.Parse(i.Value)), new {}, true, 6)
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.EnvironmentDate)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtDateTimeFor(model => model.EnvironmentDate, new DateTimeOption() {Format = "DD/MM/YYYY"})
+                    </div>
+
+                    <div class="col-lg-1">
+                        @Html.ExtLabelFor(model => model.Machine)
+                    </div>
+
+                    <div class="col-lg-3">
+                        @Html.ExtDropDownListFor(m => m.Machine, (IEnumerable<SelectListItem>) ViewBag.ListName)
+                    </div>
+
+                    <div class="col-lg-3">
+                        <button class="btn btn-default btn-flat btn-less-5-chars" id="go" onclick=" return CreepingAndRollSpeedDataEdit.onGo() ">Go</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel panel-danger">
+        <div class="panel panel-heading">
+            Creeping and Roll Speed Data Edit
+        </div>
+        <div class="panel panel-body">
+            <div class="row form-group">
+                <div class="col-lg-10">
+                    <canvas id="leftCreep" width="400" height="150"></canvas>
+
+                </div>
+                <div class="col-lg-2">
+                    <div class="row form-group">
+                        <div class="col-lg-4">High</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="leftCreepHight" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">Low</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="leftCreepLow" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">Range</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="leftCreepRanger" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">Mean</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="leftCreepMean" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">Sigma</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="leftCreepSigma" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-10">
+                    <canvas id="rightCreep" width="400" height="150"></canvas>
+                </div>
+                <div class="col-lg-2">
+                    <div class="row form-group">
+                        <div class="col-lg-4">High</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="rightCreepHight" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">Low</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="rightCreepLow" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">Range</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="rightCreepRanger" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">Mean</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="rightCreepMean" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">Sigma</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="rightCreepSigma" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-10">
+                    <canvas id="rollSpeed" width="400" height="150"></canvas>
+                </div>
+                <div class="col-lg-2">
+                    <div class="row form-group">
+                        <div class="col-lg-4">High</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="rollSpeedHigh" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">Low</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="rollSpeedLow" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">Range</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="rollSpeedRanger" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">Mean</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="rollSpeedMean" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">Sigma</div>
+                        <div class="col-lg-8">
+                            <input type="text" id="rollSpeedSigma" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form id="frmUpdate">
+                <div class="row form-group" style="margin-top: 30px; margin-bottom: 30px;">
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.Time)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtDateTimeFor(model => model.Time, new DateTimeOption() { Format = "HH:mm" }, new { @onchange = "ChangeValueOfTime()" })
+                        <span class="field-validation-error" id="lstError" hidden></span>
+                    </div>
+                    <div class="col-lg-1">&nbsp;</div>
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.LeftCreeping)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtNumberFor(model => model.LeftCreeping, new KCSG.Core.CustomControls.NumberOption() { Min = 0.00, Max = 9999999.99, NumberOfDecimal = 2 })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.RightCreeping)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtNumberFor(model => model.RightCreeping, new KCSG.Core.CustomControls.NumberOption() { Min = 0.00, Max = 9999999.99, NumberOfDecimal = 2 })
+                    </div>
+                    <div class="col-lg-1">&nbsp;</div>
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.RollSpeed)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtNumberFor(model => model.RollSpeed, new KCSG.Core.CustomControls.NumberOption() { Min = 0.00, Max = 9999999.99, NumberOfDecimal = 2 })
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-12">
+                        <a href="@Url.Action("Index", "CreepingAndRollSpeedDataEdit", new {environmentDate = preDay.ToString("dd/MM/yyyy"), EnvMode = @Model.EnvMode, machine = @Model.Machine})" class="btn btn-flat btn-default btn-less-5-chars">Prev Day</a>
+                        <a href="@Url.Action("Index", "CreepingAndRollSpeedDataEdit", new {environmentDate = nexDay.ToString("dd/MM/yyyy"), EnvMode = @Model.EnvMode, machine = @Model.Machine})" class="btn btn-flat btn-default btn-less-5-chars">Next Day</a>
+                        <button class="btn btn-flat btn-default btn-less-5-chars" type="button" onclick=" Update() ">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

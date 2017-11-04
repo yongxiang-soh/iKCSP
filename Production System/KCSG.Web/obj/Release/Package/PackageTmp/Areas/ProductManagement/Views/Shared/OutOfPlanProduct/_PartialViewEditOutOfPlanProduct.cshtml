@@ -1,0 +1,158 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@using KCSG.Core.Controls
+@model  KCSG.Web.Areas.ProductManagement.ViewModels.OutOfPlanProduct.OutOfPlanProductViewModel
+@using (Ajax.BeginForm("Edit", "OutOfPlanProduct", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "OutOfPlanProduct.onSuccess" }, new { @id = "editForm" }))
+{
+    @Html.HiddenFor(model => model.IsCreate)
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            @if (Model.IsCreate)
+            {
+                <span>Confirmation of Out-of-plan's Product-TCPR142F</span>
+            }
+            else
+            {
+                <span>Update Confirmation of Out-of-plans Product-TCPR142F</span>
+            }
+            
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.ProductCode)
+                    </div>
+                    <div class="col-xs-8">
+                        @if (Model.IsCreate)
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.ProductCode, CustomControlConstants.AddOn.Search, "#modalProductCodeSelect", new { style = "width:100%", @id = "txtProductCode" })
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.ProductCode, new { style = "width:100%", @readonly = "readonly", @id = "txtProductCode" })
+                        }
+                        
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.ProductName)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxFor(model => model.ProductName, new { style = "width:100%", @readonly = "readonly", @id = "txtProductName" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.PrePdtLotNo)
+                    </div>
+                    <div class="col-xs-8">
+                        @*@if (Model.IsCreate)
+                        {*@
+                            @Html.ExtTextBoxFor(model => model.PrePdtLotNo, new { style = "width:100%" })
+                        @*}
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.PrePdtLotNo, new { style = "width:100%", @readonly = "readonly" })
+                        }*@
+                        
+                    </div>
+
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.ProductLotNo)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxFor(model => model.ProductLotNo)
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.PackQuantity)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtNumberFor(model => model.PackQuantity, new NumberOption() {Min = 0, Max = 999 })
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.Fraction)
+                    </div>
+                    <div class="col-xs-8 form-group">
+                        @Html.ExtNumberFor(model => model.Fraction, new NumberOption() { NumberOfDecimal = 2,Min = 0, Max = 9999.99 })
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.F58_TbtEndDateString)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtDateTimeFor(model => model.F58_TbtEndDateString, new DateTimeOption() { Format = "DD/MM/YYYY" }, new { style = "width:100%" })
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn btn-flat btn-default btn-less-5-chars" >OK</button>
+            <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" OutOfPlanProduct.hideForm() ">Cancel</button>
+        </div>
+    </div>
+}
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog custom-model-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn " data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $.validator.addMethod("checkFraction",
+          function (value, element, params) {
+            if (value !== "" && value.replace(/,/g, "") > $("#PackQuantity").val().replace(/,/g, "")) {
+                  return false;
+              }
+            return true;
+          },
+          "Fraction cannot be more than the packing unit!");
+    $.validator.addMethod("checkPackQuantity",
+        function (value, element, params) {
+            if (value !== "" && value<=0) {
+                return false;
+            }
+            return true;
+        },
+        "This field must be inputted!");
+   
+    $(document).ready(function () {
+       
+        $.validator.unobtrusive.parse('#editForm');
+        $("#PackQuantity").rules("add", "checkPackQuantity");
+        $("#Fraction").rules("add", "checkFraction");
+        var $inputs = $('#editForm :input');
+        $inputs.change(function () {
+            //alert(this.value.length);
+        });
+    });
+</script>

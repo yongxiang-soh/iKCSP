@@ -1,0 +1,130 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Domain.Interfaces.Services
+@using KCSG.Domain.Models
+@{
+    // Find service which handles identity information.
+    var identityService = DependencyResolver.Current.GetService<IIdentityService>();
+
+    // Find configuration service.
+    var configurationService = DependencyResolver.Current.GetService<IConfigurationService>();
+
+    // Find available screens.
+    var availableScreens = identityService.FindAccessibleScreens(HttpContext.Current.User.Identity);
+}
+<aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <ul class="sidebar-menu">
+
+            @*Configuration is invalid.*@
+            @if (configurationService == null || configurationService.Areas == null)
+            {
+                return;
+            }
+
+            @{
+                var areaIndex = 1;
+            }
+            @*Go through every area.*@
+            @foreach (var area in configurationService.Areas.Keys)
+            {
+                // Find the list of screens.
+                var screens = configurationService.Areas[area].Screens;
+
+                @*Screen list is invalid.*@
+            if (screens == null || screens.Count < 1)
+            {
+                continue;
+            }
+
+            @*Cannot access to any screen*@
+            if (!identityService.IsScreenAccessible(availableScreens, screens.Select(x => x.Id).ToArray()))
+            {
+                continue;
+            }
+
+            <li class="treeview">
+                <a href="javascript:void(0);">
+                    <b class="area-index">@string.Format("{0}", areaIndex)</b>
+                    <span>
+                        <span class="inner-area-numeric">@string.Format("{0}. ", areaIndex)</span>
+                        <span>@string.Format("{0}", area)</span>
+                    </span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+
+                @{
+                    areaIndex++;
+                }
+                <ul class="treeview-menu">
+
+                    @{
+                        var screenIndex = 1;
+                    }
+                    @foreach (var screenInformation in screens)
+                    {
+                        if (!identityService.IsScreenAccessible(availableScreens, screenInformation.Id))
+                        {
+                            continue;
+                        }
+
+                        <li>
+                            @{
+                                IDictionary<string, string> properties;
+                                if (screenInformation.Properties != null)
+                                {
+                                    properties = new Dictionary<string, string>(screenInformation.Properties);
+                                }
+                                else
+                                {
+                                    properties = new Dictionary<string, string>();
+                                }
+
+                                properties.Add("Area", configurationService.Areas[area].Area);
+                            }
+
+                            @{
+                                var property = string.Join(" ", properties.Select(x => x.Key + "=" + x.Value).ToArray());
+                                var href = "javascript:void(0);";
+
+                                Dictionary<string, object> routes;
+                                if (screenInformation.Routes != null)
+                                {
+                                    routes = new Dictionary<string, object>(screenInformation.Routes);
+                                }
+                                else
+                                {
+                                    routes = new Dictionary<string, object>();
+                                }
+                                routes.Add("Area", configurationService.Areas[area].Area);
+
+                                if (!string.IsNullOrEmpty(screenInformation.Action) && !string.IsNullOrEmpty(screenInformation.Controller))
+                                {
+                                    href = Url.Action(screenInformation.Action, screenInformation.Controller, new RouteValueDictionary(routes));
+                                }
+
+                                <a href="@href"
+                                   @property
+                                   data-toggle="tooltip"
+                                   title="@screenInformation.Name">
+                                    <span>@string.Format("{0}. {1}", screenIndex, screenInformation.Name)</span>
+                                </a>
+
+
+                            }
+
+                        </li>
+
+                                    screenIndex++;
+                                }
+                </ul>
+            </li>
+                                }
+
+        </ul>
+    </section>
+
+</aside>

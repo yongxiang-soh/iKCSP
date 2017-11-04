@@ -1,0 +1,209 @@
+﻿@{
+    ViewBag.ScreenId = "TCEN072F";
+    ViewBag.Title = "Environment Data Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/chartjs/Chart.js"></script>
+    <script src="~/Scripts/areas/EnvironmentDataEdit/environmentDataEdit.js"></script>
+}
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.EnvironmentDataEdit.EnvironmentDataEditViewModel
+@using System.Globalization
+@using KCSG.jsGrid.MVC
+@using KCSG.Core;
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls;
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC;
+@using Resources
+@{
+    var environmentDate = DateTime.ParseExact(Model.EnvironmentDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+    var nexDay = environmentDate.AddDays(1);
+    var preDay = environmentDate.AddDays(-1);
+}
+<div class="col-lg-12">
+    @using (Ajax.BeginForm("", "", null, new {@id = "environmentDataEdit"}))
+    {
+        
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <span>Search Criteria</span>
+            </div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div class="col-lg-2">
+                        @Html.LabelFor(model => model.EnvMode)
+                    </div>
+                    <div class="col-lg-6" style="padding: 0">
+                        @Html.ExtRadioButtonFor(model => model.EnvMode, EnumsHelper.GetListItemsWithDescription<Constants.EnvMode>(Constants.EnvMode.SpecLine).OrderBy(i => int.Parse(i.Value)), new {}, true, 6)
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.EnvironmentDate)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtDateTimeFor(model => model.EnvironmentDate, new DateTimeOption() {Format = "DD/MM/YYYY"})
+                    </div>
+
+                    <div class="col-lg-1">
+                        @Html.ExtLabelFor(model => model.Location)
+                    </div>
+
+                    <div class="col-lg-3">
+                        @Html.ExtDropDownListFor(m => m.Location, (IEnumerable<SelectListItem>) ViewBag.ListLocation)
+                    </div>
+
+                    <div class="col-lg-3">
+                        <button class="btn btn-default btn-flat btn-less-5-chars" type="button" id="go" onclick=" return EnvironmentDataEdit.onGo() ">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="panel panel-danger">
+        <div class="panel panel-heading">
+            Environment Data (One Day)
+        </div>
+        <div class="panel panel-body">
+            <div class="row form-group">
+                <div class="col-lg-10">
+                    <canvas id="chartTemper" width="400" height="150"></canvas>
+
+                </div>
+                <div class="col-lg-2">
+                    <div class="row form-group">
+                        <div class="col-lg-4"><label>High</label></div>
+                        <div class="col-lg-8">
+                            @*@Html.ExtNumberFor(model => model.TemHight, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @id = "temHigh", @readonly = "readonly" })*@
+                            <input type="text" id="temHigh" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4"><label>Low</label></div>
+                        <div class="col-lg-8">
+                            @*@Html.ExtNumberFor(model => model.TemLow, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @id = "temLow", @readonly = "readonly" })*@
+                            <input type="text" id="temLow" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4"><label>Ranger</label></div>
+                        <div class="col-lg-8">
+                            @*@Html.ExtNumberFor(model => model.TemRanger, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @id = "temRanger", @readonly = "readonly" })*@
+                            <input type="text" id="temRanger" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4"><label>Mean</label></div>
+                        <div class="col-lg-8">
+                            @*@Html.ExtNumberFor(model => model.TemMean, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @id = "temMean", @readonly = "readonly" })*@
+                            <input type="text" id="temMean" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4"><label>Signma</label></div>
+                        <div class="col-lg-8">
+                            @*@Html.ExtNumberFor(model => model.TemSigma, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @id = "temSigma", @readonly = "readonly" })*@
+                            <input type="text" id="temSignma" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-10">
+                    <canvas id="humidity" width="400" height="150"></canvas>
+                </div>
+                <div class="col-lg-2">
+                    <div class="row form-group">
+                        <div class="col-lg-4"><label>High</label>
+                        </div>
+                        <div class="col-lg-8">
+                            @*@Html.ExtNumberFor(model => model.HHight, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @id = "hHight",@readonly="readonly" })*@
+                            <input type="text" id="hHigh" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4"><label>Low</label>
+                        </div>
+                        <div class="col-lg-8">
+                            @*@Html.ExtNumberFork(model => model.HLow, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @id = "hLow",@readonly="readonly"})*@
+                            <input type="text" id="hLow" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4"><label>Ranger</label>
+                        </div>
+                        <div class="col-lg-8">
+                            @*@Html.ExtNumberFor(model => model.HRanger, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @id = "hRanger", @readonly = "readonly" })*@
+                            <input type="text" id="hRanger" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4"><label>Mean</label>
+                        </div>
+                        <div class="col-lg-8">
+                            @*@Html.ExtNumberFor(model => model.HMean, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @id = "hMean", @readonly = "readonly" })*@
+                            <input type="text" id="hMean" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4"><label>Signma</label>
+                        </div>
+                        <div class="col-lg-8">
+                            @*@Html.ExtNumberFor(model => model.TemSigma, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @id = "hSigma", @readonly = "readonly" })*@
+                            <input type="text" id="hSignma" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <form id="frmUpdate">
+                    <div class="col-lg-3">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(model => model.Time)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtDateTimeFor(model => model.Time, new DateTimeOption() { Format = "HH:mm" }, new { @onchange = "LoadData()" })
+                        <span class="field-validation-error" hidden id="timeError"></span>
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.Temperature)
+                    </div>
+                    <div class="col-lg-7">
+                        @Html.ExtNumberFor(model => model.Temperature, new KCSG.Core.CustomControls.NumberOption() { Min = 0.0, Max = 999999.9 })
+                    </div>
+                    <div class="col-lg-1" style="padding: 0;">
+                        <span>(C)</span>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.Humidity)
+                    </div>
+                    <div class="col-lg-7">
+                        @Html.ExtNumberFor(model => model.Humidity, new KCSG.Core.CustomControls.NumberOption() { Min = 0.0, Max = 999999.9 })
+                    </div>
+                    <div class="col-lg-1" style="padding: 0;">
+                        <span>(%RH)</span>
+                    </div>
+                </div>
+            </form>
+            </div>
+            <div class="row form-group" style="margin-top: 40px">
+                <div class="col-lg-12">
+                    <a href="@Url.Action("Index", "EnvironmentDataEdit", new { environmentDate = preDay.ToString("dd/MM/yyyy"), EnvMode = @Model.EnvMode, Location = @Model.Location })"  class="btn btn-flat btn-default btn-less-5-chars">Prev Day</a>
+                    <a href="@Url.Action("Index", "EnvironmentDataEdit", new { environmentDate = nexDay.ToString("dd/MM/yyyy"), EnvMode = @Model.EnvMode, Location = @Model.Location })" class="btn btn-flat btn-default btn-less-5-chars">Next Day</a>
+                    <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" Update() ">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

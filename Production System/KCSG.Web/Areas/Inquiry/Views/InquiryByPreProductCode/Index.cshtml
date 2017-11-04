@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.ScreenId = "TCFC041F";
+    ViewBag.Title = "Search Pre-Product Code";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using KCSG.Core;
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@using System.Diagnostics
+@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.Inquiry.ViewModels.InquiryByPreProductCode.InquiryByPreProductCodeSearchViewModel
+    
+<!-- Jquery print plugin. -->
+<script src="~/Scripts/jQuery.print.min.js"></script>
+<!-- Script of Pre-Product Code -->
+<script src="~/Scripts/areas/inquiry/inquiryByPreProductCode.js"></script>
+<script>
+    var formUrl = {
+        urlGrandTotal: '@Url.Action("SearchByPreProductCodeTotal", "InquiryByPreProductCode")'
+    }
+</script>
+
+<div class="col-lg-10" style="float: left">
+
+</div>
+<div class="col-lg-12" style="float: left">
+    @*<p style="text-align: right">@DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")</p>*@
+</div>
+<div class="col-lg-12">
+    
+    <input type="hidden" id="selectedValue"/>
+    @using (Html.BeginForm("", "", FormMethod.Post, new {@id = "searchForm"}))
+    {
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">Search Condition</div>
+            <div class="panel-body">
+
+                <div class="row form-group">
+                    <div class="col-lg-3">
+                        @Html.ExtLabelFor(model => model.PreproductCode)
+                    </div>
+                    <div class="col-lg-5"
+                         id="PreproductCode">
+                        @Html.ExtTextBoxAddOnFor(model => model.PreproductCode, CustomControlConstants.AddOn.Search, "#modalPreProductCodeSelect", new {@id = "txtPreProductCode" })                        
+                    </div>
+
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.LotNo)
+                    </div>
+                    <div class="col-lg-2"
+                         id="LotNo">
+                        @Html.ExtTextBoxFor(model => model.LotNo, new { @id = "txtLotNo"})
+                    </div>
+                </div>
+
+                <div class="row form-group-sm">
+                    <div class="col-lg-3">
+                        @Html.ExtLabelFor(model => model.PreProductName)
+                    </div>
+                    <div class="col-lg-7">
+                        @Html.ExtTextBoxFor(model => model.PreProductName, new {@readonly = "true", @id = "txtPreproductName" })
+                        @*@Html.ValidationMessageFor(m => m.Within)*@
+                        @*   @Html.ExtNumberAddOnFor(model => model.Within, CustomControlConstants.AddOn.Text, "days", new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 0, Min = 0})*@
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="search-button-panel">
+                            <button type="button" class="btn btn-default btn-flat btn-less-5-chars" id="btnSearch" onclick="search()">Go</button>
+                            <button type="button" class="btn btn-default btn-flat btn-less-5-chars" onclick=" ClearSearch() ">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.Grid(Model.Grid)
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-8">
+
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.Total)
+                </div>
+                <div class="col-lg-2">
+                    @*@Html.ExtTextBoxFor(model => model.GrandTotal, new { @readonly = "true"})*@
+                    @Html.ExtNumberFor(model => model.Total, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @readonly = "true", @style = "text-align:right" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

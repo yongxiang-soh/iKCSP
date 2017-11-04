@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="MSG1" xml:space="preserve">
+    <value>Cannot find corresponding records from database!</value>
+  </data>
+  <data name="MSG10" xml:space="preserve">
+    <value>The corresponding conveyor does not exist!</value>
+  </data>
+  <data name="MSG11" xml:space="preserve">
+    <value>This pallet is being used!</value>
+  </data>
+  <data name="MSG12" xml:space="preserve">
+    <value>The corresponding pallet is out of the warehouse and the data is valid, Ok to store with it?</value>
+  </data>
+  <data name="MSG13" xml:space="preserve">
+    <value>At least one line must be valid, please input data!</value>
+  </data>
+  <data name="MSG14" xml:space="preserve">
+    <value>Pack quantity must be more than zero!</value>
+  </data>
+  <data name="MSG15" xml:space="preserve">
+    <value>Fraction cannot be more than the packing unit!</value>
+  </data>
+  <data name="MSG16" xml:space="preserve">
+    <value>Fraction cannot be bigger than left fraction!</value>
+  </data>
+  <data name="MSG17" xml:space="preserve">
+    <value>Pack Qty is greater than pack available!</value>
+  </data>
+  <data name="MSG18" xml:space="preserve">
+    <value>Ready to store?</value>
+  </data>
+  <data name="MSG19" xml:space="preserve">
+    <value>There is no empty location available in the warehouse now!</value>
+  </data>
+  <data name="MSG2" xml:space="preserve">
+    <value>The selected product's attribute is different from the checkbox "out-of-spec"!</value>
+  </data>
+  <data name="MSG20" xml:space="preserve">
+    <value>Ready to delete?</value>
+  </data>
+  <data name="MSG21" xml:space="preserve">
+    <value>The same record exists in database!</value>
+  </data>
+  <data name="MSG22" xml:space="preserve">
+    <value>Ready to add?</value>
+  </data>
+  <data name="MSG23" xml:space="preserve">
+    <value>Do you make sure this product is "Certification Ok"?</value>
+  </data>
+  <data name="MSG24" xml:space="preserve">
+    <value>Do you make sure this product is "Certification NG"?</value>
+  </data>
+  <data name="MSG25" xml:space="preserve">
+    <value>Start date is later than end date!</value>
+  </data>
+  <data name="MSG26" xml:space="preserve">
+    <value>Ready to print?</value>
+  </data>
+  <data name="MSG27" xml:space="preserve">
+    <value>Input request shipping quantity is error!</value>
+  </data>
+  <data name="MSG28" xml:space="preserve">
+    <value>Ready to update?</value>
+  </data>
+  <data name="MSG29" xml:space="preserve">
+    <value>Ready to assign?</value>
+  </data>
+  <data name="MSG3" xml:space="preserve">
+    <value>Do you make sure the products which will be stored on this pallet are "out-of-spec storage"?</value>
+  </data>
+  <data name="MSG30" xml:space="preserve">
+    <value>There is not matched pallet!</value>
+  </data>
+  <data name="MSG31" xml:space="preserve">
+    <value>Shipping product will be shipped from retrieved product and in-stock product!</value>
+  </data>
+  <data name="MSG32" xml:space="preserve">
+    <value>Shipping product will be shipped from retrieved product!</value>
+  </data>
+  <data name="MSG33" xml:space="preserve">
+    <value>Ready to retrieve?</value>
+  </data>
+  <data name="MSG34" xml:space="preserve">
+    <value>Ready to de-assign?</value>
+  </data>
+  <data name="MSG35" xml:space="preserve">
+    <value>Ready to transfer between floors?</value>
+  </data>
+  <data name="MSG36" xml:space="preserve">
+    <value>Shelf No is moving…</value>
+  </data>
+  <data name="MSG37" xml:space="preserve">
+    <value>This field must be inputted!</value>
+  </data>
+  <data name="MSG38" xml:space="preserve">
+    <value>The max loading number does not exist!</value>
+  </data>
+  <data name="MSG39" xml:space="preserve">
+    <value>The loading pallet number must be less than max loading number!</value>
+  </data>
+  <data name="MSG4" xml:space="preserve">
+    <value>Do you make sure the products which will be stored on this pallet are "normal storage"?</value>
+  </data>
+  <data name="MSG40" xml:space="preserve">
+    <value>The retrieval quantity cannot be more than the possible retrieval quantity!</value>
+  </data>
+  <data name="MSG41" xml:space="preserve">
+    <value>The input product code and pre-product lot-no is duplicated by other product!</value>
+  </data>
+  <data name="MSG42" xml:space="preserve">
+    <value>Assigned quantity is not enough!</value>
+  </data>
+  <data name="MSG43" xml:space="preserve">
+    <value>The request retrieval quantity is error!</value>
+  </data>
+  <data name="MSG44" xml:space="preserve">
+    <value>Input lot-no is error!</value>
+  </data>
+  <data name="MSG45" xml:space="preserve">
+    <value>Input pallet-no is error!</value>
+  </data>
+  <data name="MSG46" xml:space="preserve">
+    <value>There is some product in the pallet, do you want to continue?</value>
+  </data>
+  <data name="MSG47" xml:space="preserve">
+    <value>This record was modified by others, please retry!</value>
+  </data>
+  <data name="MSG48" xml:space="preserve">
+    <value>This kneading command cannot end the lot!</value>
+  </data>
+  <data name="MSG49" xml:space="preserve">
+    <value>This kneading command lot end Ok!</value>
+  </data>
+  <data name="MSG5" xml:space="preserve">
+    <value>More detail line cannot be selected, Ok?</value>
+  </data>
+  <data name="MSG50" xml:space="preserve">
+    <value>The input tablet line does not match the tablet line in database!</value>
+  </data>
+  <data name="MSG51" xml:space="preserve">
+    <value>Retrieve the next pallet?</value>
+  </data>
+  <data name="MSG52" xml:space="preserve">
+    <value>Do you make sure to delete the product data about this pallet?</value>
+  </data>
+  <data name="MSG53" xml:space="preserve">
+    <value>Shelf no. error!</value>
+  </data>
+  <data name="MSG54" xml:space="preserve">
+    <value>"From location" is bigger than "To location"!</value>
+  </data>
+  <data name="MSG55" xml:space="preserve">
+    <value>Value is out of range!</value>
+  </data>
+  <data name="MSG56" xml:space="preserve">
+    <value>Ready to re-store?</value>
+  </data>
+  <data name="MSG57" xml:space="preserve">
+    <value>Successfully!</value>
+  </data>
+  <data name="MSG6" xml:space="preserve">
+    <value>This product is duplicated by other details!</value>
+  </data>
+  <data name="MSG7" xml:space="preserve">
+    <value>A message is being received, please wait!</value>
+  </data>
+  <data name="MSG8" xml:space="preserve">
+    <value>Conveyor status error!</value>
+  </data>
+  <data name="MSG9" xml:space="preserve">
+    <value>Warehouse status error!</value>
+  </data>
+</root>

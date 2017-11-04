@@ -1,0 +1,307 @@
+﻿@{
+    ViewBag.ScreenId = "TCPR011F";
+    ViewBag.Title = "Storage of Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.ProductManagement.ViewModels.StorageOfProductSelectedViewModel
+@using System.Web.Mvc.Ajax
+@using DocumentFormat.OpenXml.Bibliography
+@using KCSG.Core;
+@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls;
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC;
+@using NumberOption = KCSG.Core.CustomControls.NumberOption
+
+<script type="text/javascript">
+    var formUrl = {
+        urlSelected: '@Url.Action("Selected", "StorageOfProduct", new {area = "ProductManagement"})',
+        urlStorage: '@Url.Action("StoreProduct", "StorageOfProduct", new { area = "ProductManagement" })',
+        urlCheckValidation: '@Url.Action("CheckStatus", "StorageOfProduct", new { area = "ProductManagement" })',
+        urlGetTotalAmount: '@Url.Action("GetTotalAmountFromTx40", "StorageOfProduct", new { area = "ProductManagement" })'
+    }
+    var validateMessage = {
+
+    }
+
+</script>
+
+
+
+<script src="~/Scripts/areas/storageOfProduct/storageOfProduct.js"></script>
+<input type="hidden" id="selectedRecord" />
+
+<input type="hidden" value="" id="lstValue" />
+<input type="hidden" value="" id="valueSelected" />
+@*<input type="hidden" value="" id="lstValueRemove"/>*@
+@using (Ajax.BeginForm("StoreProduct", "StorageOfProduct", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess" }, new { @id = "indexForm" }))
+{
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Product Classification</div>
+            <div class="panel-body">
+                <div class="row form-group margin-bottom-none">
+                    <div class="col-lg-12">
+                        <div class="col-lg-3">&nbsp;</div>
+                        <div class="col-lg-6">
+                            @{
+    var lstProductStatus = EnumsHelper.GetListItemsWithDescription<Constants.StorageOfProductStatus>(Constants.StorageOfProductStatus.Normal);
+    lstProductStatus.RemoveAt(2);
+                            }
+                            @Html.ExtRadioButtonFor(model => model.StorageOfProductStatus, lstProductStatus, new { onchange = "ChangeGrid()" }, true, 6)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-body">
+                <div class="panel-body">
+                    <div class="row form-group">
+                        <div class="col-lg-12">
+                            <div id="GridNormal">
+                                @Html.Grid(Model.GridNormal)
+                            </div>
+                        </div>
+
+                        </div>
+                    <div class="row form-group">
+                        <div class="col-lg-12">
+                            <div id="GridOutOfPlan">
+                                @Html.Grid(Model.GridOutOfPlan)
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row form-group">
+                        
+                        <div class="col-lg-4">
+                            <div class="col-lg-4">
+                                @Html.ExtLabelFor(model => model.PalletNo)
+                            </div>
+                            <div class="col-lg-8">
+                                @Html.ExtTextBoxFor(model => model.PalletNo)
+                                <span class="field-validation-error"><span id="errorPalletNo" hidden></span></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            @Html.CheckBoxFor(model => model.OutOfSpec)
+                            @Html.LabelFor(model => model.OutOfSpec)
+                            @Html.HiddenFor(model => model.OutOfSpec)
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="button" class="btn btn-flat btn-default btn-more-5-chars pull-right" id="btnSelect" onclick=" Selected() ">
+                                Select
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row form-group">
+                        <div class="col-lg-2">&nbsp;</div>
+                        <div class="col-lg-2">
+                            @Html.ExtLabelFor(model => model.ProductCode1)
+                        </div>
+                        <div class="col-lg-2">
+                            @Html.ExtLabelFor(model => model.ProductName1)
+                        </div>
+                        <div class="col-lg-2">
+                            @Html.ExtLabelFor(model => model.PreProductLotNo1)
+                        </div>
+                        <div class="col-lg-2">
+                            @Html.ExtLabelFor(model => model.LotNo1)
+                        </div>
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.PackQty1)
+                        </div>
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.Fraction1)
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-2">
+                            <button class="btn btn-flat btn-default btn-more-5-chars" type="button" id="clear1" onclick=" clearRow(1) ">
+                                <i class="fa fa-trash-o"></i> Clear
+                            </button>
+                        </div>
+
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.ProductCode1, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorList1" hidden></span></span>
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.ProductName1, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.PreProductLotNo1, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.LotNo1, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-1 padding-right-none">
+                            @Html.ExtNumberFor(model => model.PackQty1, new NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 99999 }, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorPackQty1" hidden></span></span>
+                        </div>
+                        <div class="col-lg-1 padding-right-none">
+                            @Html.ExtNumberFor(model => model.Fraction1, new NumberOption() { NumberOfDecimal = 2,Min=-9999.00, Max = 9999.00 }, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorFraction1" hidden></span></span>
+                        </div>
+                        @Html.HiddenFor(model => model.CommandNo1)
+                        @Html.HiddenFor(model => model.PackUnit1)
+                        @Html.HiddenFor(model => model.TabletingEndDate1)
+                        @*<input type="hidden" id="CommandNo1"/>*@
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-2">
+                            <button class="btn btn-flat btn-default btn-more-5-chars" type="button" id="clear2" onclick=" clearRow(2) ">
+                                <i class="fa fa-trash-o"></i> Clear
+                            </button>
+                        </div>
+
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.ProductCode2, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorList1" hidden></span></span>
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.ProductName2, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.PreProductLotNo2, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.LotNo2, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-1 padding-right-none">
+                            @Html.ExtNumberFor(model => model.PackQty2, new NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 99999 }, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorPackQty2" hidden></span></span>
+                        </div>
+                        <div class="col-lg-1 padding-right-none">
+                            @Html.ExtNumberFor(model => model.Fraction2, new NumberOption() { NumberOfDecimal = 2, Min = -9999.00, Max = 9999.00 }, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorFraction2" hidden></span></span>
+                        </div>
+                        @Html.HiddenFor(model => model.CommandNo2)
+                        @Html.HiddenFor(model => model.PackUnit2)
+                        @Html.HiddenFor(model => model.TabletingEndDate2)
+                        @*<input type="hidden" id="CommandNo2" />*@
+                    </div>
+
+                    <div class="row form-group">
+
+                        <div class="col-lg-2">
+                            <button class="btn btn-flat btn-default btn-more-5-chars" type="button" id="clear3" onclick=" clearRow(3) ">
+                                <i class="fa fa-trash-o"></i> Clear
+                            </button>
+                        </div>
+
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.ProductCode3, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorList1" hidden></span></span>
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.ProductName3, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.PreProductLotNo3, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.LotNo3, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-1 padding-right-none">
+                            @Html.ExtNumberFor(model => model.PackQty3, new NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 99999 }, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorPackQty3" hidden></span></span>
+                        </div>
+                        <div class="col-lg-1 padding-right-none">
+                            @Html.ExtNumberFor(model => model.Fraction3, new NumberOption() { NumberOfDecimal = 2, Min = -9999.00, Max = 9999.00 }, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorFraction3" hidden></span></span>
+                        </div>
+                        @Html.HiddenFor(model => model.CommandNo3)
+                        @Html.HiddenFor(model => model.PackUnit3)
+                        @Html.HiddenFor(model => model.TabletingEndDate3)
+                        @*<input type="hidden" id="CommandNo3" />*@
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-2">
+                            <button class="btn btn-flat btn-default  btn-more-5-chars" type="button" id="clear4" onclick=" clearRow(4) ">
+                                <i class="fa fa-trash-o"></i> Clear
+                            </button>
+                        </div>
+
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.ProductCode4, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorList1" hidden></span></span>
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.ProductName4, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.PreProductLotNo4, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.LotNo4, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-1 padding-right-none">
+                            @Html.ExtNumberFor(model => model.PackQty4, new NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 99999 }, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorPackQty4" hidden></span></span>
+                        </div>
+                        <div class="col-lg-1 padding-right-none">
+                            @Html.ExtNumberFor(model => model.Fraction4, new NumberOption() { NumberOfDecimal = 2, Min = -9999.00, Max = 9999.00 }, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorFraction4" hidden></span></span>
+                        </div>
+                        @Html.HiddenFor(model => model.CommandNo4)
+                        @Html.HiddenFor(model => model.PackUnit4)
+                        @Html.HiddenFor(model => model.TabletingEndDate4)
+                        @*<input type="hidden" id="CommandNo4" />*@
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-2">
+                            <button class="btn btn-flat btn-default btn-more-5-chars" type="button" id="clear5" onclick=" clearRow(5) ">
+                                <i class="fa fa-trash-o"></i> Clear
+                            </button>
+                        </div>
+
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.ProductCode5, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorList1" hidden></span></span>
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.ProductName5, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.PreProductLotNo5, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-2 padding-right-none">
+                            @Html.ExtTextBoxFor(model => model.LotNo5, new { @readonly = "true" })
+                        </div>
+                        <div class="col-lg-1 padding-right-none">
+                            @Html.ExtNumberFor(model => model.PackQty5, new NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 99999 }, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorPackQty5" hidden></span></span>
+                        </div>
+                        <div class="col-lg-1 padding-right-none">
+                            @Html.ExtNumberFor(model => model.Fraction5, new NumberOption() { NumberOfDecimal = 2, Min = -9999.00, Max = 9999.00 }, new { @readonly = "true" })
+                            <span class="field-validation-error"><span id="errorFraction5" hidden></span></span>
+                        </div>
+                        @Html.HiddenFor(model => model.CommandNo5)
+                        @Html.HiddenFor(model => model.PackUnit5)
+                        @Html.HiddenFor(model => model.TabletingEndDate5)
+                        @*<input type="hidden" id="CommandNo5" />*@
+
+                    </div>
+                    <div class=" row form-group">
+                        <button type="button" class="btn btn-flat btn-default  btn-more-5-chars pull-right" id="btnStorage" onclick=" Storage() ">
+                            Storage
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

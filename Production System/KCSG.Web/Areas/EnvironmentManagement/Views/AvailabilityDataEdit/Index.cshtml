@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.ScreenId = "TCEN073F";
+    ViewBag.Title = "Availability Data Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/chartjs/Chart.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/areas/AvailabilityDataEdit/availabilityDataEdit.js"></script>
+}
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.AvailabilityDataEdit.AvailabilityDataEditViewModel
+@using System.Globalization
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@{
+    var environmentDate = DateTime.ParseExact(Model.EnvironmentDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+    var nexDay = environmentDate.AddDays(1);
+    var preDay = environmentDate.AddDays(-1);
+}
+<div class="col-lg-12">
+    @using (Ajax.BeginForm("", "", null, new { @id = "availabilityDataEdit" }))
+    {
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <span>Search Criteria</span>
+            </div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.EnvMode)
+                    </div>
+                    <div class="col-lg-6" style="padding: 0">
+                        @Html.ExtRadioButtonFor(model => model.EnvMode, EnumsHelper.GetListItemsWithDescription<Constants.EnvMode>(Constants.EnvMode.SpecLine).OrderBy(i => int.Parse(i.Value)), new { }, true, 6)
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.EnvironmentDate)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtDateTimeFor(model => model.EnvironmentDate, new DateTimeOption() {Format = "DD/MM/YYYY"})
+                    </div>
+
+                    <div class="col-lg-1">
+                        @Html.ExtLabelFor(model => model.Machine)
+                    </div>
+
+                    <div class="col-lg-3">
+                        @Html.ExtDropDownListFor(m => m.Machine, (IEnumerable<SelectListItem>) ViewBag.ListLocation)
+                    </div>
+
+                    <div class="col-lg-3">
+                        <button class="btn btn-default btn-flat btn-less-5-chars" type="button" id="go" onclick=" return AvailabilityDataEdit.onGo() ">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <form id="availability-data-edit">
+        <div class="panel panel-danger">
+            <div class="panel panel-heading">
+                Availability Data Edit [TCEN073F]
+            </div>
+            <div class="panel panel-body">
+                <div style="text-align: center; display: none; margin-bottom: 15px;" id="colorChart">
+                    @*<button type="button" class="button btn-more-5-chars text-bold" style="background-color: RGB(189, 189, 189); color: white;">Rotating with load</button>
+                    <button type="button" class="button btn-more-5-chars text-bold" style="background-color: RGB(31, 115, 168); color: white;">Empty Load</button>
+                    <button type="button" class="button btn-more-5-chars text-bold" style="background-color: RGB(255, 0, 0);color:white">Stop</button>*@
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-10">
+                        <canvas id="chartAvailability" width="400" height="150"></canvas>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="row form-group text-bold">
+                            Availability
+                        </div>
+                        <div class="row form-group">
+                            <input type="text" id="avaitext" readonly="readonly" style="text-align: center; width: 80px" value="" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-group" style="margin-top: 20px;">
+                    <div class="col-lg-1" style="margin-top: 10px;">
+                            @Html.ExtLabelFor(model => model.Time)
+                    </div>
+                    <div class="col-lg-2" style="margin-top: 10px;">
+                     
+                        @Html.ExtDateTimeFor(model => model.Time, new DateTimeOption() {Format = "HH:mm"},
+                            new {@onchange = "GetStatus()"})
+                        <span class="field-validation-error" hidden id="errorTime"></span>
+                    </div>
+                    <div class="col-lg-1">&nbsp;</div>
+                    <div class="col-lg-6">
+                        <fieldset style="padding: 0; margin: 0">
+                            <legend style="width: inherit; padding: 0 5px;">Status</legend>
+                            <div class="col-lg-4 text-center">
+                                <label class="radio"><input type="radio" id="rdRotate" name="environmentStatus" value="O"/>Rotate</label>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <label class="radio"><input type="radio" id="rdEmpty" name="environmentStatus" value="A"/>Empty Load</label>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <label class="radio"><input type="radio" id="rdStop" name="environmentStatus" value="S"/>Stop</label>
+                            </div>
+                            <span class="field-validation-error"><span id="statusError" hidden></span></span>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="row form-group" style="margin-top: 30px;">
+                    <div class="col-lg-12">
+                        <a href="@Url.Action("Index", "AvailabilityDataEdit", new {environmentDate = preDay.ToString("dd/MM/yyyy")})" class="btn btn-flat btn-default btn-less-5-chars">Prev Day</a>
+                        <a href="@Url.Action("Index", "AvailabilityDataEdit", new {environmentDate = nexDay.ToString("dd/MM/yyyy")})" class="btn btn-flat btn-default btn-less-5-chars">Next Day</a>
+                        <button class="btn btn-flat btn-default btn-less-5-chars" type="button" onclick=" Update() ">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,104 @@
+﻿<style>
+    .title-table, .content-table {
+        border-collapse: collapse;
+        min-width: 100%;
+    }
+
+    .title-table th, td {
+        border: 0 solid transparent;
+    }
+
+    .content-table th {
+        border: 1px solid black;
+    }
+	
+	.content-table td{
+		border: 1px solid black;
+	}
+</style>
+
+<table class="title-table" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th>Kneading Command Sheet</th>
+    </tr>
+    </thead>
+</table>
+<br/>
+
+<table class="title-table" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td>Command No: {{CommandNo}}</td>
+            <td>Issued: {{Issued}}</td>
+        </tr>
+        <tr>
+            <td>Command Date: {{CommandDate}}</td>
+            <td>Issued No: {{IssuedNo}}</td>
+        </tr>
+        <tr>
+            <td>PreProduct Code: {{PreProductCode}}</td>
+            <td>Mixed Mode: {{MixedMode}}</td>
+        </tr>
+        <tr>
+            <td>PreProduct Name: {{PreProductName}}</td>
+            <td>Batch: {{Batch}}</td>
+        </tr>
+        <tr>
+            <td>Lot No: {{LotNo}}</td>
+            <td>Weighed By: </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>Charged By: </td>
+        </tr>
+    </tbody>
+</table>
+<br/>
+<br/>
+
+<table class="content-table" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Charged Order</th>
+        <th>Pot Seq</th>
+        <th>Material Name</th>
+        <th>Lot No</th>
+        <th>Load position</th>
+        <th>Y/N</th>
+        <th>3F Qty</th>
+        <th>4F Qty</th>
+        <th>State</th>
+        <th>Colour</th>
+        <th>Crushing (1)</th>
+        <th>Crushing (2)</th>
+        <th>Weighed</th>
+        <th>Charged</th>
+        <th>Measurement completed</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        {{#FindPrintKneadingCommandItems}}
+    <tr>
+        <td>{{ShowLayinPriority}}</td>
+        <td>{{ChargedOrder}}</td>
+        <td>{{PotSeq}}</td>
+        <td>{{MaterialName}}</td>
+        <td>{{LotNo}}</td>
+        <td>{{LoadPosition}}</td>
+        <td></td>
+        <td>{{ThirdColumn}}</td>
+        <td>{{FourthColumn}}</td>
+        <td>{{State}}</td>
+        <td>{{Colour}}</td>
+        <td>{{CrushingOne}}</td>
+        <td>{{CrushingTwo}}</td>
+        <td>{{Weighed}}</td>
+        <td>{{Charged}}</td>
+        <td>{{MeasurementCompleted}}</td>
+    </tr>
+        {{/FindPrintKneadingCommandItems}}
+    </tbody>
+</table>

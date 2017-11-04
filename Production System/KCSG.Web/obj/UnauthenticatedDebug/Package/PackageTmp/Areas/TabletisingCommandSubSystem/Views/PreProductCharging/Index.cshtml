@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.ScreenId = "TCMD051F";
+    ViewBag.Title = "Pre-product Charging Control";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.TabletisingCommandSubSystem.Models.PreProductCharging.PreProductChargingViewModel
+@using DocumentFormat.OpenXml.Wordprocessing
+@using KCSG.Core;
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@section scripts{
+<script>
+       $('#ContainerCode2').codeScanner();
+</script>
+    <script src="~/Scripts/areas/tabletising/preProductCharging.js"></script>
+    
+}
+@using (Ajax.BeginForm("UpdatePreProductCharging", "PreProductCharging", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "PreProductCharging.onSuccess" }, new { @id = "preProductChargingForm" }))
+{
+    @Html.HiddenFor(m=>m.IsError)
+    @Html.HiddenFor(m=>m.ErrorCode)
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Pre-Product Tableting</div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div class="row form-group">
+                        <div class="col-xs-2">
+                            @Html.ExtLabelFor(model => model.KneadingCmdNo)
+                        </div>
+                        <div class="col-xs-4">
+                            @Html.ExtTextBoxFor(model => model.KneadingCmdNo, new { @readonly = "true" })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-2">
+                            @Html.ExtLabelFor(model => model.PreProductCode)
+                        </div>
+                        <div class="col-xs-4">
+                            @Html.ExtTextBoxFor(model => model.PreProductCode, new { @readonly = "true" })
+                        </div>  
+                        
+                        <div class="col-xs-2">
+                            @Html.ExtLabelFor(model => model.ProductCode)
+                        </div>
+                        <div class="col-xs-4 ">
+                            @Html.ExtTextBoxFor(model => model.ProductCode, new { @readonly = "true" })
+                        </div>                                              
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-2">
+                            @Html.ExtLabelFor(model => model.PreProductName)
+                        </div>
+                        <div class="col-xs-4">
+                            @Html.ExtTextBoxFor(model => model.PreProductName, new { @readonly = "true" })
+                        </div>                        
+                        <div class="col-xs-2">
+                            @Html.ExtLabelFor(model => model.ProductName)
+                        </div>
+                        <div class="col-xs-4 ">
+                            @Html.ExtTextBoxFor(model => model.ProductName, new { @readonly = "true" })
+                        </div>
+                        
+                    </div>
+                    <div class="row form-group">                        
+                        <div class="col-xs-2">
+                            @Html.ExtLabelFor(model => model.PreProductLotNo)
+                        </div>
+                        <div class="col-xs-4">
+                            @Html.ExtTextBoxFor(model => model.PreProductLotNo, new { @readonly = "true" })
+                        </div>
+                        <div class="col-xs-2">
+                            @Html.ExtLabelFor(model => model.ProductLotNo)
+                        </div>
+                        <div class="col-xs-4 ">
+                            @Html.ExtTextBoxFor(model => model.ProductLotNo, new { @readonly = "true" })
+                        </div>
+                    </div>
+                                        
+                </div>
+
+                <div class="col-lg-12">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">Container Code Confirm</div>
+                        <div class="panel-body">
+                            <div class="row form-group">
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <div class="col-xs-4">
+                                            @Html.ExtLabelFor(model => model.ContainerCode1)
+                                        </div>
+                                        <div class="col-xs-8">
+                                            @Html.ExtTextBoxFor(model => model.ContainerCode1, new { @readonly = "true", @maxlength="12" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-xs-4">
+                                            @Html.ExtLabelFor(model => model.ContainerCode2)
+                                        </div>
+                                        <div class="col-xs-8">
+                                            @Html.ExtTextBoxFor(model => model.ContainerCode2, new { @onchange = "CheckLock()", @maxlength = "12" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="col-lg-12 form-group">
+                                        <fieldset>
+                                            <legend style="width: inherit; padding: 0 5px;">Lock Status</legend>
+                                            <div class="col-lg-6">
+                                                <label class="radio-inline">
+                                                <input type="radio" name="radLock" id="locked" checked="checked" readonly="readonly" disabled="disabled"/>Locked</label>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label class="radio-inline"><input type="radio" name="radLock" id="unlocked" readonly="readonly" disabled="disabled"/>Unlocked</label>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 btnControl">
+                    <button class="btn btn-flat btn-default btn-less-5-chars" type="submit" id="btnAdd">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

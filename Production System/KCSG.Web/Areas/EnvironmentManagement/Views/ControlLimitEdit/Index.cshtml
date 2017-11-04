@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.ScreenId = "TCEN074F";
+    ViewBag.Title = "Control Limit Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.ControlLimitEdit.ControlLimitEditViewModel
+@using System.Web.Script
+@using KCSG.jsGrid.MVC
+@using KCSG.Core;
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls;
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC;
+@using Resources
+<script src="~/Scripts/areas/ControlLimitEdit/controlLimitEdit.js"></script>
+@using (Ajax.BeginForm("Update", "ControlLimitEdit", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess" }))
+{
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel panel-heading">
+                Control Limit Edit - TCEN074F
+            </div>
+            <div class="panel panel-body">
+                <div class="row form-group">
+                    <div class="col-lg-12">
+                        @Html.Grid(Model.Grid)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-1">
+                        @Html.ExtLabelFor(model => model.Location)
+                    </div>
+
+                    <div class="col-lg-3">
+                        @Html.ExtDropDownListFor(m => m.Location, (IEnumerable<SelectListItem>)ViewBag.ListLocation, "-- Please select --", new { @onchange = "LoadDataToGrid()" })
+                    </div>
+
+                    <div class="col-lg-1">@Html.ExtLabelFor(model => model.From)</div>
+                    <div class="col-lg-3">@Html.ExtDateTimeFor(model => model.From, new DateTimeOption() {Format = "DD/MM/YYYY"})</div>
+
+                    <div class="col-lg-1">@Html.ExtLabelFor(model => model.To)</div>
+                    <div class="col-lg-3">@Html.ExtDateTimeFor(model => model.To, new DateTimeOption() {Format = "DD/MM/YYYY"})</div>
+                </div>
+                <fieldset style="margin-top: 20px;">
+                    <legend style="width: inherit; padding: 0 5px;">Temperature</legend>
+                    <div class="row form-group">
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.TempUCL)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.TempUCL, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.TempLCL)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.TempLCL, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.TempMean)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.TempMean, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.TempSigma)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.TempSigma, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.TempCp)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.TempCp, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.TempCpk)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.TempCpk, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.TempRange)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.TempRange, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+                    </div>
+                </fieldset>
+
+                <fieldset style="margin-top: 40px; margin-bottom: 20px;">
+                    <legend style="width:inherit; padding: 0 5px;">Humidity</legend>
+                    <div class="row form-group">
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.HumUCL)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.HumUCL, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.HumLCL)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.HumLCL, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.HumMean)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.HumMean, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.HumSigma)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.HumSigma, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.HumCp)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.HumCp, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.HumCpk)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.HumCpk, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+
+                        <div class="col-lg-1">
+                            @Html.ExtLabelFor(model => model.HumRange)
+                        </div>
+                        <div class="col-lg-2">@Html.ExtNumberFor(model => model.HumRange, new KCSG.Core.CustomControls.NumberOption() { Min = -99999.99, Max = 99999.99, NumberOfDecimal = 2 })</div>
+                    </div>
+                </fieldset>
+
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <button class="btn btn-flat btn-default btn-less-5-chars" id="btnUpdate" onclick=" Update() ">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

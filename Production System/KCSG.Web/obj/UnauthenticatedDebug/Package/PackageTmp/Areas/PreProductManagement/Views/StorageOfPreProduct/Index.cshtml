@@ -1,0 +1,399 @@
+﻿@{
+    ViewBag.ScreenId = "TCIP021F";
+    ViewBag.Title = "Storage of Pre-product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using KCSG.Core.CustomControls
+@model KCSG.Domain.Models.PreProductManagement.StorageOfPreProductItem
+
+<script src="~/Scripts/angular/angular.min.js"></script>
+@*<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<script src="~/Scripts/areas/signalrCommon.js"></script>
+<script src="~/signalr/hubs"></script>*@
+<script src="~/Scripts/angular/controllers/storageOfPreProduct.controller.js"></script>
+
+@Html.HiddenFor(model => model.IsOK)
+<div class="col-lg-12"
+     ng-app="RetrieveEmptyContainerModule"
+     ng-controller="RetrieveEmptyContainerController"
+     ng-init="onInit()">
+
+<div class="panel panel-danger">
+    <div class="panel-heading">Storage of Pre-product </div>
+    <div class="panel-body">
+
+        <div class="col-lg-12">
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <!-- Kneading line -->
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(x => x.KneadingLine)
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-horizontal">
+                            <div class="input-group">
+                                <input type="radio"
+                                       id="conventional"
+                                       name="kneadingLine"
+                                       ng-value="1"
+                                       ng-disabled="storageMode != 0"
+                                       ng-model="container.KneadingLine"
+                                       ng-change="kneadingLineChange()"/>
+                                <span for="conventional"> Conventional</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-horizontal">
+                            <div class="input-group">
+                                <input type="radio"
+                                       name="kneadingLine"
+                                       id="megabit"
+                                       ng-value="0"
+                                       ng-disabled="storageMode != 0"
+                                       ng-model="container.KneadingLine"
+                                       ng-change="kneadingLineChange()"/>
+                                <span for="megabit"> Megabit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <!-- Colour -->
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.Colour)
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="form-control" readonly="readonly">{{getColorDisplay(container.KneadingLine, container.Colour)}}</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Command No -->
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(x => x.CommandNo)
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control"
+                               ng-model="container.CommandNo"
+                               readonly="readonly"/>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <!-- Temperature -->
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.Temperature)
+                    </div>
+
+                    <div class="col-lg-8">
+                        <div class="form-control" id="temperature" readonly="readonly">{{getTemperatureDisplay(container.Temperature)}}</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Pre-Product code -->
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.PreProductCode)
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control"
+                               readonly="readonly"
+                               ng-model="container.PreProductCode"/>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <!-- Container number -->
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.ContainerNo)
+                    </div>
+
+                    <div class="col-lg-8">
+                        <input class="form-control"
+                               readonly="readonly"
+                               ng-model="container.ContainerNo"/>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Pre-Product name -->
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.PreProductName)
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control"
+                               readonly="readonly"
+                               ng-model="container.PreProductName"/>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <!-- Container type -->
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.ContainerType)
+                    </div>
+
+                    <div class="col-lg-8">
+                        <input class="form-control"
+                               readonly="readonly"
+                               ng-model="container.ContainerType"/>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Pre-Product Lot No -->
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.PreProductLotNo)
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control"
+                               ng-model="container.PreProductLotNo"
+                               readonly="readonly"/>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+
+                    <!-- Storaged Container Quantity -->
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.ContainerCode)
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control"
+                               ng-model="container.ContainerCode"
+                               readonly="readonly"/>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <!-- Storaged Container Quantity -->
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.StoragedContainerQuantity)
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control"
+                               ng-model="container.StoragedContainerQuantity"
+                               readonly="readonly"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        <!-- Storage button -->
+                        <button class="btn btn-default btn-flat btn-less-5-chars"
+                                id="btnRetrieval"
+                                ng-click="retrieve()">
+                            Retrieval
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="panel panel-danger"
+     ng-show="storageMode > 0">
+    <div class="panel-heading">
+        <span>Confirm with Retrieve of Empty Container</span>
+    </div>
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        <label>Retrieval of Shelf No</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="pull-right form-control"
+                               value="{{container.ShelfRow}}-{{container.ShelfBay}}-{{container.ShelfLevel}}"
+                               readonly="readonly"/>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">&nbsp;</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        <label>Container No.</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="pull-right form-control"
+                               readonly="readonly"
+                               value="{{container.ContainerNo}}"/>
+                    </div>
+                </div>
+                <div class="col-lg-6">&nbsp;</div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        <label>Container Type</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="pull-right form-control"
+                               readonly="readonly"
+                               value="{{container.ContainerType}}"/>
+                    </div>
+                </div>
+                <div class="col-lg-6">&nbsp;</div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-6">
+                        <button class="btn btn-default btn-flat btn-less-5-chars"
+                                ng-disabled="!isStoragable() || storageMode != 1"
+                                ng-click="ok()" id="btnOK">
+                            OK
+                        </button>
+
+                        <button class="btn btn-default btn-flat btn-less-5-chars"
+                                ng-disabled="!isStoragable() || storageMode != 1"
+                                ng-click="restore()" id="btnNG">
+                            NG
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="panel panel-danger"
+     ng-show="putQuantityMode > 0 && storageMode >= 2">
+    <div class="panel-heading">
+        <span>Put Quantity Confirm</span>
+    </div>
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        <label>Quantity<span style="color: red;">*</span></label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input ng-model="container.PutQuantity"
+                               ng-disabled="storageMode != 2"
+                               class="form-control"
+                               type="number"
+                               min="0"
+                               max="9999999"
+                               step="0.1"
+                               id="storageQuantity"/>
+
+                        <span class="field-validation-error"><span id="errorText" hidden></span></span>
+                    </div>
+                </div>
+                <div class="col-lg-6">&nbsp;</div>
+            </div>
+
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        <label>Container Code</label>
+                    </div>
+                    <div class="col-lg-8">
+                        <input class="form-control"
+                               readonly="readonly"
+                               value="{{container.ContainerCode}}"/>
+                    </div>
+                </div>
+                <div class="col-lg-6">&nbsp;</div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">&nbsp;</div>
+                    <div class="col-lg-8">
+                        <div class="col-lg-6" style="padding-left: 0">
+                            <div class="input-group">
+                                <input type="radio"
+                                       id="containerEnd"
+                                       name="PutQuantity"
+                                       ng-value="0"
+                                       ng-disabled="storageMode != 2"
+                                       checked="checked"/>
+                                <span> Container End</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="input-group">
+                                <input type="radio"
+                                       name="PutQuantity"
+                                       id="lotEnd"
+                                       ng-value="1" 
+                                       ng-disabled="storageMode != 2"/>
+                                <span> Lot End</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">&nbsp;</div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="col-lg-6">
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        ng-click="Storage()"
+                        id="btnStorage" 
+                        ng-disabled="storageMode != 2">
+                    Storage
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-danger"
+     ng-show="storageMode >= 3">
+    <div class="panel-heading">
+        <span>Wait for storing</span>
+    </div>
+    <div class="panel-body">
+        <div class="col-lg-12">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div>Please wait for Storing...</div>
+                </div>
+                <div class="col-lg-6">&nbsp;</div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="col-lg-6">
+                <button class="btn btn-default btn-flat btn-more-5-chars"
+                        ng-disabled="storageMode != 3"
+                        ng-click="printLabel()">
+                    Label re-publish
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

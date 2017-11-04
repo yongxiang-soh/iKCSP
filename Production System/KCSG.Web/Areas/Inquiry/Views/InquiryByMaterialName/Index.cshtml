@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.ScreenId = "TCFC011F";
+    ViewBag.Title = "Inquiry by Material Name";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using KCSG.Core;
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@using System.Diagnostics
+@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.Inquiry.ViewModels.InquiryByMaterialName.InquiryByMaterialNameSearchViewModel
+<!-- Jquery print plugin. -->
+<script src="~/Scripts/jQuery.print.min.js"></script>
+
+<!-- Business handler of Input Of Kneading Command -->
+<script src="~/Scripts/areas/inquiry/inquiryByMaterialName.js"></script>
+<script>
+    var formUrl = {
+        urlPrintMaterialName: '@Url.Action("ExportMaterialName", "InquiryByMaterialName")',
+        urlGrandTotal: '@Url.Action("SearchByMaterialCodeTotal", "InquiryByMaterialName")',
+        urlCheckPreProduct: '@Url.Action("GetMateriaCode", "InquiryByMaterialName")'
+    }
+</script>
+
+
+<div class="col-lg-10" style="float: left">
+    
+</div>
+@*<div class="col-lg-2" style="float: left">    
+    <span style="text-decoration:underline">@Model.DateTime1</span>
+</div>*@
+<div class="col-lg-12">
+    
+    <input type="hidden" id="selectedValue"/>
+    @using (Html.BeginForm("", "", FormMethod.Post, new {@id = "searchForm"}))
+    {
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">Search Condition</div>
+            <div class="panel-body">
+
+                <div class="row form-group">
+                    <div class="col-lg-3">
+                        @Html.ExtLabelFor(model => model.MaterialCode)
+                    </div>
+                    <div class="col-lg-5"
+                         id="MaterialCode">
+                        @*@Html.ExtTextBoxAddOnForEnable(model => model.MaterialCode, CustomControlConstants.AddOn.Search, "#modalMaterialCodeSelect", new {@id = "txtMaterialCode", onchange = "OnChangeTextBox()"})*@
+                        @*@Html.ExtTextBoxAddOnFor(model => model.MaterialCode, CustomControlConstants.AddOn.Search, "#modalMaterialCodeSelect", new { @id = "txtMaterialCode"})*@
+                        @Html.ExtTextBoxAddOnFor(model => model.MaterialCode, CustomControlConstants.AddOn.Search, "#modalMaterialCodeSelect", new { @id = "txtMaterialCode"})
+                    </div>
+
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.BailmentClass)
+                    </div>
+                    <div class="col-lg-2"
+                         id="BailmentClass">
+                        @Html.ExtTextBoxFor(model => model.BailmentClass, new {@readonly = "true", @id = "txtBailmentClass"})
+                    </div>
+                </div>
+
+                <div class="row form-group-sm">
+                    <div class="col-lg-3">
+                        @Html.ExtLabelFor(model => model.MaterialName)
+                    </div>
+                    <div class="col-lg-7">
+                        @Html.ExtTextBoxFor(model => model.MaterialName, new {@readonly = "true", @id = "txtMaterialName"})
+                        @*@Html.ValidationMessageFor(m => m.Within)*@
+                        @*   @Html.ExtNumberAddOnFor(model => model.Within, CustomControlConstants.AddOn.Text, "days", new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 0, Min = 0})*@
+                    </div>
+                    @*<div class="col-lg-2">
+                        <div class="pull-left search-button-panel">                            
+                            <button type="button" class="btn btn-default btn-flat" id="btnSearch" onclick="search()">Go</button>
+                            <button type="button" class="btn btn-default btn-flat" onclick=" ClearSearch() ">Clear</button>
+                        </div>                        
+                    </div>*@
+                    <div class="col-lg-2">
+                        <div class="pull-right search-button-panel">
+                            <button type="button" class="btn btn-default btn-flat" id="btnSearch" onclick="search()">&nbsp;&nbsp; Go &nbsp;</button>
+                            <button type="button" class="btn btn-default btn-flat" onclick=" ClearSearch() ">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.Grid(Model.Grid)
+            </div> 
+            
+            <div class="row form-group">
+                <div class="col-lg-8">
+
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.GrandTotal)
+                </div>
+                <div class="col-lg-2">
+                    @*@Html.ExtTextBoxFor(model => model.GrandTotal, new { @readonly = "true"})*@
+                    @Html.ExtNumberFor(model => model.GrandTotal, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @readonly = "true", @style = "text-align:right" })
+                </div>
+            </div>           
+        </div> 
+               
+        
+    </div>
+</div>
+<div class="col-lg-12">        
+        <div class="panel panel-danger">
+            <div class="panel-heading">Print Option</div>
+            <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-lg-3">
+
+                </div>
+
+                <div class="col-lg-9">
+                    @Html.ExtRadioButtonFor(model => model.PrintOptions, EnumsHelper.GetListItemsWithDescription<Constants.PrintOptions>(Constants.PrintOptions.Normal).OrderBy(x=>x.Value), new { id = "PrintOptions", onchange = "OnChangePrint()" }, true, 4)
+                </div>
+            </div> 
+            <div class="panel-body">
+                <div class="col-lg-1">
+                    <button class="btn btn-default btn-flat pull-right btn-less-5-chars" id="btnPrint" onclick="exportInquiryByMaterialName(event)">Print</button>
+                </div>
+            </div>                            
+            </div>
+        </div>    
+</div>
+
+
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="printMaterialNameArea"></div>
+</div>
+

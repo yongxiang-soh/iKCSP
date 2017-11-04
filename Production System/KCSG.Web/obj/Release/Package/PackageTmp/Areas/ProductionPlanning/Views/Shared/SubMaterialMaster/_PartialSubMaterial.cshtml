@@ -1,0 +1,176 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@model  KCSG.Web.Areas.ProductionPlanning.ViewModels.SubMaterialMasters.SubMaterialViewModel
+@using (Ajax.BeginForm("Edit", "Matertial", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess(data, status, xhr)" }, new { @id = "addNewForm" }))
+{
+    
+    @Html.HiddenFor(model => model.IsCreate)
+    
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            @if (Model.IsCreate)
+            {
+                <span>Add Sup. Material Master DB - TCPP035F</span>
+            }
+            else
+            {
+                <span>Update Sup. Material Master DB - TCPP035F</span>
+            }
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.SubMaterialCode)
+                    </div>
+                    <div class="col-xs-8">
+                        @if (Model.IsCreate)
+                        {
+                            @Html.ExtTextBoxFor(model => model.SubMaterialCode, new { style = "width:100%; margin-left:-5px;" })
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.SubMaterialCode, new { style = "width:100%;margin-left: -5px", @readonly = "readonly", @id = "disabledInput", @class = "form-control" })
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.SubMaterialDsp)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxFor(model => model.SubMaterialDsp)
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.SupplierCode)
+                    </div>
+                    <div class="col-xs-8" style="margin-left: -5px">
+                        @Html.ExtTextBoxAddOnFor(model => model.SupplierCode, CustomControlConstants.AddOn.Search, "#modalSupplierCodeSelect", new { @id = "txtSupplierCode" })
+                      
+                    </div>
+                </div>
+            </div>
+         
+         
+        <div class="row form-group">
+            <div class="col-xs-4">
+                <div class="col-xs-6 editor-label">
+                    @Html.ExtLabelFor(model => model.Price)
+                </div>
+                <div class="col-xs-6 editor-field">
+                    @Html.ExtNumberFor(model => model.Price,new NumberOption(){NumberOfDecimal = 2,Max = 99999.99})
+                </div>
+            </div>
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.State)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtTextBoxFor(model => model.State)
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.ModifyClass)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtTextBoxFor(model => model.ModifyClass)
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row form-group">
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.Department)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtTextBoxFor(model => model.Department)
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.PackingUnit)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtNumberFor(model => model.PackingUnit, new NumberOption() { NumberOfDecimal = 2,Max = 9999.99})
+                    </div>
+                </div>
+
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.Unit)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtTextBoxFor(model => model.Unit)
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.EMP)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtNumberFor(model => model.EMP,new NumberOption(){NumberOfDecimal = 2,Max = 9999999.99} )
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="col-xs-6 editor-label">
+                        @Html.ExtLabelFor(model => model.FactoryClass)
+                    </div>
+                    <div class="col-xs-6 editor-field">
+                        @Html.ExtTextBoxFor(model => model.FactoryClass)
+                    </div>
+                </div>
+               
+            </div>
+
+
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(m => m.Baliment)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtRadioButtonFor(m => m.Baliment, EnumHelper.GetSelectList(typeof(Constants.Bailment), Constants.Bailment.Normal))
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-flat btn-default btn-less-5-chars" value="OK" />
+           
+            <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" hideForm() ">Cancel</button>  
+            </div>
+            
+    </div>
+
+}
+
+<script type="text/javascript">
+    $().ready(function () {
+        @if (Model.IsCreate)
+        {
+         <text>
+        $("#SubMaterialCode").focus();
+        </text>
+        }
+        else
+        { <text>
+        $("#SubMaterialDsp").focus();
+        </text>
+        }
+
+
+
+        $.validator.unobtrusive.parse('#addNewForm');
+    });
+</script>
+

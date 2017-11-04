@@ -1,0 +1,1292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KCSGDataModelStoreContainer" CdmEntityContainer="KCSGConnectionString">
+    <FunctionImportMapping FunctionImportName="FindStockTakingPreProduct" FunctionName="KCSGDataModel.Store.FindStockTakingPreProduct">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KCSGDataModel.FindStockTakingPreProduct_Result">
+          <ScalarProperty Name="f37_shelfrow" ColumnName="f37_shelfrow" />
+          <ScalarProperty Name="f37_shelfbay" ColumnName="f37_shelfbay" />
+          <ScalarProperty Name="f37_shelflevel" ColumnName="f37_shelflevel" />
+          <ScalarProperty Name="f49_kndcmdno" ColumnName="f49_kndcmdno" />
+          <ScalarProperty Name="f49_preproductcode" ColumnName="f49_preproductcode" />
+          <ScalarProperty Name="f03_preproductname" ColumnName="f03_preproductname" />
+          <ScalarProperty Name="f49_preproductlotno" ColumnName="f49_preproductlotno" />
+          <ScalarProperty Name="f49_amount" ColumnName="f49_amount" />
+          <ScalarProperty Name="f37_containertype" ColumnName="f37_containertype" />
+          <ScalarProperty Name="f49_containercode" ColumnName="f49_containercode" />
+          <ScalarProperty Name="f37_updatedate" ColumnName="f37_updatedate" />
+          <ScalarProperty Name="f37_containerno" ColumnName="f37_containerno" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetStockTakingPreProductByShelf" FunctionName="KCSGDataModel.Store.GetStockTakingPreProductByShelf">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="KCSGDataModel.GetStockTakingPreProductByShelf_Result">
+          <ScalarProperty Name="F31_ShelfRow" ColumnName="F31_ShelfRow" />
+          <ScalarProperty Name="F31_ShelfBay" ColumnName="F31_ShelfBay" />
+          <ScalarProperty Name="F31_ShelfLevel" ColumnName="F31_ShelfLevel" />
+          <ScalarProperty Name="F31_ShelfStatus" ColumnName="F31_ShelfStatus" />
+          <ScalarProperty Name="F31_ShelfType" ColumnName="F31_ShelfType" />
+          <ScalarProperty Name="F31_LiquidClass" ColumnName="F31_LiquidClass" />
+          <ScalarProperty Name="F31_CmnShfAgnOrd" ColumnName="F31_CmnShfAgnOrd" />
+          <ScalarProperty Name="F31_LqdShfAgnOrd" ColumnName="F31_LqdShfAgnOrd" />
+          <ScalarProperty Name="F31_StockTakingFlag" ColumnName="F31_StockTakingFlag" />
+          <ScalarProperty Name="F31_TerminalNo" ColumnName="F31_TerminalNo" />
+          <ScalarProperty Name="F31_PalletNo" ColumnName="F31_PalletNo" />
+          <ScalarProperty Name="F31_SupplierCode" ColumnName="F31_SupplierCode" />
+          <ScalarProperty Name="F31_LoadAmount" ColumnName="F31_LoadAmount" />
+          <ScalarProperty Name="F31_Amount" ColumnName="F31_Amount" />
+          <ScalarProperty Name="F31_StorageDate" ColumnName="F31_StorageDate" />
+          <ScalarProperty Name="F31_RetrievalDate" ColumnName="F31_RetrievalDate" />
+          <ScalarProperty Name="F31_AddDate" ColumnName="F31_AddDate" />
+          <ScalarProperty Name="F31_UpdateDate" ColumnName="F31_UpdateDate" />
+          <ScalarProperty Name="F31_UpdateCount" ColumnName="F31_UpdateCount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="FindPrePdtShfSts" FunctionName="KCSGDataModel.Store.FindPrePdtShfSts" />
+    <FunctionImportMapping FunctionImportName="GetPdtShfSts" FunctionName="KCSGDataModel.Store.GetPdtShfSts" />
+    <FunctionImportMapping FunctionImportName="DeleteMonthlyProcess1" FunctionName="KCSGDataModel.Store.DeleteMonthlyProcess" />
+    <EntitySetMapping Name="RealtimeConnections">
+      <EntityTypeMapping TypeName="KCSGDataModel.RealtimeConnection">
+        <MappingFragment StoreEntitySet="RealtimeConnection">
+          <ScalarProperty Name="Joined" ColumnName="Joined" />
+          <ScalarProperty Name="TerminalNo" ColumnName="TerminalNo" />
+          <ScalarProperty Name="Index" ColumnName="Index" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Te80_Env_Mesp">
+      <EntityTypeMapping TypeName="KCSGDataModel.Te80_Env_Mesp">
+        <MappingFragment StoreEntitySet="Te80_Env_Mesp">
+          <ScalarProperty Name="F80_H_Cal_Lo" ColumnName="F80_H_Cal_Lo" />
+          <ScalarProperty Name="F80_H_Cal_Up" ColumnName="F80_H_Cal_Up" />
+          <ScalarProperty Name="F80_H_Scale" ColumnName="F80_H_Scale" />
+          <ScalarProperty Name="F80_H_Dis_Lo" ColumnName="F80_H_Dis_Lo" />
+          <ScalarProperty Name="F80_H_Dis_Up" ColumnName="F80_H_Dis_Up" />
+          <ScalarProperty Name="F80_T_Cal_Lo" ColumnName="F80_T_Cal_Lo" />
+          <ScalarProperty Name="F80_T_Cal_Up" ColumnName="F80_T_Cal_Up" />
+          <ScalarProperty Name="F80_T_Scale" ColumnName="F80_T_Scale" />
+          <ScalarProperty Name="F80_T_Dis_Lo" ColumnName="F80_T_Dis_Lo" />
+          <ScalarProperty Name="F80_T_Dis_Up" ColumnName="F80_T_Dis_Up" />
+          <ScalarProperty Name="F80_H_Range" ColumnName="F80_H_Range" />
+          <ScalarProperty Name="F80_H_Cpk" ColumnName="F80_H_Cpk" />
+          <ScalarProperty Name="F80_H_Cp" ColumnName="F80_H_Cp" />
+          <ScalarProperty Name="F80_H_Sigma" ColumnName="F80_H_Sigma" />
+          <ScalarProperty Name="F80_H_Mean" ColumnName="F80_H_Mean" />
+          <ScalarProperty Name="F80_H_Lcl" ColumnName="F80_H_Lcl" />
+          <ScalarProperty Name="F80_H_Ucl" ColumnName="F80_H_Ucl" />
+          <ScalarProperty Name="F80_H_Lsl" ColumnName="F80_H_Lsl" />
+          <ScalarProperty Name="F80_H_Usl" ColumnName="F80_H_Usl" />
+          <ScalarProperty Name="F80_T_Range" ColumnName="F80_T_Range" />
+          <ScalarProperty Name="F80_T_Cpk" ColumnName="F80_T_Cpk" />
+          <ScalarProperty Name="F80_T_Cp" ColumnName="F80_T_Cp" />
+          <ScalarProperty Name="F80_T_Sigma" ColumnName="F80_T_Sigma" />
+          <ScalarProperty Name="F80_T_Mean" ColumnName="F80_T_Mean" />
+          <ScalarProperty Name="F80_T_Lcl" ColumnName="F80_T_Lcl" />
+          <ScalarProperty Name="F80_T_Ucl" ColumnName="F80_T_Ucl" />
+          <ScalarProperty Name="F80_T_Lsl" ColumnName="F80_T_Lsl" />
+          <ScalarProperty Name="F80_T_Usl" ColumnName="F80_T_Usl" />
+          <ScalarProperty Name="F80_D_To" ColumnName="F80_D_To" />
+          <ScalarProperty Name="F80_D_From" ColumnName="F80_D_From" />
+          <ScalarProperty Name="F80_Humidity" ColumnName="F80_Humidity" />
+          <ScalarProperty Name="F80_Name" ColumnName="F80_Name" />
+          <ScalarProperty Name="F80_Id" ColumnName="F80_Id" />
+          <ScalarProperty Name="F80_Type" ColumnName="F80_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Te81_Env_Temp">
+      <EntityTypeMapping TypeName="KCSGDataModel.Te81_Env_Temp">
+        <MappingFragment StoreEntitySet="Te81_Env_Temp">
+          <ScalarProperty Name="F81_Humidity" ColumnName="F81_Humidity" />
+          <ScalarProperty Name="F81_Temp" ColumnName="F81_Temp" />
+          <ScalarProperty Name="F81_Id" ColumnName="F81_Id" />
+          <ScalarProperty Name="F81_Env_Time" ColumnName="F81_Env_Time" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Te82_Env_Aval">
+      <EntityTypeMapping TypeName="KCSGDataModel.Te82_Env_Aval">
+        <MappingFragment StoreEntitySet="Te82_Env_Aval">
+          <ScalarProperty Name="F82_Status" ColumnName="F82_Status" />
+          <ScalarProperty Name="F82_Id" ColumnName="F82_Id" />
+          <ScalarProperty Name="F82_Env_Time" ColumnName="F82_Env_Time" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Te83_Env_Else">
+      <EntityTypeMapping TypeName="KCSGDataModel.Te83_Env_Else">
+        <MappingFragment StoreEntitySet="Te83_Env_Else">
+          <ScalarProperty Name="F83_Value" ColumnName="F83_Value" />
+          <ScalarProperty Name="F83_Id" ColumnName="F83_Id" />
+          <ScalarProperty Name="F83_Env_Time" ColumnName="F83_Env_Time" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Te84_Env_Lot">
+      <EntityTypeMapping TypeName="KCSGDataModel.Te84_Env_Lot">
+        <MappingFragment StoreEntitySet="Te84_Env_Lot">
+          <ScalarProperty Name="F84_Temp" ColumnName="F84_Temp" />
+          <ScalarProperty Name="F84_ProductLotNo" ColumnName="F84_ProductLotNo" />
+          <ScalarProperty Name="F84_S_Time" ColumnName="F84_S_Time" />
+          <ScalarProperty Name="F84_ProductCode" ColumnName="F84_ProductCode" />
+          <ScalarProperty Name="F84_Id" ColumnName="F84_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Te85_Env_Prod">
+      <EntityTypeMapping TypeName="KCSGDataModel.Te85_Env_Prod">
+        <MappingFragment StoreEntitySet="Te85_Env_Prod">
+          <ScalarProperty Name="F85_No_Lot" ColumnName="F85_No_Lot" />
+          <ScalarProperty Name="F85_R_Sigma" ColumnName="F85_R_Sigma" />
+          <ScalarProperty Name="F85_R_Mean" ColumnName="F85_R_Mean" />
+          <ScalarProperty Name="F85_R_Range" ColumnName="F85_R_Range" />
+          <ScalarProperty Name="F85_R_Cp" ColumnName="F85_R_Cp" />
+          <ScalarProperty Name="F85_R_Cpk" ColumnName="F85_R_Cpk" />
+          <ScalarProperty Name="F85_R_Lcl" ColumnName="F85_R_Lcl" />
+          <ScalarProperty Name="F85_R_Ucl" ColumnName="F85_R_Ucl" />
+          <ScalarProperty Name="F85_R_Low" ColumnName="F85_R_Low" />
+          <ScalarProperty Name="F85_R_High" ColumnName="F85_R_High" />
+          <ScalarProperty Name="F85_T_Sigma" ColumnName="F85_T_Sigma" />
+          <ScalarProperty Name="F85_T_Mean" ColumnName="F85_T_Mean" />
+          <ScalarProperty Name="F85_T_Range" ColumnName="F85_T_Range" />
+          <ScalarProperty Name="F85_T_Cp" ColumnName="F85_T_Cp" />
+          <ScalarProperty Name="F85_T_Cpk" ColumnName="F85_T_Cpk" />
+          <ScalarProperty Name="F85_T_Lcl" ColumnName="F85_T_Lcl" />
+          <ScalarProperty Name="F85_T_Ucl" ColumnName="F85_T_Ucl" />
+          <ScalarProperty Name="F85_T_Low" ColumnName="F85_T_Low" />
+          <ScalarProperty Name="F85_T_High" ColumnName="F85_T_High" />
+          <ScalarProperty Name="F85_R_Lsl" ColumnName="F85_R_Lsl" />
+          <ScalarProperty Name="F85_R_Usl" ColumnName="F85_R_Usl" />
+          <ScalarProperty Name="F85_M_Lcl" ColumnName="F85_M_Lcl" />
+          <ScalarProperty Name="F85_M_Ucl" ColumnName="F85_M_Ucl" />
+          <ScalarProperty Name="F85_M_Lsl" ColumnName="F85_M_Lsl" />
+          <ScalarProperty Name="F85_M_Usl" ColumnName="F85_M_Usl" />
+          <ScalarProperty Name="F85_To" ColumnName="F85_To" />
+          <ScalarProperty Name="F85_From" ColumnName="F85_From" />
+          <ScalarProperty Name="F85_Id" ColumnName="F85_Id" />
+          <ScalarProperty Name="F85_Type" ColumnName="F85_Type" />
+          <ScalarProperty Name="F85_Code" ColumnName="F85_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TH60_MtrWhsCmdHst">
+      <EntityTypeMapping TypeName="KCSGDataModel.TH60_MtrWhsCmdHst">
+        <MappingFragment StoreEntitySet="TH60_MtrWhsCmdHst">
+          <ScalarProperty Name="F60_ID" ColumnName="F60_ID" />
+          <ScalarProperty Name="F60_UpdateCount" ColumnName="F60_UpdateCount" />
+          <ScalarProperty Name="F60_UpdateDate" ColumnName="F60_UpdateDate" />
+          <ScalarProperty Name="F60_AddDate" ColumnName="F60_AddDate" />
+          <ScalarProperty Name="F60_RetryCount" ColumnName="F60_RetryCount" />
+          <ScalarProperty Name="F60_AbnormalCode" ColumnName="F60_AbnormalCode" />
+          <ScalarProperty Name="F60_PictureNo" ColumnName="F60_PictureNo" />
+          <ScalarProperty Name="F60_TerminalNo" ColumnName="F60_TerminalNo" />
+          <ScalarProperty Name="F60_CommandEndDate" ColumnName="F60_CommandEndDate" />
+          <ScalarProperty Name="F60_CommandSendDate" ColumnName="F60_CommandSendDate" />
+          <ScalarProperty Name="F60_To" ColumnName="F60_To" />
+          <ScalarProperty Name="F60_From" ColumnName="F60_From" />
+          <ScalarProperty Name="F60_PalletNo" ColumnName="F60_PalletNo" />
+          <ScalarProperty Name="F60_Priority" ColumnName="F60_Priority" />
+          <ScalarProperty Name="F60_Status" ColumnName="F60_Status" />
+          <ScalarProperty Name="F60_StrRtrType" ColumnName="F60_StrRtrType" />
+          <ScalarProperty Name="F60_CommandType" ColumnName="F60_CommandType" />
+          <ScalarProperty Name="F60_CmdSeqNo" ColumnName="F60_CmdSeqNo" />
+          <ScalarProperty Name="F60_CommandNo" ColumnName="F60_CommandNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TH61_MtrStgRtrHst">
+      <EntityTypeMapping TypeName="KCSGDataModel.TH61_MtrStgRtrHst">
+        <MappingFragment StoreEntitySet="TH61_MtrStgRtrHst">
+          <ScalarProperty Name="F61_UpdateDate" ColumnName="F61_UpdateDate" />
+          <ScalarProperty Name="F61_AddDate" ColumnName="F61_AddDate" />
+          <ScalarProperty Name="F61_Amount" ColumnName="F61_Amount" />
+          <ScalarProperty Name="F61_TerminalNo" ColumnName="F61_TerminalNo" />
+          <ScalarProperty Name="F61_StgRtrCls" ColumnName="F61_StgRtrCls" />
+          <ScalarProperty Name="F61_To" ColumnName="F61_To" />
+          <ScalarProperty Name="F61_From" ColumnName="F61_From" />
+          <ScalarProperty Name="F61_PrtDvrNo" ColumnName="F61_PrtDvrNo" />
+          <ScalarProperty Name="F61_PrcPdtNo" ColumnName="F61_PrcPdtNo" />
+          <ScalarProperty Name="F61_StgRtrDate" ColumnName="F61_StgRtrDate" />
+          <ScalarProperty Name="F61_PalletNo" ColumnName="F61_PalletNo" />
+          <ScalarProperty Name="F61_MaterialLotNo" ColumnName="F61_MaterialLotNo" />
+          <ScalarProperty Name="F61_MaterialCode" ColumnName="F61_MaterialCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TH63_PrePdtWhsCmdHst">
+      <EntityTypeMapping TypeName="KCSGDataModel.TH63_PrePdtWhsCmdHst">
+        <MappingFragment StoreEntitySet="TH63_PrePdtWhsCmdHst">
+          <ScalarProperty Name="F63_ID" ColumnName="F63_ID" />
+          <ScalarProperty Name="F63_UpdateCount" ColumnName="F63_UpdateCount" />
+          <ScalarProperty Name="F63_UpdateDate" ColumnName="F63_UpdateDate" />
+          <ScalarProperty Name="F63_AddDate" ColumnName="F63_AddDate" />
+          <ScalarProperty Name="F63_RetryCount" ColumnName="F63_RetryCount" />
+          <ScalarProperty Name="F63_AbnormalCode" ColumnName="F63_AbnormalCode" />
+          <ScalarProperty Name="F63_PictureNo" ColumnName="F63_PictureNo" />
+          <ScalarProperty Name="F63_TerminalNo" ColumnName="F63_TerminalNo" />
+          <ScalarProperty Name="F63_CommandEndDate" ColumnName="F63_CommandEndDate" />
+          <ScalarProperty Name="F63_CommandSendDate" ColumnName="F63_CommandSendDate" />
+          <ScalarProperty Name="F63_To" ColumnName="F63_To" />
+          <ScalarProperty Name="F63_From" ColumnName="F63_From" />
+          <ScalarProperty Name="F63_Priority" ColumnName="F63_Priority" />
+          <ScalarProperty Name="F63_ContainerCode" ColumnName="F63_ContainerCode" />
+          <ScalarProperty Name="F63_ContainerNo" ColumnName="F63_ContainerNo" />
+          <ScalarProperty Name="F63_Status" ColumnName="F63_Status" />
+          <ScalarProperty Name="F63_StrRtrType" ColumnName="F63_StrRtrType" />
+          <ScalarProperty Name="F63_CommandType" ColumnName="F63_CommandType" />
+          <ScalarProperty Name="F63_CmdSeqNo" ColumnName="F63_CmdSeqNo" />
+          <ScalarProperty Name="F63_CommandNo" ColumnName="F63_CommandNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TH64_PrePdtStgRtrHst">
+      <EntityTypeMapping TypeName="KCSGDataModel.TH64_PrePdtStgRtrHst">
+        <MappingFragment StoreEntitySet="TH64_PrePdtStgRtrHst">
+          <ScalarProperty Name="F64_UpdateDate" ColumnName="F64_UpdateDate" />
+          <ScalarProperty Name="F64_AddDate" ColumnName="F64_AddDate" />
+          <ScalarProperty Name="F64_Amount" ColumnName="F64_Amount" />
+          <ScalarProperty Name="F64_TerminalNo" ColumnName="F64_TerminalNo" />
+          <ScalarProperty Name="F64_StgRtrCls" ColumnName="F64_StgRtrCls" />
+          <ScalarProperty Name="F64_To" ColumnName="F64_To" />
+          <ScalarProperty Name="F64_From" ColumnName="F64_From" />
+          <ScalarProperty Name="F64_ContainerSeqNo" ColumnName="F64_ContainerSeqNo" />
+          <ScalarProperty Name="F64_ContainerNo" ColumnName="F64_ContainerNo" />
+          <ScalarProperty Name="F64_StgRtrDate" ColumnName="F64_StgRtrDate" />
+          <ScalarProperty Name="F64_ContainerCode" ColumnName="F64_ContainerCode" />
+          <ScalarProperty Name="F64_PreProductLotNo" ColumnName="F64_PreProductLotNo" />
+          <ScalarProperty Name="F64_PreProductCode" ColumnName="F64_PreProductCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TH65_PdtStgRtrHst">
+      <EntityTypeMapping TypeName="KCSGDataModel.TH65_PdtStgRtrHst">
+        <MappingFragment StoreEntitySet="TH65_PdtStgRtrHst">
+          <ScalarProperty Name="F65_UpdateDate" ColumnName="F65_UpdateDate" />
+          <ScalarProperty Name="F65_AddDate" ColumnName="F65_AddDate" />
+          <ScalarProperty Name="F65_Amount" ColumnName="F65_Amount" />
+          <ScalarProperty Name="F65_TerminalNo" ColumnName="F65_TerminalNo" />
+          <ScalarProperty Name="F65_StgRtrCls" ColumnName="F65_StgRtrCls" />
+          <ScalarProperty Name="F65_To" ColumnName="F65_To" />
+          <ScalarProperty Name="F65_From" ColumnName="F65_From" />
+          <ScalarProperty Name="F65_ProductLotNo" ColumnName="F65_ProductLotNo" />
+          <ScalarProperty Name="F65_StgRtrDate" ColumnName="F65_StgRtrDate" />
+          <ScalarProperty Name="F65_PalletNo" ColumnName="F65_PalletNo" />
+          <ScalarProperty Name="F65_PrePdtLotNo" ColumnName="F65_PrePdtLotNo" />
+          <ScalarProperty Name="F65_ProductCode" ColumnName="F65_ProductCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TH66_PdtWhsCmdHst">
+      <EntityTypeMapping TypeName="KCSGDataModel.TH66_PdtWhsCmdHst">
+        <MappingFragment StoreEntitySet="TH66_PdtWhsCmdHst">
+          <ScalarProperty Name="F66_ID" ColumnName="F66_ID" />
+          <ScalarProperty Name="F66_UpdateCount" ColumnName="F66_UpdateCount" />
+          <ScalarProperty Name="F66_UpdateDate" ColumnName="F66_UpdateDate" />
+          <ScalarProperty Name="F66_AddDate" ColumnName="F66_AddDate" />
+          <ScalarProperty Name="F66_RetryCount" ColumnName="F66_RetryCount" />
+          <ScalarProperty Name="F66_AbnormalCode" ColumnName="F66_AbnormalCode" />
+          <ScalarProperty Name="F66_PictureNo" ColumnName="F66_PictureNo" />
+          <ScalarProperty Name="F66_TerminalNo" ColumnName="F66_TerminalNo" />
+          <ScalarProperty Name="F66_CommandEndDate" ColumnName="F66_CommandEndDate" />
+          <ScalarProperty Name="F66_CommandSendDate" ColumnName="F66_CommandSendDate" />
+          <ScalarProperty Name="F66_To" ColumnName="F66_To" />
+          <ScalarProperty Name="F66_From" ColumnName="F66_From" />
+          <ScalarProperty Name="F66_PalletNo" ColumnName="F66_PalletNo" />
+          <ScalarProperty Name="F66_Priority" ColumnName="F66_Priority" />
+          <ScalarProperty Name="F66_Status" ColumnName="F66_Status" />
+          <ScalarProperty Name="F66_StrRtrType" ColumnName="F66_StrRtrType" />
+          <ScalarProperty Name="F66_CommandType" ColumnName="F66_CommandType" />
+          <ScalarProperty Name="F66_CmdSeqNo" ColumnName="F66_CmdSeqNo" />
+          <ScalarProperty Name="F66_CommandNo" ColumnName="F66_CommandNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TH67_CrfHst">
+      <EntityTypeMapping TypeName="KCSGDataModel.TH67_CrfHst">
+        <MappingFragment StoreEntitySet="TH67_CrfHst">
+          <ScalarProperty Name="F67_UpdateCount" ColumnName="F67_UpdateCount" />
+          <ScalarProperty Name="F67_UpdateDate" ColumnName="F67_UpdateDate" />
+          <ScalarProperty Name="F67_AddDate" ColumnName="F67_AddDate" />
+          <ScalarProperty Name="F67_CertificationDate" ColumnName="F67_CertificationDate" />
+          <ScalarProperty Name="F67_CertificationFlag" ColumnName="F67_CertificationFlag" />
+          <ScalarProperty Name="F67_ProductLotNo" ColumnName="F67_ProductLotNo" />
+          <ScalarProperty Name="F67_Amount" ColumnName="F67_Amount" />
+          <ScalarProperty Name="F67_ProductFlg" ColumnName="F67_ProductFlg" />
+          <ScalarProperty Name="F67_PrePdtLotNo" ColumnName="F67_PrePdtLotNo" />
+          <ScalarProperty Name="F67_ProductCode" ColumnName="F67_ProductCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TH70_PdtShipHst">
+      <EntityTypeMapping TypeName="KCSGDataModel.TH70_PdtShipHst">
+        <MappingFragment StoreEntitySet="TH70_PdtShipHst">
+          <ScalarProperty Name="F70_UpdateCount" ColumnName="F70_UpdateCount" />
+          <ScalarProperty Name="F70_UpdateDate" ColumnName="F70_UpdateDate" />
+          <ScalarProperty Name="F70_AddDate" ColumnName="F70_AddDate" />
+          <ScalarProperty Name="F70_ShippedAmount" ColumnName="F70_ShippedAmount" />
+          <ScalarProperty Name="F70_ProductLotNo" ColumnName="F70_ProductLotNo" />
+          <ScalarProperty Name="F70_ShelfNo" ColumnName="F70_ShelfNo" />
+          <ScalarProperty Name="F70_ProductCode" ColumnName="F70_ProductCode" />
+          <ScalarProperty Name="F70_PrePdtLotNo" ColumnName="F70_PrePdtLotNo" />
+          <ScalarProperty Name="F70_PalletNo" ColumnName="F70_PalletNo" />
+          <ScalarProperty Name="F70_ShipCommandNo" ColumnName="F70_ShipCommandNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM01_Material">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM01_Material">
+        <MappingFragment StoreEntitySet="TM01_Material">
+          <ScalarProperty Name="F01_UpdateCount" ColumnName="F01_UpdateCount" />
+          <ScalarProperty Name="F01_UpdateDate" ColumnName="F01_UpdateDate" />
+          <ScalarProperty Name="F01_AddDate" ColumnName="F01_AddDate" />
+          <ScalarProperty Name="F01_Color" ColumnName="F01_Color" />
+          <ScalarProperty Name="F01_State" ColumnName="F01_State" />
+          <ScalarProperty Name="F01_MsrMacSndFlg" ColumnName="F01_MsrMacSndFlg" />
+          <ScalarProperty Name="F01_RtrPosCls" ColumnName="F01_RtrPosCls" />
+          <ScalarProperty Name="F01_FactoryClass" ColumnName="F01_FactoryClass" />
+          <ScalarProperty Name="F01_LiquidClass" ColumnName="F01_LiquidClass" />
+          <ScalarProperty Name="F01_Department" ColumnName="F01_Department" />
+          <ScalarProperty Name="F01_Price" ColumnName="F01_Price" />
+          <ScalarProperty Name="F01_PackingUnit" ColumnName="F01_PackingUnit" />
+          <ScalarProperty Name="F01_EntrustedClass" ColumnName="F01_EntrustedClass" />
+          <ScalarProperty Name="F01_Unit" ColumnName="F01_Unit" />
+          <ScalarProperty Name="F01_Point" ColumnName="F01_Point" />
+          <ScalarProperty Name="F01_ModifyClass" ColumnName="F01_ModifyClass" />
+          <ScalarProperty Name="F01_EMP" ColumnName="F01_EMP" />
+          <ScalarProperty Name="F01_MaterialDsp" ColumnName="F01_MaterialDsp" />
+          <ScalarProperty Name="F01_SupplierCode" ColumnName="F01_SupplierCode" />
+          <ScalarProperty Name="F01_MaterialCode" ColumnName="F01_MaterialCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM02_PrePdtMkp">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM02_PrePdtMkp">
+        <MappingFragment StoreEntitySet="TM02_PrePdtMkp">
+          <ScalarProperty Name="F02_IsDraft" ColumnName="F02_IsDraft" />
+          <ScalarProperty Name="F02_UpdateCount" ColumnName="F02_UpdateCount" />
+          <ScalarProperty Name="F02_UpdateDate" ColumnName="F02_UpdateDate" />
+          <ScalarProperty Name="F02_AddDate" ColumnName="F02_AddDate" />
+          <ScalarProperty Name="F02_Addtive" ColumnName="F02_Addtive" />
+          <ScalarProperty Name="F02_MsrSeqNo" ColumnName="F02_MsrSeqNo" />
+          <ScalarProperty Name="F02_PotSeqNo" ColumnName="F02_PotSeqNo" />
+          <ScalarProperty Name="F02_LoadPosition" ColumnName="F02_LoadPosition" />
+          <ScalarProperty Name="F02_MilingFlag2" ColumnName="F02_MilingFlag2" />
+          <ScalarProperty Name="F02_MilingFlag1" ColumnName="F02_MilingFlag1" />
+          <ScalarProperty Name="F02_WeighingMethod" ColumnName="F02_WeighingMethod" />
+          <ScalarProperty Name="F02_LayinPriority" ColumnName="F02_LayinPriority" />
+          <ScalarProperty Name="F02_4FLayinAmount" ColumnName="F02_4FLayinAmount" />
+          <ScalarProperty Name="F02_3FLayinAmount" ColumnName="F02_3FLayinAmount" />
+          <ScalarProperty Name="F02_ThrawSeqNo" ColumnName="F02_ThrawSeqNo" />
+          <ScalarProperty Name="F02_MaterialCode" ColumnName="F02_MaterialCode" />
+          <ScalarProperty Name="F02_PreProductCode" ColumnName="F02_PreProductCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM03_PreProduct">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM03_PreProduct">
+        <MappingFragment StoreEntitySet="TM03_PreProduct">
+          <ScalarProperty Name="F03_UpdateCount" ColumnName="F03_UpdateCount" />
+          <ScalarProperty Name="F03_UpdateDate" ColumnName="F03_UpdateDate" />
+          <ScalarProperty Name="F03_AddDate" ColumnName="F03_AddDate" />
+          <ScalarProperty Name="F03_MixMode" ColumnName="F03_MixMode" />
+          <ScalarProperty Name="F03_LotNoEnd" ColumnName="F03_LotNoEnd" />
+          <ScalarProperty Name="F03_ColorClass" ColumnName="F03_ColorClass" />
+          <ScalarProperty Name="F03_LowTmpClass" ColumnName="F03_LowTmpClass" />
+          <ScalarProperty Name="F03_ContainerType" ColumnName="F03_ContainerType" />
+          <ScalarProperty Name="F03_TmpRetTime" ColumnName="F03_TmpRetTime" />
+          <ScalarProperty Name="F03_MixDate3" ColumnName="F03_MixDate3" />
+          <ScalarProperty Name="F03_MixDate2" ColumnName="F03_MixDate2" />
+          <ScalarProperty Name="F03_MixDate1" ColumnName="F03_MixDate1" />
+          <ScalarProperty Name="F03_Point" ColumnName="F03_Point" />
+          <ScalarProperty Name="F03_AllMtrAmtPerBth" ColumnName="F03_AllMtrAmtPerBth" />
+          <ScalarProperty Name="F03_YieldRate" ColumnName="F03_YieldRate" />
+          <ScalarProperty Name="F03_KneadingLine" ColumnName="F03_KneadingLine" />
+          <ScalarProperty Name="F03_BatchLot" ColumnName="F03_BatchLot" />
+          <ScalarProperty Name="F03_PreProductName" ColumnName="F03_PreProductName" />
+          <ScalarProperty Name="F03_PreProductCode" ColumnName="F03_PreProductCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM04_Supplier">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM04_Supplier">
+        <MappingFragment StoreEntitySet="TM04_Supplier">
+          <ScalarProperty Name="F04_UpdateCount" ColumnName="F04_UpdateCount" />
+          <ScalarProperty Name="F04_UpdateDate" ColumnName="F04_UpdateDate" />
+          <ScalarProperty Name="F04_AddDate" ColumnName="F04_AddDate" />
+          <ScalarProperty Name="F04_MaxLoadAmount" ColumnName="F04_MaxLoadAmount" />
+          <ScalarProperty Name="F04_Fax3" ColumnName="F04_Fax3" />
+          <ScalarProperty Name="F04_Fax2" ColumnName="F04_Fax2" />
+          <ScalarProperty Name="F04_Fax1" ColumnName="F04_Fax1" />
+          <ScalarProperty Name="F04_Tel3" ColumnName="F04_Tel3" />
+          <ScalarProperty Name="F04_Tel2" ColumnName="F04_Tel2" />
+          <ScalarProperty Name="F04_Tel1" ColumnName="F04_Tel1" />
+          <ScalarProperty Name="F04_Address3" ColumnName="F04_Address3" />
+          <ScalarProperty Name="F04_Address2" ColumnName="F04_Address2" />
+          <ScalarProperty Name="F04_Address1" ColumnName="F04_Address1" />
+          <ScalarProperty Name="F04_SupplierName" ColumnName="F04_SupplierName" />
+          <ScalarProperty Name="F04_SupplierCode" ColumnName="F04_SupplierCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM05_Conveyor">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM05_Conveyor">
+        <MappingFragment StoreEntitySet="TM05_Conveyor">
+          <ScalarProperty Name="F05_UpdateCount" ColumnName="F05_UpdateCount" />
+          <ScalarProperty Name="F05_UpdateDate" ColumnName="F05_UpdateDate" />
+          <ScalarProperty Name="F05_AddDate" ColumnName="F05_AddDate" />
+          <ScalarProperty Name="F05_ColorClass" ColumnName="F05_ColorClass" />
+          <ScalarProperty Name="F05_LineNo" ColumnName="F05_LineNo" />
+          <ScalarProperty Name="F05_UsingTerm" ColumnName="F05_UsingTerm" />
+          <ScalarProperty Name="F05_BufferUsing" ColumnName="F05_BufferUsing" />
+          <ScalarProperty Name="F05_StrRtrSts" ColumnName="F05_StrRtrSts" />
+          <ScalarProperty Name="F05_MaxBuffer" ColumnName="F05_MaxBuffer" />
+          <ScalarProperty Name="F05_TerminalNo" ColumnName="F05_TerminalNo" />
+          <ScalarProperty Name="F05_ConveyorCode" ColumnName="F05_ConveyorCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM06_Terminal">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM06_Terminal">
+        <MappingFragment StoreEntitySet="TM06_Terminal">
+          <ScalarProperty Name="F06_UpdateCount" ColumnName="F06_UpdateCount" />
+          <ScalarProperty Name="F06_UpdateDate" ColumnName="F06_UpdateDate" />
+          <ScalarProperty Name="F06_AddDate" ColumnName="F06_AddDate" />
+          <ScalarProperty Name="F06_IPAddress4" ColumnName="F06_IPAddress4" />
+          <ScalarProperty Name="F06_IPAddress3" ColumnName="F06_IPAddress3" />
+          <ScalarProperty Name="F06_IPAddress2" ColumnName="F06_IPAddress2" />
+          <ScalarProperty Name="F06_IPAddress1" ColumnName="F06_IPAddress1" />
+          <ScalarProperty Name="F06_OtherFlag" ColumnName="F06_OtherFlag" />
+          <ScalarProperty Name="F06_ContinueFlag" ColumnName="F06_ContinueFlag" />
+          <ScalarProperty Name="F06_TabletLine" ColumnName="F06_TabletLine" />
+          <ScalarProperty Name="F06_TermPos" ColumnName="F06_TermPos" />
+          <ScalarProperty Name="F06_TerminalName" ColumnName="F06_TerminalName" />
+          <ScalarProperty Name="F06_TerminalNo" ColumnName="F06_TerminalNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM07_Calendar">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM07_Calendar">
+        <MappingFragment StoreEntitySet="TM07_Calendar">
+          <ScalarProperty Name="F07_UpdateCount" ColumnName="F07_UpdateCount" />
+          <ScalarProperty Name="F07_UpdateDate" ColumnName="F07_UpdateDate" />
+          <ScalarProperty Name="F07_AddDate" ColumnName="F07_AddDate" />
+          <ScalarProperty Name="F07_Description" ColumnName="F07_Description" />
+          <ScalarProperty Name="F07_SunSatDayFlag" ColumnName="F07_SunSatDayFlag" />
+          <ScalarProperty Name="F07_HolidayFlag" ColumnName="F07_HolidayFlag" />
+          <ScalarProperty Name="F07_Date" ColumnName="F07_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM09_Product">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM09_Product">
+        <MappingFragment StoreEntitySet="TM09_Product">
+          <ScalarProperty Name="F09_Label" ColumnName="F09_Label" />
+          <ScalarProperty Name="F09_UpdateCount" ColumnName="F09_UpdateCount" />
+          <ScalarProperty Name="F09_UpdateDate" ColumnName="F09_UpdateDate" />
+          <ScalarProperty Name="F09_AddDate" ColumnName="F09_AddDate" />
+          <ScalarProperty Name="F09_LowTmpCls" ColumnName="F09_LowTmpCls" />
+          <ScalarProperty Name="F09_InsideLabelClass" ColumnName="F09_InsideLabelClass" />
+          <ScalarProperty Name="F09_ValidPeriod" ColumnName="F09_ValidPeriod" />
+          <ScalarProperty Name="F09_Unit" ColumnName="F09_Unit" />
+          <ScalarProperty Name="F09_PreProductCode" ColumnName="F09_PreProductCode" />
+          <ScalarProperty Name="F09_PackingUnit" ColumnName="F09_PackingUnit" />
+          <ScalarProperty Name="F09_StdStkMtn" ColumnName="F09_StdStkMtn" />
+          <ScalarProperty Name="F09_Factor" ColumnName="F09_Factor" />
+          <ScalarProperty Name="F09_YieldRate" ColumnName="F09_YieldRate" />
+          <ScalarProperty Name="F09_EndUserCode" ColumnName="F09_EndUserCode" />
+          <ScalarProperty Name="F09_KneadingTime" ColumnName="F09_KneadingTime" />
+          <ScalarProperty Name="F09_TabletAmount" ColumnName="F09_TabletAmount" />
+          <ScalarProperty Name="F09_NeedTime" ColumnName="F09_NeedTime" />
+          <ScalarProperty Name="F09_TabletSize2" ColumnName="F09_TabletSize2" />
+          <ScalarProperty Name="F09_TabletSize" ColumnName="F09_TabletSize" />
+          <ScalarProperty Name="F09_TabletType" ColumnName="F09_TabletType" />
+          <ScalarProperty Name="F09_ProductDesp" ColumnName="F09_ProductDesp" />
+          <ScalarProperty Name="F09_ProductCode" ColumnName="F09_ProductCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM10_EndUsr">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM10_EndUsr">
+        <MappingFragment StoreEntitySet="TM10_EndUsr">
+          <ScalarProperty Name="F10_UpdateCount" ColumnName="F10_UpdateCount" />
+          <ScalarProperty Name="F10_UpdateDate" ColumnName="F10_UpdateDate" />
+          <ScalarProperty Name="F10_AddDate" ColumnName="F10_AddDate" />
+          <ScalarProperty Name="F10_Fax3" ColumnName="F10_Fax3" />
+          <ScalarProperty Name="F10_Fax2" ColumnName="F10_Fax2" />
+          <ScalarProperty Name="F10_Fax1" ColumnName="F10_Fax1" />
+          <ScalarProperty Name="F10_Tel3" ColumnName="F10_Tel3" />
+          <ScalarProperty Name="F10_Tel2" ColumnName="F10_Tel2" />
+          <ScalarProperty Name="F10_Tel1" ColumnName="F10_Tel1" />
+          <ScalarProperty Name="F10_Address3" ColumnName="F10_Address3" />
+          <ScalarProperty Name="F10_Address2" ColumnName="F10_Address2" />
+          <ScalarProperty Name="F10_Address1" ColumnName="F10_Address1" />
+          <ScalarProperty Name="F10_EndUserName" ColumnName="F10_EndUserName" />
+          <ScalarProperty Name="F10_EndUserCode" ColumnName="F10_EndUserCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM11_PckMtr">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM11_PckMtr">
+        <MappingFragment StoreEntitySet="TM11_PckMtr">
+          <ScalarProperty Name="F11_UpdateCount" ColumnName="F11_UpdateCount" />
+          <ScalarProperty Name="F11_UpdateDate" ColumnName="F11_UpdateDate" />
+          <ScalarProperty Name="F11_AddDate" ColumnName="F11_AddDate" />
+          <ScalarProperty Name="F11_Unit" ColumnName="F11_Unit" />
+          <ScalarProperty Name="F11_Amount" ColumnName="F11_Amount" />
+          <ScalarProperty Name="F11_SubMaterialCode" ColumnName="F11_SubMaterialCode" />
+          <ScalarProperty Name="F11_ProductCode" ColumnName="F11_ProductCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM12_TrmPicMgn">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM12_TrmPicMgn">
+        <MappingFragment StoreEntitySet="TM12_TrmPicMgn">
+          <ScalarProperty Name="F12_PictureNo" ColumnName="F12_PictureNo" />
+          <ScalarProperty Name="F12_TerminalNo" ColumnName="F12_TerminalNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM13_Function">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM13_Function">
+        <MappingFragment StoreEntitySet="TM13_Function">
+          <ScalarProperty Name="F13_UsingCount" ColumnName="F13_UsingCount" />
+          <ScalarProperty Name="F13_MaxUser" ColumnName="F13_MaxUser" />
+          <ScalarProperty Name="F13_UserNumCtrlFlag" ColumnName="F13_UserNumCtrlFlag" />
+          <ScalarProperty Name="F13_AccessCtrlFlag" ColumnName="F13_AccessCtrlFlag" />
+          <ScalarProperty Name="F13_PswdLevel" ColumnName="F13_PswdLevel" />
+          <ScalarProperty Name="F13_PictureNo" ColumnName="F13_PictureNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM14_Device">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM14_Device">
+        <MappingFragment StoreEntitySet="TM14_Device">
+          <ScalarProperty Name="F14_CSNumber" ColumnName="F14_CSNumber" />
+          <ScalarProperty Name="F14_UpdateCount" ColumnName="F14_UpdateCount" />
+          <ScalarProperty Name="F14_UpdateDate" ColumnName="F14_UpdateDate" />
+          <ScalarProperty Name="F14_AddDate" ColumnName="F14_AddDate" />
+          <ScalarProperty Name="F14_CSNo" ColumnName="F14_CSNo" />
+          <ScalarProperty Name="F14_DeviceMode" ColumnName="F14_DeviceMode" />
+          <ScalarProperty Name="F14_IPAddress4" ColumnName="F14_IPAddress4" />
+          <ScalarProperty Name="F14_IPAddress3" ColumnName="F14_IPAddress3" />
+          <ScalarProperty Name="F14_IPAddress2" ColumnName="F14_IPAddress2" />
+          <ScalarProperty Name="F14_IPAddress1" ColumnName="F14_IPAddress1" />
+          <ScalarProperty Name="F14_DeviceStatus" ColumnName="F14_DeviceStatus" />
+          <ScalarProperty Name="F14_UsePermitClass" ColumnName="F14_UsePermitClass" />
+          <ScalarProperty Name="F14_DeviceName" ColumnName="F14_DeviceName" />
+          <ScalarProperty Name="F14_DeviceCode" ColumnName="F14_DeviceCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM15_SubMaterial">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM15_SubMaterial">
+        <MappingFragment StoreEntitySet="TM15_SubMaterial">
+          <ScalarProperty Name="F15_UpdateCount" ColumnName="F15_UpdateCount" />
+          <ScalarProperty Name="F15_UpdateDate" ColumnName="F15_UpdateDate" />
+          <ScalarProperty Name="F15_AddDate" ColumnName="F15_AddDate" />
+          <ScalarProperty Name="F15_Color" ColumnName="F15_Color" />
+          <ScalarProperty Name="F15_State" ColumnName="F15_State" />
+          <ScalarProperty Name="F15_Department" ColumnName="F15_Department" />
+          <ScalarProperty Name="F15_Price" ColumnName="F15_Price" />
+          <ScalarProperty Name="F15_PackingUnit" ColumnName="F15_PackingUnit" />
+          <ScalarProperty Name="F15_EntrustedClass" ColumnName="F15_EntrustedClass" />
+          <ScalarProperty Name="F15_Unit" ColumnName="F15_Unit" />
+          <ScalarProperty Name="F15_Point" ColumnName="F15_Point" />
+          <ScalarProperty Name="F15_ModifyClass" ColumnName="F15_ModifyClass" />
+          <ScalarProperty Name="F15_EMP" ColumnName="F15_EMP" />
+          <ScalarProperty Name="F15_MaterialDsp" ColumnName="F15_MaterialDsp" />
+          <ScalarProperty Name="F15_SupplierCode" ColumnName="F15_SupplierCode" />
+          <ScalarProperty Name="F15_SubMaterialCode" ColumnName="F15_SubMaterialCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM16_Password">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM16_Password">
+        <MappingFragment StoreEntitySet="TM16_Password">
+          <ScalarProperty Name="F16_Password" ColumnName="F16_Password" />
+          <ScalarProperty Name="F16_PswdLevel" ColumnName="F16_PswdLevel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM18_Access">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM18_Access">
+        <MappingFragment StoreEntitySet="TM18_Access">
+          <ScalarProperty Name="F18_LockedPicture" ColumnName="F18_LockedPicture" />
+          <ScalarProperty Name="F18_LockPicture" ColumnName="F18_LockPicture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX30_Reception">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX30_Reception">
+        <MappingFragment StoreEntitySet="TX30_Reception">
+          <ScalarProperty Name="F30_UpdateCount" ColumnName="F30_UpdateCount" />
+          <ScalarProperty Name="F30_UpdateDate" ColumnName="F30_UpdateDate" />
+          <ScalarProperty Name="F30_AddDate" ColumnName="F30_AddDate" />
+          <ScalarProperty Name="F30_AcceptClass" ColumnName="F30_AcceptClass" />
+          <ScalarProperty Name="F30_StoragedAmount" ColumnName="F30_StoragedAmount" />
+          <ScalarProperty Name="F30_ExpectDate" ColumnName="F30_ExpectDate" />
+          <ScalarProperty Name="F30_ExpectAmount" ColumnName="F30_ExpectAmount" />
+          <ScalarProperty Name="F30_MaterialCode" ColumnName="F30_MaterialCode" />
+          <ScalarProperty Name="F30_PrtDvrNo" ColumnName="F30_PrtDvrNo" />
+          <ScalarProperty Name="F30_PrcOrdNo" ColumnName="F30_PrcOrdNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX31_MtrShfSts">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX31_MtrShfSts">
+        <MappingFragment StoreEntitySet="TX31_MtrShfSts">
+          <ScalarProperty Name="F31_UpdateCount" ColumnName="F31_UpdateCount" />
+          <ScalarProperty Name="F31_UpdateDate" ColumnName="F31_UpdateDate" />
+          <ScalarProperty Name="F31_AddDate" ColumnName="F31_AddDate" />
+          <ScalarProperty Name="F31_RetrievalDate" ColumnName="F31_RetrievalDate" />
+          <ScalarProperty Name="F31_StorageDate" ColumnName="F31_StorageDate" />
+          <ScalarProperty Name="F31_Amount" ColumnName="F31_Amount" />
+          <ScalarProperty Name="F31_LoadAmount" ColumnName="F31_LoadAmount" />
+          <ScalarProperty Name="F31_SupplierCode" ColumnName="F31_SupplierCode" />
+          <ScalarProperty Name="F31_PalletNo" ColumnName="F31_PalletNo" />
+          <ScalarProperty Name="F31_TerminalNo" ColumnName="F31_TerminalNo" />
+          <ScalarProperty Name="F31_StockTakingFlag" ColumnName="F31_StockTakingFlag" />
+          <ScalarProperty Name="F31_LqdShfAgnOrd" ColumnName="F31_LqdShfAgnOrd" />
+          <ScalarProperty Name="F31_CmnShfAgnOrd" ColumnName="F31_CmnShfAgnOrd" />
+          <ScalarProperty Name="F31_LiquidClass" ColumnName="F31_LiquidClass" />
+          <ScalarProperty Name="F31_ShelfType" ColumnName="F31_ShelfType" />
+          <ScalarProperty Name="F31_ShelfStatus" ColumnName="F31_ShelfStatus" />
+          <ScalarProperty Name="F31_ShelfLevel" ColumnName="F31_ShelfLevel" />
+          <ScalarProperty Name="F31_ShelfBay" ColumnName="F31_ShelfBay" />
+          <ScalarProperty Name="F31_ShelfRow" ColumnName="F31_ShelfRow" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX32_MtrShf">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX32_MtrShf">
+        <MappingFragment StoreEntitySet="TX32_MtrShf">
+          <ScalarProperty Name="F32_UpdateCount" ColumnName="F32_UpdateCount" />
+          <ScalarProperty Name="F32_UpdateDate" ColumnName="F32_UpdateDate" />
+          <ScalarProperty Name="F32_AddDate" ColumnName="F32_AddDate" />
+          <ScalarProperty Name="F32_RetrievalDate" ColumnName="F32_RetrievalDate" />
+          <ScalarProperty Name="F32_ReStorageDate" ColumnName="F32_ReStorageDate" />
+          <ScalarProperty Name="F32_StorageDate" ColumnName="F32_StorageDate" />
+          <ScalarProperty Name="F32_GnrlMsrMacSndEndFlg" ColumnName="F32_GnrlMsrMacSndEndFlg" />
+          <ScalarProperty Name="F32_MegaMsrMacSndEndFlg" ColumnName="F32_MegaMsrMacSndEndFlg" />
+          <ScalarProperty Name="F32_PrtDvrNo" ColumnName="F32_PrtDvrNo" />
+          <ScalarProperty Name="F32_PrcOrdNo" ColumnName="F32_PrcOrdNo" />
+          <ScalarProperty Name="F32_PalletNo" ColumnName="F32_PalletNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX33_MtrShfStk">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX33_MtrShfStk">
+        <MappingFragment StoreEntitySet="TX33_MtrShfStk">
+          <ScalarProperty Name="F33_UpdateDate" ColumnName="F33_UpdateDate" />
+          <ScalarProperty Name="F33_AddDate" ColumnName="F33_AddDate" />
+          <ScalarProperty Name="F33_StockFlag" ColumnName="F33_StockFlag" />
+          <ScalarProperty Name="F33_Amount" ColumnName="F33_Amount" />
+          <ScalarProperty Name="F33_MaterialLotNo" ColumnName="F33_MaterialLotNo" />
+          <ScalarProperty Name="F33_MaterialCode" ColumnName="F33_MaterialCode" />
+          <ScalarProperty Name="F33_PalletNo" ColumnName="F33_PalletNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX34_MtrWhsCmd">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX34_MtrWhsCmd">
+        <MappingFragment StoreEntitySet="TX34_MtrWhsCmd">
+          <ScalarProperty Name="F34_UpdateCount" ColumnName="F34_UpdateCount" />
+          <ScalarProperty Name="F34_UpdateDate" ColumnName="F34_UpdateDate" />
+          <ScalarProperty Name="F34_AddDate" ColumnName="F34_AddDate" />
+          <ScalarProperty Name="F34_RetryCount" ColumnName="F34_RetryCount" />
+          <ScalarProperty Name="F34_AbnormalCode" ColumnName="F34_AbnormalCode" />
+          <ScalarProperty Name="F34_PictureNo" ColumnName="F34_PictureNo" />
+          <ScalarProperty Name="F34_TerminalNo" ColumnName="F34_TerminalNo" />
+          <ScalarProperty Name="F34_CommandEndDate" ColumnName="F34_CommandEndDate" />
+          <ScalarProperty Name="F34_CommandSendDate" ColumnName="F34_CommandSendDate" />
+          <ScalarProperty Name="F34_To" ColumnName="F34_To" />
+          <ScalarProperty Name="F34_From" ColumnName="F34_From" />
+          <ScalarProperty Name="F34_PalletNo" ColumnName="F34_PalletNo" />
+          <ScalarProperty Name="F34_Priority" ColumnName="F34_Priority" />
+          <ScalarProperty Name="F34_Status" ColumnName="F34_Status" />
+          <ScalarProperty Name="F34_StrRtrType" ColumnName="F34_StrRtrType" />
+          <ScalarProperty Name="F34_CommandType" ColumnName="F34_CommandType" />
+          <ScalarProperty Name="F34_CmdSeqNo" ColumnName="F34_CmdSeqNo" />
+          <ScalarProperty Name="F34_CommandNo" ColumnName="F34_CommandNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX37_PrePdtShfSts">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX37_PrePdtShfSts">
+        <MappingFragment StoreEntitySet="TX37_PrePdtShfSts">
+          <ScalarProperty Name="F37_UpdateCount" ColumnName="F37_UpdateCount" />
+          <ScalarProperty Name="F37_UpdateDate" ColumnName="F37_UpdateDate" />
+          <ScalarProperty Name="F37_AddDate" ColumnName="F37_AddDate" />
+          <ScalarProperty Name="F37_RetrievalDate" ColumnName="F37_RetrievalDate" />
+          <ScalarProperty Name="F37_StorageDate" ColumnName="F37_StorageDate" />
+          <ScalarProperty Name="F37_StockTakingFlag" ColumnName="F37_StockTakingFlag" />
+          <ScalarProperty Name="F37_ContainerType" ColumnName="F37_ContainerType" />
+          <ScalarProperty Name="F37_TerminalNo" ColumnName="F37_TerminalNo" />
+          <ScalarProperty Name="F37_LowTmpShfAgnOrd" ColumnName="F37_LowTmpShfAgnOrd" />
+          <ScalarProperty Name="F37_CmnShfAgnOrd" ColumnName="F37_CmnShfAgnOrd" />
+          <ScalarProperty Name="F37_LowTmpCls" ColumnName="F37_LowTmpCls" />
+          <ScalarProperty Name="F37_ShelfType" ColumnName="F37_ShelfType" />
+          <ScalarProperty Name="F37_ShelfStatus" ColumnName="F37_ShelfStatus" />
+          <ScalarProperty Name="F37_ContainerNo" ColumnName="F37_ContainerNo" />
+          <ScalarProperty Name="F37_ContainerCode" ColumnName="F37_ContainerCode" />
+          <ScalarProperty Name="F37_ShelfLevel" ColumnName="F37_ShelfLevel" />
+          <ScalarProperty Name="F37_ShelfBay" ColumnName="F37_ShelfBay" />
+          <ScalarProperty Name="F37_ShelfRow" ColumnName="F37_ShelfRow" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX39_PdtPln">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX39_PdtPln">
+        <MappingFragment StoreEntitySet="TX39_PdtPln">
+          <ScalarProperty Name="F39_UpdateCount" ColumnName="F39_UpdateCount" />
+          <ScalarProperty Name="F39_UpdateDate" ColumnName="F39_UpdateDate" />
+          <ScalarProperty Name="F39_AddDate" ColumnName="F39_AddDate" />
+          <ScalarProperty Name="F39_EndLotAmont" ColumnName="F39_EndLotAmont" />
+          <ScalarProperty Name="F39_StartLotNo" ColumnName="F39_StartLotNo" />
+          <ScalarProperty Name="F39_ColorClass" ColumnName="F39_ColorClass" />
+          <ScalarProperty Name="F39_Status" ColumnName="F39_Status" />
+          <ScalarProperty Name="F39_PrePdtLotAmt" ColumnName="F39_PrePdtLotAmt" />
+          <ScalarProperty Name="F39_KndCmdNo" ColumnName="F39_KndCmdNo" />
+          <ScalarProperty Name="F39_KneadingLine" ColumnName="F39_KneadingLine" />
+          <ScalarProperty Name="F39_KndEptBgnDate" ColumnName="F39_KndEptBgnDate" />
+          <ScalarProperty Name="F39_PreProductCode" ColumnName="F39_PreProductCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX40_PdtShfStk">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX40_PdtShfStk">
+        <MappingFragment StoreEntitySet="TX40_PdtShfStk">
+          <ScalarProperty Name="F40_UpdateCount" ColumnName="F40_UpdateCount" />
+          <ScalarProperty Name="F40_UpdateDate" ColumnName="F40_UpdateDate" />
+          <ScalarProperty Name="F40_AddDate" ColumnName="F40_AddDate" />
+          <ScalarProperty Name="F40_CertificationDate" ColumnName="F40_CertificationDate" />
+          <ScalarProperty Name="F40_CertificationFlg" ColumnName="F40_CertificationFlg" />
+          <ScalarProperty Name="F40_AssignAmount" ColumnName="F40_AssignAmount" />
+          <ScalarProperty Name="F40_ShipCommandNo" ColumnName="F40_ShipCommandNo" />
+          <ScalarProperty Name="F40_ShippedAmount" ColumnName="F40_ShippedAmount" />
+          <ScalarProperty Name="F40_TabletingEndDate" ColumnName="F40_TabletingEndDate" />
+          <ScalarProperty Name="F40_Amount" ColumnName="F40_Amount" />
+          <ScalarProperty Name="F40_Fraction" ColumnName="F40_Fraction" />
+          <ScalarProperty Name="F40_PackageAmount" ColumnName="F40_PackageAmount" />
+          <ScalarProperty Name="F40_StockFlag" ColumnName="F40_StockFlag" />
+          <ScalarProperty Name="F40_ProductLotNo" ColumnName="F40_ProductLotNo" />
+          <ScalarProperty Name="F40_ProductCode" ColumnName="F40_ProductCode" />
+          <ScalarProperty Name="F40_PrePdtLotNo" ColumnName="F40_PrePdtLotNo" />
+          <ScalarProperty Name="F40_PalletNo" ColumnName="F40_PalletNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX41_TbtCmd">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX41_TbtCmd">
+        <MappingFragment StoreEntitySet="TX41_TbtCmd">
+          <ScalarProperty Name="F41_UpdateCount" ColumnName="F41_UpdateCount" />
+          <ScalarProperty Name="F41_UpdateDate" ColumnName="F41_UpdateDate" />
+          <ScalarProperty Name="F41_AddDate" ColumnName="F41_AddDate" />
+          <ScalarProperty Name="F41_TbtEndDate" ColumnName="F41_TbtEndDate" />
+          <ScalarProperty Name="F41_TbtBgnDate" ColumnName="F41_TbtBgnDate" />
+          <ScalarProperty Name="F41_ChgCntAmt" ColumnName="F41_ChgCntAmt" />
+          <ScalarProperty Name="F41_RtrEndCntAmt" ColumnName="F41_RtrEndCntAmt" />
+          <ScalarProperty Name="F41_TblCntAmt" ColumnName="F41_TblCntAmt" />
+          <ScalarProperty Name="F41_Status" ColumnName="F41_Status" />
+          <ScalarProperty Name="F41_PreproductCode" ColumnName="F41_PreproductCode" />
+          <ScalarProperty Name="F41_TabletLine" ColumnName="F41_TabletLine" />
+          <ScalarProperty Name="F41_PrePdtLotNo" ColumnName="F41_PrePdtLotNo" />
+          <ScalarProperty Name="F41_KndCmdNo" ColumnName="F41_KndCmdNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX42_KndCmd">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX42_KndCmd">
+        <MappingFragment StoreEntitySet="TX42_KndCmd">
+          <ScalarProperty Name="F42_UpdateCount" ColumnName="F42_UpdateCount" />
+          <ScalarProperty Name="F42_UpdateDate" ColumnName="F42_UpdateDate" />
+          <ScalarProperty Name="F42_AddDate" ColumnName="F42_AddDate" />
+          <ScalarProperty Name="F42_MtrRtrFlg" ColumnName="F42_MtrRtrFlg" />
+          <ScalarProperty Name="F42_CommandSeqNo" ColumnName="F42_CommandSeqNo" />
+          <ScalarProperty Name="F42_LotSeqNo" ColumnName="F42_LotSeqNo" />
+          <ScalarProperty Name="F42_KndCmdBookNo" ColumnName="F42_KndCmdBookNo" />
+          <ScalarProperty Name="F42_BatchEndAmount" ColumnName="F42_BatchEndAmount" />
+          <ScalarProperty Name="F42_StgCtnAmt" ColumnName="F42_StgCtnAmt" />
+          <ScalarProperty Name="F42_KndEndDate" ColumnName="F42_KndEndDate" />
+          <ScalarProperty Name="F42_KndBgnDate" ColumnName="F42_KndBgnDate" />
+          <ScalarProperty Name="F42_TrwEndDate" ColumnName="F42_TrwEndDate" />
+          <ScalarProperty Name="F42_TrwBgnDate" ColumnName="F42_TrwBgnDate" />
+          <ScalarProperty Name="F42_NeedAmount" ColumnName="F42_NeedAmount" />
+          <ScalarProperty Name="F42_ThrowAmount" ColumnName="F42_ThrowAmount" />
+          <ScalarProperty Name="F42_Status" ColumnName="F42_Status" />
+          <ScalarProperty Name="F42_OutSideClass" ColumnName="F42_OutSideClass" />
+          <ScalarProperty Name="F42_KndEptBgnDate" ColumnName="F42_KndEptBgnDate" />
+          <ScalarProperty Name="F42_PreProductCode" ColumnName="F42_PreProductCode" />
+          <ScalarProperty Name="F42_PrePdtLotNo" ColumnName="F42_PrePdtLotNo" />
+          <ScalarProperty Name="F42_KndCmdNo" ColumnName="F42_KndCmdNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX43_KndRcd">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX43_KndRcd">
+        <MappingFragment StoreEntitySet="TX43_KndRcd">
+          <ScalarProperty Name="F43_UpdateCount" ColumnName="F43_UpdateCount" />
+          <ScalarProperty Name="F43_UpdateDate" ColumnName="F43_UpdateDate" />
+          <ScalarProperty Name="F43_AddDate" ColumnName="F43_AddDate" />
+          <ScalarProperty Name="F43_BthEndDate" ColumnName="F43_BthEndDate" />
+          <ScalarProperty Name="F43_BthBgnDate" ColumnName="F43_BthBgnDate" />
+          <ScalarProperty Name="F43_MsrMacSndDate" ColumnName="F43_MsrMacSndDate" />
+          <ScalarProperty Name="F43_LayinginAmount" ColumnName="F43_LayinginAmount" />
+          <ScalarProperty Name="F43_MaterialLotNo" ColumnName="F43_MaterialLotNo" />
+          <ScalarProperty Name="F43_MaterialCode" ColumnName="F43_MaterialCode" />
+          <ScalarProperty Name="F43_BatchSeqNo" ColumnName="F43_BatchSeqNo" />
+          <ScalarProperty Name="F43_PrePdtLotNo" ColumnName="F43_PrePdtLotNo" />
+          <ScalarProperty Name="F43_KndCmdNo" ColumnName="F43_KndCmdNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX44_ShippingPlan">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX44_ShippingPlan">
+        <MappingFragment StoreEntitySet="TX44_ShippingPlan">
+          <ScalarProperty Name="F44_UpdateCount" ColumnName="F44_UpdateCount" />
+          <ScalarProperty Name="F44_UpdateDate" ColumnName="F44_UpdateDate" />
+          <ScalarProperty Name="F44_AddDate" ColumnName="F44_AddDate" />
+          <ScalarProperty Name="F44_Status" ColumnName="F44_Status" />
+          <ScalarProperty Name="F44_EndUserCode" ColumnName="F44_EndUserCode" />
+          <ScalarProperty Name="F44_DeliveryDate" ColumnName="F44_DeliveryDate" />
+          <ScalarProperty Name="F44_ShippedAmount" ColumnName="F44_ShippedAmount" />
+          <ScalarProperty Name="F44_ShpRqtAmt" ColumnName="F44_ShpRqtAmt" />
+          <ScalarProperty Name="F44_ProductCode" ColumnName="F44_ProductCode" />
+          <ScalarProperty Name="F44_ProductLotNo" ColumnName="F44_ProductLotNo" />
+          <ScalarProperty Name="F44_ShipCommandNo" ColumnName="F44_ShipCommandNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX45_ShipCommand">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX45_ShipCommand">
+        <MappingFragment StoreEntitySet="TX45_ShipCommand">
+          <ScalarProperty Name="F45_UpdateCount" ColumnName="F45_UpdateCount" />
+          <ScalarProperty Name="F45_UpdateDate" ColumnName="F45_UpdateDate" />
+          <ScalarProperty Name="F45_AddDate" ColumnName="F45_AddDate" />
+          <ScalarProperty Name="F45_ShippedAmount" ColumnName="F45_ShippedAmount" />
+          <ScalarProperty Name="F45_ShipAmount" ColumnName="F45_ShipAmount" />
+          <ScalarProperty Name="F45_ShipDate" ColumnName="F45_ShipDate" />
+          <ScalarProperty Name="F45_ShipCommandNo" ColumnName="F45_ShipCommandNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX46_SupMtrStk">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX46_SupMtrStk">
+        <MappingFragment StoreEntitySet="TX46_SupMtrStk">
+          <ScalarProperty Name="F46_UpdateCount" ColumnName="F46_UpdateCount" />
+          <ScalarProperty Name="F46_UpdateDate" ColumnName="F46_UpdateDate" />
+          <ScalarProperty Name="F46_AddDate" ColumnName="F46_AddDate" />
+          <ScalarProperty Name="F46_Amount" ColumnName="F46_Amount" />
+          <ScalarProperty Name="F46_StorageDate" ColumnName="F46_StorageDate" />
+          <ScalarProperty Name="F46_Comment" ColumnName="F46_Comment" />
+          <ScalarProperty Name="F46_SubMaterialCode" ColumnName="F46_SubMaterialCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX47_PdtWhsCmd">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX47_PdtWhsCmd">
+        <MappingFragment StoreEntitySet="TX47_PdtWhsCmd">
+          <ScalarProperty Name="F47_UpdateCount" ColumnName="F47_UpdateCount" />
+          <ScalarProperty Name="F47_UpdateDate" ColumnName="F47_UpdateDate" />
+          <ScalarProperty Name="F47_AddDate" ColumnName="F47_AddDate" />
+          <ScalarProperty Name="F47_RetryCount" ColumnName="F47_RetryCount" />
+          <ScalarProperty Name="F47_AbnormalCode" ColumnName="F47_AbnormalCode" />
+          <ScalarProperty Name="F47_PictureNo" ColumnName="F47_PictureNo" />
+          <ScalarProperty Name="F47_TerminalNo" ColumnName="F47_TerminalNo" />
+          <ScalarProperty Name="F47_CommandEndDate" ColumnName="F47_CommandEndDate" />
+          <ScalarProperty Name="F47_CommandSendDate" ColumnName="F47_CommandSendDate" />
+          <ScalarProperty Name="F47_To" ColumnName="F47_To" />
+          <ScalarProperty Name="F47_From" ColumnName="F47_From" />
+          <ScalarProperty Name="F47_PalletNo" ColumnName="F47_PalletNo" />
+          <ScalarProperty Name="F47_Priority" ColumnName="F47_Priority" />
+          <ScalarProperty Name="F47_Status" ColumnName="F47_Status" />
+          <ScalarProperty Name="F47_StrRtrType" ColumnName="F47_StrRtrType" />
+          <ScalarProperty Name="F47_CommandType" ColumnName="F47_CommandType" />
+          <ScalarProperty Name="F47_CmdSeqNo" ColumnName="F47_CmdSeqNo" />
+          <ScalarProperty Name="F47_CommandNo" ColumnName="F47_CommandNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX48_NoManage">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX48_NoManage">
+        <MappingFragment StoreEntitySet="TX48_NoManage">
+          <ScalarProperty Name="F48_UpdateCount" ColumnName="F48_UpdateCount" />
+          <ScalarProperty Name="F48_UpdateDate" ColumnName="F48_UpdateDate" />
+          <ScalarProperty Name="F48_AddDate" ColumnName="F48_AddDate" />
+          <ScalarProperty Name="F48_OutPlanPdtCmdNo" ColumnName="F48_OutPlanPdtCmdNo" />
+          <ScalarProperty Name="F48_PdtWhsCmdNo" ColumnName="F48_PdtWhsCmdNo" />
+          <ScalarProperty Name="F48_PrePdtWhsCmdNo" ColumnName="F48_PrePdtWhsCmdNo" />
+          <ScalarProperty Name="F48_MtrWhsCmdNo" ColumnName="F48_MtrWhsCmdNo" />
+          <ScalarProperty Name="F48_CnrKndCmdNo" ColumnName="F48_CnrKndCmdNo" />
+          <ScalarProperty Name="F48_KneadSheefNo" ColumnName="F48_KneadSheefNo" />
+          <ScalarProperty Name="F48_OutKndCmdNo" ColumnName="F48_OutKndCmdNo" />
+          <ScalarProperty Name="F48_GnrKndCmdNo" ColumnName="F48_GnrKndCmdNo" />
+          <ScalarProperty Name="F48_MegaKndCmdNo" ColumnName="F48_MegaKndCmdNo" />
+          <ScalarProperty Name="F48_KndCmdBookNo" ColumnName="F48_KndCmdBookNo" />
+          <ScalarProperty Name="F48_SystemId" ColumnName="F48_SystemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX49_PrePdtShfStk">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX49_PrePdtShfStk">
+        <MappingFragment StoreEntitySet="TX49_PrePdtShfStk">
+          <ScalarProperty Name="F49_UpdateCount" ColumnName="F49_UpdateCount" />
+          <ScalarProperty Name="F49_UpdateDate" ColumnName="F49_UpdateDate" />
+          <ScalarProperty Name="F49_AddDate" ColumnName="F49_AddDate" />
+          <ScalarProperty Name="F49_ContainerSeqNo" ColumnName="F49_ContainerSeqNo" />
+          <ScalarProperty Name="F49_RetrievalDate" ColumnName="F49_RetrievalDate" />
+          <ScalarProperty Name="F49_StorageDate" ColumnName="F49_StorageDate" />
+          <ScalarProperty Name="F49_ShelfStatus" ColumnName="F49_ShelfStatus" />
+          <ScalarProperty Name="F49_Amount" ColumnName="F49_Amount" />
+          <ScalarProperty Name="F49_PreProductLotNo" ColumnName="F49_PreProductLotNo" />
+          <ScalarProperty Name="F49_PreProductCode" ColumnName="F49_PreProductCode" />
+          <ScalarProperty Name="F49_ContainerNo" ColumnName="F49_ContainerNo" />
+          <ScalarProperty Name="F49_KndCmdNo" ColumnName="F49_KndCmdNo" />
+          <ScalarProperty Name="F49_ContainerCode" ColumnName="F49_ContainerCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX50_PrePdtWhsCmd">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX50_PrePdtWhsCmd">
+        <MappingFragment StoreEntitySet="TX50_PrePdtWhsCmd">
+          <ScalarProperty Name="F50_UpdateCount" ColumnName="F50_UpdateCount" />
+          <ScalarProperty Name="F50_UpdateDate" ColumnName="F50_UpdateDate" />
+          <ScalarProperty Name="F50_AddDate" ColumnName="F50_AddDate" />
+          <ScalarProperty Name="F50_LotEndFlg" ColumnName="F50_LotEndFlg" />
+          <ScalarProperty Name="F50_RetryCount" ColumnName="F50_RetryCount" />
+          <ScalarProperty Name="F50_AbnormalCode" ColumnName="F50_AbnormalCode" />
+          <ScalarProperty Name="F50_PictureNo" ColumnName="F50_PictureNo" />
+          <ScalarProperty Name="F50_TerminalNo" ColumnName="F50_TerminalNo" />
+          <ScalarProperty Name="F50_CommandEndDate" ColumnName="F50_CommandEndDate" />
+          <ScalarProperty Name="F50_CommandSendDate" ColumnName="F50_CommandSendDate" />
+          <ScalarProperty Name="F50_To" ColumnName="F50_To" />
+          <ScalarProperty Name="F50_From" ColumnName="F50_From" />
+          <ScalarProperty Name="F50_Priority" ColumnName="F50_Priority" />
+          <ScalarProperty Name="F50_ContainerCode" ColumnName="F50_ContainerCode" />
+          <ScalarProperty Name="F50_ContainerNo" ColumnName="F50_ContainerNo" />
+          <ScalarProperty Name="F50_Status" ColumnName="F50_Status" />
+          <ScalarProperty Name="F50_StrRtrType" ColumnName="F50_StrRtrType" />
+          <ScalarProperty Name="F50_CommandType" ColumnName="F50_CommandType" />
+          <ScalarProperty Name="F50_CmdSeqNo" ColumnName="F50_CmdSeqNo" />
+          <ScalarProperty Name="F50_CommandNo" ColumnName="F50_CommandNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX51_PdtShfSts">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX51_PdtShfSts">
+        <MappingFragment StoreEntitySet="TX51_PdtShfSts">
+          <ScalarProperty Name="F51_UpdateCount" ColumnName="F51_UpdateCount" />
+          <ScalarProperty Name="F51_UpdateDate" ColumnName="F51_UpdateDate" />
+          <ScalarProperty Name="F51_AddDate" ColumnName="F51_AddDate" />
+          <ScalarProperty Name="F51_RetrievalDate" ColumnName="F51_RetrievalDate" />
+          <ScalarProperty Name="F51_StorageDate" ColumnName="F51_StorageDate" />
+          <ScalarProperty Name="F51_TerminalNo" ColumnName="F51_TerminalNo" />
+          <ScalarProperty Name="F51_PalletNo" ColumnName="F51_PalletNo" />
+          <ScalarProperty Name="F51_StockTakingFlag" ColumnName="F51_StockTakingFlag" />
+          <ScalarProperty Name="F51_LoadAmount" ColumnName="F51_LoadAmount" />
+          <ScalarProperty Name="F51_LowTmpShfAgnOrd" ColumnName="F51_LowTmpShfAgnOrd" />
+          <ScalarProperty Name="F51_CmdShfAgnOrd" ColumnName="F51_CmdShfAgnOrd" />
+          <ScalarProperty Name="F51_ShelfType" ColumnName="F51_ShelfType" />
+          <ScalarProperty Name="F51_ShelfStatus" ColumnName="F51_ShelfStatus" />
+          <ScalarProperty Name="F51_ShelfLevel" ColumnName="F51_ShelfLevel" />
+          <ScalarProperty Name="F51_ShelfBay" ColumnName="F51_ShelfBay" />
+          <ScalarProperty Name="F51_ShelfRow" ColumnName="F51_ShelfRow" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX52_MtrMsrSndCmd">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX52_MtrMsrSndCmd">
+        <MappingFragment StoreEntitySet="TX52_MtrMsrSndCmd">
+          <ScalarProperty Name="F52_UpdateCount" ColumnName="F52_UpdateCount" />
+          <ScalarProperty Name="F52_UpdateDate" ColumnName="F52_UpdateDate" />
+          <ScalarProperty Name="F52_AbnormalCode" ColumnName="F52_AbnormalCode" />
+          <ScalarProperty Name="F52_PictureNo" ColumnName="F52_PictureNo" />
+          <ScalarProperty Name="F52_MasterCode" ColumnName="F52_MasterCode" />
+          <ScalarProperty Name="F52_Priority" ColumnName="F52_Priority" />
+          <ScalarProperty Name="F52_Status" ColumnName="F52_Status" />
+          <ScalarProperty Name="F52_CommandType" ColumnName="F52_CommandType" />
+          <ScalarProperty Name="F52_MsrMacCls" ColumnName="F52_MsrMacCls" />
+          <ScalarProperty Name="F52_AddDate" ColumnName="F52_AddDate" />
+          <ScalarProperty Name="F52_TerminalNo" ColumnName="F52_TerminalNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX53_OutSidePrePdtStk">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX53_OutSidePrePdtStk">
+        <MappingFragment StoreEntitySet="TX53_OutSidePrePdtStk">
+          <ScalarProperty Name="F53_UpdateCount" ColumnName="F53_UpdateCount" />
+          <ScalarProperty Name="F53_UpdateDate" ColumnName="F53_UpdateDate" />
+          <ScalarProperty Name="F53_AddDate" ColumnName="F53_AddDate" />
+          <ScalarProperty Name="F53_StockFlag" ColumnName="F53_StockFlag" />
+          <ScalarProperty Name="F53_Amount" ColumnName="F53_Amount" />
+          <ScalarProperty Name="F53_PalletSeqNo" ColumnName="F53_PalletSeqNo" />
+          <ScalarProperty Name="F53_KndCmdNo" ColumnName="F53_KndCmdNo" />
+          <ScalarProperty Name="F53_OutSidePrePdtLotNo" ColumnName="F53_OutSidePrePdtLotNo" />
+          <ScalarProperty Name="F53_OutSidePrePdtCode" ColumnName="F53_OutSidePrePdtCode" />
+          <ScalarProperty Name="F53_PalletNo" ColumnName="F53_PalletNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX55_KndCmdMsrSnd">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX55_KndCmdMsrSnd">
+        <MappingFragment StoreEntitySet="TX55_KndCmdMsrSnd">
+          <ScalarProperty Name="F55_UpdateCount" ColumnName="F55_UpdateCount" />
+          <ScalarProperty Name="F55_UpdateDate" ColumnName="F55_UpdateDate" />
+          <ScalarProperty Name="F55_AddDate" ColumnName="F55_AddDate" />
+          <ScalarProperty Name="F55_AbnormalCode" ColumnName="F55_AbnormalCode" />
+          <ScalarProperty Name="F55_PictureNo" ColumnName="F55_PictureNo" />
+          <ScalarProperty Name="F55_TerminalNo" ColumnName="F55_TerminalNo" />
+          <ScalarProperty Name="F55_MsrSndCls" ColumnName="F55_MsrSndCls" />
+          <ScalarProperty Name="F55_Priority" ColumnName="F55_Priority" />
+          <ScalarProperty Name="F55_Status" ColumnName="F55_Status" />
+          <ScalarProperty Name="F55_PrePdtCode" ColumnName="F55_PrePdtCode" />
+          <ScalarProperty Name="F55_PrePdtLotNo" ColumnName="F55_PrePdtLotNo" />
+          <ScalarProperty Name="F55_KndCmdNo" ColumnName="F55_KndCmdNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX56_TbtPdt">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX56_TbtPdt">
+        <MappingFragment StoreEntitySet="TX56_TbtPdt">
+          <ScalarProperty Name="F56_UpdateCount" ColumnName="F56_UpdateCount" />
+          <ScalarProperty Name="F56_UpdateDate" ColumnName="F56_UpdateDate" />
+          <ScalarProperty Name="F56_AddDate" ColumnName="F56_AddDate" />
+          <ScalarProperty Name="F56_ShipDate" ColumnName="F56_ShipDate" />
+          <ScalarProperty Name="F56_CertificationDate" ColumnName="F56_CertificationDate" />
+          <ScalarProperty Name="F56_CertificationFlag" ColumnName="F56_CertificationFlag" />
+          <ScalarProperty Name="F56_TbtEndDate" ColumnName="F56_TbtEndDate" />
+          <ScalarProperty Name="F56_TbtBgnDate" ColumnName="F56_TbtBgnDate" />
+          <ScalarProperty Name="F56_StorageAmt" ColumnName="F56_StorageAmt" />
+          <ScalarProperty Name="F56_TbtCmdEndAmt" ColumnName="F56_TbtCmdEndAmt" />
+          <ScalarProperty Name="F56_TbtCmdEndFrtAmt" ColumnName="F56_TbtCmdEndFrtAmt" />
+          <ScalarProperty Name="F56_TbtCmdEndPackAmt" ColumnName="F56_TbtCmdEndPackAmt" />
+          <ScalarProperty Name="F56_TbtCmdAmt" ColumnName="F56_TbtCmdAmt" />
+          <ScalarProperty Name="F56_Status" ColumnName="F56_Status" />
+          <ScalarProperty Name="F56_ProductLotNo" ColumnName="F56_ProductLotNo" />
+          <ScalarProperty Name="F56_ProductCode" ColumnName="F56_ProductCode" />
+          <ScalarProperty Name="F56_PrePdtLotNo" ColumnName="F56_PrePdtLotNo" />
+          <ScalarProperty Name="F56_KndCmdNo" ColumnName="F56_KndCmdNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX57_PdtShf">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX57_PdtShf">
+        <MappingFragment StoreEntitySet="TX57_PdtShf">
+          <ScalarProperty Name="F57_UpdateCount" ColumnName="F57_UpdateCount" />
+          <ScalarProperty Name="F57_UpdateDate" ColumnName="F57_UpdateDate" />
+          <ScalarProperty Name="F57_AddDate" ColumnName="F57_AddDate" />
+          <ScalarProperty Name="F57_OutFlg" ColumnName="F57_OutFlg" />
+          <ScalarProperty Name="F57_RetievalDate" ColumnName="F57_RetievalDate" />
+          <ScalarProperty Name="F57_ReStorageDate" ColumnName="F57_ReStorageDate" />
+          <ScalarProperty Name="F57_StorageDate" ColumnName="F57_StorageDate" />
+          <ScalarProperty Name="F57_PalletNo" ColumnName="F57_PalletNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX58_OutPlanPdt">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX58_OutPlanPdt">
+        <MappingFragment StoreEntitySet="TX58_OutPlanPdt">
+          <ScalarProperty Name="F58_UpdateCount" ColumnName="F58_UpdateCount" />
+          <ScalarProperty Name="F58_UpdateDate" ColumnName="F58_UpdateDate" />
+          <ScalarProperty Name="F58_AddDate" ColumnName="F58_AddDate" />
+          <ScalarProperty Name="F58_ShipDate" ColumnName="F58_ShipDate" />
+          <ScalarProperty Name="F58_CertificationDate" ColumnName="F58_CertificationDate" />
+          <ScalarProperty Name="F58_CertificationFlag" ColumnName="F58_CertificationFlag" />
+          <ScalarProperty Name="F58_TbtEndDate" ColumnName="F58_TbtEndDate" />
+          <ScalarProperty Name="F58_StorageAmt" ColumnName="F58_StorageAmt" />
+          <ScalarProperty Name="F58_TbtCmdEndAmt" ColumnName="F58_TbtCmdEndAmt" />
+          <ScalarProperty Name="F58_TbtCmdEndFrtAmt" ColumnName="F58_TbtCmdEndFrtAmt" />
+          <ScalarProperty Name="F58_TbtCmdEndPackAmt" ColumnName="F58_TbtCmdEndPackAmt" />
+          <ScalarProperty Name="F58_Status" ColumnName="F58_Status" />
+          <ScalarProperty Name="F58_ProductLotNo" ColumnName="F58_ProductLotNo" />
+          <ScalarProperty Name="F58_PdtSeqNo" ColumnName="F58_PdtSeqNo" />
+          <ScalarProperty Name="F58_ProductCode" ColumnName="F58_ProductCode" />
+          <ScalarProperty Name="F58_PrePdtLotNo" ColumnName="F58_PrePdtLotNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX91_MaterialTotal">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX91_MaterialTotal">
+        <MappingFragment StoreEntitySet="TX91_MaterialTotal">
+          <ScalarProperty Name="F91_UpdateDate" ColumnName="F91_UpdateDate" />
+          <ScalarProperty Name="F91_AddDate" ColumnName="F91_AddDate" />
+          <ScalarProperty Name="F91_Used" ColumnName="F91_Used" />
+          <ScalarProperty Name="F91_Received" ColumnName="F91_Received" />
+          <ScalarProperty Name="F91_PrevRemainder" ColumnName="F91_PrevRemainder" />
+          <ScalarProperty Name="F91_MaterialCode" ColumnName="F91_MaterialCode" />
+          <ScalarProperty Name="F91_YearMonth" ColumnName="F91_YearMonth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX92_PrepdtTotal">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX92_PrepdtTotal">
+        <MappingFragment StoreEntitySet="TX92_PrepdtTotal">
+          <ScalarProperty Name="F92_UpdateDate" ColumnName="F92_UpdateDate" />
+          <ScalarProperty Name="F92_AddDate" ColumnName="F92_AddDate" />
+          <ScalarProperty Name="F92_Used" ColumnName="F92_Used" />
+          <ScalarProperty Name="F92_Received" ColumnName="F92_Received" />
+          <ScalarProperty Name="F92_PrevRemainder" ColumnName="F92_PrevRemainder" />
+          <ScalarProperty Name="F92_PrepdtCode" ColumnName="F92_PrepdtCode" />
+          <ScalarProperty Name="F92_YearMonth" ColumnName="F92_YearMonth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX93_ProductTotal">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX93_ProductTotal">
+        <MappingFragment StoreEntitySet="TX93_ProductTotal">
+          <ScalarProperty Name="F93_UpdateDate" ColumnName="F93_UpdateDate" />
+          <ScalarProperty Name="F93_AddDate" ColumnName="F93_AddDate" />
+          <ScalarProperty Name="F93_Used" ColumnName="F93_Used" />
+          <ScalarProperty Name="F93_Received" ColumnName="F93_Received" />
+          <ScalarProperty Name="F93_PrevRemainder" ColumnName="F93_PrevRemainder" />
+          <ScalarProperty Name="F93_ProductCode" ColumnName="F93_ProductCode" />
+          <ScalarProperty Name="F93_YearMonth" ColumnName="F93_YearMonth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX94_Prepdtplan">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX94_Prepdtplan">
+        <MappingFragment StoreEntitySet="TX94_Prepdtplan">
+          <ScalarProperty Name="F94_UpdateDate" ColumnName="F94_UpdateDate" />
+          <ScalarProperty Name="F94_AddDate" ColumnName="F94_AddDate" />
+          <ScalarProperty Name="F94_amount" ColumnName="F94_amount" />
+          <ScalarProperty Name="F94_PrepdtCode" ColumnName="F94_PrepdtCode" />
+          <ScalarProperty Name="F94_YearMonth" ColumnName="F94_YearMonth" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TH62_KndCmdMsrSndHst">
+      <EntityTypeMapping TypeName="KCSGDataModel.TH62_KndCmdMsrSndHst">
+        <MappingFragment StoreEntitySet="TH62_KndCmdMsrSndHst">
+          <ScalarProperty Name="F62_AbnormalCode" ColumnName="F62_AbnormalCode" />
+          <ScalarProperty Name="F62_PictureNo" ColumnName="F62_PictureNo" />
+          <ScalarProperty Name="F62_TerminalNo" ColumnName="F62_TerminalNo" />
+          <ScalarProperty Name="F62_MsrSndCls" ColumnName="F62_MsrSndCls" />
+          <ScalarProperty Name="F62_Priority" ColumnName="F62_Priority" />
+          <ScalarProperty Name="F62_Status" ColumnName="F62_Status" />
+          <ScalarProperty Name="F62_PrePdtCode" ColumnName="F62_PrePdtCode" />
+          <ScalarProperty Name="F62_PrePdtLotNo" ColumnName="F62_PrePdtLotNo" />
+          <ScalarProperty Name="F62_KndCmdNo" ColumnName="F62_KndCmdNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TH68_MtrMsrSndCmdHst">
+      <EntityTypeMapping TypeName="KCSGDataModel.TH68_MtrMsrSndCmdHst">
+        <MappingFragment StoreEntitySet="TH68_MtrMsrSndCmdHst">
+          <ScalarProperty Name="F68_AbnormalCode" ColumnName="F68_AbnormalCode" />
+          <ScalarProperty Name="F68_PictureNo" ColumnName="F68_PictureNo" />
+          <ScalarProperty Name="F68_MasterCode" ColumnName="F68_MasterCode" />
+          <ScalarProperty Name="F68_Priority" ColumnName="F68_Priority" />
+          <ScalarProperty Name="F68_Status" ColumnName="F68_Status" />
+          <ScalarProperty Name="F68_CommandType" ColumnName="F68_CommandType" />
+          <ScalarProperty Name="F68_MsrMacCls" ColumnName="F68_MsrMacCls" />
+          <ScalarProperty Name="F68_AddDate" ColumnName="F68_AddDate" />
+          <ScalarProperty Name="F68_TerminalNo" ColumnName="F68_TerminalNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TH69_MtrRtrMsrSndCmdHst">
+      <EntityTypeMapping TypeName="KCSGDataModel.TH69_MtrRtrMsrSndCmdHst">
+        <MappingFragment StoreEntitySet="TH69_MtrRtrMsrSndCmdHst">
+          <ScalarProperty Name="F69_AbnormalCode" ColumnName="F69_AbnormalCode" />
+          <ScalarProperty Name="F69_Amount5" ColumnName="F69_Amount5" />
+          <ScalarProperty Name="F69_Amount4" ColumnName="F69_Amount4" />
+          <ScalarProperty Name="F69_Amount3" ColumnName="F69_Amount3" />
+          <ScalarProperty Name="F69_Amount2" ColumnName="F69_Amount2" />
+          <ScalarProperty Name="F69_Amount1" ColumnName="F69_Amount1" />
+          <ScalarProperty Name="F69_MtrLotNo5" ColumnName="F69_MtrLotNo5" />
+          <ScalarProperty Name="F69_MtrLotNo4" ColumnName="F69_MtrLotNo4" />
+          <ScalarProperty Name="F69_MtrLotNo3" ColumnName="F69_MtrLotNo3" />
+          <ScalarProperty Name="F69_MtrLotNo2" ColumnName="F69_MtrLotNo2" />
+          <ScalarProperty Name="F69_MtrLotNo1" ColumnName="F69_MtrLotNo1" />
+          <ScalarProperty Name="F69_Priority" ColumnName="F69_Priority" />
+          <ScalarProperty Name="F69_Status" ColumnName="F69_Status" />
+          <ScalarProperty Name="F69_PictureNo" ColumnName="F69_PictureNo" />
+          <ScalarProperty Name="F69_TerminalNo" ColumnName="F69_TerminalNo" />
+          <ScalarProperty Name="F69_MsrMacClass" ColumnName="F69_MsrMacClass" />
+          <ScalarProperty Name="F69_MaterialCode" ColumnName="F69_MaterialCode" />
+          <ScalarProperty Name="F69_PalletNo" ColumnName="F69_PalletNo" />
+          <ScalarProperty Name="F69_MtrRtrDate" ColumnName="F69_MtrRtrDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM08_Container">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM08_Container">
+        <MappingFragment StoreEntitySet="TM08_Container">
+          <ScalarProperty Name="F08_UpdateCount" ColumnName="F08_UpdateCount" />
+          <ScalarProperty Name="F08_UpdateDate" ColumnName="F08_UpdateDate" />
+          <ScalarProperty Name="F08_AddDate" ColumnName="F08_AddDate" />
+          <ScalarProperty Name="F08_ContainerName" ColumnName="F08_ContainerName" />
+          <ScalarProperty Name="F08_ContainerType" ColumnName="F08_ContainerType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TX54_MtrRtrMsrSndCmd">
+      <EntityTypeMapping TypeName="KCSGDataModel.TX54_MtrRtrMsrSndCmd">
+        <MappingFragment StoreEntitySet="TX54_MtrRtrMsrSndCmd">
+          <ScalarProperty Name="F54_UpdateCount" ColumnName="F54_UpdateCount" />
+          <ScalarProperty Name="F54_UpdateDate" ColumnName="F54_UpdateDate" />
+          <ScalarProperty Name="F54_AddDate" ColumnName="F54_AddDate" />
+          <ScalarProperty Name="F54_AbnormalCode" ColumnName="F54_AbnormalCode" />
+          <ScalarProperty Name="F54_Amount5" ColumnName="F54_Amount5" />
+          <ScalarProperty Name="F54_Amount4" ColumnName="F54_Amount4" />
+          <ScalarProperty Name="F54_Amount3" ColumnName="F54_Amount3" />
+          <ScalarProperty Name="F54_Amount2" ColumnName="F54_Amount2" />
+          <ScalarProperty Name="F54_Amount1" ColumnName="F54_Amount1" />
+          <ScalarProperty Name="F54_MtrLotNo5" ColumnName="F54_MtrLotNo5" />
+          <ScalarProperty Name="F54_MtrLotNo4" ColumnName="F54_MtrLotNo4" />
+          <ScalarProperty Name="F54_MtrLotNo3" ColumnName="F54_MtrLotNo3" />
+          <ScalarProperty Name="F54_MtrLotNo2" ColumnName="F54_MtrLotNo2" />
+          <ScalarProperty Name="F54_MtrLotNo1" ColumnName="F54_MtrLotNo1" />
+          <ScalarProperty Name="F54_Priority" ColumnName="F54_Priority" />
+          <ScalarProperty Name="F54_Status" ColumnName="F54_Status" />
+          <ScalarProperty Name="F54_PictureNo" ColumnName="F54_PictureNo" />
+          <ScalarProperty Name="F54_TerminalNo" ColumnName="F54_TerminalNo" />
+          <ScalarProperty Name="F54_MsrMacClass" ColumnName="F54_MsrMacClass" />
+          <ScalarProperty Name="F54_MaterialCode" ColumnName="F54_MaterialCode" />
+          <ScalarProperty Name="F54_PalletNo" ColumnName="F54_PalletNo" />
+          <ScalarProperty Name="F54_MtrRtrDate" ColumnName="F54_MtrRtrDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="KCSGDataModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TM17_TermStatus">
+      <EntityTypeMapping TypeName="KCSGDataModel.TM17_TermStatus">
+        <MappingFragment StoreEntitySet="TM17_TermStatus">
+          <ScalarProperty Name="F17_LastRequest" ColumnName="F17_LastRequest" />
+          <ScalarProperty Name="F17_InUsePictureNo" ColumnName="F17_InUsePictureNo" />
+          <ScalarProperty Name="F17_TermNo" ColumnName="F17_TermNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="te90_env_tmp">
+      <EntityTypeMapping TypeName="KCSGDataModel.te90_env_tmp">
+        <MappingFragment StoreEntitySet="te90_env_tmp">
+          <ScalarProperty Name="S_FLD_LOT" ColumnName="S_FLD_LOT" />
+          <ScalarProperty Name="S_FLD_LOWER" ColumnName="S_FLD_LOWER" />
+          <ScalarProperty Name="S_FLD_UPPER" ColumnName="S_FLD_UPPER" />
+          <ScalarProperty Name="S_FLD_MEAN" ColumnName="S_FLD_MEAN" />
+          <ScalarProperty Name="S_FLD_DATA" ColumnName="S_FLD_DATA" />
+          <ScalarProperty Name="S_FLD_ID" ColumnName="S_FLD_ID" />
+          <ScalarProperty Name="S_FLD_DTM" ColumnName="S_FLD_DTM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

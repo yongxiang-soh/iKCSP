@@ -1,0 +1,58 @@
+﻿<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th style="text-align: center">** ALL SHELF LIST **</th>
+    </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC096P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td>< Pre-Product Container ></td>
+            <td></td>
+        </tr>        
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>R.B.L</th>
+            <th>C.Type</th>
+            <th>Container No.</th>  
+            <th>S DATE</th>
+            <th>S TIME</th>           
+        </tr>        
+    </thead>
+
+    <tbody>
+    {{#FindPrintPreProductNameItem}}        
+        <tr>
+            <td>{{RBL}}</td>           
+            <td>{{ContainerType}}</td>           
+            <td>{{ContainerNo}}</td>		
+            <td>{{SDate}}</td>
+            <td>{{Stime}}</td>           
+        </tr>
+    {{/FindPrintPreProductNameItem}}
+    </tbody>  
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>        
+    </tfoot> 
+</table>

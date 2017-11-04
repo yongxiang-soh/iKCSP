@@ -1,0 +1,134 @@
+﻿<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th style="text-align: center">** STOCK LIST ( Normal Item ) **</th>
+        </tr>
+    </thead>
+</table>
+
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC082P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td>< Material ></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>Material Code</th>
+            <th>Material Name</th>
+        <th>Lot No.</th>
+            <th>Pallet No.</th>
+            <th>R.B.L</th>
+            <th class="text-align-right">Quantity (Kg)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#normal}}
+        {{#PrintSupplierNameGroupItem}}
+        {{#FindPrintSupplierNameItem}}
+        <tr>
+            <td>{{MaterialCode}}</td>
+            <td>{{MaterialName}}</td>
+            <td>{{MaterialLotNo}}</td>
+            <td>{{PalletNo}}</td>
+            <td>{{ShelfNo}}</td>
+            <td class="text-align-right">{{AmountString}}</td>
+        </tr>
+
+        {{/FindPrintSupplierNameItem}}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-align-right">Total:</td>
+			<td class="text-align-right">{{LotTotalString}}</td>
+        </tr>
+        {{/PrintSupplierNameGroupItem}}
+        {{/normal}}
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th style="text-align: center">** STOCK LIST ( Bailment Item ) **</th>
+        </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+    <tr>
+        <td> </td>
+        <td class="pull-right">{{Datetime}}</td>
+    </tr>
+    <tr>
+        <td>[TCFC081P]</td>
+        <td class="pull-right">{{CompanyName}}</td>
+    </tr>
+    <tr>
+        <td>< Material ></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>Material Code</th>
+            <th>Material Name</th>
+            <th>Lot No.</th>
+            <th>PalletNo</th>
+            <th>R.B.L</th>
+            <th class="text-align-right">Quantity (Kg)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {{#bailment}}
+        {{#PrintSupplierNameGroupItem}}
+        {{#FindPrintSupplierNameItem}}
+        <tr>
+            <td>{{MaterialCode}}</td>
+            <td>{{MaterialName}}</td>
+            <td>{{MaterialLotNo}}</td>
+            <td>{{PalletNo}}</td>
+            <td>{{ShelfNo}}</td>
+            <td class="text-align-right">{{AmountString}}</td>
+        </tr>
+
+        {{/FindPrintSupplierNameItem}}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-align-right">Total:</td>
+            <td class="text-align-right">{{LotTotalString}}</td>
+        </tr>
+        {{/PrintSupplierNameGroupItem}}
+        {{/bailment}}
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+</table>

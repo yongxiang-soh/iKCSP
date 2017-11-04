@@ -1,0 +1,191 @@
+﻿@{
+    ViewBag.ScreenId = "TCEN031F";
+    ViewBag.Title = "Cleanliness Data Input";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/chartjs/Chart.js"></script>
+    <script src="~/Scripts/areas/CleanlinessDataInput/CleanlinessDataInput.js"></script>
+    
+}
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.CleanlinessDataInputModel
+@using KCSG.jsGrid.MVC
+@using KCSG.Core;
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls;
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC;
+@using Resources
+
+<div class="col-lg-12">
+    @Html.Partial("SearchCriteria", Model.SearchCriteriaModel)
+    <div class="panel panel-danger">
+        <div class="panel panel-heading">
+            Cleanliness Data Input
+        </div>
+        <div class="panel panel-body">
+            <div class="col-lg-12">
+                <label>1. 1 meter above the production floor</label>
+                <div class="row form-group">
+
+                    <div class="col-lg-11">
+                        <table class="table" id="dw_1m">
+                            <tr>
+                                <th>Diameter (um)</th>
+                                <th class="active">A</th>
+                                <th class="active">B</th>
+                                <th class="active">C</th>
+                                <th class="active">D</th>
+                                <th class="active">E</th>
+                                <th class="active">F</th>
+                                <th class="active">G</th>
+                                <th class="active">H</th>
+                                <th class="active">I</th>
+                                <th class="active">J</th>
+                            </tr>
+                            <tr>
+                                <td>0.5</td>
+                                <td>@Html.TextBox("A05", null, new {@class = "form-control number", @row = "1", @col = "0"})</td>
+                                <td>@Html.TextBox("B05", null, new {@class = "form-control number ", @row = "1", @col = "1"})</td>
+                                <td>@Html.TextBox("C05", null, new {@class = "form-control number ", @row = "1", @col = "2"})</td>
+                                <td>@Html.TextBox("D05", null, new {@class = "form-control number ", @row = "1", @col = "3"})</td>
+                                <td>@Html.TextBox("E05", null, new {@class = "form-control number ", @row = "1", @col = "4"})</td>
+                                <td>@Html.TextBox("F05", null, new {@class = "form-control number ", @row = "1", @col = "5"})</td>
+                                <td>@Html.TextBox("G05", null, new {@class = "form-control number ", @row = "1", @col = "6"})</td>
+                                <td>@Html.TextBox("H05", null, new {@class = "form-control number ", @row = "1", @col = 7})</td>
+                                <td>@Html.TextBox("I05", null, new {@class = "form-control number ", @row = "1", @col = 8})</td>
+                                <td>@Html.TextBox("j05", null, new {@class = "form-control number ", @row = "1", @col = 9})</td>
+                                
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>@Html.TextBox("A5", null, new {@class = "form-control number ", @row = "2", @col = 0})</td>
+                                <td>@Html.TextBox("B5", null, new {@class = "form-control number ", @row = "2", @col = 1})</td>
+                                <td>@Html.TextBox("C5", null, new {@class = "form-control number ", @row = "2", @col = 2})</td>
+                                <td>@Html.TextBox("D5", null, new {@class = "form-control number ", @row = "2", @col = 3})</td>
+                                <td>@Html.TextBox("E5", null, new {@class = "form-control number ", @row = "2", @col = 4})</td>
+                                <td>@Html.TextBox("F5", null, new {@class = "form-control number ", @row = "2", @col = 5})</td>
+                                <td>@Html.TextBox("G5", null, new {@class = "form-control number ", @row = "2", @col = 6})</td>
+                                <td>@Html.TextBox("H5", null, new {@class = "form-control number ", @row = "2", @col = 7})</td>
+                                <td>@Html.TextBox("I5", null, new {@class = "form-control number ", @row = "2", @col = 8})</td>
+                                <td>@Html.TextBox("j5", null, new {@class = "form-control number ", @row = "2", @col = 9})</td>
+                               
+                            </tr>
+                            
+                        </table>
+                    </div>
+                    @*<div class="col-lg-9">
+                    @Html.Grid(Model.DataWindown1)
+                </div>*@
+                    <div class="col-lg-1">
+                        <div class="row">
+                            <label>Date(DD/MM)</label>
+                        </div>
+                        <div class="row">
+                            @Html.ExtTextBoxFor(m => m.DateDiameter1, new { @readonly = true })
+                        </div>
+                       
+                    </div>
+                </div>
+                <label> 2. 5cm from the exhaust value of the clean package</label>
+                <div class="row form-group">
+
+                    <div class="col-lg-11">
+                        <table class="table" id="dw_5cm">
+                            <tr>
+                                <th>Diameter (um)</th>
+                                <th class="active">a</th>
+                                <th class="active">b</th>
+                                <th class="active">c</th>
+                                <th class="active">d</th>
+                                <th class="active">e</th>
+                                <th class="active">f</th>
+                                <th class="active">g</th>
+                                <th class="active">h</th>
+                                <th class="active">i</th>
+                                <th class="active">j</th>
+                            </tr>
+                            <tr>
+                                <td>0.3</td>
+                                <td>@Html.TextBox("K03", null, new {@class = "form-control number ", @row = "1", @col = 0})</td>
+                                <td>@Html.TextBox("L03", null, new {@class = "form-control number ", @row = "1", @col = 1})</td>
+                                <td>@Html.TextBox("M03", null, new {@class = "form-control number ", @row = "1", @col = 2})</td>
+                                <td>@Html.TextBox("N03", null, new {@class = "form-control number ", @row = "1", @col = 3})</td>
+                                <td>@Html.TextBox("O03", null, new {@class = "form-control number ", @row = "1", @col = 4})</td>
+                                <td>@Html.TextBox("P03", null, new {@class = "form-control number ", @row = "1", @col = 5})</td>
+                                <td>@Html.TextBox("Q03", null, new {@class = "form-control number ", @row = "1", @col = 6})</td>
+                                <td>@Html.TextBox("R03", null, new {@class = "form-control number ", @row = "1", @col = 7})</td>
+                                <td>@Html.TextBox("S03", null, new {@class = "form-control number ", @row = "1", @col = 8})</td>
+                                <td>@Html.TextBox("T03", null, new {@class = "form-control number ", @row = "1", @col = 9})</td>
+
+                            </tr>
+                            <tr>
+                                <td>0.5</td>
+                                <td>@Html.TextBox("K05", null, new {@class = "form-control number ", @row = "2", @col = 0})</td>
+                                <td>@Html.TextBox("L05", null, new {@class = "form-control number ", @row = "2", @col = 1})</td>
+                                <td>@Html.TextBox("M05", null, new {@class = "form-control number ", @row = "2", @col = 2})</td>
+                                <td>@Html.TextBox("N05", null, new {@class = "form-control number ", @row = "2", @col = 3})</td>
+                                <td>@Html.TextBox("O05", null, new {@class = "form-control number ", @row = "2", @col = 4})</td>
+                                <td>@Html.TextBox("P05", null, new {@class = "form-control number ", @row = "2", @col = 5})</td>
+                                <td>@Html.TextBox("Q05", null, new {@class = "form-control number ", @row = "2", @col = 6})</td>
+                                <td>@Html.TextBox("R05", null, new {@class = "form-control number ", @row = "2", @col = 7})</td>
+                                <td>@Html.TextBox("S05", null, new {@class = "form-control number ", @row = "2", @col = 8})</td>
+                                <td>@Html.TextBox("T05", null, new {@class = "form-control number ", @row = "2", @col = 9})</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>@Html.TextBox("K1", null, new {@class = "form-control number ", @row = "3", @col = 0})</td>
+                                <td>@Html.TextBox("L1", null, new {@class = "form-control number ", @row = "3", @col = 1})</td>
+                                <td>@Html.TextBox("M1", null, new {@class = "form-control number ", @row = "3", @col = 2})</td>
+                                <td>@Html.TextBox("N1", null, new {@class = "form-control number ", @row = "3", @col = 3})</td>
+                                <td>@Html.TextBox("O1", null, new {@class = "form-control number ", @row = "3", @col = 4})</td>
+                                <td>@Html.TextBox("P1", null, new {@class = "form-control number ", @row = "3", @col = 5})</td>
+                                <td>@Html.TextBox("Q1", null, new {@class = "form-control number ", @row = "3", @col = 6})</td>
+                                <td>@Html.TextBox("R1", null, new {@class = "form-control number ", @row = "3", @col = 7})</td>
+                                <td>@Html.TextBox("S1", null, new {@class = "form-control number ", @row = "3", @col = 8})</td>
+                                <td>@Html.TextBox("T1", null, new {@class = "form-control number ", @row = "3", @col = 9})</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>@Html.TextBox("K5", null, new {@class = "form-control number ", @row = "4", @col = 0})</td>
+                                <td>@Html.TextBox("L5", null, new {@class = "form-control number ", @row = "4", @col = 1})</td>
+                                <td>@Html.TextBox("M5", null, new {@class = "form-control number ", @row = "4", @col = 2})</td>
+                                <td>@Html.TextBox("N5", null, new {@class = "form-control number ", @row = "4", @col = 3})</td>
+                                <td>@Html.TextBox("O5", null, new {@class = "form-control number ", @row = "4", @col = 4})</td>
+                                <td>@Html.TextBox("P5", null, new {@class = "form-control number ", @row = "4", @col = 5})</td>
+                                <td>@Html.TextBox("Q5", null, new {@class = "form-control number ", @row = "4", @col = 6})</td>
+                                <td>@Html.TextBox("R5", null, new {@class = "form-control number ", @row = "4", @col = 7})</td>
+                                <td>@Html.TextBox("S5", null, new {@class = "form-control number ", @row = "4", @col = 8})</td>
+                                <td>@Html.TextBox("T5", null, new {@class = "form-control number ", @row = "4", @col = 9})</td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+                    @*<div class="col-lg-9">
+                    @Html.Grid(Model.DataWindown2)
+                </div>*@
+                    <div class="col-lg-1">
+                        <div class="row">
+                            <label>Date(DD/MM)</label>
+                        </div>
+                        <div class="row">
+                            @Html.ExtTextBoxFor(m => m.DateDiameter2, new { @readonly = true })
+                        </div>
+                       
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <input type="button" value="Print" class="btn btn-less-5-chars btn-flat" onclick=" Print() "/>
+                    <input type="button" value="Clear" class="btn btn-less-5-chars btn-flat" onclick=" Clear() "/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="printAreaInput"></div>
+</div>
+

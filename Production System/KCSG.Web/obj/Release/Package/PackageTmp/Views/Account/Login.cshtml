@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Login Page";
+    Layout = null;
+}
+@using KCSG.Core.CustomControls
+@model  KCSG.Web.Areas.Common.ViewModels.LoginItem
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>@ViewBag.Title</title>
+
+    <!---<CSS>------------------------------------------------------------------------------------------------->
+    <!-- Bootstrap theme -->
+    <link href="~/Content/theme/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/theme/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Page style -->
+    <link href="~/Content/AdminLTE/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE/skin-gray-light-login.css" rel="stylesheet" />
+
+    <link href="~/Content/AdminLTE/skin-gray-light-validation-messages.css" rel="stylesheet" />
+    <!---</CSS>------------------------------------------------------------------------------------------------>
+    <!---< JS >------------------------------------------------------------------------------------------------>
+    <!-- JQuery 3.0.0-->
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Bootstrap -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+
+    <!---</JS >------------------------------------------------------------------------------------------------>
+</head>
+<body>
+    
+    <div class="login-controls-container">
+        <div class="logo-panel">
+            <img src="/Images/kyocera-logo.png"
+                 class="img-responsive login-logo" />
+            <h3 class="text-center">Kyocera Asia Pacific - TUAS Product Control System</h3>
+        </div>
+
+
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "col-lg-offset-3 col-lg-6 col-lg-offset-3" }))
+        {
+            <div class="box box-primary">
+                <div class="box-header">
+                    <span class="glyphicon glyphicon-log-in"></span> Login
+                </div>
+                <div class="box-body">
+                    <div class="row form-group">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.ExtLabelFor(model => model.IpAddress)
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.ExtDisplayFor(model => model.IpAddress)
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-4 col-md-4 col-sm-4">
+                            @Html.ExtLabelFor(model => model.Password)
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            @Html.PasswordFor(model => model.Password, new { @type = "password", @class="form-control" })
+                        </div>
+                    </div>
+                    
+                    <div class="row form-group">
+                        <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-8">
+                            @Html.ValidationSummary()
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <div class='text-center'>
+                        <input type="submit"
+                               class="btn btn-primary btn-flat col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-lg-2 col-md-2 col-sm-2 col-xs-12"
+                               value="Login">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

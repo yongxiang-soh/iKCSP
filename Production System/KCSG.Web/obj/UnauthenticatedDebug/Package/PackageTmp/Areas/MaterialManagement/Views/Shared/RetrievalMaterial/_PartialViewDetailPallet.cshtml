@@ -1,0 +1,61 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.MaterialManagement.ViewModels.RetrieveOfMaterial.DetailPalletViewModel
+@using (Ajax.BeginForm("DeassignDetailPallet", "RetrieveOfMaterial", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess()" }, new { @id = "addNewForm" }))
+{
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <span>Generate Information</span>
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    @Html.Grid(Model.Grid)
+                </div>
+                <div class="col-xs-6 table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Lot No</th>
+                            <th>Quantity</th>
+                        </tr>
+                        <tr>
+                            <td>@Html.ExtTextBoxFor(model => model.LotNo1, new { style = "width:100%" })</td>
+                            <td>@Html.ExtTextBoxFor(model => model.Quantity1, new { style = "width:100%" })</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.ExtTextBoxFor(model => model.LotNo2, new { style = "width:100%" })</td>
+                            <td>@Html.ExtTextBoxFor(model => model.Quantity2, new { style = "width:100%" })</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.ExtTextBoxFor(model => model.LotNo3, new { style = "width:100%" })</td>
+                            <td>@Html.ExtTextBoxFor(model => model.Quantity3, new { style = "width:100%" })</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.ExtTextBoxFor(model => model.LotNo4, new { style = "width:100%" })</td>
+                            <td>@Html.ExtTextBoxFor(model => model.Quantity4, new { style = "width:100%" })</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.ExtTextBoxFor(model => model.LotNo5, new { style = "width:100%" })</td>
+                            <td>@Html.ExtTextBoxFor(model => model.Quantity5, new { style = "width:100%" })</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row btnControl margin-top-10 margin-left-5">
+                <button type="submit" class="btn btn-flat btn-default">De-Assign</button>
+                <button type="button" class="btn btn-flat btn-default" onclick=" hideForm() ">Cancel</button>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .input-group-addon {
+        padding: 3px 6px;
+        border-radius: 1px;
+    }
+</style>

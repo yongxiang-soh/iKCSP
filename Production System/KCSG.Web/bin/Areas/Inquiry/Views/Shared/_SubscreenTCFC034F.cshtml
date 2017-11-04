@@ -1,0 +1,257 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@model KCSG.Web.Areas.Inquiry.ViewModels.InquiryByWarehouseLocation.InquiryByPreProductShelfStatusModelView
+
+@using (Ajax.BeginForm("UpdateSubscreentcf034f", "InquiryBase", new AjaxOptions() { HttpMethod = "POST", Confirm = "Ready to update ?", OnSuccess = "InquiryBase.onUpdateSubscreentcf034fSuccess" }, new { @id = "updateSubscreentcf034f" }))
+{
+    @Html.HiddenFor(m => m.SearchCondition)
+    @Html.HiddenFor(m => m.Row)
+    @Html.HiddenFor(m => m.Bay)
+    @Html.HiddenFor(m => m.Level)
+    <div class="panel panel-danger"> 
+        <div class="panel-heading">Query by Pre-product Shelf Status Picture - TCFC034F</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelFor(model => model.ShelfNo)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @Html.ExtTextBoxFor(model => model.ShelfNo, new { @class = "form-control",@readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.ContainerType, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.ContainerType, CustomControlConstants.AddOn.Search, "#modalContainerTypeSelect", new {style = "width:100%", @id = "txtContainerType"})
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.ContainerType, CustomControlConstants.AddOn.Search, null, new { style = "width:100%", @id = "txtContainerType" })
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.PreProductCode,Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.PreProductCode, CustomControlConstants.AddOn.Search, "#modalPreProductCodeSelect", new {style = "width:100%", @id = "txtPreProductCode"})
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.PreProductCode, CustomControlConstants.AddOn.Search, null, new { style = "width:100%", @id = "txtPreProductCode" })                            
+                        }
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.PreProductName, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @Html.ExtTextBoxFor(model => model.PreProductName, new { @class = "form-control", @readonly = "readonly",@id= "txtPreproductName" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.PreProductLotNo, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtTextBoxFor(model => model.PreProductLotNo, new { @class = "form-control"})
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.PreProductLotNo, new { @class = "form-control", @readonly = "readonly" })                            
+                        }
+                        
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.Amount, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtNumberFor(model => model.Amount, new NumberOption() {NumberOfDecimal = 2, Max = 9999.99 })
+                        }
+                        else
+                        {
+                            @Html.ExtNumberFor(model => model.Amount, new NumberOption() { NumberOfDecimal = 2, Max = 9999.99 },new { @readonly = "readonly" })
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.ContainerCode, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtTextBoxFor(model => model.ContainerCode, new {@class = "form-control"})
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.ContainerCode, new { @class = "form-control", @readonly = "readonly" })
+                        }
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.ContainerNo, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtTextBoxNumberFor(model => model.ContainerNo)
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxNumberFor(model => model.ContainerNo, new { @class = "form-control", @readonly = "readonly" })
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.KneadingCommandNo, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @Html.ExtTextBoxFor(model => model.KneadingCommandNo, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelFor(model => model.ShelfStatus)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @Html.ExtTextBoxFor(model => model.ShelfStatus, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.StorageDate, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtDateTimeFor(model => model.StorageDate, new DateTimeOption() { Format = "DD/MM/YYYY hh:mm:ss" }, new { style = "width:100%" })
+                        }
+                        else
+                        {
+
+                            @Html.ExtDateTimeFor(model => model.StorageDate, new DateTimeOption() { Format = "DD/MM/YYYY hh:mm:ss" }, new { @readonly = "readonly" })
+                        }
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.ContainerSeqNo, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtNumberFor(model => model.ContainerSeqNo, new NumberOption() { NumberOfDecimal = 0,Max = 999 })
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.ContainerSeqNo, new { @class = "form-control", @readonly = "readonly" })
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        @if (Model.ShowUpdate)
+        {
+            <button type="submit" class="btn btn-default btn-flat btn-less-5-chars" id="btnOk">OK</button>
+        }
+        <button class="btn btn-default btn-flat btn-less-5-chars" type="button" data-dismiss="modal">Cancel</button>
+    </div>
+}
+
+<script>
+    $().ready(function () {
+        
+        $.validator.unobtrusive.parse("#updateSubscreentcf034f");
+        function isEmpty(str) {
+            return (!str || 0 === str.length);
+        }
+        $.validator.addMethod("morethanone",
+            function (value, element) {
+                 
+                var thiserror = "";
+                if (!isEmpty(value)) {
+                    if (parseInt(value) < 1 ) {
+                        thiserror = "Container No must be more than one !";
+                        return false;
+                    }
+                }
+                return true;
+            },
+            "Container No must be more than one !");
+        $("#ContainerNo").rules("add", { morethanone: true });
+
+        //If user already changed value of [Container SeqNo]: 
+        //	Count item from table TX49_PrePdtShfStk where f49_containerseqno = [Container SeqNo]. After executing, if the count number > 0 then the system will show a warning message with content “This Container Seq No is already existed !”.
+
+        $.validator.addMethod("CheckContainerSeqNo034",
+            function (value, element, params) {
+                var thiserror = "";
+                var check = true;
+                if (!isEmpty(value)) {
+                    var row = $('#Row').val(),
+                    bay = $('#Bay').val(),
+                    level = $('#Level').val();
+
+                    $.ajax({
+                        url: '/Inquiry/InquiryBase/CheckContainerSeqNo034',
+                        data: {
+                            containerSeqNo: value,
+                            row: row,
+                            bay: bay,
+                            level: level
+                        },
+                        type: "Options",
+                        async: false,
+                        success: function (response) {
+                            if (!response.Success) {
+                                thiserror = "This Container Seq No is already existed !";
+                                check = false;
+                            }
+                        }
+                    });
+                }
+                return check;
+            }, "This Container Seq No is already existed !");
+        $("#ContainerSeqNo").rules("add", { CheckContainerSeqNo034: true });
+    });
+</script>

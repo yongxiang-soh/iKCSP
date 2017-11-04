@@ -1,0 +1,1065 @@
+﻿@using System.Globalization
+@using System.Text
+@using System.Web.Configuration
+@using KCSG.Core.CustomControls
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.ScreenId</title>
+
+    <!--(CSS)------------------------------------------------------------------------------------->
+    <!-- Bootstrap 3.3.7 -->
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Admin LTE -->
+    <link href="~/Content/AdminLTE/AdminLTE.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE/skin-gray-light.css" rel="stylesheet" />
+
+    <!-- Layout of authorized view -->
+    <link href="~/Content/AdminLTE/authorized-layout.css" rel="stylesheet" />
+
+    <!-- Custom Fonts -->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- JsGrid -->
+    <link href="~/Scripts/jsgrid-1.4.1/jsgrid.css" rel="stylesheet">
+    <link href="~/Scripts/jsgrid-1.4.1/jsgrid-theme.css" rel="stylesheet">
+
+    <!-- Validation messages styles -->
+    <link href="~/Content/AdminLTE/skin-gray-light-validation-messages.css" rel="stylesheet" />
+
+    <!-- Bootstrap date-time-picker -->
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+
+    <!--(/CSS)------------------------------------------------------------------------------------>
+    <!--( JS )------------------------------------------------------------------------------------>
+    <!-- JQuery 3.0.0 -->
+    <script src="~/Scripts/jquery-2.2.4.min.js"></script>
+
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <!-- AdminLTE -->
+    <script src="~/Scripts/AdminLTE/app.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- JQuery unobtrusive -->
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+    <!-- JQuery Validation -->
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <!-- Chart -->
+    <script src="~/Scripts/chartjs/Chart.js"></script>
+
+    <!-- Helpers -->
+    <script src="~/Scripts/helper/commonHelper.js"></script>
+    <script src="~/Scripts/helper/constants.js"></script>
+    <script src="~/Scripts/helper/gridHelper.js"></script>
+    <script src="~/Scripts/helper/multiselectHelper.js"></script>
+    <script src="~/Scripts/helper/numberHelper.js"></script>
+    <script src="~/Scripts/helper/suggestionHelper.js"></script>
+
+    <!-- JsGrid -->
+    <script src="~/Scripts/jsgrid-1.4.1/jsgrid.js"></script>
+
+    <!-- Default settings of jsGrid -->
+    <script src="~/Scripts/jsgrid-1.4.1/jsGrid-default-settings.js"></script>
+
+    <!-- Custom JS -->
+    <script src="~/Scripts/Custom.js"></script>
+
+    <!-- Bootstrap DateTime picker -->
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="~/Scripts/BlockUI.js"></script>
+
+    <script src="~/Scripts/autoNumeric.js"></script>
+
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script src="~/Scripts/areas/signalrCommon.js"></script>
+    <!-- Toastr notification -->
+    <script src="~/Scripts/toastr.min.js"></script>
+
+    <!-- Jquery print plugin. -->
+    <script src="~/Scripts/jQuery.print.min.js"></script>
+    <script src="~/Scripts/jquery-code-scanner.js"></script>
+
+    @{
+        if (HttpContext.Current.User == null)
+        {
+            return;
+        }
+
+        var user = HttpContext.Current.User;
+        if (user.Identity == null)
+        {
+            return;
+        }
+
+
+        <script>
+    $(document)
+        .ready(function() {
+
+            var prameter = getUrlParameter('isLockScreen');
+            if (prameter != undefined) {
+                alert("This screen is locked by another terminal at the moment.");
+            }
+            var controllerName =
+                '@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()';
+            setInterval(function() {
+                $.ajax({
+                    url: controllerName + '/' + 'LockScreen',
+                    contentType: 'application/json',
+                    type: 'POST'
+                });
+            }, 5000);
+
+        });
+
+        function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        }
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-top-right",
+            "onclick": null,
+            "showDuration": "1000",
+            "hideDuration": "1000",
+            "extendedTimeOut": "1000",
+            "timeOut": "@WebConfigurationManager.AppSettings["ToastrTimeOut"]",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+         }
+        </script>
+    }
+    @*print directly when click left menu*@
+    <script>
+    // print supplymentaryMaterial
+    var formUrlSupplementaryMaterial = {
+        urlPrintSupplementaryMaterialStock: '@Url.Action("ExportSupplementaryMaterialName", "MaterialStock", new {Area = "ManagementReport"})',
+    }
+    exportSupplementaryMaterialStock = function(event) {
+        // Prevent default behaviour of button.
+        if (!confirm("Ready to print Supplementary Material Stock?")) {
+            return;
+        };
+        event.preventDefault();
+        $.ajax({
+            url: formUrlSupplementaryMaterial.urlPrintSupplementaryMaterialStock,
+            data: {
+
+            },
+            type: "post",
+            success: function(response) {
+
+                var render = response.render;
+
+                if (render != null) {
+
+                    $("#PrintArea")
+                        .html(render)
+                        .show()
+                        .print()
+                        .empty()
+                        .hide();
+                }
+            }
+        });
+    }
+
+    //Print Metarial Shelt List
+
+    var formUrlMetarialShelt = {
+        urlPrintMetarialShelt: '@Url.Action("ExportMetarialShelt", "MaterialStock", new {Area = "ManagementReport"})',
+    }
+    exportMetarialShelt = function(event) {
+        // Prevent default behaviour of button.
+        if (!confirm("Ready to print Export Material Shelf ?")) {
+            return;
+        };
+        event.preventDefault();
+        $.ajax({
+            url: formUrlMetarialShelt.urlPrintMetarialShelt,
+            data: {
+
+            },
+            type: "post",
+            success: function(response) {
+
+                var render = response.render;
+
+                if (render != null) {
+
+                    $("#PrintArea")
+                        .html(render)
+                        .show()
+                        .print()
+                        .empty()
+                        .hide();
+                }
+            }
+        });
+    }
+    // Print PreProduct Sheif List
+    var formUrlPreProductShelt = {
+        urlPrintPreProductShelt: '@Url.Action("ExportPreProductShelt", "MaterialStock", new {Area = "ManagementReport"})',
+    }
+    exportPreProductShelt = function(event) {
+        // Prevent default behaviour of button.
+        if (!confirm("Ready to print Pre Product Shelf List?")) {
+            return;
+        };
+        event.preventDefault();
+        $.ajax({
+            url: formUrlPreProductShelt.urlPrintPreProductShelt,
+            data: {
+
+            },
+            type: "post",
+            success: function(response) {
+
+                var render = response.render;
+
+                if (render != null) {
+
+                    $("#PrintArea")
+                        .html(render)
+                        .show()
+                        .print()
+                        .empty()
+                        .hide();
+                }
+            }
+        });
+    }
+    // Print ExtPreProduct Sheif List
+    var formUrlExtPreProductShelt = {
+        urlPrintExtPreProductShelt: '@Url.Action("ExportExtPreProductShelt", "MaterialStock", new {Area = "ManagementReport"})',
+    }
+    exportExtPreProductShelt = function(event) {
+        // Prevent default behaviour of button.
+        if (!confirm("Ready to print External Pre-product Shelf List?")) {
+            return;
+        };
+        event.preventDefault();
+        $.ajax({
+            url: formUrlExtPreProductShelt.urlPrintExtPreProductShelt,
+            data: {
+
+            },
+            type: "post",
+            success: function(response) {
+
+                var render = response.render;
+
+                if (render != null) {
+
+                    $("#PrintArea")
+                        .html(render)
+                        .show()
+                        .print()
+                        .empty()
+                        .hide();
+                }
+            }
+        });
+    }
+    // Print Product Sheif List
+    var formUrlProductShelt = {
+        urlPrintProductShelt: '@Url.Action("ExportProductShelt", "MaterialStock", new {Area = "ManagementReport"})',
+    }
+    exportProductShelt = function(event) {
+        // Prevent default behaviour of button.
+        if (!confirm("Ready to print Product Shelf List?")) {
+            return;
+        };
+        event.preventDefault();
+        $.ajax({
+            url: formUrlProductShelt.urlPrintProductShelt,
+            data: {
+
+            },
+            type: "post",
+            success: function(response) {
+
+                var render = response.render;
+
+                if (render != null) {
+
+                    $("#PrintArea")
+                        .html(render)
+                        .show()
+                        .print()
+                        .empty()
+                        .hide();
+                }
+            }
+        });
+    }
+    // Print Metarial Pallet List
+    var formUrlMetarialPallet = {
+        urlPrintMetarialPallet: '@Url.Action("ExportMetarialPallet", "MaterialStock", new {Area = "ManagementReport"})',
+    }
+    exportMetarialPallet = function(event) {
+        // Prevent default behaviour of button.
+        if (!confirm("Ready to print Material Pallet List?")) {
+            return;
+        };
+        event.preventDefault();
+        $.ajax({
+            url: formUrlMetarialPallet.urlPrintMetarialPallet,
+            data: {
+
+            },
+            type: "post",
+            success: function(response) {
+
+                var render = response.render;
+
+                if (render != null) {
+
+                    $("#PrintArea")
+                        .html(render)
+                        .show()
+                        .print()
+                        .empty()
+                        .hide();
+                }
+            }
+        });
+    }
+    // Print PreProduct Container List
+    var formUrlPreProductContainer = {
+        urlPrintPreProductContainer: '@Url.Action("ExportPreproductContainer", "MaterialStock", new {Area = "ManagementReport"})',
+    }
+    exportPreProductContainer = function(event) {
+        // Prevent default behaviour of button.
+        if (!confirm("Ready to print Pre-Product Container List?")) {
+            return;
+        };
+        event.preventDefault();
+        $.ajax({
+            url: formUrlPreProductContainer.urlPrintPreProductContainer,
+            data: {
+
+            },
+            type: "post",
+            success: function(response) {
+
+                var render = response.render;
+
+                if (render != null) {
+
+                    $("#PrintArea")
+                        .html(render)
+                        .show()
+                        .print()
+                        .empty()
+                        .hide();
+                }
+            }
+        });
+    }
+
+    // Print Product Pallet List
+    var formUrlProductPallet = {
+        urlPrintProductPallet: '@Url.Action("ExportProductPallet", "MaterialStock", new {Area = "ManagementReport"})',
+    }
+    exportProductPallet = function(event) {
+        // Prevent default behaviour of button.
+        if (!confirm("Ready to print Product Pallets List?")) {
+            return;
+        };
+        event.preventDefault();
+        $.ajax({
+            url: formUrlProductPallet.urlPrintProductPallet,
+            data: {
+
+            },
+            type: "post",
+            success: function(response) {
+
+                var render = response.render;
+
+                if (render != null) {
+
+                    $("#PrintArea")
+                        .html(render)
+                        .show()
+                        .print()
+                        .empty()
+                        .hide();
+                }
+            }
+        });
+    }
+    </script>
+
+
+    <!--(/JS )------------------------------------------------------------------------------------>
+
+</head>
+<body class="hold-transition skin-gray-light sidebar-mini">
+
+    <div class="wrapper">
+
+        <!-- Navigation bar -->
+        @Html.Partial("Components/_Navigationbar")
+
+        <!-- Sidebar -->
+        @Html.Partial("Components/_Sidebar")
+
+        <!-- Area where content should be shown -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1 style="margin-left: 15px">
+                    @{
+                        var titleBuilder = new StringBuilder();
+
+                        if (!string.IsNullOrEmpty(ViewBag.Title))
+                        {
+                            titleBuilder.Append(ViewBag.Title);
+                        }
+
+                        if (!string.IsNullOrEmpty(ViewBag.ScreenId))
+                        {
+                            titleBuilder.Append(" - ");
+                            titleBuilder.Append(ViewBag.ScreenId);
+                        }
+                    }
+                    @titleBuilder.ToString()
+                </h1>
+            </section>
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+            </section>
+        </div>
+    </div>
+
+    <div id="PrintArea">
+
+    </div>
+    <div class="alert alert-success" role="alert" id="dvSucssesfull" style="display: none">
+        <span class="glyphicon glyphicon-ok input-lg" aria-hidden="true"></span>
+        <label id="lblMessage"></label>
+    </div>
+    <div class="alert alert-danger row" role="alert" id="dvError" style="display: none;">
+        <div class="form-group">
+            <div class="glyphicon glyphicon-exclamation-sign input-lg text-right col-lg-2" style="padding-right: 0px" aria-hidden="true"></div>
+            <div class="col-lg-10">
+                <label id="lblMessageError" class="input-lg text-left pull-left" style="font-size: 15px; padding-left: 0px"></label>
+            </div>
+        </div>
+    </div>
+    <!-- /#wrapper -->
+    @using (Html.ExtModalFor("modalSupplierCodeSelect", ExtModal.ModalSize.Medium, "Supplier Code Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectSupplier() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal">
+                Cancel
+            </button>
+        }
+    }
+
+    <!--Container Type Select-->
+    @using (Html.ExtModalFor("modalContainerTypeSelect", ExtModal.ModalSize.Medium, "Container Type Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectContainer() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('#modalContainerTypeSelect .close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--End Container Type Select-->
+    <!--Material Code Select-->
+    @using (Html.ExtModalFor("modalMaterialCodeSelect", ExtModal.ModalSize.Medium, "Material Code Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectMaterial() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('#modalMaterialCodeSelect .close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--End Material Code Select-->
+    <!--Pre Product Code Select-->
+    @using (Html.ExtModalFor("modalPreProductCodeSelect", ExtModal.ModalSize.Medium, "Pre-Product  Code Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectPreProduct() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" onclick=" $('#modalPreProductCodeSelect .close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--Pre Product Code Select-->
+    <!--Product Code Select-->
+    @using (Html.ExtModalFor("modalProductCodeSelect", ExtModal.ModalSize.Medium, "Product Code Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectProduct() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('#modalProductCodeSelect .close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--Product Code Select-->
+    <!--Out Of Plan's Product Code Select-->
+    @using (Html.ExtModalFor("modalOutOfPlanProductCodeSelect", ExtModal.ModalSize.Medium, "Out Of Plan's Product Code Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectOutOfPlanProduct() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--Product Code Select-->
+    <!--Supplement Material Code Select-->
+    @using (Html.ExtModalFor("modalSupplementMaterialCodeSelect", ExtModal.ModalSize.Medium, "Supplement Material Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectSupplementMaterial() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--Supplement Material Code Select-->
+    <!--End User Code Select-->
+    @using (Html.ExtModalFor("modalEndUserCodeSelect", ExtModal.ModalSize.Medium, "End User Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectEndUser() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--End User Code Select-->
+    <!--Shipping No Select-->
+    @using (Html.ExtModalFor("modalShippingNoSelect", ExtModal.ModalSize.Medium, "Shipping No Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectShippingNo() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--Shipping No Select-->
+    <!--Product Lot No Select-->
+    @using (Html.ExtModalFor("modalProductLotNoSelect", ExtModal.ModalSize.Medium, "Product Lot No Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectProductLotNo() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--End Product Lot No Select-->
+    <!--P.O.No Select-->
+    @using (Html.ExtModalFor("modalPONOSelect", ExtModal.ModalSize.Medium, "P.O.No Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectPONo() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+
+
+    @using (Html.ExtModalFor("modalPONOSelectWithParameter", ExtModal.ModalSize.Medium, "P.O.No Select-TCSS009F"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectPONoWithParameter() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--End P.O.No Select-->
+    <!--Pallet No Select-->
+    @using (Html.ExtModalFor("modalPalletNoSelect", ExtModal.ModalSize.Medium, "Pallet No Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectPalletNo() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--End Pallet No Select-->
+    <!--Container Type Select-->
+    @using (Html.ExtModalFor("modalContainerTypeSelect", ExtModal.ModalSize.Medium, "Container Type Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectTabletingLine() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--End Container Type Select-->
+    <!--Shelf No Select-->
+    @using (Html.ExtModalFor("modalShelfNoSelect", ExtModal.ModalSize.Medium, "Shelf No Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectShelfNo() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--End Shelf No Select-->
+    <!--Tabletising Line-->
+    @using (Html.ExtModalFor("modalTabletingLineSelect", ExtModal.ModalSize.Medium, "Tabletising Line"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectTabletising() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--End Tabletising Line-->
+    <!--Get palletNo with stock flag is 0-->
+    @using (Html.ExtModalFor("modalPalletNoWithParameter", ExtModal.ModalSize.Medium, "Pallet No Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectPalletNoWithParameter() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+    <!--End Get palletNo with stock flag is 0-->
+    @using (Html.ExtModalFor("modalProductLotNoParameter", ExtModal.ModalSize.Medium, "Product Lot No Select"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectProductLotNoParameter() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+
+    @using (Html.ExtModalFor("modalLabelPrintManagement", ExtModal.ModalSize.Medium, "Products list"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnOk" onclick=" selectLabelPrint() ">OK</button>
+            <button class="btn btn-flat btn-default btn-less-5-chars" type="button" data-dismiss="modal" onclick=" $('.close').click(); ">
+                Cancel
+            </button>
+        }
+    }
+
+    }
+
+
+
+    @RenderSection("scripts", false)
+</body>
+</html>
+<style>
+    div#menu {
+        float: left;
+        padding: 1%;
+        width: 20%;
+    }
+
+    div#content {
+        background: rgb(255, 255, 255);
+        float: left;
+        padding: 1%;
+        width: 80%;
+    }
+</style>
+<script src="/Scripts/maskedinput/jquery.maskedinput.js" type="text/javascript"></script>
+<script>
+    //$.validator.methods.number = function (value, element) {
+    //    var result = value.replace(",", "");
+    //
+    //    return this.optional(element) || parseFloat(result);
+    //    //|| Globalize.parseDate(value, "dd/MM/yyyy", "it-IT")
+    //    //|| Globalize.parseDate(value, "dd/MM/yyyy");
+    //}
+    $('#modalSupplierCodeSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalSupplierCodeSelect");
+            $("#modalSupplierCodeSelect .modal-header .modal-title").text("Supplier Code Select - TCSS004F");
+            //$("#txtKeyWordSearch").focus();
+        });
+
+
+    $('#modalContainerTypeSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalContainerTypeSelect");
+            $("#modalContainerTypeSelect .modal-header .modal-title").text("Container Type - TCSS010F");
+            // $("#txtKeyWordSearch").focus();
+        });
+    $('#modalMaterialCodeSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalMaterialCodeSelect");
+            $("#modalMaterialCodeSelect .modal-header .modal-title").text("Material Code Selection - TCSS001F");
+            //$("#txtKeyWordSearch").focus();
+        });
+
+    $('#modalPreProductCodeSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalPreProductCodeSelect");
+            $("#modalPreProductCodeSelect .modal-header .modal-title").text("Pre-Product Code Select - TCSS002F");
+            $("#txtKeyWordSearch").focus();
+        });
+
+    $('#modalProductCodeSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalProductCodeSelect");
+            $("#modalProductCodeSelect .modal-header .modal-title").text("Product Code Select - TCSS003F");
+            //$("#txtKeyWordSearch").focus();
+        });
+
+    $('#modalOutOfPlanProductCodeSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalOutOfPlanProductCodeSelect");
+            $("#modalOutOfPlanProductCodeSelect .modal-header .modal-title").text("Out Of Plan's Product Code");
+            //$("#txtKeyWordSearch").focus();
+        });
+
+    $('#modalSupplementMaterialCodeSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalSupplementMaterialCodeSelect");
+            $("#modalSupplementMaterialCodeSelect .modal-header .modal-title").text("Supplementary Material Code - TCSS005F");
+            //$("#txtKeyWordSearch").focus();
+        });
+
+    $('#modalEndUserCodeSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalEndUserCodeSelect");
+            $("#modalEndUserCodeSelect .modal-header .modal-title").text("End User - TCSS006F");
+            //$("#txtKeyWordSearch").focus();
+        });
+
+    $('#modalShippingNoSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalShippingNoSelect");
+            $("#modalShippingNoSelect .modal-header .modal-title").text("Shipping No - TCSS007F");
+            //$("#txtKeyWordSearch").focus();
+        });
+
+    $('#modalProductLotNoSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalProductLotNoSelect");
+            $("#modalProductLotNoSelect .modal-header .modal-title").text("Product Lot No. - TCSS008F");
+            //$("#txtKeyWordSearch").focus();
+        });
+
+    $('#modalPONOSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalPONOSelect");
+            $("#modalPONOSelect .modal-header .modal-title").text("P.O.No - TCSS009F");
+            // $("#txtKeyWordSearch").focus();
+        });
+
+    $('#modalPONOSelectWithParameter')
+        .on('show.bs.modal',
+        function (e) {
+            LoadPONoWithParameter("modalPONOSelectWithParameter");
+            $("#modalPONOSelect .modal-header .modal-title").text("P.O.No - TCSS009F");
+            ///$("#txtKeyWordSearch").focus();
+        });
+
+
+    $('#modalPalletNoSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalPalletNoSelect");
+            $("#modalPalletNoSelect .modal-header .modal-title").text("Pallet No - TCSS011F");
+            //$("#txtKeyWordSearch").focus();
+        });
+
+    $('#modalTabletingLineSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalTabletingLineSelect");
+            $("#modalTabletingLineSelect .modal-header .modal-title").text("Tableting Line - TCSS012F");
+            //$("#txtKeyWordSearch").focus();
+        });
+    $('#modalShelfNoSelect')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalShelfNoSelect");
+            $("#modalShelfNoSelect .modal-header .modal-title").text("Pre-product Shelfs - TCSS019F");
+            //$("#txtKeyWordSearch").focus();
+        });
+
+    $('#modalPalletNoWithParameter')
+        .on('show.bs.modal',
+        function (e) {
+            LoadPalletNo("modalPalletNoWithParameter");
+            $("#modalPalletNoWithParameter .modal-header .modal-title").text("Pallet No TCSS011F");
+            //$("#txtKeyWordSearch").focus();
+        });
+    $('#modalProductLotNoParameter')
+        .on('show.bs.modal',
+        function (e) {
+            LoadProductLotNoWithParameter("modalProductLotNoParameter");
+            $("#modalProductLotNoParameter .modal-header .modal-title").text("Product Lot No. - TCSS008F");
+            //$("#txtKeyWordSearch").focus();
+        });
+
+    //$('#labelPrintManagement')
+    //    .on('show.bs.modal', function () {
+    //        loadLabelProducts('labelPrintManagement');
+    //    });
+
+    $('#modalLabelPrintManagement')
+        .on('show.bs.modal',
+        function (e) {
+            LoadModel("modalLabelPrintManagement");
+            $("#modalLabelPrintManagement .modal-header .modal-title").text("Product List");
+            //$("#txtKeyWordSearch").focus();
+        });
+    function LoadPalletNo(modelId) {
+        $.ajax({
+            url: "/Common/Common/LoadPalletNoSelectWithParameter",
+            type: "GET",
+            data: { id: null },
+            success: function (data) {
+                $("#" + modelId + " .modal-body").html(data);
+
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+    function LoadPONoWithParameter(modelId) {
+        var id = $("#txtMaterialCode").val();
+        $.ajax({
+            url: "/Common/Common/LoadPONoWithParameter",
+            type: "GET",
+            data: { id: id },
+            success: function (data) {
+                $("#" + modelId + " .modal-body").html(data);
+
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    }
+    function LoadProductLotNoWithParameter(modelId) {
+        var id = $("#txtProductCode").val();
+        $.ajax({
+            url: "/Common/Common/LoadProductLotNoWithParameter",
+            type: "GET",
+            data: { id: id },
+            success: function (data) {
+                $("#" + modelId + " .modal-body").html(data);
+
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+    function LoadModel(modelId) {
+        var id = $("#disabledInput").val();
+        $.ajax({
+            url: "/Common/Common/LoadSelected",
+            type: "GET",
+            data: {
+                modelId: modelId,
+                id: id
+            },
+            success: function (data) {
+                $("#" + modelId + " .modal-body").html(data);
+
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+    }
+
+    /*
+    Display a list of products on modal to allow user to select which label should be printed.
+    */
+    //loadLabelProducts = function (modelId) {
+
+    //    $.ajax({
+    //        url: "/Common/Common/LoadSelected",
+    //        type: "GET",
+    //        data: {
+    //            modelId: modelId 
+    //        },
+    //        success: function (data) {
+    //            $("#" + modelId + " .modal-body").html(data);
+
+    //        },
+    //        error: function (data) {
+    //            console.log(data);
+    //        }
+    //    });
+
+    //}
+    //function LoadModel(modelId) {
+    //    $.ajax({
+    //        url:"/Common/Common/LoadSelected",
+    //        type: "GET",data:{modelId:modelId},
+    //        success: function (data) {
+    //            $("#modalSupplierCodeSelect .modal-body").html(data);
+    //            $("#modalSupplierCodeSelect .modal-header .modal-title").text("Supplier Code");
+
+    //        },
+    //        error: function (data) {
+    //            console.log(data);
+    //        }
+    //    });
+    //}
+    //function searchSupplierCode() {
+    //    var request = {
+    //        SupplierCode: $("#txtKeyWordSearch").val().trim()
+    //    };
+    //    gridHelper.searchObject("SupplierGrid", request);
+    //}
+    //function selectSupplier() {
+    //    $('#modalSupplierCodeSelect').modal('toggle');
+    //    var supplierCode = gridHelper.getSelectedItem("SupplierGrid").F04_SupplierCode;
+
+    //    $('#F01_SupplierCode').val(supplierCode);
+
+    //}
+
+</script>

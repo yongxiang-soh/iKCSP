@@ -1,0 +1,140 @@
+﻿@{
+    ViewBag.ScreenId = "TCEN044F";
+    ViewBag.Title = "Product Master Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.ProductMasterManagement.ProductMasterManagementViewModel
+@using KCSG.jsGrid.MVC
+@using KCSG.Core;
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls;
+@using KCSG.Core.Helper
+@using KCSG.Data.DataModel
+@using KCSG.jsGrid.MVC;
+@using Resources
+<script src="~/Scripts/areas/ProductMasterManagement/productMasterManagement.js"></script>
+
+<div class="col-lg-12">
+    @using (Ajax.BeginForm("AddOrUpdate", "ProductMasterManagement", new AjaxOptions() {HttpMethod = "POST", OnSuccess = "onSuccess(data)"}, new {@id = "productMasterManagementForm"}))
+    {
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <span>Search Criteria</span>
+            </div>
+            <div class="panel-body">
+                <div class="col-lg-12 form-group">
+
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.Location)
+                    </div>
+
+                    <div class="col-lg-3">
+                        @Html.ExtDropDownListFor(m => m.Location, (IEnumerable<SelectListItem>) ViewBag.ListLocation, "-- Please select --", new {@onchange = "DisableAllButton()"})
+                    </div>
+                    <div class="col-lg-1">
+                        @Html.ExtLabelFor(model => model.Mode)
+                    </div>
+                    <div class="col-lg-4" style="padding: 0">
+                        @Html.ExtRadioButtonFor(model => model.Mode, EnumsHelper.GetListItemsWithDescription<Constants.EnvMode>(Constants.EnvMode.SpecLine).OrderBy(i => int.Parse(i.Value)), new {}, true, 6)
+                    </div>
+
+                    <div class="col-lg-2">
+                        <button class="btn btn-default btn-flat btn-less-5-chars pull-right" type="button" onclick=" Go() ">Go</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.isCreate)
+        @Html.HiddenFor(model => model.F85_Code)
+        <div class="panel panel-danger">
+            <div class="panel panel-heading">
+                Product Master Management - TCEN044F
+            </div>
+            <div class="panel panel-body">
+                <div class="row form-group">
+                    <div class="col-lg-12">
+                        <div id="dvTempGrid" class="jsgrid" style="position: relative; height: auto; min-width: 100%; max-width: 100%;">
+                            <div class="jsgrid-grid-header jsgrid-header-scrollbar" style=" overflow: auto;">
+                                <table class="jsgrid-table" style="min-width: 100%; width: 1116px;overflow-y: auto">
+                                    <tbody>
+                                        <tr class="jsgrid-header-row">
+                                            <th style="width: 160px;">
+                                            </th>
+                                            <th style="width: 400px;">Mean Value</th>
+                                            <th style="width: 200px;">Range</th>
+                                            <th style="width: 100px;"></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        @Html.Grid(Model.Grid)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-2">@Html.LabelFor(model => model.ProductName)</div>
+                    <div class="col-lg-3">@Html.ExtTextBoxFor(model => model.ProductName, new {@readonly = "true"})</div>
+                    <div class="col-lg-2">&nbsp;</div>
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.NewProductName)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtDropDownListFor(m => m.NewProductName, (IEnumerable<SelectListItem>) ViewBag.ListProductName, "-- Please select --", new {@onchange = "ChangeProductName()"})
+                    </div>
+                </div>
+
+                <div class="row form-group" style="margin-top: 40px; margin-bottom: 40px;">
+                    <div class="col-lg-6">
+                        <fieldset class="scheduler-border">
+                            <legend style="width: inherit; padding: 0 10px;" class="scheduler-border">Mean Value</legend>
+                            <div class="row form-group">
+                                <div class="col-lg-2">@Html.ExtLabelFor(model => model.USLMean)</div>
+                                <div class="col-lg-4">@Html.ExtNumberFor(model => model.USLMean, new KCSG.Core.CustomControls.NumberOption() {Min = -9999.99, Max = 9999.99, NumberOfDecimal = 2})</div>
+                                <div class="col-lg-2">@Html.ExtLabelFor(model => model.UCLMean)</div>
+                                <div class="col-lg-4">@Html.ExtNumberFor(model => model.UCLMean, new KCSG.Core.CustomControls.NumberOption() {Min = -9999.99, Max = 9999.99, NumberOfDecimal = 2})</div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-2">@Html.ExtLabelFor(model => model.LSLMean)</div>
+                                <div class="col-lg-4">@Html.ExtNumberFor(model => model.LSLMean, new KCSG.Core.CustomControls.NumberOption() {Min = -9999.99, Max = 9999.99, NumberOfDecimal = 2})</div>
+                                <div class="col-lg-2">@Html.ExtLabelFor(model => model.LCLMean)</div>
+                                <div class="col-lg-4">@Html.ExtNumberFor(model => model.LCLMean, new KCSG.Core.CustomControls.NumberOption() {Min = -9999.99, Max = 9999.99, NumberOfDecimal = 2})</div>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <fieldset class="scheduler-border">
+                            <legend style="width: inherit; padding: 0 10px;" class="scheduler-border">Range</legend>
+                            <div class="row form-group">
+                                <div class="col-lg-4">@Html.ExtLabelFor(model => model.USLRange)</div>
+                                <div class="col-lg-8">@Html.ExtNumberFor(model => model.USLRange, new KCSG.Core.CustomControls.NumberOption() {Min = -9999.99, Max = 9999.99, NumberOfDecimal = 2})</div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-4">@Html.ExtLabelFor(model => model.LSLRange)</div>
+                                <div class="col-lg-8">@Html.ExtNumberFor(model => model.LSLRange, new KCSG.Core.CustomControls.NumberOption() {Min = -9999.99, Max = 9999.99, NumberOfDecimal = 2})</div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="col-lg-3">
+                        <fieldset style="height: 134px; margin-top: 10px;" class="scheduler-border">
+                            <div style="margin-top: 35px;">
+                                <div class="col-lg-4" style="padding: 0">@Html.ExtLabelFor(model => model.NoOFLot)</div>
+                                <div class="col-lg-8">@Html.ExtNumberFor(model => model.NoOFLot, new KCSG.Core.CustomControls.NumberOption() {Min = -9999, Max = 9999, NumberOfDecimal = 0})</div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <button class="btn btn-flat btn-default btn-less-5-chars" type="button" onclick=" Add() " id="btnAdd">Add</button>
+                        <button class="btn btn-flat btn-default btn-less-5-chars" type="button" onclick=" Update() " id="btnUpdate">Update</button>
+                        <button class="btn btn-flat btn-default btn-less-5-chars" type="button" onclick=" Delete() " id="btnDelete">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

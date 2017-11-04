@@ -1,0 +1,47 @@
+﻿@using KCSG.Core.CustomControls
+@using Resources
+@model KCSG.Web.Areas.ProductManagement.ViewModels.StorageOfEmptyProduct.StorageOfEmptyProductViewModel
+
+@{
+    ViewBag.ScreenId = "TCPR121F";
+    ViewBag.Title = "Empty Pallet of Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="~/Scripts/areas/StorageOfEmptyProductPallet/storageOfEmptyProducPallet.js"></script>
+
+<script>
+    var formUrl = {
+        urlChecked: '@Url.Action("CheckMaxiumNumberOfIpAddress", "StorageOfEmptyProductPallet", new {area = "ProductManagement"})'
+    }
+    var message = {
+        MSG14: ' @ProductManagementResources.MSG14',
+        MSG2: '@MessageResource.MSG2'
+    }
+</script>
+@using (Ajax.BeginForm("StoreTheEmptyPallet", "StorageOfEmptyProductPallet", new AjaxOptions() {HttpMethod = "POST", OnSuccess = "onSuccess"}, new {@id = "restorageProduct"}))
+{
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Empty Pallet Of Product</div>
+            <div class="panel-body">
+                <div class="row form-group-sm">
+                    <div class="col-lg-2">&nbsp;</div>
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.PalletNumber)</div>
+                    <div class="col-lg-3">
+                        @Html.ExtTextBoxFor(model => model.PalletNumber, new {Type = "number",@max=99, @class = "form-control", @onchange = "ChangeMessageStatus()"})
+                        <span class="field-validation-error"><span id="errorList" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2">
+                        <button type="button" class="btn btn-default btn-flat pull-right col-lg-2 btn-less-5-chars" id="btnStorage" onclick=" Storage() ">Storage</button>
+                    </div>
+                    <div class="col-lg-2">&nbsp;</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+

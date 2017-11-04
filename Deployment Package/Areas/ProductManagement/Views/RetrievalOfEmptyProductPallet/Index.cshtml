@@ -1,0 +1,60 @@
+﻿@using KCSG.Core.CustomControls
+@using Resources
+@model KCSG.Web.Areas.ProductManagement.ViewModels.RetrievalOfEmptyProductPallet.RetrievalOfEmptyProductPalletViewModel
+@{
+    ViewBag.ScreenId = "TCPR131F";
+    ViewBag.Title = "Retrieval of Empty Product Pallet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="~/Scripts/areas/RetrievalOfEmptyProductPallet/retrievalOfEmptyProductPallet.js"></script>
+<script>
+    var message = {
+        MSG40: ' @ProductManagementResources.MSG40'
+    }
+</script>
+@*@using (Ajax.BeginForm("RetrieveTheEmptyPallet", "RetrievalOfEmptyProductPallet", new AjaxOptions() {HttpMethod = "POST", OnSuccess = "onSuccess"}, new {@id = "retrievalOfProductPallet"}))
+{*@
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Retrieval of Empty Product Pallet</div>
+            <div class="panel-body">
+                
+                <div class="row form-group-sm">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-3">
+                        @Html.ExtLabelFor(model => model.PossibleRetrievalQuantity)
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group ">
+                            @Html.ExtNumberFor(model => model.PossibleRetrievalQuantity, new NumberOption() {NumberOfDecimal = 0, Min = 0, Max = 999999})
+                        </div>
+                        @*@Html.ValidationMessageFor(m => m.Within)*@
+                        @*   @Html.ExtNumberAddOnFor(model => model.Within, CustomControlConstants.AddOn.Text, "days", new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 0, Min = 0})*@
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+                
+                <div class="row form-group-sm">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-3">
+                        @Html.ExtLabelFor(model => model.RequestedRetrievalQuantity)
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group ">
+                            @Html.ExtTextBoxFor(model => model.RequestedRetrievalQuantity, new { NumberOfDecimal = 0, @type = "number", @max = 99, @onchange = "ChangeShowMessage()" })
+                            <span class="field-validation-error"><span id="errorList" hidden></span></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+
+                <div class="col-lg-10">
+                    <button type="button" class="btn btn-default btn-flat col-lg-2 btn-less-5-chars" onclick=" Retrieval() ">Retrieval</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+@*}*@

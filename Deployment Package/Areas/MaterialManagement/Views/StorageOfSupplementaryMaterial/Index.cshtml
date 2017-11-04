@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.ScreenId = "TCRM061F";
+    ViewBag.Title = "Storage Of Supplementary Material";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.MaterialManagement.ViewModels.StorageOfSupplementaryMaterial.StorageOfSupplementMaterialSearchViewModel
+@using KCSG.Core;
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@using Resources
+
+<script src="/Scripts/areas/storageOfSupplementaryMaterial/storageOfSupplementary.js" type="text/javascript"></script>
+
+<script>
+    var formUrl = {
+        urlEdit: '@Url.Action("Edit", "StorageOfSupplementaryMaterial")',
+        urlDelete: '@Url.Action("Delete", "StorageOfSupplementaryMaterial")'
+    }
+    var message = {
+        MSG25: '@KCSG.Core.Constants.Constants.Messages.Material_MSG025',
+        MSG26: '@KCSG.Core.Constants.Constants.Messages.Material_MSG026',
+        MSG02:'@MessageResource.MSG2'
+    }
+</script>
+
+<div class="col-lg-12">
+
+    @using (Html.BeginForm("", ""))
+    {
+        <div class="panel panel-danger" id="searchForm">
+            <div class="panel-heading">Search Criteria</div>
+            <div class="panel-body">
+                <div class="row">
+                    
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.SubMaterialCode)
+                    </div>
+
+                    <div class="col-lg-5 form-group">
+                        @Html.ExtTextBoxFor(model => model.SubMaterialCode, new {@id = "txtSubMaterialCodeSearch"})
+                        <span class="field-validation-error"><span id="errorSubMaterialCode" hidden></span></span>
+                    </div>
+                    
+                    <div class="col-lg-3">
+                        <button type="button"
+                                class="btn btn-flat btn-default btn-less-5-chars"
+                                id="btnSearch" onclick=" search() ">
+                            Search
+                        </button>
+
+                        <button type="button"
+                                class="btn btn-flat btn-default btn-less-5-chars"
+                                onclick="Clear(this, 'MaterialGrid')">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">Storage Of Supplementary Material</div>
+        <div class="panel-body">
+            <div class="col-lg-12 form-group">
+                @Html.Grid(Model.GridSupplementaryMaterial)
+            </div>
+            <div class="col-md-12">
+                
+                <button class="btn btn-flat btn-default btn-less-5-chars"
+                        id="btnStore" onclick=" StoreItem() ">
+                     Storage
+                </button>
+
+                <button class="btn btn-flat btn-default btn-less-5-chars"
+                        id="btnInventory"
+                        onclick="InventoryItem()">
+                    Inventory
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="formPlaceholder"></div>
+</div>
+

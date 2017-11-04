@@ -1,0 +1,316 @@
+/*
+ * Skin: Green
+ * -----------
+ */
+.skin-gray-light .main-header .navbar {
+  background-color: #f8f8f8;
+  border-color:#e7e7e7;
+}
+.skin-gray-light .main-header .navbar .nav > li > a {
+  color: #428bca;
+}
+.skin-gray-light .main-header .navbar .nav > li > a:hover,
+.skin-gray-light .main-header .navbar .nav > li > a:active,
+.skin-gray-light .main-header .navbar .nav > li > a:focus,
+.skin-gray-light .main-header .navbar .nav .open > a,
+.skin-gray-light .main-header .navbar .nav .open > a:hover,
+.skin-gray-light .main-header .navbar .nav .open > a:focus,
+.skin-gray-light .main-header .navbar .nav > .active > a {
+  background: rgba(0, 0, 0, 0.1);
+  color: #f6f6f6;
+}
+.skin-gray-light .main-header .navbar .sidebar-toggle {
+  color: #428bca;
+}
+.skin-gray-light .main-header .navbar .sidebar-toggle:hover {
+  color: #f6f6f6;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 767px) {
+  .skin-gray-light .main-header .navbar .dropdown-menu li.divider {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  .skin-gray-light .main-header .navbar .dropdown-menu li a {
+    color: #fff;
+  }
+  .skin-gray-light .main-header .navbar .dropdown-menu li a:hover {
+    background: #008d4c;
+  }
+}
+.skin-gray-light .main-header .logo {
+  background-color: #f8f8f8;
+  color: #ffffff;
+  border-bottom: 0 solid transparent;
+}
+.skin-gray-light .main-header .logo:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.skin-gray-light .main-header li.user-header {
+  background-color: #00a65a;
+  
+}
+.skin-gray-light .content-header {
+  background: transparent;
+}
+.skin-gray-light .wrapper,
+.skin-gray-light .main-sidebar,
+.skin-gray-light .left-side {
+  background-color: #f9fafc;
+}
+.skin-gray-light .content-wrapper,
+.skin-gray-light .main-footer {
+  border-left: 1px solid #d2d6de;
+}
+.skin-gray-light .user-panel > .info,
+.skin-gray-light .user-panel > .info > a {
+  color: #444444;
+}
+.skin-gray-light .sidebar-menu > li {
+  -webkit-transition: border-left-color 0.3s ease;
+  -o-transition: border-left-color 0.3s ease;
+  transition: border-left-color 0.3s ease;
+}
+.skin-gray-light .sidebar-menu > li.header {
+  color: #848484;
+  background: #f9fafc;
+}
+.skin-gray-light .sidebar-menu > li > a {
+  border-left: 3px solid transparent;
+  font-weight: 600;
+}
+.skin-gray-light .sidebar-menu > li:hover > a,
+.skin-gray-light .sidebar-menu > li.active > a {
+  color: #000000;
+  background: #f4f4f5;
+}
+.skin-gray-light .sidebar-menu > li.active {
+  border-left-color: #00a65a;
+}
+.skin-gray-light .sidebar-menu > li.active > a {
+  font-weight: 600;
+}
+.skin-gray-light .sidebar-menu > li > .treeview-menu {
+  background: #f4f4f5;
+}
+.skin-gray-light .sidebar a {
+  color: #444444;
+}
+.skin-gray-light .sidebar a:hover {
+  text-decoration: none;
+}
+.skin-gray-light .treeview-menu > li > a {
+  color: #777777;
+}
+
+.skin-gray-light .treeview > a >span {
+    overflow: hidden; 
+    text-overflow: ellipsis;
+    width: 150px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.skin-gray-light .treeview-menu > li.active > a,
+.skin-gray-light .treeview-menu > li > a:hover {
+  color: #000000;
+}
+.skin-gray-light .treeview-menu > li.active > a {
+  font-weight: 600;
+}
+.skin-gray-light .treeview > a > span{
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 150px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.skin-gray-light .sidebar-form {
+  border-radius: 3px;
+  border: 1px solid #d2d6de;
+  margin: 10px 10px;
+}
+.skin-gray-light .sidebar-form input[type="text"],
+.skin-gray-light .sidebar-form .btn {
+  box-shadow: none;
+  background-color: #fff;
+  border: 1px solid transparent;
+  height: 35px;
+}
+.skin-gray-light .sidebar-form input[type="text"] {
+  color: #666;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 2px;
+}
+.skin-gray-light .sidebar-form input[type="text"]:focus,
+.skin-gray-light .sidebar-form input[type="text"]:focus + .input-group-btn .btn {
+  background-color: #fff;
+  color: #666;
+}
+.skin-gray-light .sidebar-form input[type="text"]:focus + .input-group-btn .btn {
+  border-left-color: #fff;
+}
+.skin-gray-light .sidebar-form .btn {
+  color: #999;
+  border-top-left-radius: 0;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 0;
+}
+@media (min-width: 768px) {
+  .skin-gray-light.sidebar-mini.sidebar-collapse .sidebar-menu > li > .treeview-menu {
+    border-left: 1px solid #d2d6de;
+  }
+}
+
+/* Override content-wrapper of AdminLTE */
+.content-wrapper, .right-side{
+	background-color:#f8f8f8 !important;
+}
+
+.treeview.active > a {
+	background-color: #ccc !important;
+}
+.skin-gray-light .treeview.active > a > span{
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 175px!important;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/*
+    Customized sidebar content for content length limitation.
+*/
+ul.treeview-menu > li > a {
+    text-decoration: none; 
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap;
+}
+
+/*
+	Style for panel which contains buttons under a jsGrid table.
+*/
+.undertable-buttons-panel{
+	margin-top: 5px;
+}
+
+@media screen and (max-width : 1199px){
+	/*
+		Style for search panel (displayed on the Search Creteria)
+		Contain OK & Clear button.
+	*/
+	.search-button-panel{
+		margin-top: 5px;
+	}
+}
+
+/*
+    Style for sidebar item selected.
+*/
+.treeview-menu.menu-open > li > a.item-select {
+    color: #f44336;
+    font-weight: bold;
+}
+.required {
+    color: red;
+    font-weight: bold;
+    font-size: 16px
+}
+.padding-left-none {
+    padding-left: 0px !important;
+}
+
+.padding-left-5 {
+    padding-left: 5px !important;
+}
+
+.padding-left-10 {
+    padding-left: 10px !important;
+}
+
+.padding-right-none {
+    padding-right: 0px !important;
+}
+
+.padding-right-5 {
+    padding-right: 5px !important;
+}
+
+
+.padding-top-10 {
+    padding-top: 10px !important;
+}
+
+.padding-top-20 {
+    padding-top: 20px !important;
+}
+
+.padding-bottom-10 {
+    padding-bottom: 10px !important;
+}
+
+.margin-left-none {
+    margin-left: 0px !important;
+}
+
+.margin-left-5 {
+    margin-left: 5px !important;
+}
+
+.margin-right-none {
+    margin-right: 0px !important;
+}
+
+.margin-right-5 {
+    margin-right: 5px !important;
+}
+
+.margin-top-10 {
+    margin-top: 10px !important;
+}
+
+.margin-bottom-none {
+    margin-bottom: 0px !important;
+}
+
+.margin-bottom-10 {
+    margin-bottom: 10px !important;
+}
+
+/*
+    Custom button styles
+*/
+.btn-less-5-chars {
+    width: 80px;
+}
+
+.btn-more-5-chars {
+    width: 150px;
+}
+.btn-more-8-chars {
+    width: 200px;
+}
+.td-selected {
+   border-style: solid !important;
+    border-color: red !important;
+    border-width: 2px !important;
+}
+.error-line td{
+    background-color: #F2DEDE !important;
+}
+
+.user-menu {
+    padding-right: 30px;
+    font-size: 17px !important; 
+   
+}
+.jsgrid-selected >td {
+     background: #c4e2ff !important;
+    border-color: #c4e2ff !important;
+}

@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.ScreenId = "TCPR091F";
+    ViewBag.Title = "Storage of External Pre-product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@model KCSG.Web.Areas.ProductManagement.ViewModels.StorageOfExternalPreProduct.StorageOfExternalPreProductViewModel
+
+
+<script src="~/Scripts/areas/StorageOfExternalPreProduct/storageOfExternalPreProduct.js"></script>
+<script>
+    var formUrl = {
+        urlLotEnd: '@Url.Action("LotEnd", "StorageOfExternalPreProduct", new {area = "ProductManagement"})',
+        urlStorage: '@Url.Action("Storage", "StorageOfExternalPreProduct", new {area = "ProductManagement"})'
+    }
+</script>
+@using (Ajax.BeginForm("Storage", "StorageOfExternalPreProduct", new AjaxOptions() {HttpMethod = "POST", OnSuccess = "onSuccess", Confirm = "Ready to store?"}, new {@id = "indexForm"}))
+{
+   @Html.HiddenFor(m => m.Kndcmdno)
+        <div class="col-lg-12">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <span>Storage of External Pre-product</span>
+                </div>
+                <div class="panel-body">
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">@Html.ExtLabelFor(model => model.PreProductCode)</div>
+                            <div class="col-lg-8">
+                                @Html.ExtTextBoxAddOnFor(model => model.PreProductCode, CustomControlConstants.AddOn.Search, "#modalPreProductCodeSelect", new {@id = "txtPreProductCode"})
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">@Html.ExtLabelFor(model => model.PreProductName)</div>
+                            <div class="col-lg-8">
+                                @Html.ExtTextBoxFor(model => model.PreProductName, new {@readonly = "true", @id = "txtPreproductName"})
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">@Html.ExtLabelFor(model => model.LotNo)</div>
+                            <div class="col-lg-8">
+                                @Html.ExtTextBoxFor(model => model.LotNo)
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">@Html.ExtLabelFor(model => model.PalletNo)</div>
+                            <div class="col-lg-8">
+                                @Html.ExtTextBoxFor(model => model.PalletNo)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-6">
+                            <div class="col-lg-4">@Html.ExtLabelFor(model => model.Quantity)</div>
+                            <div class="col-lg-8">
+                                @Html.ExtNumberFor(model => model.Quantity, new NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999999.00})
+                                <span class="field-validation-error"><span id="quantity-error" hidden></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-6" style="padding-left: 30px;">
+                            <button type="button" class="btn btn-flat btn-default btn-more-5-chars" id="btnStorage" onclick=" Storage() ">Storage</button>
+                            <button type="button" class="btn btn-flat btn-default btn-more-5-chars" id="btnLotEnd" onclick=" LotEnd() ">Lot End</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+}

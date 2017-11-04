@@ -1,0 +1,38 @@
+﻿@using System.Diagnostics
+@helper ShelfStatus (string status) {
+    switch (status)
+    {
+        case "0":
+            <text>
+                Empty
+            </text>
+        break;
+        case "1":
+            <text>
+                Pallet
+            </text>
+        break;
+        case "3":
+                <text>
+                    Out/Spec
+                </text>
+            break;
+        case "4":
+                <text>
+                    Stor
+                </text>
+            break;
+        case "5":
+                <text>
+                    Retr
+                </text>
+            break;
+        case "6":
+                <text>
+                    Forbid
+                </text>
+            break;
+        default:
+        break;
+    }
+}

@@ -1,0 +1,70 @@
+﻿<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th style="text-align: center">** STORAGE RETRIEVAL RESULT LIST **</th>
+    </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC104P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td>< Material ></td>
+            <td></td>
+        </tr>        
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>S_ID</th>
+            <th>Cmd_ID</th>
+            <th>Cmd_Type</th>            
+            <th>S.R.T.</th>
+            <th>P.No</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Cmd_End_Date</th>
+            <th>Terminal_No</th>   
+            <th>Picture_No</th>   
+            <th>Abnormal_Code</th>          
+        </tr>        
+    </thead>
+
+    <tbody>
+    {{#FindPrintManagementReportItem}}        
+        <tr>
+            <td>{{SID}}</td>            
+            <td>{{CmdID}}</td>            
+            <td>{{CmdType}}</td>
+            <td>{{SRT}}</td>
+            <td>{{PalletNo}}</td>		
+            <td>{{From}}</td>
+            <td>{{To}}</td>
+            <td>{{SDate}}</td>
+            <td>{{TerminalNo}}</td>
+            <td>{{PictureNo}}</td>            
+            <td>{{AbnormalCode}}</td>            
+        </tr>
+    {{/FindPrintManagementReportItem}}
+    </tbody>  
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>        
+    </tfoot> 
+</table>

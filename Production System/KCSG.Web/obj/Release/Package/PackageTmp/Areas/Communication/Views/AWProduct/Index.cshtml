@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Automated Warehouse Controller - Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.Communication.ViewModels.GeneralInformatrionViewModel
+@*<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<script src="~/Scripts/areas/signalrCommon.js"></script>
+<script src="~/signalr/hubs"></script>*@
+<script src="~/Scripts/areas/automatedWarehouse/awProduct.js"></script>
+<script src="~/Scripts/areas/Communication/Communication1.js"></script>
+
+
+<script>
+    $().ready(function () {
+        $.validator.unobtrusive.parse('#indexFrom');
+    });
+    var formActionUrl = {
+        urlStatus: '@Url.Action("Status", "AWProduct")',
+        urlRequestTimer: '@Url.Action("RequestTimer", "AWProduct")',
+        urlDelete: '@Url.Action("Delete", "AWProduct")',
+        urlDeleteHistory: '@Url.Action("DeleteHistory", "AWProduct")',
+        urlEnd: '@Url.Action("End", "AWProduct")',
+        urlCancel: '@Url.Action("Cancel", "AWProduct")'
+    }
+
+</script>
+@using (Html.BeginForm("", "", FormMethod.Get, new { @id = "indexFrom" }))
+{
+    <div class="col-lg-12">
+
+        @Html.Partial("_PartialViewGeneralInfomation", Model)
+        @Html.Partial("_PartialDetailInfomation", Model.DetailInformation)
+
+    </div>
+}

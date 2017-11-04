@@ -1,0 +1,108 @@
+﻿@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@model KCSG.Web.Areas.ProductionPlanning.ViewModels.PckMtr.PckMtrViewModel
+
+
+@*@using (Html.BeginForm("CreateSub", "Product", FormMethod.Post, new { @id = "formAddSup" }))
+{*@
+    <form id="fAddSub">
+        @Html.HiddenFor(model => model.IsCreate)
+        @Html.HiddenFor(model => model.IsUpdate, new{id = "isUpdate"})
+        @Html.HiddenFor(model => model.F11_AddDate)
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                @if (Model.IsCreate)
+            {
+                    <span>Add Supplementary Material</span>
+            }
+            else
+            {
+                    <span>Update Supplementary Material</span>
+            }
+            </div>
+            <div class="panel-body">
+                <div class="row form-group" >
+                    <div class="col-xs-6">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(model => model.F11_ProductCode)
+                        </div>
+                        <div class="col-lg-8 ">
+                            <div class="padding-right-8">
+                                @Html.ExtTextBoxFor(model => model.F11_ProductCode, new {style = "cursor: not-allowed", @readonly = "readonly", @id = "productCode"})
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(model => model.ProductName)
+                        </div>
+                        <div class="col-lg-8">
+                           
+                                @Html.ExtTextBoxFor(model => model.ProductName, new { style = "cursor: not-allowed", @readonly = "readonly", @id = "productName" })
+                                
+                            </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-6">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(model => model.F11_SubMaterialCode)
+                        </div>
+                        <div class="col-lg-8">
+                            @if (Model.IsCreate)
+                            {
+                                @Html.ExtTextBoxAddOnFor(model => model.F11_SubMaterialCode, CustomControlConstants.AddOn.Search, "#modalSupplementMaterialCodeSelect", new { id = "txtSubMaterialCode", onchange = "ChangeSubCode(this)" })
+                            }
+                            else
+                            {@Html.ExtTextBoxAddOnFor(model => model.F11_SubMaterialCode, CustomControlConstants.AddOn.Search, "", new { id = "txtSubMaterialCode" }) }
+
+                        </div>
+                    </div>
+                    <div class="col-xs-6 hidden">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(model => model.SubMaterialName)
+                        </div>
+                        <div class="col-lg-8">
+                            @Html.ExtTextBoxFor(model => model.SubMaterialName, new { @readonly = "readonly", @id = "txtSubMaterialName" })
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row form-group" >
+                    <div class="col-xs-6">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(model => model.F11_Amount)
+                        </div>
+                        <div class="col-lg-8 ">
+                            <div class="padding-right-8">
+                                @Html.ExtNumberFor(model => model.F11_Amount, new NumberOption() { Min = 0, NumberOfDecimal = 2 ,Max = 9999.99})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(model => model.F11_Unit)
+                        </div>
+                        <div class="col-lg-8">
+                            @Html.ExtTextBoxFor(model => model.F11_Unit, new {  id = "txtSubMaterialUnit", @readonly = true })
+                            @Html.HiddenFor(model => model.F11_Unit)
+                        </div>
+                    </div>
+                </div>
+                <div class="row btnControl" style="margin: 20px 0 20px 30px;">
+                    <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick="saveSub()">OK</button>
+                    <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" cancelSub() ">Cancel</button>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+
+
+<script>
+    $().ready(function () {
+        $("#F11_Amount").focus();
+        $.validator.unobtrusive.parse("#fAddSub");
+    });
+</script>

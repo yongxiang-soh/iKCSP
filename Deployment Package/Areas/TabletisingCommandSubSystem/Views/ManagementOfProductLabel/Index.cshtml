@@ -1,0 +1,468 @@
+﻿@{
+    ViewBag.ScreenId = "TCMD031F";
+    ViewBag.Title = "Management of Product Label";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.TabletisingCommandSubSystem.Models.ManagementOfProductLabel.ManagementOfProductLabelViewModel
+@*@using System.Linq.Dynamic*@
+@using DocumentFormat.OpenXml.Drawing.Charts
+@using DocumentFormat.OpenXml.Wordprocessing
+@using KCSG.Core;
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+<script src="~/Scripts/areas/managementofproductlabel/managementOfProductLabel.js"></script>
+<script src="~/Scripts/areas/commond/commonSearchHelper.js"></script>
+@using (Ajax.BeginForm("Print", "ManagementOfProductLabel", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "" }, new { @id = "addNewForm" }))
+{
+    @Html.HiddenFor(model => model.MainFlow)
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Print Label</div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+
+                    <div class="row form-group">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.LabelFor(model => model.SupplierName)
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @Html.ExtDropDownListFor(model => model.SupplierName, EnumsHelper.GetListItemsWithDescription<Constants.SupplierName>(Constants.SupplierName.Kap).OrderBy(i => int.Parse(i.Value)), null, new { @onchange = "ChangeData()", @class = "clearData" })
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.LabelFor(model => model.CsNo1)
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+                            <div class="input-group">
+                                @if (Model.MainFlow)
+                                {
+                                    @Html.ExtNumberFor(model => model.CsNo1, new NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 9999 }, new { @class = "clearData" })
+                                }
+                                else
+                                {
+                                    @Html.ExtNumberFor(model => model.CsNo1, new NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 9999 }, new { @readonly = "true", @class = "clearData" })
+                                }
+                                <span class="input-group-addon">~</span>
+                                @if (Model.MainFlow)
+                                {
+                                    @Html.ExtNumberFor(model => model.CsNo2, new NumberOption() { NumberOfDecimal = 0, Max = 9999 }, new { @class = "clearData" })
+                                }
+                                else
+                                {
+                                    @Html.ExtNumberFor(model => model.CsNo2, new NumberOption() { NumberOfDecimal = 0, Max = 9999 }, new { @readonly = "true", @class = "clearData" })
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.LabelFor(model => model.Mode)
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @Html.ExtTextBoxFor(model => model.Mode, new { @readonly = "true" })
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.LabelFor(model => model.CmdNo)<span style="color: red">*</span>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @if (Model.MainFlow)
+                            {
+                                @Html.ExtTextBoxFor(model => model.CmdNo)
+                            }
+                            else
+                            {
+                                @Html.ExtTextBoxFor(model => model.CmdNo, new { @readonly = "true" })
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @if (Model.MainFlow)
+                            {
+                                @Html.LabelFor(model => model.ProductionCode)<span style="color: red">*</span>
+                            }
+                            else
+                            {
+                                @Html.LabelFor(model => model.ProductionCode)
+                            }
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @if (Model.MainFlow)
+                            {
+                                @Html.ExtTextBoxAddOnFor(model => model.ProductionCode, CustomControlConstants.AddOn.Search, "#modalLabelPrintManagement", new { @id = "txtProductCode" })
+                            }
+                            else
+                            {
+                                @Html.ExtTextBoxFor(model => model.ProductionCode, new { @id = "txtProductCode", @readonly = "true" })
+                            }
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.LabelFor(model => model.ProductionName)
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @Html.ExtTextBoxFor(model => model.ProductionName, new { @readonly = "true", @id = "txtProductName", @class = "clearData" })
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @if (Model.MainFlow)
+                {
+                                @Html.LabelFor(model => model.ShelfLife)<span style="color: red">*</span>
+                            }
+                            else
+                            {
+                                @Html.LabelFor(model => model.ShelfLife)
+                            }
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @if (Model.MainFlow)
+                            {
+                                @Html.ExtTextBoxFor(model => model.ShelfLife, new {  @type = "number", @class = "clearData", max = 99, onKeyDown = "if(this.value.length==2) return false;" })
+                            }
+                            else
+                            {
+                                @Html.ExtTextBoxFor(model => model.ShelfLife, new {@type = "number", @class = "clearData", max = 99, onKeyDown = "if(this.value.length==2) return false;" })
+                            }
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @if (Model.MainFlow)
+                {
+                                @Html.LabelFor(model => model.Pieces)<span style="color: red">*</span>
+                            }
+                            else
+                            {
+                                @Html.LabelFor(model => model.Pieces)
+                            }
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @if (Model.MainFlow)
+                {
+                                @Html.ExtTextBoxFor(model => model.Pieces, new { @type = "number", @class = "clearData", max = 99 })
+                            }
+                            else
+                            {
+                                @Html.ExtTextBoxFor(model => model.Pieces, new { @type = "number", @readonly = "true", @class = "clearData", max = 99 })
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.LabelFor(model => model.ExternalLabel)
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @if (Model.MainFlow)
+                            {
+                                @Html.ExtDropDownListFor(model => model.ExternalLabel, EnumsHelper.GetListItemsWithDescription<Constants.ExternalLabel>(Constants.ExternalLabel.No).OrderBy(i => int.Parse(i.Value)), null, new { @onchange = "ChangeData()", @class = "clearData" })
+                            }
+                            else
+                            {
+                                @Html.ExtDropDownListFor(model => model.ExternalLabel, EnumsHelper.GetListItemsWithDescription<Constants.ExternalLabel>(Constants.ExternalLabel.Piece).OrderBy(i => int.Parse(i.Value)), null, new { @disabled = "disabled", @onchange = "ChangeData()", @class = "clearData" })
+                            }
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.LabelFor(model => model.CodeHeading)
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @Html.ExtTextBoxFor(model => model.CodeHeading, new { @class = "clearData" })
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.LabelFor(model => model.InternalLabel)
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @if (Model.MainFlow)
+                            {
+                                @Html.ExtDropDownListFor(model => model.InternalLabel, EnumsHelper.GetListItemsWithDescription<Constants.InternalLabel>(Constants.InternalLabel.No).OrderBy(i => int.Parse(i.Value)), null, new { @onchange = "ChangeData()", @class = "clearData" })
+                            }
+                            else
+                            {
+                                @Html.ExtDropDownListFor(model => model.InternalLabel, EnumsHelper.GetListItemsWithDescription<Constants.InternalLabel>(Constants.InternalLabel.Piece).OrderBy(i => int.Parse(i.Value)), null, new { @onchange = "ChangeData()", @disabled = "disabled", @class = "clearData" })
+                            }
+
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.CheckBoxFor(model => model.LotNoIDY)
+                            <b>Lot No. IDY</b>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.LabelFor(model => model.ScsPartNo)
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @Html.ExtTextBoxFor(model => model.ScsPartNo, new { @class = "clearData" })
+                            <span class="field-validation-error">
+                                <span id="Pieces-error" class="hidden">Please input data for this required field.</span>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.CheckBoxFor(model => model.SmallFont)
+                            @Html.LabelFor(model => model.SmallFont)
+                        </div>
+
+                    </div>
+                
+                    <div class="row form-group">
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.LabelFor(model => model.CodeLabel)
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @Html.ExtDropDownListFor(model => model.CodeLabel, EnumHelper.GetSelectList(typeof(Constants.CodeLabel)), null, new { @onchange = "ChangeData()", @class = "clearData" })
+                        </div>
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            @Html.CheckBoxFor(model => model.KAP)
+                            @Html.LabelFor(model => model.KAP)
+                        </div>
+                    </div>
+                
+                    <div class="row form-group">
+
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"></div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            @if (Model.MainFlow)
+                            {
+                                @Html.ExtTextBoxFor(model => model.SpecificCodeLabel, new { @class = "clearData" })
+                            }
+                            else
+                            {
+                                @Html.ExtTextBoxFor(model => model.SpecificCodeLabel, new { @readonly = "true", @class = "clearData" })
+                            }
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            @Html.CheckBoxFor(model => model.BarcodeOfExpireDate)
+                            @Html.LabelFor(model => model.BarcodeOfExpireDate)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <div class="panel panel-danger" id="formExternalLabel">
+                        <div class="panel-heading">External Label</div>
+                        <div class="panel-body">
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    @Html.LabelFor(model => model.ExternalModelName)
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    @if (Model.MainFlow)
+                                    {
+                                        @Html.ExtTextBoxFor(model => model.ExternalModelName, new { @class = "clearData" })
+                                    }
+                                    else
+                                    {
+                                        @Html.ExtTextBoxFor(model => model.ExternalModelName, new { @readonly = "true", @class = "clearData" })
+                                    }
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    @Html.LabelFor(model => model.Quantity)
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    @if (Model.MainFlow)
+                                    {
+                                        @Html.ExtNumberFor(model => model.Quantity, new NumberOption() { NumberOfDecimal = 2 }, new { @class = "clearData" })
+                                        <span class="field-validation-error"><span id="errorlst" hidden></span></span>
+                                    }
+                                    else
+                                    {
+                                        @Html.ExtNumberFor(model => model.Quantity, new NumberOption() { NumberOfDecimal = 2 }, new { @readonly = "true", @class = "clearData" })
+                                        <span class="field-validation-error"><span id="errorlst" hidden></span></span>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    @Html.LabelFor(model => model.ExternalLabelType)
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    @if (Model.MainFlow)
+                                    {
+                                        @Html.ExtTextBoxFor(model => model.ExternalLabelType)
+                                    }
+                                    else
+                                    {
+                                        @Html.ExtTextBoxFor(model => model.ExternalLabelType, new { @readonly = "true", @class = "clearData" })
+                                    }
+                                </div>
+                            </div>
+                            <div class="row form-group">
+
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    @Html.LabelFor(model => model.InternalLotNo)
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    @if (Model.MainFlow)
+                                    {
+                                        @Html.ExtTextBoxFor(model => model.ExternalLotNo)
+                                    }
+                                    else
+                                    {
+                                        @Html.ExtTextBoxFor(model => model.ExternalLotNo, new { @readonly = true, @class = "clearData" })
+                                    }
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    @Html.LabelFor(model => model.MfgDate)
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    @if (Model.MainFlow)
+                                    {
+                                        @Html.ExtDateTimeFor(model => model.MfgDate, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                                    }
+                                    else
+                                    {
+                                        @Html.ExtDateTimeFor(model => model.MfgDate, new DateTimeOption() { Format = "DD/MM/YYYY" }, new { @readonly = "true" })
+                                    }
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    @Html.LabelFor(model => model.Size1)
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+
+                                    <div class="input-group">
+                                        @if (Model.MainFlow)
+                                        {
+                                            @Html.TextBoxFor(model => model.Size1, new { type = "number", min = "1", max = "999", @class = "clearData form-control"})
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(model => model.Size1, new { type = "number", min = "1", max = "999", @class = "clearData form-control", @readonly = "true" })
+                                        }
+                                        <span class="input-group-addon">X</span>
+                                        @if (Model.MainFlow)
+                                        {
+                                            @Html.TextBoxFor(model => model.Size2, new { type = "number", min = "1", max = "999", @class = "clearData form-control" })
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(model => model.Size2, new { type = "number", min = "1", max = "999", @class = "clearData form-control", @readonly="true" })
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                    @Html.LabelFor(model => model.Expired)
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                    @if (Model.MainFlow)
+                                    {
+                                        @Html.ExtDateTimeFor(model => model.Expired, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                                    }
+                                    else
+                                    {
+                                        @Html.ExtDateTimeFor(model => model.Expired, new DateTimeOption() { Format = "DD/MM/YYYY" }, new { @readonly = "true" })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="panel panel-danger" id="formInternalLabel">
+                        <div class="panel-heading">Internal Label</div>
+                        <div class="panel-body">
+
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+                                    @Html.LabelFor(model => model.InternalModelName)
+                                </div>
+                                <div class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
+                                    @Html.ExtTextBoxFor(model => model.InternalModelName)
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+                                    @Html.LabelFor(model => model.InternalLabelType)
+                                </div>
+                                <div class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
+                                    @if (Model.MainFlow)
+                                    {
+                                        @Html.ExtTextBoxFor(model => model.InternalLabelType)
+                                    }
+                                    else
+                                    {
+                                        @Html.ExtTextBoxFor(model => model.InternalLabelType, new { @readonly = "true" })
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+                                    @Html.LabelFor(model => model.ExternalLotNo)
+                                </div>
+                                <div class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
+                                    @if (Model.MainFlow)
+                                    {
+                                        @Html.ExtTextBoxFor(model => model.InternalLotNo)
+                                    }
+                                    else
+                                    {
+                                        @Html.ExtTextBoxFor(model => model.InternalLotNo, new { @readonly = "true" })
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12">
+                                    @Html.LabelFor(model => model.InternalSize1)
+                                </div>
+                                <div class="col-lg-10 col-md-8 col-sm-8 col-xs-12">
+                                    <div class="input-group">
+                                        @if (Model.MainFlow)
+                                        {
+                                            @Html.TextBoxFor(model => model.InternalSize1, new { type="number", min="1", max="999", @class= "clearData form-control" })
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(model => model.InternalSize1, new { type = "number", min = "1", max = "999", @class = "clearData form-control", @readonly = "true" })
+                                        }
+                                        <span class="input-group-addon">X</span>
+                                        @if (Model.MainFlow)
+                                        {
+                                            @Html.TextBoxFor(model => model.InternalSize2, new { type = "number", min = "1", max = "999", @class = "clearData form-control" })
+                                        }
+                                        else
+                                        {
+                                            @Html.TextBoxFor(model => model.InternalSize2, new { type = "number", min = "1", max = "999", @class = "form-control", @readonly = "true" })
+                                        }
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 btnControl">
+                    <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnClear" onclick=" Clear() ">Clear</button>
+                    <button class="btn btn-flat btn-default btn-less-5-chars" type="button" id="btnPrint" onclick=" Print() ">Print</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="formPlaceholder"></div>
+</div>

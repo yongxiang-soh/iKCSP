@@ -1,0 +1,472 @@
+﻿@{
+    ViewBag.ScreenId = "TCPR061F";
+    ViewBag.Title = "Stock-taking of Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.ProductManagement.ViewModels.StockTakingOfProduct.StockTakingOfProductViewModel
+@using KCSG.Core;
+@using KCSG.Core.CustomControls;
+@using KCSG.jsGrid.MVC;
+@using Resources
+
+<style>
+    .validation-summary-errors {
+     padding-left: 10px   
+    }
+    .validation-summary-errors li{
+     list-style-type: none
+    }
+
+</style>
+<script src="/Scripts/maskedinput/jquery.maskedinput.js" type="text/javascript"></script>
+<script src="~/Scripts/areas/productmanagement/stockTakingOfProduct.js"></script>
+<script src="~/Scripts/angular/angular.min.js"></script>
+<script src="~/Scripts/angular/services/angular-datetime-service.js"></script>
+@using (Ajax.BeginForm("", "", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess" }, new { @id = "indexForm" }))
+{
+        <div class="col-lg-12">
+            <div class="panel panel-danger">
+
+                <div class="panel-heading">
+                    <span>Set Stock-taking Criteria</span>
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                        <label>Shelf No</label>
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtTextBoxFor(model => model.ShelfNoFrom)
+                        <span class="field-validation-error" style="margin-left: auto; margin-right: auto"><span id="errorlist01" hidden></span></span>
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtTextBoxFor(model => model.ShelfNoTo)
+                        <span class="field-validation-error" style="margin-left: auto; margin-right: auto"><span id="errorlist02" hidden></span></span>
+                    </div>
+                    <div class="col-lg-1">&nbsp;</div>
+
+                    @*<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
+                            <input id="txtStartShelfNo"
+                                   type="text"
+                                   class="form-control" />
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
+                            <input id="txtEndShelfNo"
+                                   type="text"
+                                   class="form-control" />
+                        </div>*@
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12 form-group">
+                        <button class="btn btn-flat btn-default btn-less-5-chars" id="btnGo"
+                                onclick="searchStockTakingOfProduct()">
+                            <span>Go</span>
+                        </button>
+                    </div>
+                </div>
+                @*<div class="col-lg-12 form-group" style="text-align: center">
+                        <span class="field-validation-error" style="margin-left: auto; margin-right: auto"><span id="errorlist" hidden></span></span>
+                    </div>*@
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div id="StockTakingOfProductGridContainer"
+                             class="col-lg-12 form-group">
+                            @Html.Grid(Model.StockTakingOfProductGrid)
+
+                        </div>
+                    </div>
+
+                        <div id="productDetailContainer"
+                             class="form-group"
+                             hidden="hidden">
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <!-- Product Code -->
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="text-center">
+                                            <label>Product Code</label>
+                                        </div>
+                                        <div id="divProductCode">
+                                        </div>
+                                    </div>
+
+                                    <!-- Product Name -->
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="text-center">
+                                            <label>Product Name</label>
+                                        </div>
+                                        <div id="divProductName">
+                                        </div>
+                                    </div>
+
+                                    <!-- Lot No -->
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="text-center">
+                                            <label>Lot No</label>
+                                        </div>
+                                        <div id="divLotNo">
+                                        </div>
+                                    </div>
+
+                                    <!-- Quantity -->
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                        <div class="text-center">
+                                            <label>Quantity</label>
+                                        </div>
+                                        <div id="divQuantity">
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 form-group">
+
+                                <div class="pull-left" style="margin-left: 15px;">
+                                    <button id="btnClear"
+                                            class="btn btn-flat btn-default btn-less-5-chars"
+                                            disabled="disabled"
+                                            onclick="clearProductDetails(event)">
+                                        <span>Clear</span>
+                                    </button>
+
+                                    <button id="btnRetrieval"
+                                            class="btn btn-flat btn-default btn-more-5-chars"
+                                            disabled="disabled"
+                                            onclick="retrievalProductDetails()">
+                                        <span>Retrieval</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+        </div>
+}
+
+<div id="panelConfirmStockTaking"
+     class="row"
+     ng-init="onInit()"
+     ng-app="StockTakingRestoreProductModule"
+     ng-controller="StockTakingRestoreProductController"
+     ng-hide="location == null || location.length < 1 || palletNo == null || palletNo.length < 1">
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+
+            <div class="panel-heading">
+                <span>Stock-taking of Product Confirm</span>
+            </div>
+
+            <div class="panel-body">
+
+                <div class="row form-group">
+                    <div class="col-lg-12">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-lg-push-2 col-md-push-2 col-sm-push-1">
+                            <label>Location</label>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
+                            <input id="locationfirst" class="form-control"
+                                   readonly="readonly" />
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-lg-push-2 col-md-push-2 col-sm-push-1">
+                            <label>Pallet No.</label>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
+                            <input id="palletNofirst" class="form-control"
+                                   readonly="readonly" />
+                        </div>
+                    </div>
+                </div>
+
+                <form class="row form-group">
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Product Code</th>
+                                <th>Product Name</th>
+                                <th>PrePdt Lot No</th>
+                                <th>Lot No</th>
+                                <th>Pack Unit</th>
+                                <th>Pack Qty</th>
+                                <th>Fraction</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="retrievalItem in retrievalItems track by $index">
+
+                                <!-- Button clear -->
+                                <td>
+                                    <button class="btn btn-flat btn-default btn-less-5-chars"
+                                            ng-click="deleteItem(retrievalItem)">
+                                        <span>Clear</span>
+                                    </button>
+                                </td>
+
+
+                                <!-- Product Code -->
+                                <td>
+                                    <input class="form-control form-group"
+                                           value="{{retrievalItem.F40_ProductCode}}"
+                                           readonly="readonly" />
+                                </td>
+
+                                <!-- Product Name -->
+                                <td>
+                                    <input class="form-control form-group"
+                                           value="{{retrievalItem.F09_ProductDesp}}"
+                                           readonly="readonly" />
+                                </td>
+
+                                <!-- Pre product lot no -->
+                                <td>
+                                    <input class="form-control form-group"
+                                           value="{{retrievalItem.F40_PrePdtLotNo}}"
+                                           readonly="readonly" />
+                                </td>
+
+                                <!-- Product lot no -->
+                                <td>
+                                    <input class="form-control form-group"
+                                           value="{{retrievalItem.F40_ProductLotNo}}"
+                                           readonly="readonly" />
+                                </td>
+
+                                <!-- Pack unit -->
+                                <td>
+                                    <input class="form-control form-group"
+                                           ng-model="retrievalItem.F09_PackingUnit"
+                                           readonly="readonly"
+                                           type="number" />
+                                </td>
+
+                                <!-- Pack quantity -->
+                                <td>
+                                    <input class="form-control form-group"
+                                           ng-model="retrievalItem.PackQty"
+                                           name="packQuantity_{{$index}}"
+                                           type="number"
+                                           required="required"
+                                           step="0.01"
+                                           min="0" />
+
+                                    <ul class="validation-summary-errors">
+                                        <li style="display:none" id="packQuantityValid_{{$index}}">This field is required</li>
+                                    </ul>
+
+                                </td>
+
+                                <!-- Fraction -->
+                                <td>
+                                    <input class="form-control form-group"
+                                           ng-model="retrievalItem.Fraction"
+                                           name="packFraction_{{$index}}"
+                                           type="number"
+                                           min="0"
+                                           max="999"
+                                           step="0.01"
+                                           required="required" />
+                                    <ul class="validation-summary-errors">
+                                        <li style="display:none" id="packFractionValid_{{$index}}">This field is required</li>
+                                    </ul>
+
+                                </td>
+
+                                <!-- Total -->
+                                <td>
+                                    <div class='form-control'>
+                                        {{retrievalItem.F09_PackingUnit * retrievalItem.PackQty +  retrievalItem.Fraction | number : 2}}
+                                    </div>                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-lg-12">
+                        <button class="btn btn-default btn-flat btn-more-5-chars"
+                                ng-disabled="retrievalItems == null || retrievalItems.length < 1 ||  location == null || location.length < 1 || palletNo == null || palletNo.length < 1"
+                                @*ng-disabled="location == null || location.length < 1 || palletNo == null || palletNo.length < 1"*@
+                                ng-click="restorage()">
+                            <span>Re-storage</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    var app = angular.module('StockTakingRestoreProductModule', ['AngularDateTimeService']);
+    app.controller('StockTakingRestoreProductController', ['$scope', 'ngDateTime',
+        function ($scope, $ngDateTime) {
+
+            $scope.retrievalItems = [];
+            $scope.location = '';
+            $scope.palletNo = '';
+
+            $scope.onInit = function () {
+
+                
+            };
+
+            // Find stock list and display the screen.
+            $scope.findStocksList = function (item) {                
+
+                // Reset the list.
+                $scope.retrievalItems = [];
+                $scope.$applyAsync();
+
+                // Item is not defined.
+                if (item == null)
+                    return;
+
+                var parameter = {};
+
+                var selectItem = gridHelper.getSelectedItem("StockTakingOfProductGrid");
+                if (!selectItem)
+                    return;
+
+                parameter['row'] = selectItem.F51_ShelfRow;
+                parameter['bay'] = selectItem.F51_ShelfBay;
+                parameter['level'] = selectItem.F51_ShelfLevel;
+                parameter['palletNo'] = selectItem.F51_PalletNo;
+
+                $.ajax({
+                    url: '/StockTakingOfProduct/FindProductConfirmDetails',
+                    type: 'post',
+                    data: parameter,
+                    success: function (data) {
+                        if (data == null)
+                            return;
+
+                        if (!(data instanceof Array))
+                            return;
+
+                        $scope.retrievalItems = data;
+
+
+                        for (var index = 0; index < $scope.retrievalItems.length; index++)
+                            $scope.retrievalItems['packingUnitValid'] = true;
+
+                        $scope.location = selectItem.F51_ShelfRow + '-' + selectItem.F51_ShelfBay + '-' + selectItem.F51_ShelfLevel;
+                        $scope.palletNo = selectItem.F51_PalletNo;
+
+                        $('#locationfirst').val(selectItem.F51_ShelfRow + '-' + selectItem.F51_ShelfBay + '-' + selectItem.F51_ShelfLevel);
+                        $('#palletNofirst').val(selectItem.F51_PalletNo);
+                        $scope.$applyAsync();
+
+                        console.log(data);
+                    }
+                });
+            }
+
+            // Restorage list of products.
+            $scope.restorage = function () {
+                 
+                // Find item.
+                var item = findStockTakingItem();
+                if (item == null)
+                    return;
+
+                var valid = true;
+
+                
+
+                for (var index = 0; index < $scope.retrievalItems.length; index++) {
+                    var packQty = angular.copy($scope.retrievalItems)[index].PackQty;
+                    var fraction = angular.copy($scope.retrievalItems)[index].Fraction;
+                    var packingUnit = angular.copy($scope.retrievalItems)[index].F09_PackingUnit;                    
+                    if (packQty <= 0) {
+                        valid = false;
+                        $("#packQuantityValid_" + index).show();
+                        $("#packQuantityValid_" + index).text("Pack quantity must be more than zero!");
+                    } else {
+                        $("#packQuantityValid_" + index).hide();
+                    }
+                    if (fraction < -0.005) {
+                        valid = false;
+                        $("#packFractionValid_" + index).show();
+                        $("#packFractionValid_" + index).text("Value is out of range!");
+                    }
+                    else {
+                        $("#packFractionValid_" + index).hide();
+                    }
+                    if ((fraction + 0.005) > packingUnit) {
+                        valid = false;
+                        $("#packFractionValid_" + index).show();
+                        $("#packFractionValid_" + index).text("Fraction cannot be more than the packing unit!");
+                    }
+                    else {
+                        $("#packFractionValid_" + index).hide();
+                    }
+                }
+                if (!valid) {
+                    return;
+                }
+                if (!confirm("Ready to re-store?"))
+                   return;
+                // Copy parameter.
+                var parameter = {};
+                parameter['row'] = item.row;
+                parameter['bay'] = item.bay;
+                parameter['level'] = item.level;
+                parameter['palletNo'] = item.palletNo;
+                parameter['items'] = angular.copy($scope.retrievalItems);
+
+                for (var index = 0; index < parameter['items'].length; index++) {
+                    var tableListingDate = $ngDateTime.sqlDateToDate(parameter['items'][index]['F40_TabletingEndDate']);
+                    if (tableListingDate != null)
+                        parameter['items'][index]['F40_TabletingEndDate'] = moment(tableListingDate).format('YYYY-MM-DD HH:mm:ss');
+
+                    var certificationDate = $ngDateTime
+                        .sqlDateToDate(parameter['items'][index]['F40_CertificationDate']);
+                    if (certificationDate != null)
+                        parameter['items'][index]['F40_CertificationDate'] = moment(certificationDate).format('YYYY-MM-DD HH:mm:ss');
+
+                    var addDate = $ngDateTime
+                        .sqlDateToDate(parameter['items'][index]['F40_AddDate']);
+
+                    if (addDate != null)
+                        parameter['items'][index]['F40_AddDate'] = moment(addDate).format('YYYY-MM-DD HH:mm:ss');
+                }
+                $.ajax({
+                    url: '/StockTakingOfProduct/Restorage',
+                    type: 'post',
+                    data: parameter,
+                    success: function (data) {
+                        if (!data.Success) {
+                            analyzeExceptionMessage(data);
+                            return;
+                        }
+
+                        blockScreenAccess('Waiting messages from C3');
+                    }
+                });
+            }
+
+            // Clear item from list.
+            $scope.deleteItem = function (item) {
+                $scope.retrievalItems.pop(item);
+            }
+
+            $scope.initInputField = function() {
+                return {
+                    F40_ProductCode: "",
+                    F09_ProductDesp: "",
+                    F40_PrePdtLotNo: "",
+                    F40_ProductLotNo: ""
+                }
+            }
+        }]);
+
+</script>

@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.ScreenId = "TCRM111F";
+    ViewBag.Title = "Retrieval of Warehouse Pallet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.MaterialManagement.ViewModels.RetrievalOfWarehousePallet.RetrievalOfWarehousePalletViewModel
+@using KCSG.Core.CustomControls
+@using NumberOption = KCSG.Core.CustomControls.NumberOption
+<script src="~/Scripts/areas/retrievalOfWarehousePallet/retrievalOfWarehousePallet.js"></script>
+<Script>
+    var message= {
+        MSG39: ' @KCSG.Core.Constants.Constants.Messages.Material_MSG39',
+        MSG40: ' @KCSG.Core.Constants.Constants.Messages.Material_MSG40'
+    }
+</Script>
+@using (Ajax.BeginForm("Retrieval", "RetrieveOfWarehousePallet", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess(data)", Confirm = ("Are you sure you want to retrieve?") }, new { @id = "frmRetrievalWh" }))
+{
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <span>Generate Information</span>
+            </div>
+            <div class="panel-body">
+                
+                <div class="col-lg-12 form-group">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.PossibleRetrievalQuantity)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtTextBoxFor(model => model.PossibleRetrievalQuantity, new {style = "cursor: not-allowed", @readonly = "readonly", @class = "form-control"})
+                    </div>
+                </div>
+
+                <div class="col-lg-12 form-group">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.RequestRetrievalQuantity)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtNumberFor(m => m.RequestRetrievalQuantity, new NumberOption() {Min = 0})
+                        <span class="field-validation-error"><span id="RequestRetrievalQuantityError" hidden></span></span>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 form-group">
+                    <button type="button" 
+                            class="btn btn-default btn-flat" onclick="Retrieval()">Retrieval</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,160 @@
+﻿/* Layout */
+body { }
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar { padding: 10px; }
+
+.modal-dialog { left: 0 !important; }
+
+.logo-lg img { width: 222px; }
+
+/* End of Layout */
+
+/* Elements */
+
+.jsgrid-table input[type="radio"] {
+    margin: auto;
+    display: block;
+}
+
+input, select, textarea { max-width: 280px; }
+
+/* End of Elements */
+
+/* General */
+
+.padding-left-none { padding-left: 0px !important; }
+
+.padding-left-5 { padding-left: 5px !important; }
+
+.padding-left-10 { padding-left: 10px !important; }
+
+.padding-right-none { padding-right: 0px !important; }
+
+.padding-right-5 { padding-right: 5px !important; }
+
+.padding-right-8 { padding-right: 8px !important; }
+
+.padding-top-10 { padding-top: 10px !important; }
+
+.padding-top-20 { padding-top: 20px !important; }
+
+.padding-bottom-10 { padding-bottom: 10px !important; }
+
+.margin-left-none { margin-left: 0px !important; }
+
+.margin-left-5 { margin-left: 5px !important; }
+
+.margin-right-none { margin-right: 0px !important; }
+
+.margin-right-5 { margin-right: 5px !important; }
+
+.margin-top-10 { margin-top: 10px !important; }
+
+.margin-bottom-none { margin-bottom: 0px !important; }
+
+.margin-bottom-10 { margin-bottom: 10px !important; }
+
+.float-right { float: right !important; }
+
+.width-full { width: 100%; }
+
+/* End of General */
+
+/* styles for validation helpers */
+
+.field-validation-error { color: #b94a48; }
+
+.field-validation-valid { display: none; }
+
+input.input-validation-error, div.input-validation-error { border: 1px solid #b94a48; }
+
+input[type="checkbox"].input-validation-error { border: 0 none; }
+
+.validation-summary-errors { color: #b94a48; }
+
+.validation-summary-valid { display: none; }
+
+.growlUI { background: url("/Images/ok.png") no-repeat 10px 10px }
+
+.growlUI h1, .growlUI h2 {
+    color: white;
+    padding: 5px 5px 5px 75px;
+    text-align: right
+}
+
+.message {
+    width: inherit;
+    height: inherit;
+    text-align: left !important;
+}
+
+.message img {
+    width: 35px;
+    margin: 20px;
+}
+
+.message label {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14pt;
+    line-height: 1.428571429;
+    color: #333333;
+    margin-top: 25px
+}
+
+.message div {
+    height: inherit;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.numberKg {
+    display: inline;
+    width: 80%;
+    height: 26px;
+    border-radius: 0px;
+    cursor: not-allowed;
+}
+
+.control {
+    width: 100%;
+    height: 26px;
+    border-radius: 0px;
+    cursor: not-allowed
+}
+
+/*Custom css for model-dialog in feature add for material reception input*/
+
+#myModal .custom-model-dialog {
+    left: 0 !important;
+    width: 50% !important;
+    margin: 0 auto !important;
+}
+
+/*Fix max-width for text area in Storage of Supplementary Material*/
+
+.fix-max-width-textarea { max-width: none; }
+
+
+.required {
+    color: red;
+    font-size: 17px
+}
+
+
+
+fieldset {
+    border: 1px solid silver;
+    padding: 10px;
+}
+
+legend {
+    border-bottom: none;
+    font-size: 15px;
+    margin: 0.2em 0.5em;
+    font-weight: bold;
+}

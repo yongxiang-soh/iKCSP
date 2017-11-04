@@ -1,0 +1,90 @@
+﻿@using KCSG.Core.CustomControls
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.ChartModel
+<div class="panel panel-danger">
+    <div class="panel panel-body">
+        <div class="row form-group">
+            <div class="col-lg-8">
+                <canvas id="@Model.ChartName" width="400" height="200"></canvas>
+            </div>
+            <div class="col-lg-4">
+                <div class="panel panel-danger">
+                    <div class="panel panel-body">
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">@Html.ExtLabelFor(m => m.High)</div>
+                                <div class="col-lg-8">
+                                    @Html.ExtTextBoxFor(m => m.High, new { @readonly = true, id = Model.ChartName + "High" })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">@Html.ExtLabelFor(m => m.Low)</div>
+                                <div class="col-lg-8">
+                                    @Html.ExtTextBoxFor(m => m.Low, new { @readonly = true, id = Model.ChartName + "Low" })
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">@Html.ExtLabelFor(m => m.UCL)</div>
+                                <div class="col-lg-8">
+                                    @Html.ExtTextBoxFor(m => m.UCL, new { @readonly = true, id = Model.ChartName + "UCL" })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">@Html.ExtLabelFor(m => m.LCL)</div>
+                                <div class="col-lg-8">
+                                    @Html.ExtTextBoxFor(m => m.LCL, new { @readonly = true, id = Model.ChartName + "LCL" })
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">@Html.ExtLabelFor(m => m.Cp)</div>
+                                <div class="col-lg-8">
+                                    @Html.ExtTextBoxFor(m => m.Cp, new { @readonly = true, id = Model.ChartName + "Cp" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">@Html.ExtLabelFor(m => m.Cpk)</div>
+                                <div class="col-lg-8">
+                                    @Html.ExtTextBoxFor(m => m.Cpk, new { @readonly = true, id = Model.ChartName + "Cpk" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">@Html.ExtLabelFor(m => m.Range)</div>
+                                <div class="col-lg-8">
+                                    @Html.ExtTextBoxFor(m => m.Range, new { @readonly = true, id = Model.ChartName + "Range" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">@Html.ExtLabelFor(m => m.Mean)</div>
+                                <div class="col-lg-8">
+                                    @Html.ExtTextBoxFor(m => m.Mean, new { @readonly = true, id = Model.ChartName + "Mean" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <div class="col-lg-4">@Html.ExtLabelFor(m => m.Sigma)</div>
+                                <div class="col-lg-8">
+                                    @Html.ExtTextBoxFor(m => m.Sigma, new { @readonly = true, id = Model.ChartName + "Sigma" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

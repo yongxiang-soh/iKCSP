@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.ScreenId = "TCPS031F";
+    ViewBag.Title = "Input of Kneading Command";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.KneadingCommand.ViewModels.InputOfKneadingCommand.InputOfKneadingCommandSearchViewModel
+@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+
+<!-- Variable declaration -->
+<script>
+    var formUrl = {
+        urlCreateOrUpdate: '@Url.Action("CreateOrUpdate", "InputOfKneadingCommand")',
+        urlPrintKneadingCommands: '@Url.Action("ExportKneadingCommands", "InputOfKneadingCommand")'
+    }
+</script>
+
+
+<!-- Business handler of Input Of Kneading Command -->
+<script src="~/Scripts/areas/inputofkneadingcommand/inputOfKneadingCommand.js"></script>
+
+<div class="col-lg-12">
+    <input type="hidden" id="selectedValue" />
+    @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "searchForm" }))
+    {
+        <div class="panel panel-danger">
+            <div class="panel-heading">Search Criteria</div>
+            <div class="panel-body">
+
+                <div class="row form-group">
+                    <div class="col-lg-3">
+                        @Html.ExtLabelFor(model => model.KndLine)
+                    </div>
+                    <div class="col-lg-7"
+                         id="KndLine">
+                        @Html.ExtRadioButtonFor(model => model.KndLine, EnumHelper.GetSelectList(typeof(Constants.KndLine), Constants.KndLine.Conventional), null, true, 6)
+                    </div>
+                </div>
+
+                <div class="row form-group-sm">
+                    <div class="col-lg-3">
+                        @Html.ExtLabelFor(model => model.Within)
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="input-group">
+                            @Html.TextBoxFor(model => model.Within, new {Type = "number",@class = "form-control"})
+                            <span class='input-group-addon'>days</span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Within)
+                        @*   @Html.ExtNumberAddOnFor(model => model.Within, CustomControlConstants.AddOn.Text, "days", new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 0, Min = 0})*@
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="pull-right search-button-panel">
+                            <button type="button" class="btn btn-default btn-flat btn-less-5-chars" id="btnSearch" onclick=" search() ">Go</button>
+                            <button type="button" class="btn btn-default btn-flat btn-less-5-chars" onclick=" ClearSearch() ">Clear</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">List of Kneading</div>
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.Grid(Model.Grid)
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnSelected" onclick="Selected()">
+                    Select
+                </button>
+            </div>
+        </div>
+        <div class="panel-body">
+
+            <div class="form-group">
+                @Html.Grid(Model.GridSelected)
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default btn-flat btn-less-5-chars" id="btnPrint" disabled="disabled" onclick=" exportInputKneadingCommand(event) ">Print</button>
+                <button class="btn btn-default btn-flat btn-less-5-chars" id="btnDelete" onclick=" DeleteItem() ">Delete</button>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default btn-flat btn-less-5-chars" id="btnOK" disabled="disabled" onclick="ConfirmKneading()">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

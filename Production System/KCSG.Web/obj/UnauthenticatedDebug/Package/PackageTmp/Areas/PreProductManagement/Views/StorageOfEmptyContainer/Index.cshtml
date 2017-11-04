@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.ScreenId = "TCIP011F";
+    ViewBag.Title = "Storage of Empty Container";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.PreProductManagement.ViewModels.StorageOfEmptyContainerViewModel
+@using KCSG.Core;
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+
+@*<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<script src="~/Scripts/areas/signalrCommon.js"></script>
+<script src="/signalr/hubs"></script>*@
+<script src="~/Scripts/areas/preproductmanagement/storageOfEmptyContainer.js"></script>
+
+
+<script>
+    var formUrl = {
+        urlAssign: '@Url.Action("GetStorageShelfNo", "StorageOfEmptyContainer")',
+        urlStore: '@Url.Action("InsertAndUpdate", "StorageOfEmptyContainer")',
+        urlCheckExistsTX50: '@Url.Action("CheckedExistsTX50", "StorageOfEmptyContainer")'
+    }
+</script>
+<form id="addNewForm">
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Storage of Empty Pre-product Container</div>
+            <div class="panel-body">
+                <div class="col-lg-12">
+                    <div class="row form-group">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+                            <div class="col-xs-4">
+                                @Html.ExtLabelFor(model => model.ContainerType)
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.ExtTextBoxAddOnFor(model => model.ContainerType, CustomControlConstants.AddOn.Search, "#modalContainerTypeSelect", new { @id = "txtContainerType" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-xs-6 col-xs-offset-3">
+                            <div class="col-xs-4">
+                                @Html.ExtLabelFor(model => model.ContainerName)
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.ExtTextBoxFor(model => model.ContainerName, new { @id = "txtContainerName", @readonly = "readonly" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-xs-6 col-xs-offset-3">
+                            <div class="col-xs-4">
+                                @Html.ExtLabelFor(model => model.ContainerNo)
+                            </div>
+                            <div class="col-xs-8">
+                                @Html.ExtNumberFor(model => model.ContainerNo, new KCSG.Core.CustomControls.NumberOption() { Min = 0,Max = 999})
+                                <span class="field-validation-error"><span id="errorlst" hidden></span></span>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-xs-6 col-xs-offset-3">
+                            <div class="col-xs-4">
+                                @Html.ExtLabelFor(model => model.StorageShelfNo)
+                            </div>
+                            <div class="col-xs-8">
+                                @*@Html.ExtTextBoxAddOnFor(model => model.StorageShelfNo, CustomControlConstants.AddOn.Search, "#modalShelfNoSelect", new { @id = "txtShelfNo", @onchange = "CheckExistsTX50()" })*@
+                                @Html.ExtTextBoxAddOnFor(model => model.StorageShelfNo, CustomControlConstants.AddOn.Search, "#modalShelfNoSelect", new { @id = "txtShelfNo" })
+                            </div>
+                        </div>
+                            <button type="button" class="btn btn-default btn-flat btn-less-5-chars col-lg-2" onclick=" Assign() " style="margin-right: 5px;">Assign</button>
+                            <button class="btn btn-default btn-flat btn-less-5-chars col-lg-2"
+                                    type="button"
+                                    id="btnStorage"
+                                    onclick=" storageEmptyContainer() ">
+                                Storage
+                            </button>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+</form>
+
+
+

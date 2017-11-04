@@ -1,0 +1,346 @@
+﻿<style>
+    .title-table, .content-table {
+        border-collapse: collapse;
+        min-width: 100%;
+    }
+
+    .title-table th, td {
+        border: 0 solid transparent;
+    }
+
+    .content-table th {
+        border: 1px solid black;
+    }
+	
+	.content-table td{
+		border: 1px solid black;
+	}
+</style>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th colspan="2"
+			class="text-center">Cleanliness Measurement Record</th>
+    </tr>
+	<tr>
+        <td></td>
+		<td class="pull-right">DATE: {{currentDate}}</td>
+    </tr>
+	<tr>
+        <td></td>
+		<td class="pull-right"> {{company}} </td>
+    </tr>
+    </thead>
+</table>
+
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+	<tr>
+        <td> < Product > </td>
+    </tr>
+    </thead>
+</table>
+<br/>
+<h1> 1 meter above the operation floor </h1>
+<h2>Standard value below 1000</h2>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th class="text-center"> PLACE</th>
+        <th class="text-center"> A</th>
+        <th class="text-center">B</th>
+        <th class="text-center"> C</th>
+        <th class="text-center"> D</th>
+        <th class="text-center"> E</th>
+        <th class="text-center"> F</th>
+        <th class="text-center"> G</th>
+        <th class="text-center"> H</th>
+        <th class="text-center"> I</th>
+        <th class="text-center"> J</th>
+        <th class="text-center"> CP</th>
+        <th class="text-center"> Mead</th>
+        <th class="text-center"> Sigma</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td class="text-center">VALUE</td>
+        <td class="text-center">{{conv1.conv1.Datas[0][0]}}</td>
+        <td class="text-center">{{conv1.Datas[0][1]}}</td>
+        <td class="text-center">{{conv1.Datas[0][2]}}</td>
+        <td class="text-center">{{conv1.Datas[0][3]}}</td>
+        <td class="text-center">{{conv1.Datas[0][4]}}</td>
+        <td class="text-center">{{conv1.Datas[0][5]}}</td>
+        <td class="text-center">{{conv1.Datas[0][6]}}</td>
+        <td class="text-center">{{conv1.Datas[0][7]}}</td>
+        <td class="text-center">{{conv1.Datas[0][8]}}</td>
+        <td class="text-center">{{conv1.Datas[0][9]}}</td>
+        <td class="text-center">{{Cp[1]}}</td>
+        <td class="text-center">{{Mean[1]}}</td>
+        <td class="text-center">{{Sigma[1]}}</td>
+
+    </tr>
+
+    <tr>
+
+        <td class="text-center">{{conv1.Datas[1][0]}}</td>
+        <td class="text-center">{{conv1.Datas[1][1]}}</td>
+        <td class="text-center">{{conv1.Datas[1][2]}}</td>
+        <td class="text-center">{{conv1.Datas[1][3]}}</td>
+        <td class="text-center">{{conv1.Datas[1][4]}}</td>
+        <td class="text-center">{{conv1.Datas[1][5]}}</td>
+        <td class="text-center">{{conv1.Datas[1][6]}}</td>
+        <td class="text-center">{{conv1.Datas[1][7]}}</td>
+        <td class="text-center">{{conv1.Datas[1][8]}}</td>
+        <td class="text-center">{{conv1.Datas[1][9]}}</td>
+        <td class="text-center">{{conv1.Cp[1]}}</td>
+        <td class="text-center">{{conv1.Mean[2]}}</td>
+        <td class="text-center">{{conv1.Sigma[2]}}</td>
+    </tr>
+
+    </tbody>
+</table>
+<h2>Standard value below 500</h2>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th class="text-center"> PLACE</th>
+        <th class="text-center"> K</th>
+        <th class="text-center">L</th>
+        <th class="text-center"> M</th>
+        <th class="text-center"> N</th>
+        <th class="text-center"> O</th>
+        <th class="text-center"> P</th>
+        <th class="text-center"> Q</th>
+        <th class="text-center"> R</th>
+        <th class="text-center"> S</th>
+        <th class="text-center"> T</th>
+        <th class="text-center"> CP</th>
+        <th class="text-center"> Mead</th>
+        <th class="text-center"> Sigma</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td class="text-center">VALUE</td>
+        <td class="text-center">{{mega1.Datas[0][0]}}</td>
+        <td class="text-center">{{mega1.Datas[0][1]}}</td>
+        <td class="text-center">{{mega1.Datas[0][2]}}</td>
+        <td class="text-center">{{mega1.Datas[0][3]}}</td>
+        <td class="text-center">{{mega1.Datas[0][4]}}</td>
+        <td class="text-center">{{mega1.Datas[0][5]}}</td>
+        <td class="text-center">{{mega1.Datas[0][6]}}</td>
+        <td class="text-center">{{mega1.Datas[0][7]}}</td>
+        <td class="text-center">{{mega1.Datas[0][8]}}</td>
+        <td class="text-center">{{mega1.Datas[0][9]}}</td>
+        <td class="text-center">{{Cp[1]}}</td>
+        <td class="text-center">{{Mean[1]}}</td>
+        <td class="text-center">{{Sigma[1]}}</td>
+
+    </tr>
+
+    <tr>
+
+        <td class="text-center">{{mega1.Datas[1][0]}}</td>
+        <td class="text-center">{{mega1.Datas[1][1]}}</td>
+        <td class="text-center">{{mega1.Datas[1][2]}}</td>
+        <td class="text-center">{{mega1.Datas[1][3]}}</td>
+        <td class="text-center">{{mega1.Datas[1][4]}}</td>
+        <td class="text-center">{{mega1.Datas[1][5]}}</td>
+        <td class="text-center">{{mega1.Datas[1][6]}}</td>
+        <td class="text-center">{{mega1.Datas[1][7]}}</td>
+        <td class="text-center">{{mega1.Datas[1][8]}}</td>
+        <td class="text-center">{{mega1.Datas[1][9]}}</td>
+        <td class="text-center">{{mega1.Cp[1]}}</td>
+        <td class="text-center">{{mega1.Mean[2]}}</td>
+        <td class="text-center">{{mega1.Sigma[2]}}</td>
+    </tr>
+
+    </tbody>
+</table>
+<h1> 2 meter above the operation floor </h1>
+<h2>Standard value below 50</h2>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th class="text-center"> PLACE</th>
+        <th class="text-center"> A</th>
+        <th class="text-center">B</th>
+        <th class="text-center"> C</th>
+        <th class="text-center"> D</th>
+        <th class="text-center"> E</th>
+        <th class="text-center"> F</th>
+        <th class="text-center"> G</th>
+        <th class="text-center"> H</th>
+        <th class="text-center"> I</th>
+        <th class="text-center"> J</th>
+        <th class="text-center"> CP</th>
+        <th class="text-center"> Mead</th>
+        <th class="text-center"> Sigma</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td class="text-center">VALUE</td>
+        <td class="text-center">{{conv2.Datas[0][0]}}</td>
+        <td class="text-center">{{conv2.Datas[0][1]}}</td>
+        <td class="text-center">{{conv2.Datas[0][2]}}</td>
+        <td class="text-center">{{conv2.Datas[0][3]}}</td>
+        <td class="text-center">{{conv2.Datas[0][4]}}</td>
+        <td class="text-center">{{conv2.Datas[0][5]}}</td>
+        <td class="text-center">{{conv2.Datas[0][6]}}</td>
+        <td class="text-center">{{conv2.Datas[0][7]}}</td>
+        <td class="text-center">{{conv2.Datas[0][8]}}</td>
+        <td class="text-center">{{conv2.Datas[0][9]}}</td>
+        <td class="text-center">{{conv2.Cp[1]}}</td>
+        <td class="text-center">{{conv2.Mean[1]}}</td>
+        <td class="text-center">{{conv2.Sigma[1]}}</td>
+
+    </tr>
+
+    <tr>
+
+        <td class="text-center">{{conv2.Datas[1][0]}}</td>
+        <td class="text-center">{{conv2.Datas[1][1]}}</td>
+        <td class="text-center">{{conv2.Datas[1][2]}}</td>
+        <td class="text-center">{{conv2.Datas[1][3]}}</td>
+        <td class="text-center">{{conv2.Datas[1][4]}}</td>
+        <td class="text-center">{{conv2.Datas[1][5]}}</td>
+        <td class="text-center">{{conv2.Datas[1][6]}}</td>
+        <td class="text-center">{{conv2.Datas[1][7]}}</td>
+        <td class="text-center">{{conv2.Datas[1][8]}}</td>
+        <td class="text-center">{{conv2.Datas[1][9]}}</td>
+        <td class="text-center">{{conv2.Cp[1]}}</td>
+        <td class="text-center">{{conv2.Mean[2]}}</td>
+        <td class="text-center">{{conv2.Sigma[2]}}</td>
+    </tr> <tr>
+
+        <td class="text-center">{{conv2.Datas[2][0]}}</td>
+        <td class="text-center">{{conv2.Datas[2][2]}}</td>
+        <td class="text-center">{{conv2.Datas[2][2]}}</td>
+        <td class="text-center">{{conv2.Datas[2][3]}}</td>
+        <td class="text-center">{{conv2.Datas[2][4]}}</td>
+        <td class="text-center">{{conv2.Datas[2][5]}}</td>
+        <td class="text-center">{{conv2.Datas[2][6]}}</td>
+        <td class="text-center">{{conv2.Datas[2][7]}}</td>
+        <td class="text-center">{{conv2.Datas[2][8]}}</td>
+        <td class="text-center">{{conv2.Datas[2][9]}}</td>
+        <td class="text-center">{{conv2.Cp[1]}}</td>
+        <td class="text-center">{{conv2.Mean[2]}}</td>
+        <td class="text-center">{{conv2.Sigma[2]}}</td>
+    </tr> <tr>
+
+        <td class="text-center">{{conv2.Datas[3][0]}}</td>
+        <td class="text-center">{{conv2.Datas[3][3]}}</td>
+        <td class="text-center">{{conv2.Datas[3][2]}}</td>
+        <td class="text-center">{{conv2.Datas[3][3]}}</td>
+        <td class="text-center">{{conv2.Datas[3][4]}}</td>
+        <td class="text-center">{{conv2.Datas[3][5]}}</td>
+        <td class="text-center">{{conv2.Datas[3][6]}}</td>
+        <td class="text-center">{{conv2.Datas[3][7]}}</td>
+        <td class="text-center">{{conv2.Datas[3][8]}}</td>
+        <td class="text-center">{{conv2.Datas[3][9]}}</td>
+        <td class="text-center">{{conv2.Cp[1]}}</td>
+        <td class="text-center">{{conv2.Mean[2]}}</td>
+        <td class="text-center">{{conv2.Sigma[2]}}</td>
+    </tr>
+
+    </tbody>
+</table>
+<h2>Standard value below 50</h2>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th class="text-center"> PLACE</th>
+        <th class="text-center"> K</th>
+        <th class="text-center">L</th>
+        <th class="text-center"> M</th>
+        <th class="text-center"> N</th>
+        <th class="text-center"> O</th>
+        <th class="text-center"> P</th>
+        <th class="text-center"> Q</th>
+        <th class="text-center"> R</th>
+        <th class="text-center"> S</th>
+        <th class="text-center"> T</th>
+        <th class="text-center"> CP</th>
+        <th class="text-center"> Mead</th>
+        <th class="text-center"> Sigma</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td class="text-center">VALUE</td>
+            <td class="text-center">{{mega2.Datas[0][0]}}</td>
+            <td class="text-center">{{mega2.Datas[0][1]}}</td>
+            <td class="text-center">{{mega2.Datas[0][2]}}</td>
+            <td class="text-center">{{mega2.Datas[0][3]}}</td>
+            <td class="text-center">{{mega2.Datas[0][4]}}</td>
+            <td class="text-center">{{mega2.Datas[0][5]}}</td>
+            <td class="text-center">{{mega2.Datas[0][6]}}</td>
+            <td class="text-center">{{mega2.Datas[0][7]}}</td>
+            <td class="text-center">{{mega2.Datas[0][8]}}</td>
+            <td class="text-center">{{mega2.Datas[0][9]}}</td>
+            <td class="text-center">{{mega2.Cp[1]}}</td>
+            <td class="text-center">{{mega2.Mean[1]}}</td>
+            <td class="text-center">{{mega2.Sigma[1]}}</td>
+            
+        </tr>
+
+    <tr>
+
+        <td class="text-center">{{mega2.Datas[1][0]}}</td>
+        <td class="text-center">{{mega2.Datas[1][1]}}</td>
+        <td class="text-center">{{mega2.Datas[1][2]}}</td>
+        <td class="text-center">{{mega2.Datas[1][3]}}</td>
+        <td class="text-center">{{mega2.Datas[1][4]}}</td>
+        <td class="text-center">{{mega2.Datas[1][5]}}</td>
+        <td class="text-center">{{mega2.Datas[1][6]}}</td>
+        <td class="text-center">{{mega2.Datas[1][7]}}</td>
+        <td class="text-center">{{mega2.Datas[1][8]}}</td>
+        <td class="text-center">{{mega2.Datas[1][9]}}</td>
+        <td class="text-center">{{mega2.Cp[1]}}</td>
+        <td class="text-center">{{mega2.Mean[2]}}</td>
+        <td class="text-center">{{mega2.Sigma[2]}}</td>
+    </tr>
+          <tr>
+            
+            <td class="text-center">{{mega2.Datas[2][0]}}</td>
+            <td class="text-center">{{mega2.Datas[2][1]}}</td>
+            <td class="text-center">{{mega2.Datas[2][2]}}</td>
+            <td class="text-center">{{mega2.Datas[2][3]}}</td>
+            <td class="text-center">{{mega2.Datas[2][4]}}</td>
+            <td class="text-center">{{mega2.Datas[2][5]}}</td>
+            <td class="text-center">{{mega2.Datas[2][6]}}</td>
+            <td class="text-center">{{mega2.Datas[2][7]}}</td>
+            <td class="text-center">{{mega2.Datas[2][8]}}</td>
+            <td class="text-center">{{mega2.Datas[2][9]}}</td>
+            <td class="text-center">{{mega2.Cp[1]}}</td>
+            <td class="text-center">{{mega2.Mean[2]}}</td>
+            <td class="text-center">{{mega2.Sigma[2]}}</td>
+    </tr> 
+        <tr>
+            
+            <td class="text-center">{{mega2.Datas[3][0]}}</td>
+            <td class="text-center">{{mega2.Datas[3][1]}}</td>
+            <td class="text-center">{{mega2.Datas[3][2]}}</td>
+            <td class="text-center">{{mega2.Datas[3][3]}}</td>
+            <td class="text-center">{{mega2.Datas[3][4]}}</td>
+            <td class="text-center">{{mega2.Datas[3][5]}}</td>
+            <td class="text-center">{{mega2.Datas[3][6]}}</td>
+            <td class="text-center">{{mega2.Datas[3][7]}}</td>
+            <td class="text-center">{{mega2.Datas[3][8]}}</td>
+            <td class="text-center">{{mega2.Datas[3][9]}}</td>
+            <td class="text-center">{{mega2.Cp[1]}}</td>
+            <td class="text-center">{{mega2.Mean[2]}}</td>
+            <td class="text-center">{{mega2.Sigma[2]}}</td>
+        </tr>
+    
+    </tbody>
+</table>
+

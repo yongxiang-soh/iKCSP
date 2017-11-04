@@ -1,0 +1,184 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Domain.Interfaces.Services
+@{
+    // Find service which handles identity information.
+    var identityService = DependencyResolver.Current.GetService<IIdentityService>();
+
+    // Find available screens.
+    var availableScreens = identityService.FindAccessibleScreens(HttpContext.Current.User.Identity);
+}
+
+
+
+@if (identityService.IsScreenAccessible(availableScreens, new[] { "TCPR011F", "TCPR021F", "TCPR031F", "TCPR041F", "TCPR051F", "TCPR061F",
+    "TCPR071F", "TCPR081F", "TCPR091F", "TCPR101F", "TCPR111F", "TCPR121F", "TCPR131F", "TCPR141F" }))
+{
+    <li class="treeview">
+        <a href="javascript:void(0);">
+            <i class="fa fa-table" aria-hidden="true"></i>
+            <span>Product Management</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR011F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StorageOfProduct", new { area = "ProductManagement" })" 
+                       data-toggle=" tooltip"
+                       title="Storage of Product">
+                        <i class=" fa fa-circle-o">
+                        </i>Storage of Product
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR021F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "ProductCertification", new {Area = "ProductManagement"})"
+                       data-toggle="tooltip"
+                       title="Product Certification Management">
+                        <i class="fa fa-circle-o"></i>Product Certification Management
+                    </a>
+                </li>
+
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR031F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "ProductShippingPlanning", new { Area = "ProductManagement" })"
+                       data-toggle="tooltip"
+                       title="Product Shipping Planning">
+                        <i class="fa fa-circle-o"></i>Product Shipping Planning
+                    </a>
+                </li>
+
+            }
+            
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR041F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "ProductShippingCommand", new { Area = "ProductManagement" })"
+                       data-toggle="tooltip"
+                       title="Product Shipping Command">
+                        <i class="fa fa-circle-o"></i>Product Shipping Command
+                    </a>
+                </li>
+            }
+            
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR051F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "ForcedRetrievalOfProduct", new { Area = "ProductManagement" })"
+                       data-toggle="tooltip"
+                       title="Forced Retrieval of Product">
+                        <i class="fa fa-circle-o"></i>Forced Retrieval of Product
+                    </a>
+                </li>
+            }
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR061F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StockTakingOfProduct", new { Area = "ProductManagement" })"
+                       data-toggle="tooltip"
+                       title="Stock-Taking of Product">
+                        <i class="fa fa-circle-o"></i>Stock-Taking of Product
+                    </a>
+                </li>
+            }
+            
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR071F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "RestorageOfProduct", new { Area = "ProductManagement" })"
+                       data-toggle="tooltip"
+                       title="Re-storage of Product">
+                        <i class="fa fa-circle-o"></i>Re-storage of Product
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR081F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "InterFloorMovementOfProduct", new { Area = "ProductManagement" })"
+                       data-toggle="tooltip"
+                       title="Inter-floor Movement of Product">
+                        <i class="fa fa-circle-o"></i>Inter-floor Movement of Product
+                    </a>
+                </li>
+            }
+            
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR091F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StorageOfExternalPreProduct", new { Area = "ProductManagement" })"
+                       data-toggle="tooltip"
+                       title="Storage of External Pre-Product">
+                        <i class="fa fa-circle-o"></i>Storage of External Pre-Product
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR101F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "RetrievalOfExternalPreProduct", new { Area = "ProductManagement" })"
+                       data-toggle="tooltip"
+                       title="Retrieval of External Pre-Product">
+                        <i class="fa fa-circle-o"></i>Retrieval of External Pre-Product
+                    </a>
+                </li>
+            }
+            
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR111F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "RetrievalOfOutOfSpecPreProduct", new { Area = "ProductManagement" })"
+                       data-toggle="tooltip"
+                       title="Retrieval of Out-of-Spec Pre-Product">
+                        <i class="fa fa-circle-o"></i>Retrieval of Out-of-Spec Pre-Product
+                    </a>
+                </li>
+            }
+            
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR121F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "StorageOfEmptyProductPallet", new { Area = "ProductManagement" })"
+                       data-toggle="tooltip"
+                       title="Storage of Empty Product Pallet">
+                        <i class="fa fa-circle-o"></i>Storage of Empty Product Pallet
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR131F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "RetrievalOfEmptyProductPallet", new { Area = "ProductManagement" })"
+                       data-toggle="tooltip"
+                       title="Retrieve of Empty Product Pallet">
+                        <i class="fa fa-circle-o"></i>Retrieval of Empty Product Pallet
+                    </a>
+                </li>
+            }
+            
+            @if (identityService.IsScreenAccessible(availableScreens, "TCPR141F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "OutOfPlanProduct", new {Area = "ProductManagement"})"
+                       data-toggle="tooltip"
+                       title="Input of Out-of-plan’s Product">
+                        <i class="fa fa-circle-o"></i>Input of Out-of-plan’s Product
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </li>
+}

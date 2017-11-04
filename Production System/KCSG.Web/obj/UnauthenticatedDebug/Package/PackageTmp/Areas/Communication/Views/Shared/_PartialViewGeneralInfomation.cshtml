@@ -1,0 +1,63 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@using Resources
+@model KCSG.Web.Areas.Communication.ViewModels.GeneralInformatrionViewModel
+<script>
+    var formUrl = {
+        urlConveyor: '@Url.Action("Index", "ConveyorStatus")',
+    }
+    var mesage = {
+        MSG3: '@CommunicationResource.MSG3',
+        MSG5: '@CommunicationResource.MSG5',
+        MSG6: '@CommunicationResource.MSG6',
+        MSG8: '@CommunicationResource.MSG8'
+
+    }
+</script>
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <span>General Information</span>
+    </div>
+    <div class="panel-body">
+        @Html.HiddenFor(m=>m.Communcation)
+        <div class="row form-group">
+            <div class="col-xs-6">
+                <div class="col-lg-4">@Html.ExtLabelFor(model => model.ViewSelect)</div>
+                <div class="col-lg-8">
+                    @Html.ExtRadioButtonFor(m => m.ViewSelect, EnumsHelper.GetListItemsWithDescription<Constants.ViewSelected>(Constants.ViewSelected.Monitor).OrderByDescending(i=>i.Text), new { onclick = "ChangeViewSelected(this)" })
+                </div>
+            </div>
+            <div class="col-xs-6">
+
+                <div class="col-lg-4">@Html.ExtLabelFor(model=>model.Status)</div>
+                <div class="col-lg-8">
+                    @Html.ExtRadioButtonFor(m => m.Status, EnumHelper.GetSelectList(typeof(Constants.F14_DeviceStatus)), new { onclick = "ChangeStatus(this)" })
+                </div>
+
+            </div>
+            @*<div class="col-xs-4">
+
+                <div class="col-lg-4">@Html.ExtLabelFor(m => m.StatusRequest)</div>
+                <div class="col-lg-8">
+                    @Html.ExtRadioButtonFor(m => m.StatusRequest, EnumsHelper.GetListItemsWithDescription<Constants.StatusRequest>(), new { onclick = "ChangeStatusRequest(this)" })
+                </div>
+
+            </div>*@
+        </div>
+
+        <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick="Conveyor()">Conveyor</button>
+        <button type="button" class="btn btn-flat btn-default btn-less-5-chars" id="btnDelete" onclick="Delete()" disabled="disabled">Delete</button>
+        <button type="button" class="btn btn-flat btn-default btn-less-5-chars" id="btnEnd" onclick="End()" disabled="disabled">End</button>
+        <button type="button" class="btn btn-flat btn-default btn-less-5-chars" id="btnCancel" onclick=" Cancel()" disabled="disabled">Cancel</button>
+    </div>
+</div>
+
+@using (Html.ExtModalFor("conveyor", ExtModal.ModalSize.Large, "Conveyor Status Controller"))
+{
+    using (Html.ExtModalBodyFor())
+    {
+    }
+  
+
+}

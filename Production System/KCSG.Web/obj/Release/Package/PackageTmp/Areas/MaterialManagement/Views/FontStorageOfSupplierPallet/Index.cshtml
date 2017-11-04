@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Font Storage of Supplier Pallet - TCRM123F";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@model KCSG.Web.Areas.MaterialManagement.ViewModels.FontStorageOfSupplierPalletViewModel
+<script type="text/javascript" src="~/Scripts/areas/FontStorageOfSupplierPallet/FontStorageOfSupplierPallet.js"></script>
+<div class="col-lg-12">
+    @using (Ajax.BeginForm("Storage", "FontStorageOfSupplierPallet",new AjaxOptions(){HttpMethod = "POST",OnSuccess = "onSuccess"},new {@id = "fromStorage"}))
+    { 
+    <div class="panel panel-danger">
+        <div class="panel-heading">General information</div>
+
+        <form id="materialSearchForm">
+            <div class="panel-body">
+
+                <div class="row form-group">
+                    <div class="col-lg-6">
+                        <div class="col-lg-3">
+                            @Html.ExtLabelFor(m => m.SupplierCode)
+                        </div>
+                        <div class="col-lg-9">
+
+                            @Html.ExtTextBoxAddOnFor(m => m.SupplierCode, CustomControlConstants.AddOn.Search, "#modalSupplierCodeSelect", new { id = "txtSupplierCode" })
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-lg-3">
+                            @Html.ExtLabelFor(m => m.SupplierName)
+                        </div>
+                        <div class="col-lg-9">
+                            @Html.ExtTextBoxFor(m => m.SupplierName, new { id = "txtSupplierName", @readonly = "true" })
+
+                        </div>
+                    </div>
+                </div>
+         
+
+                <div class="row form-group">
+                    <div class="col-lg-6">
+                        <div class="col-lg-3">@Html.ExtLabelFor(m => m.MaxPallet)</div>
+                        <div class="col-lg-9">
+                            @Html.ExtNumberFor(m => m.MaxPallet, new NumberOption() { }, new { @readonly = true, @id = "txtSupplierMax" })
+                            @*@Html.ExtTextBoxFor(x => x.ProductOrderNumber, new {@id = "txtProductOrderNumber"})*@
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-lg-3">@Html.ExtLabelFor(m => m.StorageQuantity)</div>
+                        <div class="col-lg-9">
+
+                            @Html.ExtTextBoxFor(x => x.StorageQuantity, new { @class = "form-control", type = "number" })
+                        </div>
+                    </div>
+                </div>
+          
+               
+            
+                <div class="row form-group">
+                    <div class="col-lg-4">
+                        <button id="btnRetrieve" type="button" onclick="save()"
+                                class="btn btn-flat btn-default btn-more-5-chars">
+                            <span>Storage</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+    }
+</div>

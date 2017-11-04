@@ -1,0 +1,60 @@
+﻿<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th style="text-align: center">** ALL SHELF LIST **</th>
+    </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC095P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td>< Material Empty/Supplier Pallet ></td>
+            <td></td>
+        </tr>        
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>R.B.L</th>
+            <th>Pallet Class</th>
+            <th>Supplier Code</th>  
+            <th>S DATE</th>
+            <th>S TIME</th>           
+            <th class="text-align-right">Load Qty</th>            
+        </tr>        
+    </thead>
+
+    <tbody>
+    {{#FindPrintPreProductNameItem}}        
+        <tr>
+            <td>{{RBL}}</td>           
+            <td>{{PalletClass}}</td>           
+            <td>{{SupplierCode}}</td>		
+            <td>{{SDate}}</td>
+            <td>{{Stime}}</td>
+            <td class="text-align-right">{{LoadQuantity}}</td>            
+        </tr>
+    {{/FindPrintPreProductNameItem}}
+    </tbody>  
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>        
+    </tfoot> 
+</table>

@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.ScreenId = "TCIP061F";
+    ViewBag.Title = "Forced Retrieval of Pre-product ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.PreProductManagement.ViewModels.RetrieveForcedRetrievalPreProductViewModel
+@using KCSG.Core;
+@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+
+@*<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>*@
+<script src="~/Scripts/areas/signalrCommon.js"></script>
+<script src="~/Scripts/areas/ForcedRetrievalOfPreProduct/ForcedRetrievalofPreProduct.js"></script>
+
+<script>
+
+    var formUrl = {
+        urlRetrieval: '@Url.Action("Edit", "ForcedRetrievalOfPreProduct")'
+    }
+</script>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">Forced Retrieval of Pre-product </div>
+        <div class="panel-body">
+            <div class="col-lg-12">
+                <div class="form-group row">
+                    <div class="panel panel-default" id="searchForm">
+                        <div class="panel-heading">Group Name</div>
+                        <div class="panel-body">
+                            <div class="col-xs-8 col-xs-offset-2">
+                                @Html.ExtRadioButtonFor(model => model.GroupName, Model.GroupNameList, new { @onchange = "ChangeGrid()" }, true, 6)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group row">
+                    @Html.Grid(Model.Grid)
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group row">
+                    <button class="btn btn-default btn-flat btn-more-5-chars" id="btnRetrieval" onclick="Retrieval()">Retrieval</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

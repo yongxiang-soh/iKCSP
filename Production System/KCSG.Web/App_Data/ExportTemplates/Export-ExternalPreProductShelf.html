@@ -1,0 +1,63 @@
+﻿<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th style="text-align: center">** ALL SHELF LIST **</th>
+    </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC093P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td>< External-Pre-Product ></td>
+            <td></td>
+        </tr>        
+    </tbody>
+</table>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>R.B.L</th>
+            <th>Pallet No.</th>
+            <th>Pre-product Code</th>            
+            <th>Pre-product Name</th>
+            <th>S DATE</th>
+            <th>S TIME</th>          
+            <th>LOT.NO</th>            
+            <th class="text-align-right">Quantity (Kg)</th>            
+        </tr>        
+    </thead>
+
+    <tbody>
+    {{#FindPrintPreProductNameItem}}        
+        <tr>
+            <td>{{RBL}}</td>           
+            <td>{{PalletNo}}</td>           
+            <td>{{PreProductCode}}</td>
+            <td>{{PreProductName}}</td>			
+            <td>{{SDate}}</td>
+            <td>{{Stime}}</td>
+            <td>{{LotNo}}</td>
+            <td class="text-align-right">{{Quantityst}}</td>            
+        </tr>
+    {{/FindPrintPreProductNameItem}}
+    </tbody>  
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>        
+    </tfoot> 
+</table>

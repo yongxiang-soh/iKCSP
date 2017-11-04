@@ -1,0 +1,126 @@
+﻿@using KCSG.Core.CustomControls
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.ProductionPlanning.ViewModels.PdtPln.PdtPlnViewModel
+@using (Ajax.BeginForm("Edit", "PdtPln", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess(data, status, xhr)"}, new { @id = "addNewFormPdtPln" }))
+{
+   
+    @Html.HiddenFor(model => model.IsCreate)
+    @Html.HiddenFor(model => model.F39_AddDate)
+    @Html.HiddenFor(m=>m.KndLine,new{id="hdfKndLine"})
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            @if (Model.IsCreate)
+            {
+                <span> Add Production Planning - TCPP042F </span>
+            }
+            else
+            {
+                <span> Update Production Planning - TCPP042F </span>
+            }
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelFor(model => model.F39_KndEptBgnDate)
+                    </div>
+                    <div class="col-lg-7">
+                       
+                        @if (Model.IsCreate)
+                        {
+                            @Html.ExtDateTimeFor(model => model.F39_KndEptBgnDate, new DateTimeOption() {Format = "DD/MM/YYYY"})
+
+                        }
+                        else
+                        {
+                            @Html.ExtDateTimeFor(model => model.F39_KndEptBgnDate, new DateTimeOption() { Format = "DD/MM/YYYY" }, new { style = "cursor: not-allowed", @readonly = "readonly" })
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelFor(model => model.F39_PrePdtLotAmt)
+                    </div>
+                    <div class="col-lg-7">
+                        @Html.ExtTextBoxFor(model => model.F39_PrePdtLotAmt,new{type="number",max=999} )
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelFor(model => model.F39_PreProductCode)
+                    </div>
+                    <div class="col-lg-7">
+                      
+                            @if (Model.IsCreate)
+                            {
+                                @Html.ExtTextBoxAddOnFor(model => model.F39_PreProductCode, CustomControlConstants.AddOn.Search, "#modalPreProductCodeSelect", new { @id = "txtPreProductCode" })
+
+                            }
+                            else
+                            {
+                                @*@Html.ExtTextBoxAddOnFor(model => model.F39_PreProductCode, CustomControlConstants.AddOn.Search, "#modalPreProductCodeSelectFortbl39", new { style = "width:100%; cursor: not-allowed", @readonly = "readonly", @id = "txtPreProductCode" })*@
+                                @Html.ExtTextBoxAddOnFor(model => model.F39_PreProductCode, CustomControlConstants.AddOn.Search, "", new { style = "width:100%;"})
+                            }
+                          
+                       
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelFor(model => model.F39_Status)
+                    </div>
+                    <div class="col-lg-7">
+                        @Html.ExtTextBoxFor(model => model.F39_Status, new { style = "width:100%;  cursor: not-allowed", @readonly = "readonly"})
+                        @*@Html.ExtDropDownListFor(model => model.F39_Status, EnumHelper.GetSelectList(typeof(Constants.Status)).OrderBy(i => i.Value), null, new {@readonly = true})*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelFor(model => model.F39_PreProductName)
+                    </div>
+                    <div class="col-lg-7">
+                        @*@Html.ExtTextBoxFor(model => model.F03_PreProductName, new { style = "width:100%;  cursor: not-allowed", @readonly = "readonly", @id = "txtPreProductName" })*@
+                        @Html.ExtTextBoxFor(model => model.F39_PreProductName, new { style = "  cursor: not-allowed", @readonly = "readonly", @id = "txtPreproductName" })
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-flat btn-default btn-less-5-chars">OK</button>
+            <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" hideFormPdtPln() ">Cancel</button>
+        </div>
+    </div>
+}
+
+
+
+<script>
+    $(document).ready(function () {
+         @if (Model.IsCreate)
+         {
+             <text>
+        $("#F39_KndEptBgnDate").focus();
+             </text>
+         }
+         else
+         { <text>
+
+        $("#F39_PrePdtLotAmt").focus();
+             </text>
+         }
+       
+        $.validator.unobtrusive.parse('#addNewFormPdtPln');
+        $("#dvKndLine").find("input").each(function() {
+            $(this).click(function() {
+                $("#hdfKndLine").val($(this).val());
+            });
+        });
+    });
+</script>

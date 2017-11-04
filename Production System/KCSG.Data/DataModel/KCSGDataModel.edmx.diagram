@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0fca540e6ce045cabe895dd3f4fc036f" Name="Diagram1" ZoomLevel="77" ShowGrid="false" SnapToGrid="false">
+        <EntityTypeShape EntityType="KCSGDataModel.RealtimeConnection" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.Te80_Env_Mesp" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.Te81_Env_Temp" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.Te82_Env_Aval" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.Te83_Env_Else" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.Te84_Env_Lot" Width="1.5" PointX="6.75" PointY="3.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.Te85_Env_Prod" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TH60_MtrWhsCmdHst" Width="1.5" PointX="6.75" PointY="6.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TH61_MtrStgRtrHst" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TH63_PrePdtWhsCmdHst" Width="1.5" PointX="8.75" PointY="5.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TH64_PrePdtStgRtrHst" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TH65_PdtStgRtrHst" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TH66_PdtWhsCmdHst" Width="1.5" PointX="10.75" PointY="5.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TH67_CrfHst" Width="1.5" PointX="8.75" PointY="11.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TH70_PdtShipHst" Width="1.5" PointX="10.75" PointY="11.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM01_Material" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM02_PrePdtMkp" Width="1.5" PointX="12.75" PointY="6.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM03_PreProduct" Width="1.5" PointX="12.75" PointY="12.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM04_Supplier" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM05_Conveyor" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM06_Terminal" Width="1.5" PointX="2.75" PointY="14.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM07_Calendar" Width="1.5" PointX="4.75" PointY="14.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM09_Product" Width="1.5" PointX="14.75" PointY="5.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM10_EndUsr" Width="1.5" PointX="14.75" PointY="11.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM11_PckMtr" Width="1.5" PointX="6.75" PointY="15.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM12_TrmPicMgn" Width="1.5" PointX="8.75" PointY="15.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM13_Function" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM14_Device" Width="1.5" PointX="16.75" PointY="3.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM15_SubMaterial" Width="1.5" PointX="16.75" PointY="8.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM16_Password" Width="1.5" PointX="16.75" PointY="13.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM18_Access" Width="1.5" PointX="16.75" PointY="16.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX30_Reception" Width="1.5" PointX="18.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX31_MtrShfSts" Width="1.5" PointX="18.75" PointY="4.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX32_MtrShf" Width="1.5" PointX="8.75" PointY="18.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX33_MtrShfStk" Width="1.5" PointX="18.75" PointY="10.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX34_MtrWhsCmd" Width="1.5" PointX="10.75" PointY="18.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX37_PrePdtShfSts" Width="1.5" PointX="18.75" PointY="14.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX39_PdtPln" Width="1.5" PointX="0.75" PointY="19.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX40_PdtShfStk" Width="1.5" PointX="2.75" PointY="19.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX41_TbtCmd" Width="1.5" PointX="4.75" PointY="19.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX42_KndCmd" Width="1.5" PointX="12.75" PointY="19.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX43_KndRcd" Width="1.5" PointX="14.75" PointY="19.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX44_ShippingPlan" Width="1.5" PointX="20.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX45_ShipCommand" Width="1.5" PointX="20.75" PointY="4.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX46_SupMtrStk" Width="1.5" PointX="20.75" PointY="8.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX47_PdtWhsCmd" Width="1.5" PointX="20.75" PointY="12.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX48_NoManage" Width="1.5" PointX="16.75" PointY="20.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX49_PrePdtShfStk" Width="1.5" PointX="20.75" PointY="18.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX50_PrePdtWhsCmd" Width="1.5" PointX="22.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX51_PdtShfSts" Width="1.5" PointX="22.75" PointY="6.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX52_MtrMsrSndCmd" Width="1.5" PointX="6.75" PointY="22.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX53_OutSidePrePdtStk" Width="1.5" PointX="22.75" PointY="11.750000000000002" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX55_KndCmdMsrSnd" Width="1.5" PointX="22.75" PointY="15.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX56_TbtPdt" Width="1.5" PointX="22.75" PointY="20.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX57_PdtShf" Width="1.5" PointX="18.75" PointY="23.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX58_OutPlanPdt" Width="1.5" PointX="24.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX91_MaterialTotal" Width="1.5" PointX="24.75" PointY="5.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX92_PrepdtTotal" Width="1.5" PointX="8.75" PointY="24.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX93_ProductTotal" Width="1.5" PointX="24.75" PointY="9.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX94_Prepdtplan" Width="1.5" PointX="24.75" PointY="13.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TH62_KndCmdMsrSndHst" Width="1.5" PointX="24.75" PointY="16.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TH68_MtrMsrSndCmdHst" Width="1.5" PointX="24.75" PointY="20.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TH69_MtrRtrMsrSndCmdHst" Width="1.5" PointX="24.75" PointY="24.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM08_Container" Width="1.5" PointX="0.75" PointY="25.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TX54_MtrRtrMsrSndCmd" Width="1.5" PointX="2.75" PointY="25.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.sysdiagram" Width="1.5" PointX="11.375" PointY="25.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.TM17_TermStatus" Width="1.5" PointX="13.375" PointY="25.75" />
+        <EntityTypeShape EntityType="KCSGDataModel.te90_env_tmp" Width="1.5" PointX="15.375" PointY="25.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

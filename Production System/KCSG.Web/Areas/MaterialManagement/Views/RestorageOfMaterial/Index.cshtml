@@ -1,0 +1,282 @@
+﻿@{
+    ViewBag.ScreenId = "TCRM051F";
+    ViewBag.Title = "Re-Storage of Raw Material";
+    if (!Model.ShowInRetrivel)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    
+}
+@using System.Web.Mvc.Ajax
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.MaterialManagement.ViewModels.ReStorageOfMaterial.UnassignMaterialViewModel
+
+
+<script src="~/Scripts/jquery-custom-validators/jquery-validation-handler.js"></script>
+<script src="~/Scripts/areas/restorageOfMaterial/restorageOfMaterial.js"></script>
+<script type="text/javascript">
+    @*var formUrl = {
+        urlGetMaterialName: '@Url.Action("GetMaterialName", "Material", new { area = "ProductionPlanning" })'
+    }*@
+    var message = {
+        MSG09: ' @KCSG.Core.Constants.Constants.Messages.StoreMaterial_MSG09',
+        MSG12: '@KCSG.Core.Constants.Constants.Messages.StoreMaterial_MSG12',
+        MSG14: '@KCSG.Core.Constants.Constants.Messages.StoreMaterial_MSG14'
+    }
+
+</script>
+@Html.HiddenFor(m => m.F01_Unit, new { id = "txtUnit" })
+
+@using (Ajax.BeginForm("Restorage", "RestorageOfMaterial", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess"}, new { @id = "addNewForm" }))
+{
+    <div id="restorageMaterialForm"
+         class="panel panel-danger">
+        <div class="panel-heading">General information</div>
+        <div class="panel-body">
+
+            <div class="col-lg-12">
+                <!-- Pallet no & Material code section -->
+                <div class="row">
+                    <!-- Pallet No search input -->
+                    <div class="col-lg-2">@Html.ExtLabelFor(model => model.PalletNo)</div>
+                    <div class="col-lg-4 form-group">
+                        @Html.ExtTextBoxAddOnFor(model => model.PalletNo, CustomControlConstants.AddOn.Search, "#modalPalletNoWithParameter", new { @id = "txtPalletNo", @onchange = "changePalletNo()" })
+                        <span class="field-validation-error"><span id="errorPalletNo" hidden></span></span>
+                    </div>
+
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.MaterialCode)
+                    </div>
+                    <div class="col-lg-4 form-group">
+                        @Html.ExtTextBoxFor(model => model.MaterialCode, new { @id = "txtMaterialCode", @readonly = "true" })
+                        <span class="field-validation-error"><span id="errorMaterialCode" hidden></span></span>
+                    </div>
+                </div>
+                <br />
+
+                <!-- Material name -->
+                <div class="row">
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.MaterialName)
+                    </div>
+                    <div class="col-lg-4">
+                        @Html.ExtTextBoxFor(model => model.MaterialName, new { @class = "form-control", @id = "txtMaterialName", @readonly = "readonly" })
+
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <hr style="border-top: 1px solid #f2dede;" />
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2">&nbsp;</div>
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.MaterialLotNo01)
+                        <label style="color: red">*</label>
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.PackUnit01)
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.PackQuantity01)
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.Fraction01)
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.Total01)
+                    </div>
+                </div>
+
+                <div class="row form-group">
+
+                    <button class="btn btn-flat btn-default col-lg-2 col-xs-12" type="button" onclick=" clearRow(1) ">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+
+                    <div class="col-lg-2 padding-right-none">
+                        @Html.ExtTextBoxFor(model => model.MaterialLotNo01, new { @Class = "material-lot-no" })
+                        <span class="field-validation-error"><span id="errorList00" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @*@Html.ExtNumberFor(model => model.PackUnit01, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {@readonly = "true", @class = "packunit"})*@
+                        @Html.ExtNumberFor(model => model.PackUnit01, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999 }, new { @readonly = "true", @class = "packunit" })
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @Html.ExtNumberFor(model => model.PackQuantity01, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 999 }, new { onchange = "PackQuantity(1)" })
+                        <span class="field-validation-error"><span id="errorPackQuantity01" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @*@Html.ExtNumberFor(model => model.Fraction01, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {onchange = "PackQuantity(1)"})*@
+                        @Html.ExtNumberFor(model => model.Fraction01, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999999 }, new { onchange = "PackQuantity(1)" })
+                        <span class="field-validation-error"><span id="errorFraction01" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2">
+                        @*@Html.ExtNumberFor(model => model.Total01, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {@readonly = "true"})*@
+                        @Html.ExtNumberFor(model => model.Total01, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999999 }, new { @readonly = "true" })
+                    </div>
+
+                </div>
+
+
+                <div class="row form-group">
+                    <button type="button" class="btn btn-flat btn-default col-lg-2 col-xs-12" onclick=" clearRow(2) ">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+
+                    <div class="col-lg-2 padding-right-none">
+                        @Html.ExtTextBoxFor(model => model.MaterialLotNo02, new { @Class = "material-lot-no" })
+                        <span class="field-validation-error"><span id="errorList01" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @*@Html.ExtNumberFor(model => model.PackUnit02, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {@readonly = "true", @class = "packunit"})*@
+                        @Html.ExtNumberFor(model => model.PackUnit02, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999 }, new { @readonly = "true", @class = "packunit" })
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @Html.ExtNumberFor(model => model.PackQuantity02, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 999 }, new { onchange = "PackQuantity(2)" })
+                        <span class="field-validation-error"><span id="errorPackQuantity02" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @*@Html.ExtNumberFor(model => model.Fraction02, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {onchange = "PackQuantity(2)"})*@
+                        @Html.ExtNumberFor(model => model.Fraction02, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999999 }, new { onchange = "PackQuantity(2)" })
+                        <span class="field-validation-error"><span id="errorFraction02" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2">
+                        @*@Html.ExtNumberFor(model => model.Total02, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {@readonly = "true"})*@
+                        @Html.ExtNumberFor(model => model.Total02, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999999 }, new { @readonly = "true" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <button class="btn btn-flat btn-default col-lg-2 col-xs-12" onclick=" clearRow(3) " type="button">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+
+                    <div class="col-lg-2 padding-right-none">
+                        @Html.ExtTextBoxFor(model => model.MaterialLotNo03, new { @Class = "material-lot-no" })
+                        <span class="field-validation-error"><span id="errorList02" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @*@Html.ExtNumberFor(model => model.PackUnit03, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {@readonly = "true", @class = "packunit"})*@
+                        @Html.ExtNumberFor(model => model.PackUnit03, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999 }, new { @readonly = "true", @class = "packunit" })
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @Html.ExtNumberFor(model => model.PackQuantity03, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 999 }, new { onchange = "PackQuantity(3)" })
+                        <span class="field-validation-error"><span id="errorPackQuantity03" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @*@Html.ExtNumberFor(model => model.Fraction03, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {onchange = "PackQuantity(3)"})*@
+                        @Html.ExtNumberFor(model => model.Fraction03, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999999 }, new { onchange = "PackQuantity(3)" })
+                        <span class="field-validation-error"><span id="errorFraction03" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2">
+                        @*@Html.ExtNumberFor(model => model.Total03, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {@readonly = "true"})*@
+                        @Html.ExtNumberFor(model => model.Total03, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999999 }, new { @readonly = "true" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <button class="btn btn-flat btn-default col-lg-2 col-xs-12" onclick=" clearRow(4) " type="button">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+
+                    <div class="col-lg-2 padding-right-none">
+                        @Html.ExtTextBoxFor(model => model.MaterialLotNo04, new { @Class = "material-lot-no" })
+                        <span class="field-validation-error"><span id="errorList03" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @*@Html.ExtNumberFor(model => model.PackUnit04, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {@readonly = "true", @class = "packunit"})*@
+                        @Html.ExtNumberFor(model => model.PackUnit04, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999 }, new { @readonly = "true", @class = "packunit" })
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @Html.ExtNumberFor(model => model.PackQuantity04, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 999 }, new { onchange = "PackQuantity(4)" })
+                        <span class="field-validation-error"><span id="errorPackQuantity04" hidden></span></span>
+
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @*@Html.ExtNumberFor(model => model.Fraction04, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {onchange = "PackQuantity(4)"})*@
+                        @Html.ExtNumberFor(model => model.Fraction04, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999999 }, new { onchange = "PackQuantity(4)" })
+                        <span class="field-validation-error"><span id="errorFraction04" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2">
+                        @*@Html.ExtNumberFor(model => model.Total04, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {@readonly = "true"})*@
+                        @Html.ExtNumberFor(model => model.Total04, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999999 }, new { @readonly = "true" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <button class="btn btn-flat btn-default col-lg-2 col-xs-12" onclick=" clearRow(5) " type="button">
+                        <i class="fa fa-trash-o"></i> Clear
+                    </button>
+
+                    <div class="col-lg-2 padding-right-none">
+                        @Html.ExtTextBoxFor(model => model.MaterialLotNo05, new { @Class = "material-lot-no" })
+                        <span class="field-validation-error"><span id="errorList04" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @*@Html.ExtNumberFor(model => model.PackUnit05, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {@readonly = "true", @class = "packunit"})*@
+                        @Html.ExtNumberFor(model => model.PackUnit05, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999 }, new { @readonly = "true", @class = "packunit" })
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @Html.ExtNumberFor(model => model.PackQuantity05, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 999 }, new { onchange = "PackQuantity(5)" })
+                        <span class="field-validation-error"><span id="errorPackQuantity05" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @*@Html.ExtNumberFor(model => model.Fraction05, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {onchange = "PackQuantity(5)"})*@
+                        @Html.ExtNumberFor(model => model.Fraction05, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999999 }, new { onchange = "PackQuantity(5)" })
+                        <span class="field-validation-error"><span id="errorFraction05" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2">
+                        @*@Html.ExtNumberFor(model => model.Total05, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {@readonly = "true"})*@
+                        @Html.ExtNumberFor(model => model.Total05, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999999 }, new { @readonly = "true" })
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-2">&nbsp;</div>
+                    <div class="col-lg-2 padding-right-none">&nbsp;</div>
+                    <div class="col-lg-2 padding-right-none">&nbsp;</div>
+                    <div class="col-lg-2 padding-right-none">
+                        <span class="field-validation-error"><span id="GrandTotalError" hidden></span></span>
+                    </div>
+                    <div class="col-lg-2 padding-right-none">
+                        @Html.ExtLabelFor(model => model.GrandTotal, new { @Class = "margin-top-10 float-right", @readonly = "true" })
+                    </div>
+                    <div class="col-lg-2">
+                        @*@Html.ExtNumberFor(model => model.GrandTotal, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 999}, new {@readonly = "true"})*@
+                        @Html.ExtNumberFor(model => model.GrandTotal, new KCSG.Core.CustomControls.NumberOption() { Min = 0, Max = 999999 }, new { @readonly = "true" })
+                        @Html.HiddenFor(model => model.GrandTotal, new { @id = "GrandTotalHidden" })
+                        
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-default btn-flat btn-more-5-chars" id="btnRestorage">
+                    @*<span class="" onclick=" Restorage() "></span>*@
+                    Re-storage
+                </button>
+
+                <button type="button" class="btn btn-default btn-flat btn-more-5-chars" id="btnDeassign"
+                        onclick=" unassignMaterials() ">
+                    De-assign
+                </button>
+
+                <button id="btnEmpty"
+                        type="button" class="btn btn-default btn-flat btn-more-5-chars"
+                        onclick=" emptyMaterials() ">
+
+                    Empty Pallet Storage
+                </button>
+
+                @*<button type="button" class="btn btn-default btn-flat col-lg-2 col-md-3 col-sm-2 col-xs-6">
+                        <span class="glyphicon glyphicon glyphicon-remove-sign"></span>
+                        Exit
+                    </button>*@
+            </div>
+        </div>
+    </div>
+}

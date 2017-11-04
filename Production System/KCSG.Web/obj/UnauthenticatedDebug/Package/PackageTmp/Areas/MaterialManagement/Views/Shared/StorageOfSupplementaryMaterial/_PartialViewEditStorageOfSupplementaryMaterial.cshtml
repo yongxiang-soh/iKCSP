@@ -1,0 +1,155 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@using KCSG.Core.Controls
+@model KCSG.Web.Areas.MaterialManagement.ViewModels.StorageOfSupplementaryMaterial.StorageOfSupplementaryMaterialViewModel
+@using (Ajax.BeginForm("Edit", "StorageOfSupplementaryMaterialController", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess", Confirm = Model.IsStore ? "Are your sure you want to store this supplementary material?" : "Are you sure you want to update this supplementary material?" }, new { @id = "addNewForm" }))
+{
+
+
+    @Html.HiddenFor(model => model.IsStore)
+    @*@Html.HiddenFor(model => model.F30_AddDate)*@
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <span>Confirmation of Supplementary Material Storage-TCRM062F</span>
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.F15_SubMaterialCode)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxFor(model => model.F15_SubMaterialCode, new { @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.F15_MaterialDsp)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxFor(model => model.F15_MaterialDsp, new { @readonly = "readonly" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.F15_Unit)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxFor(model => model.F15_Unit)
+                    </div>
+                </div>
+                
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.F15_PackingUnit)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtNumberFor(model => model.F15_PackingUnit, new NumberOption() { NumberOfDecimal = 2 }, new { @readonly = "readonly", @onchange = "CaculateAddQuantity()" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.PackQuantity)
+                    </div>
+                    <div class="col-xs-8">
+                        @if (Model.IsStore)
+                        {
+                            @Html.ExtNumberFor(model => model.PackQuantity, new NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 999999 }, new { @onchange = "CaculateAddQuantity()" })
+                        }
+                        else
+                        {
+                            @Html.ExtNumberFor(model => model.PackQuantity, new NumberOption() { NumberOfDecimal = 0, Min = 0, Max = 999999 }, new { @readonly = "true", @onchange = "CaculateAddQuantity()" })
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.Fraction)
+                    </div>
+                    <div class="col-xs-8">
+                        @if (Model.IsStore)
+                        {
+                            @Html.ExtNumberFor(model => model.Fraction, new NumberOption() { NumberOfDecimal = 2, Min = 0, Max = 9999.00 }, new { onchange = "CaculateAddQuantity()" })
+                        }
+                        else
+                        {
+                            @Html.ExtNumberFor(model => model.Fraction, new NumberOption() { NumberOfDecimal = 2, Min = 0, Max = 9999.00 }, new { @readonly = "true", @onchange = "CaculateAddQuantity()" })
+                        }
+                        
+                        <span class="field-validation-error"><span id="FractionError" hidden></span></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.AddQuantity)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtNumberFor(model => model.AddQuantity,new NumberOption(), new { @readonly = true })
+                        @*@if (Model.IsStore)
+                        {
+                            @Html.ExtTextBoxFor(model => model.AddQuantity)
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.AddQuantity, new { @readonly = "readonly" })
+                        }*@
+                    </div>
+                </div>
+                
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.InventoryQuantity)
+                    </div>
+                    <div class="col-xs-8">
+                        @*@Html.ExtNumberFor(model => model.InventoryQuantity, new NumberOption() { NumberOfDecimal = 2, Min = 0.00, Max = 99999999.00 })*@
+                        @if (Model.IsStore)
+                        {
+                            @Html.ExtNumberFor(model => model.InventoryQuantity,null,new{@readonly="true"})
+                        }
+                        else
+                        {
+                            @Html.ExtNumberFor(model => model.InventoryQuantity)
+                        }
+                        
+                        <span class="field-validation-error"><span id="InventoryQuantityError" hidden></span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-xs-2">
+                    @Html.ExtLabelFor(model => model.Comment,new {style="margin-left:15px;"})
+                </div>
+                <div class="col-xs-10">
+                    @Html.ExtTextAreaFor(model => model.Comment, new { @class="fix-max-width-textarea"})
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick="OK()">OK</button>
+            <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" hideForm() ">Exit</button>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $.validator.unobtrusive.parse('#addNewForm');
+        var $inputs = $('#addNewForm :input');
+        $inputs.change(function () {
+            //alert(this.value.length);
+        });
+    });
+
+
+</script>

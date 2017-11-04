@@ -1,0 +1,38 @@
+﻿{
+  "Terminals": {
+    "Material": {
+      "Code": "AWT001",
+      "Incoming": {
+        "Address": "127.0.0.1",
+        "Port": 5001
+      },
+      "Outgoing": {
+        "Address": "127.0.0.1",
+        "Port": 27015
+      }
+    },
+    "PreProduct": {
+      "Code": "AWT002",
+      "Incoming": {
+        "Address": "127.0.0.1",
+        "Port": 5002
+      },
+      "Outgoing": {
+        "Address": "192.168.2.202",
+        "Port": 6002
+      }
+    },
+    "Product": {
+      "Code": "AWT003",
+      "Incoming": {
+        "Address": "127.0.0.1",
+        "Port": 5003
+      },
+      "Outgoing": {
+        "Address": "192.168.2.203",
+        "Port": 6003
+      }
+    }
+  },
+  "DefaultTerminal": "Material"
+}

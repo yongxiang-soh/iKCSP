@@ -1,0 +1,284 @@
+﻿@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@using NumberOption = KCSG.Core.CustomControls.NumberOption
+@model KCSG.Web.Areas.ProductManagement.ViewModels.ForcedRetrievalOfProduct.ForcedRetrievalOfProductViewModel
+@{
+    ViewBag.ScreenId = "TCPR051F";
+    ViewBag.Title = "Forced Retrieval of Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<script src="/signalr/hubs"></script>
+<script src="~/Scripts/areas/signalrCommon.js"></script>*@
+<script src="~/Scripts/areas/forcedRetrievalOfProduct/forcedRetrievalOfProduct.js"></script>
+
+
+<script>
+    var formUrl = {
+        urlCheckRecord: '@Url.Action("CheckRecordExistsFromTX40", "ForcedRetrievalOfProduct", new { area = "ProductManagement" })',
+        urlCheckRecordForRetrievalButton:'@Url.Action("CheckRecordExistsFromTX40ForButtonRetrieval", "ForcedRetrievalOfProduct", new { area = "ProductManagement" })',
+        urlPallet: '@Url.Action("Pallet", "ForcedRetrievalOfProduct", new { area = "ProductManagement" })',
+        urlProductDetail: '@Url.Action("ProductDetails", "ForcedRetrievalOfProduct", new { area = "ProductManagement" })',
+        urlDeAssign: '@Url.Action("DeAssign", "ForcedRetrievalOfProduct", new { area = "ProductManagement" })',
+        urlDeAllAssign: '@Url.Action("DeAllAssign", "ForcedRetrievalOfProduct", new { area = "ProductManagement" })',
+        urlRetrieval: '@Url.Action("RetrieveProduct", "ForcedRetrievalOfProduct", new { area = "ProductManagement" })',
+        urlCheckStatus: '@Url.Action("CheckConveyorStatusAndDeviceStatus", "ForcedRetrievalOfProduct", new { area = "ProductManagement" })',
+        urlRestoreProduct: '@Url.Action("Index", "RestorageOfProduct", new { area = "ProductManagement"})',
+        urlGetTally: '@Url.Action("GetTally", "ForcedRetrievalOfProduct", new { area = "ProductManagement" })'
+    }
+</script>
+
+@using (Ajax.BeginForm("", "", new AjaxOptions() { HttpMethod = "POST" }, new { @id = "indexForm" }))
+{
+    <input type="hidden" id="txtPalletNoTranfer"/>
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                Forced Retrieval of Product - TCPR051F
+            </div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div class="col-xs-1">&nbsp;</div>
+                    <div class="col-xs-3">
+                        @Html.ExtLabelFor(model => model.ProductCode)
+                    </div>
+                    <div class="col-xs-4" id="product_code_div">
+                        @Html.ExtTextBoxAddOnFor(model => model.ProductCode, CustomControlConstants.AddOn.Search, "#modalProductCodeSelect", new {@id = "txtProductCode"})
+                    </div>
+                    <div class="col-xs-2">&nbsp;</div>
+                    <div class="col-xs-2">&nbsp;</div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-1">&nbsp;</div>
+                    <div class="col-xs-3">
+                        @Html.ExtLabelFor(model => model.ProductName)
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.ExtTextBoxFor(model => model.ProductName, new {@id = "txtProductName", @readonly = "true"})
+                    </div>
+                    <div class="col-xs-2">&nbsp;</div>
+                    <div class="col-xs-2">&nbsp;</div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-xs-1">&nbsp;</div>
+                    <div class="col-xs-3">
+                        @Html.ExtLabelFor(model => model.ProductLotNo)
+                    </div>
+                    <div class="col-xs-4" id="product_lotno_div">
+                        @Html.ExtTextBoxAddOnFor(model => model.ProductLotNo, CustomControlConstants.AddOn.Search, "#modalProductLotNoParameter", new {@id = "txtProductLotNo"})
+                    </div>
+                    <div class="col-xs-2">&nbsp;</div>
+                    <div class="col-xs-2">&nbsp;</div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-xs-1">&nbsp;</div>
+                    <div class="col-xs-3">
+                        @Html.ExtLabelFor(model => model.RequestedRetrievalQuantity)
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.ExtNumberFor(model => model.RequestedRetrievalQuantity, new NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 99999999.00})
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-default btn-flat btn-more-5-chars" id="btnPallet" onclick=" Pallet(1) ">1 Pallet</button>
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn btn-default btn-flat btn-more-5-chars" id="btnAssign" onclick=" Pallet(2) ">Assign</button>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-1">&nbsp;</div>
+                    <div class="col-xs-3">
+                        @Html.ExtLabelFor(model => model.Tally)
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.ExtNumberFor(model => model.Tally, new NumberOption() {NumberOfDecimal = 2, Min = 0, Max = 99999999.00}, new {@readonly = "true"})
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="btn btn-default btn-flat btn-more-5-chars" id="btnDetail" onclick=" Detail() ">Detail</button>
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="btn btn-default btn-flat btn-more-5-chars" id="btnDeAllAssign" onclick=" DeAllAssign() ">De-assign</button>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    @*<div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-flat btn-more-5-chars" id="btnRestorage" onclick=" Restorage() ">Re-storage</button>
+                        <button type="button" class="btn btn-default btn-flat btn-more-5-chars" id="btnRetrieval" onclick=" Retrieval() ">Retrieval</button>
+                    </div>*@
+      
+                    <div class="col-xs-1">
+                        &nbsp;
+                    </div>
+                    <div class="col-xs-3">
+                        &nbsp;
+                    </div>
+                    <div class="col-xs-4">
+                        &nbsp;
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="btn btn-default btn-flat btn-more-5-chars" id="btnRestorage" onclick=" Restorage() ">Re-storage</button>
+                    </div>
+                    <div class="col-xs-2">
+                        <button type="button" class="btn btn-default btn-flat btn-more-5-chars" id="btnRetrieval" onclick=" Retrieval() ">Retrieval</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="col-lg-12" id="detail-product" style="display: none;">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            Forced Retrieval of Product Assign Detail - TCPR052F
+        </div>
+        <div class="panel-body">
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div id="GridNormal">
+                        @Html.Grid(Model.Grid)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-lg-3">
+                    @Html.ExtLabelFor(model => model.ProductCode1)
+                </div>
+                <div class="col-lg-3">
+                    @Html.ExtLabelFor(model => model.ProductName1)
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.LotNo1)
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.Quantity1)
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.CerFlag1)
+                </div>
+            </div>
+            <div class="row form-group">
+
+                <div class="col-lg-3">
+                    @Html.ExtTextBoxFor(model => model.ProductCode1, new {@readonly = "true"})
+                    <span class="field-validation-error"><span id="errorList1" hidden></span></span>
+                </div>
+                <div class="col-lg-3">
+                    @Html.ExtTextBoxFor(model => model.ProductName1, new {@readonly = "true"})
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtTextBoxFor(model => model.LotNo1, new {@readonly = "true"})
+                </div>
+
+                <div class="col-lg-2">
+                    @Html.ExtNumberFor(model => model.Quantity1, new NumberOption() {NumberOfDecimal = 2, Min = 0.00, Max = 999999.00}, new {@readonly = "true"})
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtTextBoxFor(model => model.CerFlag1, new {@readonly = "true"})
+                </div>
+            </div>
+            <div class="row form-group">
+
+
+                <div class="col-lg-3">
+                    @Html.ExtTextBoxFor(model => model.ProductCode2, new {@readonly = "true"})
+                    <span class="field-validation-error"><span id="errorList1" hidden></span></span>
+                </div>
+                <div class="col-lg-3">
+                    @Html.ExtTextBoxFor(model => model.ProductName2, new {@readonly = "true"})
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtTextBoxFor(model => model.LotNo2, new {@readonly = "true"})
+                </div>
+
+                <div class="col-lg-2">
+                    @Html.ExtNumberFor(model => model.Quantity2, new NumberOption() {NumberOfDecimal = 2, Min = 0.00, Max = 999999.00}, new {@readonly = "true"})
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtTextBoxFor(model => model.CerFlag2, new {@readonly = "true"})
+                </div>
+            </div>
+            <div class="row form-group">
+
+                <div class="col-lg-3">
+                    @Html.ExtTextBoxFor(model => model.ProductCode3, new {@readonly = "true"})
+                    <span class="field-validation-error"><span id="errorList1" hidden></span></span>
+                </div>
+                <div class="col-lg-3">
+                    @Html.ExtTextBoxFor(model => model.ProductName3, new {@readonly = "true"})
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtTextBoxFor(model => model.LotNo3, new {@readonly = "true"})
+                </div>
+
+                <div class="col-lg-2">
+                    @Html.ExtNumberFor(model => model.Quantity3, new NumberOption() {NumberOfDecimal = 2, Min = 0.00, Max = 999999.00}, new {@readonly = "true"})
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtTextBoxFor(model => model.CerFlag3, new {@readonly = "true"})
+                </div>
+            </div>
+            <div class="row form-group">
+
+
+                <div class="col-lg-3">
+                    @Html.ExtTextBoxFor(model => model.ProductCode4, new {@readonly = "true"})
+                    <span class="field-validation-error"><span id="errorList1" hidden></span></span>
+                </div>
+                <div class="col-lg-3">
+                    @Html.ExtTextBoxFor(model => model.ProductName4, new {@readonly = "true"})
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtTextBoxFor(model => model.LotNo4, new {@readonly = "true"})
+                </div>
+
+                <div class="col-lg-2">
+                    @Html.ExtNumberFor(model => model.Quantity4, new NumberOption() {NumberOfDecimal = 2, Min = 0.00, Max = 999999.00}, new {@readonly = "true"})
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtTextBoxFor(model => model.CerFlag4, new {@readonly = "true"})
+                </div>
+            </div>
+            <div class="row form-group">
+
+
+                <div class="col-lg-3 ">
+                    @Html.ExtTextBoxFor(model => model.ProductCode5, new {@readonly = "true"})
+                    <span class="field-validation-error"><span id="errorList1" hidden></span></span>
+                </div>
+                <div class="col-lg-3">
+                    @Html.ExtTextBoxFor(model => model.ProductName5, new {@readonly = "true"})
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtTextBoxFor(model => model.LotNo5, new {@readonly = "true"})
+                </div>
+
+                <div class="col-lg-2">
+                    @Html.ExtNumberFor(model => model.Quantity5, new NumberOption() {NumberOfDecimal = 2, Min = 0.00, Max = 999999.00}, new {@readonly = "true"})
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtTextBoxFor(model => model.CerFlag5, new {@readonly = "true"})
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-2 pull-right">
+                    <button type="button" class="btn btn-flat btn-default btn-more-5-chars pull-right" onclick=" DeAssign() " id="btnDeAssign">De-assign</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

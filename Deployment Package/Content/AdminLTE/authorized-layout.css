@@ -1,0 +1,38 @@
+﻿/*
+    Screen:
+        - Max-width : 767
+*/
+@media screen and (max-width: 767px) {
+
+    /* Make large logo be responsive */
+    .image-logo-large {
+        margin-left: auto;
+        margin-right: auto;
+        height: 50px;
+    }
+
+}
+
+/* Prevent content from flying out content wrapper */
+.content-wrapper {
+    overflow: auto;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+/* Area section numbering style */
+
+.sidebar-mini .treeview .area-index {
+    visibility:collapse;
+}
+
+
+body[class~="sidebar-collapse"] .treeview .area-index{
+    visibility:visible
+}
+
+body[class~='sidebar-collapse'] .treeview .inner-area-numeric{
+    visibility:collapse;
+}

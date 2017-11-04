@@ -1,0 +1,67 @@
+﻿
+@using System.Web.Mvc.Ajax
+@using System.Web.Mvc.Html
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.ProductManagement.ViewModels.ProductCertification.PrintProductCertificationViewModel
+@*@using (Ajax.BeginForm("ExportDetail", "ProductCertification", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess(data, status, xhr)"}, new { @id = "addNewForm" }))
+{*@                  
+<div class="panel panel-danger" id="searchForm">
+    <div class="panel-heading">Printing Certification History - TCPR023F</div>
+    <div class="panel-body">
+        <div class="row form-group">
+            <div class="col-lg-2">
+
+            </div>
+
+            <div class="col-lg-10">
+                @Html.ExtRadioButtonFor(model => model.PrintProductCertificationStatus, EnumsHelper.GetListItemsWithDescription<Constants.PrintProductCertificationStatus>(Constants.PrintProductCertificationStatus.Certificated), new { id = "PrintProductCertificationStatus" }, true, 4)
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-lg-2">
+
+            </div>
+            <div class="col-lg-3">
+                @Html.ExtDateTimeFor(model => model.StartDate, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                <br/>
+                <span class="field-validation-error"><span id="DatetimeError" hidden></span></span>
+            </div>
+            @*<div class="col-lg-2">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ~
+            </div>*@
+            <div class="col-lg-2">
+                <label class="padding-top-10" style="margin:auto;width:10px;display:block">&#126;</label>
+            </div>
+            <div class="col-lg-3">
+                @Html.ExtDateTimeFor(model => model.EndDate, new DateTimeOption() { Format = "DD/MM/YYYY" })
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+        <button class="btn btn-default btn-flat btn-less-5-chars" onclick="exportProductCertification()">OK</button>
+        <button type="button" class="btn btn-default btn-flat btn-less-5-chars"
+                id="btnCancel"
+                onclick="hideFormProdCer()">
+            Cancel
+        </button>                    
+    </div>
+</div>        
+ 
+
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="productCertificationPrintArea">
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $().ready(function () {       
+        $.validator.unobtrusive.parse('#addNewForm');
+       
+    });
+</script>

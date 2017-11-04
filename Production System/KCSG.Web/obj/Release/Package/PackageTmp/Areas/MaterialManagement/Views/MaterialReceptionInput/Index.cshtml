@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Material Reception Input";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.MaterialManagement.ViewModels.MaterialReceptionInput.MaterialReceptionSearchViewModel
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@using Resources
+
+<script src="/Scripts/areas/materialManagement/materialManagement.js" type="text/javascript"></script>
+
+<script>
+    var formUrl = {
+        urlEdit: '@Url.Action("Edit", "MaterialReceptionInput")',
+        urlDelete: '@Url.Action("Delete", "MaterialReceptionInput")'
+    }
+    var message = {
+        MSG01: '@MessageResource.MSG2'
+    }
+</script>
+
+<div class="col-lg-12">
+
+    @using (Html.BeginForm("", ""))
+    {
+        <div class="panel panel-danger" id="searchForm">
+            <div class="panel-heading">Search Criteria</div>
+            <div class="panel-body">
+
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.PrcOrdNo)<span class="required">*</span>
+                </div>
+
+                <div class="col-lg-3">
+                    @Html.ExtTextBoxFor(model => model.PrcOrdNo, new {@id = "txtPrcOrdNoCodeSearch"})
+                    <span class="field-validation-error"><span id="errorPONo" hidden></span></span>
+                </div>
+
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.PartialDelivery)<span class="required">*</span>
+                </div>
+
+                <div class="col-lg-3">
+                    @Html.ExtTextBoxFor(model => model.PartialDelivery, new {@id = "txtParDeliveryCodeSearch"})
+                    <span class="field-validation-error"><span id="errorPD" hidden></span></span>
+                </div>
+
+                <div class="col-lg-2 search-button-panel">
+
+                    <button type="button"
+                            class="btn btn-default btn-flat"
+                            id="btnSearch" onclick=" search() ">
+                        Search
+                    </button>
+
+                    <button type="button"
+                            id="btnClear"
+                            class="btn btn-default btn-flat"
+                            onclick=" Clear() ">
+                        Clear
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+
+        <div class="panel-heading">List of Material Reception</div>
+
+        <div class="panel-body">
+            <div class="col-lg-12 form-group"
+                 ondblclick=" UpdateItem() ">
+                @Html.Grid(Model.GridMaterialReception)
+            </div>
+            <div class="col-lg-12 form-group">
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnAdd" onclick=" addNew() ">
+                    Add
+                </button>
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnUpdate"
+                        onclick=" UpdateItem() ">
+                    Update
+                </button>
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnDelete" onclick=" deleteItem() ">
+                    Delete
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="formPlaceholder"></div>
+</div>

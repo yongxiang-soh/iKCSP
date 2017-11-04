@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.ScreenId = "TCFC051F";
+    ViewBag.Title = "Search Product Code";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using KCSG.Core;
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@using System.Diagnostics
+@using System.Web.Mvc
+@using System.Web.Mvc.Html
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.Inquiry.ViewModels.InquiryByProductCode.InquiryByProductCodeSearchViewModel
+    
+<!-- Jquery print plugin. -->
+<script src="~/Scripts/jQuery.print.min.js"></script>
+<!-- Script of Pre-Product Code -->
+<script src="~/Scripts/areas/inquiry/inquiryByProductCode.js"></script>
+<script>
+    var formUrl = {
+        urluser: '@Url.Action("Searchuser", "InquiryByProductCode")'
+    }
+</script>
+<div class="col-lg-10" style="float: left">
+
+</div>
+<div class="col-lg-12" style="float: left">
+    @*<p style="text-align: right">@DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")</p>*@
+</div>
+<div class="col-lg-12">
+
+    <input type="hidden" id="selectedValue"/>
+    @using (Html.BeginForm("", "", FormMethod.Post, new {@id = "searchForm"}))
+    {
+
+        <div class="panel panel-danger">
+            <div class="panel-heading">Search Condition</div>
+            <div class="panel-body">
+
+                <div class="row form-group">
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.ProductCode)
+                    </div>
+                    <div class="col-lg-3"
+                         id="PreproductCode">
+                        @Html.ExtTextBoxAddOnFor(model => model.ProductCode, CustomControlConstants.AddOn.Search, "#modalProductCodeSelect", new {@id = "txtProductCode" })
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.ProductName)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtTextBoxFor(model => model.ProductName, new { @readonly = "true", @id = "txtProductName" })
+                    </div>
+
+                </div>
+
+                <div class="row form-group-sm">
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.EndUserCode)
+                    </div>
+                    <div class="col-lg-3"
+                         id="LotNo">
+                        @Html.ExtTextBoxFor(model => model.EndUserCode, new { @readonly = "true", @id = "txtEndUserCode" })
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.EndUserName)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtTextBoxFor(model => model.EndUserName, new { @readonly = "true", @id = "txtEndUserNameuc12" })
+                    </div>
+                    @*<div class="col-lg-2">
+                        <div class="pull-right search-button-panel">
+                            <button type="button" class="btn btn-default btn-flat pull-right btn-less-5-chars" id="btnSearch" onclick="search()">Go</button>                            
+                        </div>
+                    </div>*@
+                    <div class="col-lg-2">
+                        <button type="button"
+                                class="btn btn-flat btn-default btn-less-5-chars"
+                                id="btnSearch" onclick=" search() ">
+                            Go
+                        </button>
+
+                        <button type="button"
+                                class="btn btn-flat btn-default btn-less-5-chars"
+                                onclick="ClearSearch()">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-body">
+            <div class="form-group">
+                @Html.Grid(Model.Grid)
+            </div>
+        </div>
+
+    </div>
+</div>
+

@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = "Forced Retrieval of Rejected Material - TCRM151F";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@model KCSG.Web.Areas.MaterialManagement.ViewModels.ForcedRetrievalOfRejectedMaterial.AssignRejectedMaterialViewModel
+
+@*<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<script src="/signalr/hubs"></script>*@
+<script src="~/Scripts/areas/signalrCommon.js"></script>
+<script src="~/Scripts/areas/forcedRetrievalOfRejectedMaterial/forcedRetrievalOfRejectedMaterial.js"></script>
+<script src="~/Scripts/jquery-custom-validators/jquery-validation-handler.js"></script>
+
+
+
+<div class="col-lg-12">
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">General information</div>
+
+        <form id="materialSearchForm"
+              class="panel-body">
+            
+            <div class="row">
+                <div class="col-lg-3">
+                    @Html.ExtLabelFor(m=>m.MaterialCode)
+                </div>
+                <div class="col-lg-6">
+                   
+                        @Html.ExtTextBoxAddOnFor(m => m.MaterialCode, CustomControlConstants.AddOn.Search, "#modalMaterialCodeSelect", new { id = "txtMaterialCode" })
+                      
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    @Html.ExtLabelFor(m => m.MaterialName)
+                </div>
+                <div class="col-lg-6">
+                    @Html.ExtTextBoxFor(m => m.MaterialName, new {id="txtMaterialName",@readonly="true"})
+                  
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-lg-3">@Html.LabelFor(m => m.ProductOrderNumber)</div>
+                <div class="col-lg-6">
+                    @*@Html.ExtTextBoxAddOnFor(m => m.ProductOrderNumber, CustomControlConstants.AddOn.Search, "#modalPONOSelectWithParameter", new { id = "txtPONoCode" })*@
+                    @Html.TextBoxFor(x => x.ProductOrderNumber, new {@id = "txtProductOrderNumber", @class="form-control"})
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-lg-3">@Html.LabelFor(m => m.PartialDelivery)</div>
+                <div class="col-lg-6">
+                    @*@Html.ExtTextBoxFor(x => x.PartialDelivery, new { @class = "form-control", @id = "txtPartialDelivery",@readonly="true" })*@
+                    @Html.TextBoxFor(x => x.PartialDelivery, new { @class = "form-control", @id = "txtPartialDelivery"})
+                </div>
+            </div>
+            <br/>
+
+            <div class="row">
+                <div class="col-lg-3">@Html.ExtLabelFor(model=>model.Assigned)</div>
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        @Html.ExtNumberFor(model=>model.Assigned,new NumberOption(){NumberOfDecimal = 2},new{@readonly="true"})
+                        @*<input id="txtAssigned"
+                               class="form-control"
+                               readonly="readonly"/>*@
+                        <span class="input-group-addon">
+                            <span>Pallet</span>
+                        </span>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col-lg-3">
+                    <button id="btnAssign"
+                            type="button"
+                            onclick="assignMaterials()"
+                            class="btn btn-flat btn-default btn-more-5-chars">
+                        Assign
+                    </button>
+                </div>
+            </div>
+
+            <br/>
+            <div class="row form-group">
+                <div class="col-lg-3">@Html.ExtLabelFor(model=>model.AssignedQuantity)</div>
+                <div class="col-lg-6">
+                        @Html.ExtNumberFor(x => x.AssignedQuantity, new NumberOption(){NumberOfDecimal = 2},new {@id = "txtAssignedQuantity",@readonly = true })
+                        
+
+                </div>
+                <div class="col-lg-3">
+                    <button id="btnDeAssign"
+                            class="btn btn-flat btn-default btn-more-5-chars"
+                            disabled="disabled"
+                            type="button"
+                            onclick=" rejectMaterials() ">
+                        De-assign
+                    </button>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-4">
+                    <button id="btnRetrieve" type="button"
+                            disabled="disabled"
+                            class="btn btn-flat btn-default btn-more-5-chars"
+                            onclick=" retrieveMaterials() ">
+                        @*<span class="glyphicon glyphicon-refresh"></span>*@
+                        <span>Retrieval</span>
+                    </button>
+                </div>
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+<style>
+    input, select, textarea {
+        max-width: none
+    }
+</style>

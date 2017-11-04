@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "Conveyor Status Controller(Material)";
+}
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC
+@using NumberOption = KCSG.Core.CustomControls.NumberOption
+@model KCSG.Web.Areas.Communication.ViewModels.ConveyorStatusViewModel
+<script type="text/javascript" src="/Scripts/areas/Communication/Conveyor.js"></script>
+<script type="text/javascript">
+   var urlConveryor = {
+       urlEdit: '@Url.Action("Edit","ConveyorStatus")',
+       urlSave :'@Url.Action("Save", "ConveyorStatus")'
+   }
+</script>
+<div class="panel panel-danger">
+    <div class="panel-heading">
+        <span>List of Conveyor</span>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            @Html.Grid(Model.ConveyorGrid)
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("", "", FormMethod.Post, new { @id = "conveyorFrom" }))
+{
+    <div class="panel panel-danger">
+        <div class="panel-body">
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="col-lg-4">@Html.ExtLabelFor(model => model.ConveyorCode)</div>
+                    <div class="col-lg-8">
+                        @Html.ExtTextBoxFor(m => m.ConveyorCode, new {@readonly = true})
+                        @Html.HiddenFor(m => m.ConveyorCode)
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-4">@Html.ExtLabelFor(model => model.UsingBuffer)</div>
+                    <div class="col-lg-8">
+                        @Html.ExtNumberFor(m => m.UsingBuffer,new NumberOption(){NumberOfDecimal = 0})
+                    </div>
+                </div>
+                @Html.Hidden("MaxBuffer")
+            </div>
+            <div class="form-group">
+                <div class="col-lg-3">@Html.ExtLabelFor(model => model.ConveyorStatus)</div>
+                <div class="col-lg-9">
+                    @Html.ExtRadioButtonFor(m => m.ConveyorStatus, EnumsHelper.GetListItemsWithDescription<Constants.F05_StrRtrSts>(), null, true, 4)
+                </div>
+            </div>
+
+            <div class=" form-group pull-right">
+                <button id="btnUpdate" class="btn btn-flat btn-default btn-less-5-chars" disabled="disabled" onclick="UpdateConveyor(); return false;">Update</button>
+                <button class="btn btn-flat btn-default btn-less-5-chars" data-dismiss="modal">Exit</button>
+            </div>
+        </div>
+    </div>
+}
+
+

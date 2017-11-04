@@ -1,0 +1,81 @@
+﻿<style>
+    .title-table, .content-table {
+        border-collapse: collapse;
+        min-width: 100%;
+    }
+
+    .title-table th, td {
+        border: 0 solid transparent;
+    }
+
+    .content-table th {
+        border: 1px solid black;
+    }
+	
+	.content-table td{
+		border: 1px solid black;
+	}
+</style>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th colspan="2"
+			class="text-center">** STOCK LIST ( Uncertified Item ) **</th>
+    </tr>
+	<tr>
+        <td></td>
+		<td class="pull-right"> {{currentDate}}</td>
+    </tr>
+	<tr>
+        <td></td>
+		<td class="pull-right"> {{company}} </td>
+    </tr>
+    </thead>
+</table>
+
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+	<tr>
+        <td> < Product > </td>
+    </tr>
+    </thead>
+</table>
+<br/>
+
+<table class="table table-responsive" style="font-family:courier;">
+	<thead>
+		<tr>
+			<th class="text-center"> Product Code</th>
+			<th class="text-center"> Product Name</th>
+			<th class="text-center"> Lot No.</th>
+			<th class="text-center"> Pallet No..</th>
+			<th class="text-center"> R.B.L</th>
+            <th class="text-center"> Quantity (Kg)</th>
+		</tr>
+	</thead>
+    <tbody>
+    {{#items}}
+    {{#Details}}
+    <tr>
+        <td class="text-center">{{F09_ProductCode}}</td>
+        <td class="text-center">{{F09_ProductDesp}}</td>
+        <td class="text-center">{{F40_ProductLotNo}}</td>
+        <td class="text-center">{{F40_PalletNo}}</td>
+        <td class="text-center">{{Rbl}}</td>
+        <td class="pull-right">{{F40_Amount}}</td>
+    </tr>
+    {{/Details}}
+    <tr>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-center"></td>
+        <td class="text-right">Total:</td>
+        <td class="text-center">{{Total}}</td>
+    </tr>
+    {{/items}}
+    </tbody>
+</table>
+<br/>

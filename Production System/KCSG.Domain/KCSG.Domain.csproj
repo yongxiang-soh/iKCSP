@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FDE39488-F6B6-4BCB-856E-5D5113D26F1C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KCSG.Domain</RootNamespace>
+    <AssemblyName>KCSG.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugWithoutLogin|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugWithoutLogin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'UnauthenticatedDebug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\UnAuthorizedDebug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="App_GlobalResources.e3pyrzlo">
+      <HintPath>C:\Users\linhnd20\AppData\Local\Temp\Temporary ASP.NET Files\root\ff105b08\_shadow\14e200d7\5448\App_GlobalResources.e3pyrzlo.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DataTables.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\datatables.mvc5.0.1.0\lib\net45\DataTables.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.1\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nustache.Core, Version=1.16.0.4, Culture=neutral, PublicKeyToken=efd6f3d8f76ecd9f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nustache.1.16.0.4\lib\net20\Nustache.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Domains\BaseDomain.cs" />
+    <Compile Include="Domains\CommonSearchDomain.cs" />
+    <Compile Include="Domains\CommunicationManagement\Communication3Domain.cs" />
+    <Compile Include="Domains\CommunicationManagement\Communication2Domain.cs" />
+    <Compile Include="Domains\CommunicationManagement\Communication1Domain.cs" />
+    <Compile Include="Domains\CommunicationManagement\ConveyorDomain.cs" />
+    <Compile Include="Domains\EnvironmentManagement\AvailabityDataEditDomain.cs" />
+    <Compile Include="Domains\EnvironmentManagement\CalculationOfControlLimitDomain.cs" />
+    <Compile Include="Domains\EnvironmentManagement\CleanlinessDataInputDomain.cs" />
+    <Compile Include="Domains\EnvironmentManagement\ControlLimitEditDomain.cs" />
+    <Compile Include="Domains\EnvironmentManagement\CreepingAndRollSpeedDurationDomain.cs" />
+    <Compile Include="Domains\EnvironmentManagement\CreepingAndRollSpeedDataEditDomain.cs" />
+    <Compile Include="Domains\EnvironmentManagement\EnvironmentBaseDomain.cs" />
+    <Compile Include="Domains\EnvironmentManagement\LotDataCleanupDomain.cs" />
+    <Compile Include="Domains\EnvironmentManagement\LotDataSamplingDomain.cs" />
+    <Compile Include="Domains\EnvironmentManagement\XRTemperatureManagementDomain.cs" />
+    <Compile Include="Domains\EnvironmentManagement\ProductMasterManagementDomain.cs" />
+    <Compile Include="Domains\ExportReportDomain.cs" />
+    <Compile Include="Domains\Inquiry\InquiryByExternalPreProductNameDomain.cs" />
+    <Compile Include="Domains\Inquiry\InquiryByMaterialNameDomain.cs" />
+    <Compile Include="Domains\Inquiry\InquiryByPreProductNameDomain.cs" />
+    <Compile Include="Domains\Inquiry\InquiryByProductCodeDomain.cs" />
+    <Compile Include="Domains\Inquiry\InquiryByProductNameDomain.cs" />
+    <Compile Include="Domains\Inquiry\InquiryBySupplierNameDomain.cs" />
+    <Compile Include="Domains\Inquiry\InquiryByPreProductDomain.cs" />
+    <Compile Include="Domains\Inquiry\InquiryCommonDomain.cs" />
+    <Compile Include="Domains\Inquiry\InquiryKneadingLotNoDomain.cs" />
+    <Compile Include="Domains\Inquiry\InquiryKneadingCommandNoDomain.cs" />
+    <Compile Include="Domains\Inquiry\InquiryKneadingLineNoDomain.cs" />
+    <Compile Include="Domains\KneadingCommand\InputOfKneadingCommandDomain.cs" />
+    <Compile Include="Domains\KneadingCommand\KneadingStartEndControlDomain.cs" />
+    <Compile Include="Domains\LoginDomain.cs" />
+    <Compile Include="Domains\ManagementReport\ManagementReportDomain.cs" />
+    <Compile Include="Domains\ManagementReport\MaterialStockDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\AcceptanceOfMaterial.cs" />
+    <Compile Include="Domains\MaterialManagement\FontStorageOfSupplierPalletDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\ForcedRetrievalOfRejectedMaterialDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\InterFloorMovementOfMaterialDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\MaterialPostReceptionInputDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\MaterialReceptionDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\MaterialShelfStatusDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\RestorageOfMaterialDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\RetrievalOfWarehousePalletDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\RetrieveOfMaterialDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\RetrieveSupplierPalletDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\StockTakingOfMaterialDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\StorageOfMaterialDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\StorageOfSupplementaryMaterialDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\StorageOfSupplierPalletDomain.cs" />
+    <Compile Include="Domains\MaterialManagement\StorageOfWarehousePalletDomain.cs" />
+    <Compile Include="Domains\PreProductManagement\ForcedRetrievalOfPreProductDomain.cs" />
+    <Compile Include="Domains\PreProductManagement\PreProductManagementDomain.cs" />
+    <Compile Include="Domains\PreProductManagement\RetrievalOfPreProductDomain.cs" />
+    <Compile Include="Domains\PreProductManagement\StockTakingPreProductDomain.cs" />
+    <Compile Include="Domains\ProductionPlanning\MaterialDomain.cs" />
+    <Compile Include="Domains\ProductionPlanning\MaterialRequirementListDomain.cs" />
+    <Compile Include="Domains\ProductionPlanning\MaterialSimulationDomain.cs" />
+    <Compile Include="Domains\ProductionPlanning\PckMtrDomain.cs" />
+    <Compile Include="Domains\ProductionPlanning\PdtPlnDomain.cs" />
+    <Compile Include="Domains\ProductionPlanning\PreProductPlanDomain.cs" />
+    <Compile Include="Domains\ProductionPlanning\ProductDomain.cs" />
+    <Compile Include="Domains\ProductionPlanning\PrePdtMkpDomain.cs" />
+    <Compile Include="Domains\ProductionPlanning\PreProductDomain.cs" />
+    <Compile Include="Domains\ProductionPlanning\SubMaterialDomain.cs" />
+    <Compile Include="Domains\ProductManagement\ForceRetrievalOfProductDomain.cs" />
+    <Compile Include="Domains\ProductManagement\InterFloorMovementOfProductDomain.cs" />
+    <Compile Include="Domains\ProductManagement\RetrievalOfProductPalletDomain.cs" />
+    <Compile Include="Domains\ProductManagement\StorageOfEmptyProductPalletDomain.cs" />
+    <Compile Include="Domains\ProductManagement\OutOfPlanProductDomain.cs" />
+    <Compile Include="Domains\ProductManagement\ProductShippingCommandDomain.cs" />
+    <Compile Include="Domains\ProductManagement\RetrievalOfOutOfSpecPreProductDomain.cs" />
+    <Compile Include="Domains\ProductManagement\RestorageOfProductDomain.cs" />
+    <Compile Include="Domains\ProductManagement\StorageOfExternalPreProductDomain.cs" />
+    <Compile Include="Domains\ProductManagement\RetrievalOfExternalPreProductDomain.cs" />
+    <Compile Include="Domains\ProductManagement\StockTakingOfProductDomain.cs" />
+    <Compile Include="Domains\ProductManagement\ProductShippingPlanningDomain.cs" />
+    <Compile Include="Domains\ProductManagement\StorageOfProductDomain.cs" />
+    <Compile Include="Domains\ProductManagement\ProductCertificationDomain.cs" />
+    <Compile Include="Domains\SupplierDomain.cs" />
+    <Compile Include="Domains\SystemManagement\DailyProcessDomain.cs" />
+    <Compile Include="Domains\SystemManagement\MonthlyProcessDomain.cs" />
+    <Compile Include="Domains\SystemManagement\StartEndSystemDomain.cs" />
+    <Compile Include="Domains\TabletisingCommandSubSystem\CreateTabletisingCommandDomain.cs" />
+    <Compile Include="Domains\TabletisingCommandSubSystem\ManagementOfProductLabelDomain.cs" />
+    <Compile Include="Domains\TabletisingCommandSubSystem\PreProductChargingDomain.cs" />
+    <Compile Include="Domains\TabletisingCommandSubSystem\TabletisingStartStopDomain.cs" />
+    <Compile Include="Domains\TabletisingCommandSubSystem\TabletisingStartStopSelectedItem.cs" />
+    <Compile Include="Domains\CommunicationManagement\WeighingEquipmentDomain.cs" />
+    <Compile Include="Enumerations\InitiateTabletisingCommandResult.cs" />
+    <Compile Include="Interfaces\CommunicationManagement\ICommunication1Domain.cs" />
+    <Compile Include="Interfaces\CommunicationManagement\ICommunication2Domain.cs" />
+    <Compile Include="Interfaces\CommunicationManagement\ICommunication3Domain.cs" />
+    <Compile Include="Interfaces\CommunicationManagement\IConveyorDomain.cs" />
+    <Compile Include="Interfaces\CommunicationManagement\IWeighingEquipmentDomain.cs" />
+    <Compile Include="Interfaces\EnvironmentManagement\IAvailabityDataEditDomain.cs" />
+    <Compile Include="Interfaces\EnvironmentManagement\ICalculationOfControlLimitDomain.cs" />
+    <Compile Include="Interfaces\EnvironmentManagement\ICleanlinessDataInputDomain.cs" />
+    <Compile Include="Interfaces\EnvironmentManagement\IControlLimitEditDomain.cs" />
+    <Compile Include="Interfaces\EnvironmentManagement\ICreepingAndRollSpeedDurationDomain.cs" />
+    <Compile Include="Interfaces\EnvironmentManagement\ICreepingAndRollSpeedDataEditDomain.cs" />
+    <Compile Include="Interfaces\EnvironmentManagement\IEnvironmentBaseDomain.cs" />
+    <Compile Include="Interfaces\EnvironmentManagement\ILotDataCleanupDomain.cs" />
+    <Compile Include="Interfaces\EnvironmentManagement\ILotDataSamplingDomain.cs" />
+    <Compile Include="Interfaces\EnvironmentManagement\IXRTemperatureManagement.cs" />
+    <Compile Include="Interfaces\EnvironmentManagement\IProductMasterManagementDomain.cs" />
+    <Compile Include="Interfaces\ICommonDomain.cs" />
+    <Compile Include="Interfaces\ICommonSearchDomain.cs" />
+    <Compile Include="Interfaces\IExportReportDomain.cs" />
+    <Compile Include="Interfaces\Inquiry\IInquiryByExternalPre-ProductNameDomain.cs" />
+    <Compile Include="Interfaces\Inquiry\IInquiryByMaterialNameDomain.cs" />
+    <Compile Include="Interfaces\Inquiry\IInquiryByPreProductDomain.cs" />
+    <Compile Include="Interfaces\Inquiry\IInquiryByPreProductNameDomain.cs" />
+    <Compile Include="Interfaces\Inquiry\IInquiryByProductCodeDomain.cs" />
+    <Compile Include="Interfaces\Inquiry\IInquiryByProductNameDomain.cs" />
+    <Compile Include="Interfaces\Inquiry\IInquiryBySupplierNameDomain.cs" />
+    <Compile Include="Interfaces\Inquiry\IInquiryCommonDomain.cs" />
+    <Compile Include="Interfaces\Inquiry\IInquiryKneadingLotNoDomain.cs" />
+    <Compile Include="Interfaces\Inquiry\IInquiryKneadingCommandNoDomain.cs" />
+    <Compile Include="Interfaces\Inquiry\IInquiryKneadingLineNoDomain.cs" />
+    <Compile Include="Interfaces\ILabelPrintService.cs" />
+    <Compile Include="Interfaces\ManagementReport\IManagementReportDomain.cs" />
+    <Compile Include="Interfaces\ManagementReport\IMaterialStockDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IMaterialShelfStatusDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IFontStorageOfSupplierPalletDomain.cs" />
+    <Compile Include="Interfaces\ProductManagement\IForcedRetrievalOfProductDomain.cs" />
+    <Compile Include="Interfaces\ProductManagement\IInterFloorMovementOfProductDomain.cs" />
+    <Compile Include="Interfaces\ProductManagement\IRestorageOfProductDomain.cs" />
+    <Compile Include="Interfaces\ProductManagement\IRetrievalOfProductPalletDomain.cs" />
+    <Compile Include="Interfaces\ProductManagement\IRetrievalOfOutOfSpecPreProductDomain.cs" />
+    <Compile Include="Interfaces\ProductManagement\IOutOfPlanProductDomain.cs" />
+    <Compile Include="Interfaces\ProductManagement\IStorageOfExternalPreProductDomain.cs" />
+    <Compile Include="Interfaces\ProductManagement\IRetrievalOfExternalProductDomain.cs" />
+    <Compile Include="Interfaces\ProductManagement\IStockTakingOfProductDomain.cs" />
+    <Compile Include="Interfaces\ProductManagement\IProductShippingPlanningDomain.cs" />
+    <Compile Include="Interfaces\ProductManagement\IStorageOfProductDomain.cs" />
+    <Compile Include="Interfaces\ProductCertificationManagement\IProductCertificationDomain.cs" />
+    <Compile Include="Interfaces\ProductManagement\IStorageOfEmptyProductPalletDomain.cs" />
+    <Compile Include="Interfaces\ProductShippingCommand\IProductShippingCommandDomain.cs" />
+    <Compile Include="Interfaces\Services\IConfigurationService.cs" />
+    <Compile Include="Interfaces\Services\IIdentityService.cs" />
+    <Compile Include="Interfaces\ILoginDomain.cs" />
+    <Compile Include="Interfaces\Services\INotificationService.cs" />
+    <Compile Include="Interfaces\SystemManagement\IDatabaseMaintainanceDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IStorageOfMaterialDomain.cs" />
+    <Compile Include="Interfaces\ISupplierDomain.cs" />
+    <Compile Include="Interfaces\KneadingCommand\IInputOfKneadingCommandDomain.cs" />
+    <Compile Include="Interfaces\KneadingCommand\IKneadingStartEndControlDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IAcceptanceOfMaterialDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IForcedRetrievalOfRejectedMaterialDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IMaterialPostReceptionInputDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IMaterialReceptionDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IMaterialWarehouseCommandDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IInterFloorMovementOfMaterialDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IRestorageOfMaterialDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IRetrievalOfWarehousePalletDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IRetrieveOfMaterialDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IRetrieveSupplierPalletDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IStockTakingOfMaterialDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IStorageOfSupplementaryMaterialDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IStorageOfSupplierPalletDomain.cs" />
+    <Compile Include="Interfaces\MaterialManagement\IStorageOfWarehousePalletDomain.cs" />
+    <Compile Include="Interfaces\PreProductManagement\IForcedRetrievalOfPreProductDomain.cs" />
+    <Compile Include="Interfaces\PreProductManagement\IPreProductManagementDomain.cs" />
+    <Compile Include="Interfaces\PreProductManagement\IRetrievalOfPreProductDomain.cs" />
+    <Compile Include="Interfaces\PreProductManagement\IStockTakingPreProductDomain.cs" />
+    <Compile Include="Interfaces\ProductionPlanning\IMaterialDomain.cs" />
+    <Compile Include="Interfaces\ProductionPlanning\IMaterialRequirementListDomain.cs" />
+    <Compile Include="Interfaces\ProductionPlanning\IMaterialSimulationDomain.cs" />
+    <Compile Include="Interfaces\ProductionPlanning\IPckMtrDomain.cs" />
+    <Compile Include="Interfaces\ProductionPlanning\IPdtPlnDomain.cs" />
+    <Compile Include="Interfaces\ProductionPlanning\IPreProductPlanDomain.cs" />
+    <Compile Include="Interfaces\ProductionPlanning\IProductDomain.cs" />
+    <Compile Include="Interfaces\ProductionPlanning\IPrePdtMkpDomain.cs" />
+    <Compile Include="Interfaces\ProductionPlanning\IPreProductDomain.cs" />
+    <Compile Include="Interfaces\ProductionPlanning\ISubMaterialDomain.cs" />
+    <Compile Include="Interfaces\SystemManagement\IDailyProcessDomain.cs" />
+    <Compile Include="Interfaces\SystemManagement\IMonthlyProcessDomain.cs" />
+    <Compile Include="Interfaces\SystemManagement\IStartEndSystemDomain.cs" />
+    <Compile Include="Interfaces\TabletisingCommandSubSystem\ICreateTabletisingCommandDomain.cs" />
+    <Compile Include="Interfaces\TabletisingCommandSubSystem\IManagementOfProductLabelDomain.cs" />
+    <Compile Include="Interfaces\TabletisingCommandSubSystem\IPreProductCharging.cs" />
+    <Compile Include="Interfaces\TabletisingCommandSubSystem\ITabletisingStartStopDomain.cs" />
+    <Compile Include="Interfaces\TabletisingCommandSubSystem\PreProductChargingItem.cs" />
+    <Compile Include="Models\AreaInformation.cs" />
+    <Compile Include="Models\C2Response.cs" />
+    <Compile Include="Models\C2ResponseItem.cs" />
+    <Compile Include="Models\CommonSearchItem.cs" />
+    <Compile Include="Models\CommunicationManagement\HistoryItem.cs" />
+    <Compile Include="Models\CommunicationManagement\MessageFormAW.cs" />
+    <Compile Include="Models\CommunicationManagement\MessageC4Item.cs" />
+    <Compile Include="Models\CommunicationManagement\QueueItem.cs" />
+    <Compile Include="Models\CommunicationManagement\WeighingEquipmentItem.cs" />
+    <Compile Include="Models\CommunicationManagement\WeighingEquipmentViewSearchModel.cs" />
+    <Compile Include="Models\ConveyorItem.cs" />
+    <Compile Include="Models\EndTabletisingItem.cs" />
+    <Compile Include="Models\EndUser\EndUserItem.cs" />
+    <Compile Include="Models\EnvironmentManagement\CalculationOfControlLimitItem.cs" />
+    <Compile Include="Models\EnvironmentManagement\ControlLimitEditItem.cs" />
+    <Compile Include="Models\EnvironmentManagement\CreepingAndRollSpeedDurationItem.cs" />
+    <Compile Include="Models\EnvironmentManagement\CreepingAndRollSpeedDataEditItem.cs" />
+    <Compile Include="Models\EnvironmentManagement\Graphtbl.cs" />
+    <Compile Include="Models\EnvironmentManagement\LotdataSamplingItem.cs" />
+    <Compile Include="Models\EnvironmentManagement\TemporaryTable.cs" />
+    <Compile Include="Models\EnvironmentManagement\XRTemperatureItem.cs" />
+    <Compile Include="Models\EnvironmentManagement\ProductMasterManagementItem.cs" />
+    <Compile Include="Models\FinalStockTakingMaterialItem.cs" />
+    <Compile Include="Models\FindRecordTableResult.cs" />
+    <Compile Include="Models\FirstCommunicationResponse.cs" />
+    <Compile Include="Models\Inquiry\ByExternalPre-ProductName\FindPrintExternalPreProductNameItem.cs" />
+    <Compile Include="Models\Inquiry\ByExternalPre-ProductName\PrintExternalPreProductNameGroup.cs" />
+    <Compile Include="Models\Inquiry\ByExternalPre-ProductName\PrintExternalPreProductNameGroupItem.cs" />
+    <Compile Include="Models\Inquiry\ByExternalPre-ProductName\PrintExternalPreProductNameItem.cs" />
+    <Compile Include="Models\Inquiry\ByPreProductName\FindPrintPreProductNameItem.cs" />
+    <Compile Include="Models\Inquiry\ByPreProductName\PrintPreProductNameGroup.cs" />
+    <Compile Include="Models\Inquiry\ByPreProductName\PrintPreProductNameGroupItem.cs" />
+    <Compile Include="Models\Inquiry\ByPreProductName\PrintPreProductNameItem.cs" />
+    <Compile Include="Models\Inquiry\ByProductName\FindPrintProductNameItem.cs" />
+    <Compile Include="Models\Inquiry\ByProductName\PrintProductNameGroupItem.cs" />
+    <Compile Include="Models\Inquiry\ByProductName\PrintProductNameItem.cs" />
+    <Compile Include="Models\Inquiry\BySupplierName\FindPrintSupplierNameItem.cs" />
+    <Compile Include="Models\Inquiry\BySupplierName\PrintSupplierNameGroupItem.cs" />
+    <Compile Include="Models\Inquiry\BySupplierName\PrintSupplierNameItem.cs" />
+    <Compile Include="Models\Inquiry\ByWareHouseLocation\InquiryByPreProductShelfStatusEmptyItem.cs" />
+    <Compile Include="Models\Inquiry\ByWareHouseLocation\InquiryByProductShelfStatusEmptyItem.cs" />
+    <Compile Include="Models\Inquiry\ByWareHouseLocation\InquiryByProductShelfStatusItem.cs" />
+    <Compile Include="Models\Inquiry\ByWareHouseLocation\InquiryBySupplierPalletItem.cs" />
+    <Compile Include="Models\Inquiry\ByWareHouseLocation\InquiryByProductShelfStatusExternalPreProductItem.cs" />
+    <Compile Include="Models\Inquiry\ByWareHouseLocation\PreProductShelfStatusItem.cs" />
+    <Compile Include="Models\Inquiry\FindMaterialNameItem.cs" />
+    <Compile Include="Models\Inquiry\FindPrintMaterialNameItem.cs" />
+    <Compile Include="Models\Inquiry\PrintMaterialNameItem.cs" />
+    <Compile Include="Models\Inquiry\ByWareHouseLocation\RawMaterialShelftStatusItem.cs" />
+    <Compile Include="Models\Inquiry\PrintMaterialNameGroupItem.cs" />
+    <Compile Include="Models\InsertTableRowModel.cs" />
+    <Compile Include="Models\KneadingCommand\FindKneadingCommandItem.cs" />
+    <Compile Include="Models\KneadingCommand\FindPrintKneadingCommandItem.cs" />
+    <Compile Include="Models\KneadingCommand\KneadingLotNoItem.cs" />
+    <Compile Include="Models\KneadingCommand\KneadingCommandItem.cs" />
+    <Compile Include="Models\KneadingCommand\PrintKneadingCommandItem.cs" />
+    <Compile Include="Models\AuthenticationResult.cs" />
+    <Compile Include="Domains\SystemManagement\DatabaseMaintainanceDomain.cs" />
+    <Compile Include="Models\ManagementReport\FindMaterialNameItem.cs" />
+    <Compile Include="Models\ManagementReport\FindPrintMaterialNameItem.cs" />
+    <Compile Include="Models\ManagementReport\FindPrintManagementReportItem.cs" />
+    <Compile Include="Models\ManagementReport\PrintMaterialNameItem.cs" />
+    <Compile Include="Models\ManagementReport\PrintManagementReportItem.cs" />
+    <Compile Include="Models\MaterialManagement\AssignPalletItem.cs" />
+    <Compile Include="Models\MaterialManagement\FindRetrievalMaterialResult.cs" />
+    <Compile Include="Models\MaterialManagement\DetailPalletItem.cs" />
+    <Compile Include="Models\MaterialManagement\InterFloorMovementOfMaterialItem.cs" />
+    <Compile Include="Models\MaterialManagement\AssignRejectedMaterialResult.cs" />
+    <Compile Include="Models\MaterialManagement\MaterialDetailInformationViewModel.cs" />
+    <Compile Include="Models\MaterialManagement\MaterialPostReceptionInputItem.cs" />
+    <Compile Include="Models\MaterialManagement\MaterialReceptionItem.cs" />
+    <Compile Include="Models\MaterialManagement\MaterialShelfItem.cs" />
+    <Compile Include="Models\MaterialManagement\MaterialShelfStatusItem.cs" />
+    <Compile Include="Models\MaterialManagement\MaterialShelfStockItem.cs" />
+    <Compile Include="Models\MaterialManagement\MaterialWarehouseCommandItem.cs" />
+    <Compile Include="Models\MaterialManagement\PalletGridDetail.cs" />
+    <Compile Include="Models\MaterialManagement\RestorageMaterialItem.cs" />
+    <Compile Include="Models\MaterialManagement\RetrievalOfWarehousePalletItem.cs" />
+    <Compile Include="Models\MaterialManagement\StockTakingOfMaterialC1ViewModelItem.cs" />
+    <Compile Include="Models\MaterialManagement\StockTakingOfMaterialItem.cs" />
+    <Compile Include="Models\MaterialManagement\StockTakingOfMaterialStockItem.cs" />
+    <Compile Include="Models\MaterialManagement\StorageOfMaterialItem.cs" />
+    <Compile Include="Models\MaterialManagement\StorageOfSupplementaryMaterialItem.cs" />
+    <Compile Include="Models\MaterialManagement\SupMaterialStockItem.cs" />
+    <Compile Include="Models\Message\MessageItem.cs" />
+    <Compile Include="Models\NoManageItem.cs" />
+    <Compile Include="Models\PreProductManagement\ForcedRetrievalOfPreProductItem.cs" />
+    <Compile Include="Models\PreProductManagement\PreProductShelfStatusItem.cs" />
+    <Compile Include="Models\PreProductManagement\RetrievalOfPreProductItem.cs" />
+    <Compile Include="Models\PreProductManagement\RetrieveOfEmptyContainerItem.cs" />
+    <Compile Include="Models\PreProductManagement\StorageContainerItem.cs" />
+    <Compile Include="Models\PreProductManagement\StorageOfPreProductItem.cs" />
+    <Compile Include="Models\PreProductManagement\SearchStockTakingPreProductItem.cs" />
+    <Compile Include="Models\PreProductManagement\SubmitContainerStorageViewModel.cs" />
+    <Compile Include="Models\PrinterConfiguration.cs" />
+    <Compile Include="Models\PrinterSetting.cs" />
+    <Compile Include="Models\ProductionPlanning\MaterialItem.cs" />
+    <Compile Include="Models\ProductionPlanning\MaterialRequirementListItem.cs" />
+    <Compile Include="Models\ProductionPlanning\MaterialSimulationItem.cs" />
+    <Compile Include="Models\ProductionPlanning\PckMtrItem.cs" />
+    <Compile Include="Models\ProductionPlanning\PdtPlnItem.cs" />
+    <Compile Include="Models\ProductionPlanning\PrePdtMkpMatItem.cs" />
+    <Compile Include="Models\ProductionPlanning\PreProductPlanItem.cs" />
+    <Compile Include="Models\ProductionPlanning\PreProductPlanSimuItem.cs" />
+    <Compile Include="Models\ProductionPlanning\PrintPreProductItem.cs" />
+    <Compile Include="Models\ProductionPlanning\ProductItem.cs" />
+    <Compile Include="Models\ProductionPlanning\PrePdtMkpItem.cs" />
+    <Compile Include="Models\ProductionPlanning\PreProductItem.cs" />
+    <Compile Include="Models\ProductionPlanning\SimulationPopUpItem.cs" />
+    <Compile Include="Models\ProductionPlanning\SubMaterialItem.cs" />
+    <Compile Include="Models\ProductManagement\RetrievalItem.cs" />
+    <Compile Include="Models\ProductManagement\AssignProductShippingViewModel.cs" />
+    <Compile Include="Models\ProductManagement\ExternalPreProductItem.cs" />
+    <Compile Include="Models\ProductManagement\FindStockTakingOfProductViewModel.cs" />
+    <Compile Include="Models\ProductManagement\ForceRetrievalOfProductItem.cs" />
+    <Compile Include="Models\ProductManagement\OutOfPlanProductItem.cs" />
+    <Compile Include="Models\ProductManagement\ProductShippingCommandItem.cs" />
+    <Compile Include="Models\ProductManagement\ProductCertificationOutOfPlanItem.cs" />
+    <Compile Include="Models\ProductManagement\AssignProductShippingCommandResult.cs" />
+    <Compile Include="Models\ProductManagement\RestorageOfProductViewItem.cs" />
+    <Compile Include="Models\ProductManagement\RestoreProductItem.cs" />
+    <Compile Include="Models\ProductManagement\SelectingItem.cs" />
+    <Compile Include="Models\ProductManagement\StockTakingOfProductConfirmItem.cs" />
+    <Compile Include="Models\ProductManagement\StockTakingOfProductDetailItem.cs" />
+    <Compile Include="Models\ProductManagement\StockTakingOfProductItem.cs" />
+    <Compile Include="Models\ProductManagement\ProductShippingPlanningItem.cs" />
+    <Compile Include="Models\ProductManagement\StorageOfProductItem.cs" />
+    <Compile Include="Models\ProductManagement\ProductCertificationItem.cs" />
+    <Compile Include="Models\ProductManagement\StoreProductItem.cs" />
+    <Compile Include="Models\ProductManagement\UnassignShippingCommandViewModel.cs" />
+    <Compile Include="Models\ProductManagement\TempTableItem.cs" />
+    <Compile Include="Models\ProductShelfNoItem.cs" />
+    <Compile Include="Models\RestoreMaterialViewModel.cs" />
+    <Compile Include="Models\ScreenInformation.cs" />
+    <Compile Include="Models\SecondCommunicationResponse.cs" />
+    <Compile Include="Models\SupplierItem.cs" />
+    <Compile Include="Models\SchemaColumn.cs" />
+    <Compile Include="Models\SchemaTable.cs" />
+    <Compile Include="Models\TabletisingCommondSubSystem\SearchProductInformationItem.cs" />
+    <Compile Include="Models\TabletisingCommondSubSystem\TabletisingStarStopSelectItem.cs" />
+    <Compile Include="Models\TabletisingCommondSubSystem\TabletisingStartStopControlItem.cs" />
+    <Compile Include="Models\Tabletising\FindTabletisingKneadingCommandItem.cs" />
+    <Compile Include="Models\Tabletising\ProductLowerTable.cs" />
+    <Compile Include="Models\Tabletising\InitiateTabletisingCommandViewModel.cs" />
+    <Compile Include="Models\Tabletising\TabletisingKneadingCommandItem.cs" />
+    <Compile Include="Models\ThirdCommunicationResponse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KCSG.Core\KCSG.Core.csproj">
+      <Project>{5da4af64-c5db-42aa-990d-55306c21e84a}</Project>
+      <Name>KCSG.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KCSG.Data\KCSG.Data.csproj">
+      <Project>{d39d17ff-d8a2-4b55-bb33-ddbbbff0ea91}</Project>
+      <Name>KCSG.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Inquiry\ByMaterialName\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

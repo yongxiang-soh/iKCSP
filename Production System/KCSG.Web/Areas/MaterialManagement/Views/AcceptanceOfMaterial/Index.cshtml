@@ -1,0 +1,98 @@
+﻿@{
+    // Screen ID - which will be displayed on navigation bar of browser.
+    ViewBag.ScreenId = "TCRM041F";
+    ViewBag.Title = "Acceptance of Raw Material";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.ProductionPlanning.ViewModels.AcceptanceOfMaterial.AcceptanceOfMaterialViewModel
+<script src="~/Scripts/areas/acceptanceOfMaterial/acceptanceOfMaterial.js"></script>
+
+<div class="col-lg-12">
+
+    <form class="panel panel-danger"
+          onsubmit="searchMaterials(event)">
+            <div class="panel-heading">Search Criteria</div>
+            <div class="panel-body">
+
+                <!-- P.O No. input area -->
+                <div class="col-lg-2">
+                    <label>P.O No.<span style="color:red">*</span></label>    
+                    </div>
+                
+                <div class="col-lg-3 form-group">
+                    @*<input id="txtpNo"
+                               type="text"
+                               class="form-control"
+                           maxlength="7" />*@
+                    @Html.ExtTextBoxFor(model => model.PNo, new { @id = "txtpNo" })
+                </div>
+
+                <!-- Partial delivery input area -->
+                <div class="col-lg-2">
+                        <label>Partial Delivery<span style="color:red">*</span></label>
+                    </div>
+                
+                <div class="col-lg-3 form-group">
+                    @*<input id="txtPartialDelivery"
+                               type="text"
+                               class="form-control"
+                           maxlength="2 " />*@
+                    @Html.ExtTextBoxFor(model => model.PartialDelivery, new { @id = "txtPartialDelivery" })
+                    </div>
+
+                <div class="col-lg-2">
+                    
+                    <input class="btn btn-default btn-flat"
+                           type="submit"
+                           value="Search"/>
+                      
+                    <button type="button"
+                            class="btn btn-default btn-flat"
+                            onclick="Clear(this, 'AcceptanceOfMaterial')">
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+        </form>
+</div>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">List of Material</div>
+        <div class="panel-body">
+            
+                <div ondblclick=" acceptMaterial() ">
+                
+                <div class="form-group">
+                    @Html.Grid(Model.Grid)
+                </div>
+
+                <div>
+                    <button class="btn btn-default btn-flat btn-less-5-chars"
+                            id="btnAccept"
+                            onclick="acceptMaterial()">
+                        
+                        Accept
+                    </button>
+
+                    <button class="btn btn-default btn-flat btn-less-5-chars"
+                            id="btnReject"
+                            onclick="rejectMaterial()">
+
+                        Reject
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="formPlaceholder"></div>
+</div>

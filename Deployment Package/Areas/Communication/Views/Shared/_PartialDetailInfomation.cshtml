@@ -1,0 +1,54 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.Communication.ViewModels.DetailInformationViewModel
+@using (Html.BeginForm("","",FormMethod.Get,new{id="fromDetail"})) { 
+     <div class="panel panel-danger">
+         <div class="panel-heading">
+             <span>Detailed Information</span>
+         </div>
+         <div class="panel-body">
+
+             <div class="row form-group">
+                
+                     <div class="col-lg-5">
+                         <div class="col-lg-4">@Html.ExtLabelFor(model => model.Date)</div>
+                         <div class="col-lg-8">
+                             @Html.ExtDateTimeFor(m => m.Date, new DateTimeOption() { Format = "DD/MM/YYYY" },new{@disabled = true})
+                         </div>
+                     </div>
+                     <div class="col-lg-5">
+                         <div class="col-lg-4">@Html.ExtLabelFor(model => model.Terminal)</div>
+                         <div class="col-lg-8">
+                             @Html.ExtTextBoxFor(m => m.Terminal,new{@disabled = true})
+                         </div>
+                     </div>
+
+                 
+             <div class="col-lg-2">
+
+                 <button id="btnFind" type="button" class="btn btn-flat btn-default btn-less-5-chars" disabled="disabled" onclick=" Find() ">Find</button>
+             </div>
+         </div>
+             <div class="form-group">
+                 <div id="dvLog">
+                     <textarea id="EditLog"
+                               class="form-control"
+                               readonly="readonly"
+                               rows="10"></textarea>
+                 </div>
+                 <div id="dvQueue" style="display: none">
+                     @Html.Grid(Model.CommonQueue)
+                 </div>
+                 <div id="dvHistory" style="display: none">
+                     @Html.Grid(Model.CommonHistory)
+                 </div>
+
+             </div>
+
+         </div>
+     </div>
+ 
+}

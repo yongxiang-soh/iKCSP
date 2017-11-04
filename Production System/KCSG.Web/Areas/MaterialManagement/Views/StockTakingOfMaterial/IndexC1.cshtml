@@ -1,0 +1,264 @@
+﻿@{
+    ViewBag.ScreenId = "TCRM082F";
+    ViewBag.Title = "Stock-taking of Material";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@model KCSG.Domain.Models.RestoreMaterialViewModel
+
+
+<script>
+    var message = {
+        MSG12: '@Constants.Messages.StoreMaterial_MSG12'
+    }
+    function ReCaculatorTotal(index, materiallength) {
+         
+        var packUnit = $("#Materials_" + index + "_PackUnit").val();
+        var packQuantity = $("#Materials_" + index + "_PackQuantity").val();
+        var fraction = $("#Materials_" +index + "_Fraction").val();
+        var total = parseInt(packUnit) * parseInt(packQuantity) + parseInt(fraction);
+        $("#Materials_" + index + "_Total").val(total);
+        var grandTotal = 0;
+        for (var i = 0; i < materiallength; i++) {
+            grandTotal = grandTotal + parseInt($("#Materials_" + i + "_Total").val());
+        }
+        $("#GrandTotal").val(grandTotal); 
+        $("#GrandTotalHidden").val(grandTotal);
+    }
+</script>
+
+@using (Ajax.BeginForm("ReStore", "StockTakingOfMaterial", new AjaxOptions { HttpMethod = "POST", OnSuccess = "onSuccess" }, new { id = "indexC1Form" }))
+{
+    @Html.HiddenFor(m => m.UnitFlag)
+    <div class="col-lg-12">
+
+        <div class="panel panel-danger"
+             id="searchForm">
+            <div class="panel-heading">Stock-taking of Raw Material - TCRM082F</div>
+            <div class="panel-body">
+                <div class="row form-group margin-bottom-none">
+                    <div class="col-lg-12">
+                        <div class="col-lg-12">
+                            <span class="field-validation-error"><span id="errorList" hidden></span></span>
+                        </div>
+                    </div>
+                </div>
+
+                @Html.HiddenFor(x => x.PalletNo)
+
+                <div class="row form-group">
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(model => model.ShelfNo)
+                        </div>
+                        <div class="col-lg-8">
+                            @Html.ExtTextBoxFor(model => model.ShelfNo, new { @readonly = "true" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        &nbsp;
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(model => model.MaterialCode)
+                        </div>
+                        <div class="col-lg-8">
+                            @Html.ExtTextBoxFor(model => model.MaterialCode, new { @readonly = "true" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(model => model.MaterialDsp)
+                        </div>
+                        <div class="col-lg-8">
+                            @Html.ExtTextBoxFor(model => model.MaterialDsp, new { @readonly = "true", id = "txtMaterialName" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <hr style="border-top: 1px solid #f2dede;" />
+                </div>
+
+                <!-- Labels -->
+                <div class="row form-group">
+                    <div class="col-lg-2">&nbsp;</div>
+                    <div class="col-lg-2">
+                        @Html.LabelFor(x => x.Materials[0].MaterialLotNo)
+                        <label style="color: red">*</label>
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.LabelFor(x => x.Materials[0].PackUnit)
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.LabelFor(x => x.Materials[0].PackQuantity)
+                        <label style="color: red">*</label>
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.LabelFor(x => x.Materials[0].Fraction)
+                        <label style="color: red">*</label>
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.LabelFor(x => x.Materials[0].Total)
+                    </div>
+                </div>
+
+                @for (var index = 0; index < Model.Materials.Length; index++)
+                {
+                    var materialLotNo = string.Format("Materials[{0}].MaterialLotNo", index);
+                    var materialLotNoId = string.Format("Materials_{0}_MaterialLotNo", index);
+
+
+                    var materialPackUnit = string.Format("Materials[{0}].PackUnit", index);
+                    var materialPackUnitId = string.Format("Materials_{0}_PackUnit", index);
+                    var materialPackQuantity = string.Format("Materials[{0}].PackQuantity", index);
+                    var materialPackQuantityId = string.Format("Materials_{0}_PackQuantity", index);
+
+                    var fraction = string.Format("Materials[{0}].Fraction", index);
+                    var fractionId = string.Format("Materials_{0}_Fraction", index);
+                    var total = string.Format("Materials[{0}].Total", index);
+                    var totalId = string.Format("Materials_{0}_Total", index);
+
+                    <div class="row form-group">
+                        <div class="col-lg-2">
+                            <button class="btn btn-flat btn-default btn-more-5-chars" type="button" onclick=" clearRow( @index ) ">
+                                <i class="fa fa-trash-o"></i> Clear
+                            </button>
+                        </div>
+
+                        <div class="col-lg-2 padding-right-none">
+
+                            <input id="@materialLotNoId"
+                                   name="@materialLotNo"
+                                   class="form-control"
+                                   data-val-length="Material Lot No. cannot be longer than 16 characters."
+                                   data-val-length-max="16"
+                                   value="@Model.Materials[index].MaterialLotNo" />
+                            <span class="field-validation-error">
+                                <span id="errorList1" hidden></span>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-2 padding-right-none">
+
+                            <input id="@materialPackUnitId"
+                                   name="@materialPackUnit"
+                                   class="form-control"
+                                   data-val="true"
+                                   data-val-number="The field Pack Unit must be a number."
+                                   data-val-range="The inputted value of Pack Unit (1) is out of range."
+                                   data-val-range-max="999" data-val-range-min="0"
+                                   data-val-required="The Pack Unit field is required."
+                                   maxlength="255"
+                                   onkeypress="setMaxLength($(this));"
+                                   type="text"
+                                   value="@Model.Materials[index].PackUnit" 
+                                   readonly="readonly" />
+                            <script>
+                                $(function () {
+                                    $('#@materialPackUnitId').autoNumeric('init', { aSep: ',', aDec: '.', vMin: '0', vMax: '999', mDec: 2 });
+                                });</script>
+
+                        </div>
+
+                        <div class="col-lg-2 padding-right-none">
+
+                            <input id="@materialPackQuantityId"
+                                   name="@materialPackQuantity"
+                                   class="form-control"
+                                   data-val="true"
+                                   data-val-number="The field Pack Qty must be a number."
+                                   data-val-range="The inputted value of Pack Qty (1) is out of range."
+                                   data-val-range-max="999"
+                                   data-val-range-min="0"
+                                   data-val-required="The Pack Qty field is required."
+                                   maxlength="255"
+                                   onkeypress="setMaxLength($(this));"
+                                   type="text"
+                                   value="@Model.Materials[index].PackQuantity" 
+                                   onChange=" ReCaculatorTotal(@index,@Model.Materials.Length) " />
+
+                            <script>
+                                $(function () {
+                                    $('#@materialPackQuantityId').autoNumeric('init', { aSep: ',', aDec: '.', vMin: '0', vMax: '999', mDec: 0 });
+                                });</script>
+
+                        </div>
+
+                        <div class="col-lg-2 padding-right-none">
+
+                            <input id="@fractionId"
+                                   name="@fraction"
+                                   class="form-control"
+                                   data-val="true"
+                                   data-val-number="The field Fraction must be a number."
+                                   data-val-range="The inputted value of Fraction (1) is out of range."
+                                   data-val-range-max="999"
+                                   data-val-range-min="0"
+                                   data-val-required="The Fraction field is required."
+                                   maxlength="255"
+                                   onkeypress="setMaxLength($(this));"
+                                   type="text"
+                                   value="@Model.Materials[index].Fraction"
+                                   onChange=" ReCaculatorTotal(@index,@Model.Materials.Length) " />
+                        </div>
+                        <div class="col-lg-2">
+                            <input id="@totalId"
+                                   name="@total"
+                                   class="form-control"
+                                   data-val="true"
+                                   data-val-number="The field Total must be a number."
+                                   data-val-range="The inputted value of Total (1) is out of range."
+                                   data-val-range-max="999999"
+                                   data-val-range-min="0"
+                                   data-val-required="The Total field is required."
+                                   maxlength="255"
+                                   onkeypress="setMaxLength($(this));"
+                                   type="text"
+                                   value="@Model.Materials[index].Total"
+                                   readonly="readonly" />
+                            <script>
+                                $(function () {
+                                    $('#@totalId').autoNumeric('init', { aSep: ',', aDec: '.', vMin: '0', vMax: '999', mDec: 2 });
+                                });</script>
+                        </div>
+                    </div>
+                }
+
+                <div class="row form-group">
+                    <div class="col-lg-2">&nbsp;</div>
+                    <div class="col-lg-2 padding-right-none">&nbsp;</div>
+                    <div class="col-lg-2 padding-right-none">&nbsp;</div>
+                    <div class="col-lg-2 padding-right-none">&nbsp;</div>
+                    <div class="col-lg-2 padding-right-none">
+                        @Html.ExtLabelFor(model => model.GrandTotal, new { Class = "margin-top-10 float-right", @readonly = "true" })
+                    </div>
+                    <div class="col-lg-2">
+                        @Html.ExtNumberFor(model => model.GrandTotal, new NumberOption { NumberOfDecimal = 2 }, new { @readonly = "true" })
+                        @Html.HiddenFor(model => model.GrandTotal, new { id = "GrandTotalHidden" })
+                        <span class="field-validation-error"><span id="GrandTotalError" hidden></span></span>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-12">
+                        <div class="col-lg-4 ">
+                            <button type="button" class="btn btn-flat btn-default btn-more-5-chars" id="btnReStorage" onclick=" ReStorage() ">
+                                <span>Re-Storage</span>
+                            </button>
+                            <button type="button" class="btn btn-flat btn-default btn-less-5-chars" id="btnReStorage" data-dismiss="modal" onclick=" Clear() ">
+                                <span>Exit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+}

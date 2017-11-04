@@ -1,0 +1,242 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Domain.Interfaces.Services
+@{
+    // Find service which handles identity information.
+    var identityService = DependencyResolver.Current.GetService<IIdentityService>();
+
+    // Find available screens.
+    var availableScreens = identityService.FindAccessibleScreens(HttpContext.Current.User.Identity);
+
+}
+
+@if (identityService.IsScreenAccessible(availableScreens, new[] { "TCSS016F", "TCFC083P", "TCSS017F", "TCSS018F", "TCFC091P", "TCFC092P", "TCFC093P", "TCFC094P", "TCFC095P", "TCFC096P", "TCFC097P", "TCFC111P", "TCFC161P", "TCFC151P", "TCFC103P", "TCFC105P", "TCFC104P", "TCFC106P", "TCFC102P", "TCFC121P", "TCFC101P", "TCFC201F", "TCFC202F", "TCFC203F"}))
+{
+<li class="treeview">
+    <a href="javascript:void(0);">
+        <i class="fa fa-files-o"></i>
+        <span>Management Report</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        @if (identityService.IsScreenAccessible(availableScreens, "TCSS016F"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Material Stock List" href="@Url.Action("Index", "MaterialStock", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Material Stock List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC083P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Supplementary Material Stock List" href="#" onclick="exportSupplementaryMaterialStock(event)">
+                    <i class="fa fa-circle-o"></i>Supplementary Material Stock List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCSS017F"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Pre-product Stock List" href="@Url.Action("Index", "PreProductStock", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Pre-product Stock List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCSS018F"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Product Stock List" href="@Url.Action("Index", "ProductStock", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Product Stock List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC091P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Material Shelf List" href="#" onclick="exportMetarialShelt(event)">
+                    <i class="fa fa-circle-o"></i>Material Shelf List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC092P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Pre-product Shelf List" href="#" onclick="exportPreProductShelt(event)">
+                    <i class="fa fa-circle-o"></i>Pre-product Shelf List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC093P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="External Pre-product Shelf List" href="#" onclick="exportExtPreProductShelt(event)">
+                    <i class="fa fa-circle-o"></i>External Pre-product Shelf List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC094P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Product Shelf List" href="#" onclick="exportProductShelt(event)">
+                    <i class="fa fa-circle-o"></i>Product Shelf List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC095P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Material Pallet List" href="#" onclick="exportMetarialPallet(event)">
+                    <i class="fa fa-circle-o"></i>Material Pallet List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC096P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Pre-product Container List" href="#" onclick="exportPreProductContainer(event)">
+                    <i class="fa fa-circle-o"></i>Pre-product Container List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC097P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Product Pallet List" href="#" onclick="exportProductPallet(event)">
+                    <i class="fa fa-circle-o"></i>Product Pallet List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC111P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Material Retrieval Record" href="@Url.Action("Index", "MaterialRetrievalRecord", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Material Retrieval Record
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC121P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Pre-product Retrieval Record" href="@Url.Action("Index", "PreProductRetrievalRecord", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Pre-product Retrieval Record
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC101P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Material Movement History List" href="@Url.Action("Index", "MaterialMovementHistory", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Material Movement History List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC102P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Pre-product Movement History List" href="@Url.Action("Index", "PreproductMovementHistory", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Pre-product Movement History List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC106P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Product Movement History List" href="@Url.Action("Index", "ProductMovementHistory", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Product Movement History List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC104P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Material Movement Record" href="@Url.Action("Index", "MaterialMovementRecord", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Material Movement Record
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC105P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Pre-product Movement Record" href="@Url.Action("Index", "PreProductMovementRecord", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Pre-product Movement Record
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC103P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Product Movement Record" href="@Url.Action("Index", "ProductMovementRecord", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Product Movement Record
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC151P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Product Shipping Record" href="@Url.Action("Index", "ProductShippingRecord", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Product Shipping Record
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC161P"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Product Certification Record" href="@Url.Action("Index", "ProductCertificationRecord", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Product Certification Record
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC201F"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Material Received/Consumed List" href="@Url.Action("Index", "MaterialReceivedConsumedList", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Material Received/ Consumed List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC202F"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Pre-product Received/Consumed List" href="@Url.Action("Index", "PreProductReceivedConsumedList", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Pre-product Received/ Consumed List
+                </a>
+            </li>
+        }
+        @if (identityService.IsScreenAccessible(availableScreens, "TCFC203F"))
+        {
+
+            <li>
+                <a data-toggle="tooltip" title="Product Certified/Shipped List" href="@Url.Action("Index", "ProductCerfiticateConsumedList", new {Area = "ManagementReport"})">
+                    <i class="fa fa-circle-o"></i>Product Certified/ Shipped List
+                </a>
+            </li>
+        }
+    </ul>
+</li>
+
+}

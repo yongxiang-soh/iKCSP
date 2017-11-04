@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.ScreenId = "TCPS041F";
+    ViewBag.Title = "Kneading Start/End Control";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using KCSG.Core.Constants
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.KneadingCommand.ViewModels.KneadingCommandControlViewModel
+
+@*<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+<script src="~/Scripts/areas/signalrCommon.js"></script>
+<script src="~/signalr/hubs"></script>*@
+<script src="~/Scripts/areas/kneadStartEndControl/kneadStartEndControl.js"></script>
+<div class="col-lg-12">
+
+    <form class="panel panel-danger"
+          onsubmit=" searchMaterials(event) ">
+        <div class="panel-heading">Search Criteria</div>
+        <div class="panel-body">
+
+            <!-- Line label -->
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <b>Line</b>
+            </div>
+
+            <!-- Conventional checkbox -->
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                @*@Html.RadioButtonFor(x => x.KneadingLine, Constants.KndLine.Megabit)*@
+                <input type="radio"
+                       name="KneadingLine"
+                       value="@Constants.KndLine.Conventional.ToString("D")"
+                       checked="checked"/>
+                <span> Conventional</span>
+            </div>
+
+            <!-- Megabit checkbox -->
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                @*@Html.RadioButtonFor(x => x.KneadingLine, Constants.KndLine.Megabit, new { Checked = "checked" })*@
+                <input type="radio"
+                       name="KneadingLine"
+                       value="@Constants.KndLine.Megabit.ToString("D")"/>
+                <span> Megabit</span>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">List of Products</div>
+        <div class="panel-body">
+            <div class="form-group" onclick=" clickKneadingTable() ">
+                @Html.Grid(Model.Grid)
+            </div>
+            <div class="form-group">
+                <button id="btnDelete"
+                        class="btn btn-default btn-flat btn-less-5-chars"
+                        onclick=" stopKneadingCommand() ">
+                    Delete
+                </button>
+
+            </div>
+
+            <div class=" form-group">
+                <button id="btnStart"
+                        class="btn btn-default btn-flat btn-less-5-chars"
+                        onclick=" startKneadingCommand() ">
+                    Go
+                </button>
+                <button id="btnPause"
+                        class="btn btn-default btn-flat btn-less-5-chars"
+                        onclick=" interruptKneadingCommands() ">
+                    Pause
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+</div>

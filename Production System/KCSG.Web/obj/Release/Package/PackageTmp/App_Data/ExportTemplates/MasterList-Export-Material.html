@@ -1,0 +1,55 @@
+﻿
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th colspan="2"
+                class="text-center">** MATERIAL MASTER LIST **</th>
+        </tr>
+    <tr>
+        <td class="pull-left">[TCFC171P]</td>
+        <td class="pull-right"> {{currentDate}}</td>
+        <!--<td class="pull-right"> PAGE: {{page}}</td>-->
+    </tr>
+        <tr>
+            <td colspan="2" class="pull-right"> {{companyName}} </td>
+        </tr>
+        </thead>
+</table>
+<b>< Material List ></b>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+
+            <th>Material Code
+                <br/>
+                Material Name
+            </th>
+            <th>Supplier Code<br/>Modify Class</th>
+            <th>EMP<br/>Unit</th>
+            <th>Factor<br/>Pack. Unit</th>
+            <th>Bail. Class<br/>Department</th>
+            <th>Price<br/>Factory</th>
+            <th>Liquid Class<br/>Weighing Machine Command</th>
+            <th>Retr. Location</th>
+            <th>State<br/>Color</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {{#data}}
+        <tr>
+
+            <td>{{F01_MaterialCode}}<br/>{{F01_MaterialDsp}}</td>
+            <td>{{F01_SupplierCode}}<br/>{{F01_ModifyClass}}</td>
+            <td>{{F01_EMP}}<br/>{{Unit}}</td>
+            <td>{{F01_Point}}<br/>{{F01_PackingUnit}}</td>
+            <td>{{Bali}}<br/>{{F01_Department}}</td>
+            <td>{{F01_Price}}<br/>{{F01_FactoryClass}}</td>
+            <td>{{Liquid}}<br/>{{Comms}}</td>
+            <td>{{Retrieval}}</td>
+            <td>{{F01_State}}<br/>{{F01_Color}}</td>
+        </tr>
+        {{/data}}
+    </tbody>
+</table>
+<br />

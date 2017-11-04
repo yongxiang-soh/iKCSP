@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.ScreenId = "TCFC061F";
+    ViewBag.Title = "Search Kneading Command No";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.Inquiry.ViewModels.InquiryKneadingCommandNo.KneadingCommandLineViewModel
+           
+<script>
+    var urlForm = {
+        urlgetCodeNamebycmNo: '@Url.Action("GetCodeNamebycmNo", "InquiryKneadingCommandNo", new { area = "Inquiry"})',
+    }
+</script>
+<script src="~/Scripts/areas/inquiry/inquiryKneadingCommandNo.js"></script>
+<div class="col-lg-12" style="float: left">
+    @*<p style="text-align: right">@DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss")</p>*@
+</div>
+<div class="col-lg-12">
+
+    <div class="col-lg-12">
+
+        <input type="hidden" id="selectedValue" />
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "searchForm" }))
+        {
+
+            <div class="panel panel-danger">
+                <div class="panel-heading">Search Condition</div>
+                <div class="panel-body">
+                    <div class="row form-group">
+                        <div class="col-lg-3">
+                            @Html.ExtLabelFor(model => model.KneadingNo)
+                        </div>
+                        <div class="col-lg-5"
+                             id="LotNo">
+                            @Html.ExtTextBoxFor(model => model.KneadingNo, new { @id = "txtKneadingNo" })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+
+                        <div class="col-lg-3">
+                            @Html.ExtLabelFor(model => model.PreProductCode)
+                        </div>
+                        <div class="col-lg-5"
+                             id="PreproductCode">
+                            @Html.ExtTextBoxFor(model => model.PreProductCode, new { @readonly = "true", @id = "txtPreProductCode" })
+                        </div>
+                    </div>
+                    <div class="row form-group-sm">
+                        <div class="col-lg-3">
+                            @Html.ExtLabelFor(model => model.PreProductName)
+                        </div>
+                        <div class="col-lg-5">
+                            @Html.ExtTextBoxFor(model => model.PreProductName, new { @readonly = "true", @id = "txtPreproductName" })
+                        </div>
+                        
+                        @*<div class="col-lg-2">
+                            <div class="pull-right search-button-panel">
+                                <button type="button" class="btn btn-default btn-flat pull-right btn-less-5-chars" id="btnSearch" onclick="search()">Go</button>
+                            </div>
+                        </div>*@
+                        <div class="col-lg-3">
+                            <button type="button"
+                                    class="btn btn-flat btn-default btn-less-5-chars"
+                                    id="btnSearch" onclick=" search() ">
+                                Go
+                            </button>
+
+                            <button type="button"
+                                    class="btn btn-flat btn-default btn-less-5-chars"
+                                    onclick="ClearSearch()">
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+<div class="col-lg-12">
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        
+        <div class="panel-body">
+            <div class="form-group" onclick="clickKneadingTable()">
+                @Html.Grid(Model.Grid)
+            </div>
+            <div class="form-group pull-left">
+
+                <button id="btnStart"
+                        class="btn btn-default btn-flat btn-more-5-chars"
+                        onclick=" startKneadingCommand() ">
+                    LotNo Search
+                </button>
+            </div>
+        </div>
+        </div>
+
+    </div>
+</div>

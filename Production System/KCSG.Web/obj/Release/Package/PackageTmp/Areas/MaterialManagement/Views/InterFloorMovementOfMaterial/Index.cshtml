@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Inter-Floor Movement Of Material";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.MaterialManagement.ViewModels.InterFloorMovementOfMaterialController.InterFloorMovementOfMaterialViewModel
+@using KCSG.Core;
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+<script src="~/Scripts/areas/innerfloormovementofmaterial/innerFloorMovementOfMaterial.js"></script>
+
+<div class="col-md-12">
+
+    @using (Ajax.BeginForm("Edit", "InterFloorMovementOfMaterial", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess", Confirm = "Are you sure you want to transfer between floors?" }))
+    {
+        <div class="panel panel-danger">
+            <div class="panel-heading">Source and Destination</div>
+            <div class="panel-body">
+                <div class="row form-group" >
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-3">
+                        <div class="col-xs-4 text-center">
+                            @Html.ExtLabelFor(m => m.From)
+                        </div>
+                        <div class="col-xs-4">
+                            @Html.ExtNumberFor(model => model.From, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 0 }, new { @readonly = "readonly", @id = "txtFromNumber" })
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="text-center">Floor</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-1" style="text-align:center">
+                        <label>~</label>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="col-xs-4 text-center">
+                            @Html.ExtLabelFor(m => m.To)
+                        </div>
+                        <div class="col-xs-4">
+                            @Html.ExtNumberFor(model => model.To, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 0 }, new { @readonly = "readonly", @id = "txtToNumber" })
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="text-center"  >Floor</label>
+                        </div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>
+
+                <button type="submit" class="btn btn-flat btn-default btn-less-5-chars">OK</button>
+             </div>
+        </div>
+    }
+</div>
+
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="formPlaceholder"></div>
+</div>
+

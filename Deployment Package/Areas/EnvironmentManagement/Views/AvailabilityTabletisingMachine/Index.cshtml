@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.ScreenId = "TCEN022F";
+    ViewBag.Title = "Availability of Tabletising Machine";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="~/Scripts/chartjs/Chart.js"></script>
+    <script src="~/Scripts/areas/environmentManagement/availabilityTabletisingMachine.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+}
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.AvailabilityMixingRollMachine.AvailabilityMixingRollMachineViewModel
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+
+<div class="col-lg-12">
+    @using (Ajax.BeginForm("Search", "AvailabilityTabletisingMachine", new AjaxOptions() {HttpMethod = "POST",  OnSuccess = "AvailabilityTabletisingMachine.onSuccess" }, new {@id = "availabilityTabletisingMachine" }))
+    {
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <span>Date Range</span>
+            </div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.StartDate)
+                    </div>
+                    <div class="col-lg-3">
+                        @Html.ExtDateTimeFor(model => model.StartDate, new DateTimeOption() {Format = "DD/MM/YYYY"})
+                    </div>
+
+                    <div class="col-lg-2">
+                        @Html.ExtLabelFor(model => model.EndDate)
+                    </div>
+
+                    <div class="col-lg-3">
+                        @Html.ExtDateTimeFor(model => model.EndDate, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                    </div>
+
+                    <div class="col-lg-2">
+                        <input type="submit" class="btn btn-default btn-flat btn-less-5-chars" id ="go" value="Go" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="panel panel-danger">
+        <div class="panel panel-heading">
+            Availability of Tabletising Machine
+        </div>
+        <div class="panel panel-body">
+            @*<div style="text-align: center;display: none" id="colorChart">
+                <button type="button" class="button btn-more-5-chars text-bold" style="background-color: RGB(189, 189, 189); color: white;">Rotating with load</button>
+                <button type="button" class="button btn-more-5-chars text-bold" style="background-color: RGB(31, 115, 168); color: white;">Empty Load</button>
+                <button type="button" class="button btn-more-5-chars text-bold" style="background-color: RGB(255, 0, 0);color:white">Stop</button>
+            </div>*@
+            
+            <div class="row form-group">
+                <div class="col-lg-10">
+                    <canvas id="chartAvailability" width="400" height="220"></canvas>
+                </div>
+                <div class="col-lg-2" style="padding-top: 20px">
+                    <div class="row form-group text-center">Availability</div>
+                    <div class="row form-group text-center">
+                        <input type="text" id="avaitext3" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                    </div>
+                    <div class="row form-group text-center">
+                        <input type="text" id="avaitext4" readonly="readonly" style="text-align: center; width: 80px" value=""/>
+                    </div>
+                    <div class="row form-group text-center">
+                        <input type="text" id="avaitext5" readonly="readonly" style="text-align: center; width: 80px" value="" />
+                    </div>
+                    <div class="row form-group text-center">
+                        <input type="text" id="avaitext6" readonly="readonly" style="text-align: center; width: 80px" value="" />
+                    </div>
+                    <div class="row form-group text-center">
+                        <input type="text" id="avaitext7" readonly="readonly" style="text-align: center; width: 80px" value="" />
+                    </div>
+                    <div class="row form-group text-center">
+                        <input type="text" id="avaitext8" readonly="readonly" style="text-align: center; width: 80px" value="" />
+                    </div>
+                    <div class="row form-group text-center">
+                        <input type="text" id="avaitext9" readonly="readonly" style="text-align: center; width: 80px" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-10 text-align-right">
+                    Total Tabletising Machine
+                </div>
+                <div class="col-lg-2">
+                    <div class="row form-group text-center">
+                        <input type="text" id="sumAvai" readonly="readonly" style="text-align: center; width: 80px" value="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Storage of Warehouse Pallet - TCRM101F";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using KCSG.Core;
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+<script src="~/Scripts/areas/storeofwarehousepallet/storeOfWarehousePallet.js"></script>
+@using (Ajax.BeginForm("Edit", "StorageOfWarehousePallet", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess", Confirm = "Are you sure you want to store?" }))
+{
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+           <label>Storage of Warehouse Pallet</label>
+        </div>
+        <div class="panel-body">
+
+            <div class="row" style="text-align:center;padding:2em 0;">
+                <label style="text-align:center">Are you sure you want to store the warehouse pallet?</label>
+            </div>
+    
+            <button type="submit" class="btn btn-flat btn-default">Store</button>
+        </div>
+    </div>
+}

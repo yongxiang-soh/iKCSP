@@ -1,0 +1,47 @@
+﻿
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th colspan="3"
+                class="text-center">** PRE-PRODUCT PLAN LIST **</th>
+        </tr>
+    <tr>
+        <td class="pull-left">[TCFC192P]</td>
+        <td class=""> </td>
+        <td class="pull-right">{{currentDate}} </td>
+        </tr>
+        <tr>
+            <td class="pull-left">Production month: {{productMonth}}</td>
+            <td class="">
+               </td>
+            <td class="pull-right">{{companyName}}  </td>
+        </tr>
+    </thead>
+</table>
+<b>< Pre-product plan ></b>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>Pre-Product Code</th>
+            <th>Pre-Product Name</th>
+           <th class="text-align-right">Production Qty (Kg)</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+
+        {{#data}}
+        <tr>
+            
+            <td>{{F94_PrepdtCode}}</td>
+            <td>{{PreProductName}}</td>
+            <td class="text-align-right">{{amount}}</td>
+            
+        </tr>
+        {{/data}}
+    </tbody>
+</table>
+<br />
+
+
+

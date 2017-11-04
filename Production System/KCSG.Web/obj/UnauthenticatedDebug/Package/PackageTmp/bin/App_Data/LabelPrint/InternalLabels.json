@@ -1,0 +1,9 @@
+﻿{
+  "Atm": "~/App_Data/LabelPrint/Internal/Atm.txt",
+  "AtmKap": "~/App_Data/LabelPrint/Internal/AtmKap.txt",
+  "Buzen": "~/App_Data/LabelPrint/Internal/Buzen.txt",
+  "Piece": "~/App_Data/LabelPrint/Internal/Piece.txt",
+  "Renesas": "~/App_Data/LabelPrint/Internal/Renesas.txt",
+  "Stlgg": "~/App_Data/LabelPrint/Internal/Stlgg.txt",
+  "Sts": "~/App_Data/LabelPrint/Internal/Sts.txt"
+}

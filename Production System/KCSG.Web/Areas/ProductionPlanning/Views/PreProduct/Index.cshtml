@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Pre-Product Master DB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.ProductionPlanning.ViewModels.PreProduct.PreProductSearchViewModel
+<script src="/Scripts/areas/preproduct/prepdtmkp.js" type="text/javascript"></script>
+<script src="/Scripts/areas/preproduct/preproduct.js" type="text/javascript"></script>
+
+<script>
+    var formUrlPreProduct = {
+        urlEdit: '@Url.Action("Edit", "PreProduct")',
+        urlDelete: '@Url.Action("Delete", "PreProduct")'
+    }
+</script>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger" id="searchForm">
+        <div class="panel-heading">Search Criteria</div>
+        <div class="panel-body">
+            
+            <div class="col-lg-3">
+                @Html.ExtLabelFor(model => model.PreProductCode)
+            </div>
+
+            <div class="col-lg-3 form-group">
+                @Html.ExtTextBoxFor(model => model.PreProductCode, new {@id = "txtPreProductCodeSearch"})
+            </div>
+            
+            <div class="col-lg-5">
+                <button type="button"
+                        class=" btn btn-flat btn-default btn-less-5-chars"
+                        id="btnSearch"
+                        onclick=" searchPreProduct() ">
+                    Search
+                </button>
+                <button type="button"
+                        class="btn btn-flat btn-default btn-less-5-chars"
+                        onclick="Clear(this)">
+                    Clear
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">List of Pre-Product</div>
+        <div class="panel-body">
+            <div class=" form-group">
+                @Html.Grid(Model.Grid)
+            </div>
+            <div class=" form-group">
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnAdd" onclick=" addPreProduct() ">
+                    Add
+                </button>
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnUpdate"
+                        onclick=" updatePreProduct() ">
+                    Update
+                </button>
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnDelete"
+                        onclick=" deletePreProduct() ">
+                    Delete
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+
+    <div id="modificationArea"></div>
+
+</div>

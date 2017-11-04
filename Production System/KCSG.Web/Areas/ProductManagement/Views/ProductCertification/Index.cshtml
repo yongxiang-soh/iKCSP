@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.ScreenId = "TCPR021F";
+    ViewBag.Title = "Product Certification Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using KCSG.Core;
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@using System.Diagnostics
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.ProductManagement.ViewModels.ProductCertification.ProductCertificationSearchViewModel
+<script src="/Scripts/areas/productmanagement/productcertification.js" type="text/javascript"></script>
+<script src="~/Scripts/jQuery.print.min.js"></script>
+
+<script>
+    var formUrl = {
+        urlEdit: '@Url.Action("Edit", "ProductCertification")',
+        urlDelete: '@Url.Action("Delete", "ProductCertification")'
+            //urlGetProductName :'@Url.Action("GetProductCode","ProductCertification")'
+    }
+</script>
+
+<div class="col-lg-12">
+    <input type="hidden" id="selectedValue" />
+    @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "searchForm" }))
+    {
+        <div class="panel panel-danger" id="searchForm">
+            <div class="panel-heading">Search Criteria</div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div class="col-lg-3">
+
+                    </div>
+
+                    <div class="col-lg-9">
+                        @Html.ExtRadioButtonFor(model => model.StorageOfProductStatus, EnumsHelper.GetListItemsWithDescription<Constants.StorageOfProductStatus>(Constants.StorageOfProductStatus.Normal), new { id = "StorageOfProductStatus", onchange = "OnChangeGrid()" }, true, 3)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-xs-3">
+                        @Html.ExtLabelFor(model => model.YearMonth, new { @style = "margin-right: 40px;float:right" })
+                    </div>
+                    <div class="col-xs-3" style="margin-left: 14px;float: left">
+                            @Html.ExtDateTimeFor(model => model.YearMonth, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                            <span class="field-validation-error" style="margin-left: auto; margin-right: auto"><span id="errorlist" hidden></span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">List of Product Certification</div>
+        <div class="panel-body">
+            <div class="row form-group"
+                 id="dvNormal">
+                <div class="col-lg-12">
+                    @Html.Grid(Model.GridNormal)
+                </div>
+            </div>
+            <div class="row form-group"
+                 id="dvOutOfPlan">
+                <div class="col-lg-12">
+                    @Html.Grid(Model.GridOutOfPlan)
+                </div>
+            </div>
+            <div class="row form-group"
+                 id="dvSample">
+                <div class="col-lg-12">
+                    @Html.Grid(Model.GridSample)
+                </div>
+            </div>            
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnPrintProdCer"
+                        @*onclick=" exportProductCertification(event)">*@
+                        onclick=" callExport()">
+                    Print
+                </button>
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnAdd"
+                        onclick=" addNewProdCer() ">
+                    Add
+                </button>
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnUpdate"
+                        onclick=" edit() ">
+                    Update
+                </button>
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnDelete" onclick=" deleteItemProdCer() ">
+                    Delete
+                </button>
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnOKProdCer" onclick=" makeProductOk() ">
+                    OK
+                </button>
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnNGProdCer" onclick=" makeProductNg() ">
+                    NG
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="formPlaceholder"></div>
+</div>
+
+    
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnOKProdCer').prop('disabled', true);
+            $('#btnNGProdCer').prop('disabled', true);
+            OnChangeGrid();
+        })
+    </script>

@@ -1,0 +1,10 @@
+﻿@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.TabletisingCommandSubSystem.ViewModels.TabletisingKneadingCommandListViewModel
+<div id="productDetailModal">
+    <div>
+        @Html.Grid(Model.Detail)
+    </div>
+    <div>
+        <button class="btn btn-flat btn-default btn-less-5-chars" data-dismiss="modal">Close</button>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.ScreenId = "TCPR031F";
+    ViewBag.Title = "Shipping Plan Maintenance of Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using KCSG.Core;
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@using System.Diagnostics
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.ProductManagement.ViewModels.ProductShippingPlanning.ProductShippingPlanningSearchViewModel
+<script src="/Scripts/areas/productmanagement/productShippingPlanning.js" type="text/javascript"></script>
+
+<script>
+    var formUrlProdShip = {
+            urlEdit: '@Url.Action("Edit", "ProductShippingPlanning")',
+            urlDelete: '@Url.Action("Delete", "ProductShippingPlanning")',
+            @*urlGetProductName :'@Url.Action("GetProductCode", "ProductShippingPlanning")'*@
+        }
+</script>
+
+<div class="col-lg-12">
+    <input type="hidden" id="selectedValue" />
+    @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "searchForm" }))
+    {
+        <div class="panel panel-danger" id="searchForm">
+            <div class="panel-heading">Search Criteria</div>
+            <div class="panel-body">                                
+                <div class="col-xs-2">
+                    @Html.ExtLabelFor(model => model.ShippingNo)
+                </div>
+                <div class="col-xs-2">
+                    @Html.ExtTextBoxFor(model => model.ShippingNo, new { @id = "txtShippingNoSearch", @autofocus = "autofocus" })
+                </div>                                
+                <div class="col-lg-4">
+                    <button type="button"
+                            class=" btn btn-flat btn-default  btn-less-5-chars"
+                            id="btnSearch"
+                            onclick=" searchProductShip() ">
+                        Go
+                    </button>
+                    <button type="button" class=" btn btn-flat btn-default  btn-less-5-chars" onclick="Clear(this, 'Grid')">Clear</button>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">List of Product Shipping Plan</div>
+        <div class="panel-body">
+            <div class="row form-group"
+                 id="dvNormal">
+                <div class="col-lg-12">
+                    @Html.Grid(Model.Grid)
+                </div>
+            </div>            
+            <div class="form-group">                
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnAdd"
+                        onclick=" addNewProdShip() ">
+                    Add
+                </button>
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnUpdate"
+                        onclick=" edit() ">
+                    Update
+                </button>
+
+                <button class="btn btn-default btn-flat btn-less-5-chars"
+                        id="btnDelete" onclick=" deleteItemProdShip() ">
+                    Delete
+                </button>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="formPlaceholder"></div>
+</div>
+
+
+
+@*<script type="text/javascript">
+    $(document).ready(function() {
+        $('#btnOKProdCer').prop('disabled', true);
+        $('#btnNGProdCer').prop('disabled', true);        
+    })
+</script>*@

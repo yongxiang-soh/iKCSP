@@ -1,0 +1,262 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@model KCSG.Web.Areas.Inquiry.ViewModels.InquiryByWarehouseLocation.InquiryByProductShelfStatusExternalPreProductModelView
+
+@using (Ajax.BeginForm("UpdateSubscreentcf037f", "InquiryBase", new AjaxOptions() { HttpMethod = "POST",Confirm = "Ready to update ?", OnSuccess = "InquiryBase.onUpdateSubscreentcf037fSuccess" }, new { @id = "updateSubscreentcf037f" }))
+{
+    @Html.HiddenFor(m => m.SearchCondition)
+    @Html.HiddenFor(m => m.Row)
+    @Html.HiddenFor(m => m.Bay)
+    @Html.HiddenFor(m => m.Level)
+    <div class="panel panel-danger">
+        <div class="panel-heading">Inquiry by product Shelf Status Picture (External Pre-product) - TCFC037F</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelFor(model => model.ShelfNo)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @Html.ExtTextBoxFor(model => model.ShelfNo, new { @class = "form-control",@readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelFor(model => model.ShelfStatus)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @Html.ExtTextBoxFor(model => model.ShelfStatus, new { @class = "form-control", @disabled = "disabled" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.PreProductCode, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.PreProductCode, CustomControlConstants.AddOn.Search, "#modalPreProductCodeSelect", new { style = "width:100%", @id = "txtPreProductCode" })
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxAddOnFor(model => model.PreProductCode, CustomControlConstants.AddOn.Search, null, new { style = "width:100%", @id = "txtPreProductCode" })
+                            
+                        }
+                        
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.PreProductName, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @Html.ExtTextBoxFor(model => model.PreProductName, new { @class = "form-control", @readonly = "readonly",@id= "txtPreproductName" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.PreProductLotNo, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtTextBoxFor(model => model.PreProductLotNo, new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.PreProductLotNo, new { @disabled = "disabled" })
+                        }
+                        
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.Amount, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtNumberFor(model => model.Amount, new NumberOption() { NumberOfDecimal = 2 })
+                        }
+                        else
+                        {
+                            @Html.ExtNumberFor(model => model.Amount, new NumberOption() { NumberOfDecimal = 2 }, new { @disabled = "disabled" })
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.PalletNo, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtTextBoxFor(model => model.PalletNo, new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.PalletNo, new { @class = "form-control", @disabled = "disabled" })
+                        }
+                        
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.PalletSeqNo,Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtTextBoxFor(model => model.PalletSeqNo, new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.ExtTextBoxFor(model => model.PalletSeqNo, new { @disabled = "disabled" })
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.KneadingCommandNo, Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @Html.ExtTextBoxFor(model => model.KneadingCommandNo, new {@class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-5">
+                        @Html.ExtLabelRequireFor(model => model.StorageDate,Model.ShowUpdate)
+                    </div>
+                    <div class="col-lg-7 form-group">
+                        @if (Model.ShowUpdate)
+                        {
+                            @Html.ExtDateTimeFor(model => model.StorageDate, new DateTimeOption() { Format = "DD/MM/YYYY HH:mm:ss" })                            
+                        }
+                        else
+                        {
+                            @Html.ExtDateTimeFor(model => model.StorageDate, new DateTimeOption() { Format = "DD/MM/YYYY HH:mm:ss" }, new { @readonly = "readonly" })
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        @if (Model.ShowUpdate)
+        {
+            <button type="submit" class="btn btn-default btn-flat btn-less-5-chars" id="btnOk">OK</button>
+        }
+        <button class="btn btn-default btn-flat btn-less-5-chars" type="button" data-dismiss="modal">Cancel</button>
+    </div>
+}
+
+<script>
+    $().ready(function () {
+        $.validator.unobtrusive.parse("#updateSubscreentcf037f");
+        function isEmpty(str) {
+            return (!str || 0 === str.length);
+        }
+        $.validator.addMethod("preproductLotno",
+            function (value, element, params) {
+                var thiserror = "";
+                var check = true;
+                 
+                var preProductCode = $('#txtPreProductCode').val();
+                if (!isEmpty(value) && !isEmpty(preProductCode)) {
+                    $.ajax({
+                        url: '/Inquiry/InquiryBase/PreproductIsExternal',
+                        data: {
+                            preProductCode: preProductCode,
+                            preproductLotNo: value,
+                        },
+                        type: "Options",
+                        async: false,
+                        success: function (response) {
+                            if (!response.Success) {
+                                check = false;
+                            }
+                        }
+                    });
+                }
+
+                return check;
+
+            }, "This pre-product lot-no is not external !");
+        $("input[name='PreProductLotNo']").rules("add", { preproductLotno: true });
+
+        $.validator.addMethod("palletNoExit037",
+            function (value, element, params) {
+                var thiserror = "";
+                var check = true;
+                var row = $('#Row').val(),
+                    bay = $('#Bay').val(),
+                    level = $('#Level').val();
+                if (!isEmpty(value)) {
+                    $.ajax({
+                        url: '/Inquiry/InquiryBase/PalletNoExit037',
+                        data: {
+                            row: row,
+                            bay: bay,
+                            level: level,
+                            palletNo: value
+                        },
+                        type: "Options",
+                        async: false,
+                        success: function (response) {
+                            if (!response.Success) {
+                                check = false;
+                            }
+                        }
+                    });
+                }
+
+                return check;
+
+            }, "This pallet is being used !");
+        $("input[name='PalletNo']").rules("add", { palletNoExit037: true });
+        
+
+        $.validator.addMethod("palletSeqNoExit037",
+            function (value, element, params) {
+                var thiserror = "";
+                var check = true;
+                var row = $('#Row').val(),
+                    bay = $('#Bay').val(),
+                    level = $('#Level').val();
+                if (!isEmpty(value)) {
+                    $.ajax({
+                        url: '/Inquiry/InquiryBase/PalletSeqNoExit037',
+                        data: {
+                            row: row,
+                            bay: bay,
+                            level: level,
+                            palletSeqNo: value
+                        },
+                        type: "Options",
+                        async: false,
+                        success: function (response) {
+                            if (!response.Success) {
+                                check = false;
+                            }
+                        }
+                    });
+                }
+
+                return check;
+
+            }, "The inputted pallet-seqno is duplicated !");
+        
+        $("input[name='PalletSeqNo']").rules("add", { palletSeqNoExit037: true });
+    });
+</script>

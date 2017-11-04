@@ -1,0 +1,62 @@
+﻿<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th style="text-align: center">** PRE-PRODUCT RECEIVED/CONSUMED LIST **</th>
+    </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC202P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td>Month: {{Month}}</td>
+            <td></td>
+        </tr>        
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>Pre-product Code</th>
+            <th>Pre-product Name</th>
+            <th class="text-align-right">Unit</th>  
+            <th class="text-align-right">Remainder (Prev)</th>
+            <th class="text-align-right">Received</th>           
+            <th class="text-align-right">Consumed</th>            
+            <th class="text-align-right">Remainder (Curr)</th>            
+        </tr>        
+    </thead>
+
+    <tbody>
+    {{#FindPrintManagementReportItem}}        
+        <tr>
+            <td>{{PreProductCode}}</td>           
+            <td>{{PreProductName}}</td>           
+            <td class="text-align-right">{{Unit}}</td>		
+            <td class="text-align-right">{{Remainst}}</td>
+            <td class="text-align-right">{{Receivedst}}</td>
+            <td class="text-align-right">{{Usedst}}</td>            
+            <td class="text-align-right">{{Remaincurrst}}</td>            
+        </tr>
+    {{/FindPrintManagementReportItem}}
+    </tbody>  
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>        
+    </tfoot> 
+</table>

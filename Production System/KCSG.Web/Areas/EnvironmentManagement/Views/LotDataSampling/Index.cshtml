@@ -1,0 +1,196 @@
+﻿@{
+    ViewBag.ScreenId = "TCEN042F";
+    ViewBag.Title = "Lot Data Sampling ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model KCSG.Web.Areas.EnvironmentManagement.ViewModels.LotDataSamplingModel
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls;
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC
+
+@using NumberOption = KCSG.jsGrid.MVC.NumberOption
+<script src="~/Scripts/areas/LotDataSampling/LotDataSampling.js"></script>
+<div class="col-lg-12">
+    @using (Ajax.BeginForm("Search", new AjaxOptions() { HttpMethod = "Get", OnSuccess = "onSuccess" }))
+    {
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <span>Search Criteria</span>
+            </div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">@Html.ExtLabelFor(m => m.Product)</div>
+                        <div class="col-lg-8">@Html.ExtDropDownListFor(m => m.Product, (IEnumerable<SelectListItem>) ViewBag.ListProduct, "-- Please select --",new{@onchange="ChangeProduct()"})</div>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">
+                            @Html.ExtLabelFor(model => model.Date)
+                        </div>
+                        <div class="col-lg-8">
+                            @Html.ExtDateTimeFor(model => model.Date, new DateTimeOption() { Format = "DD/MM/YYYY" })
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">@Html.ExtLabelFor(m => m.LotNo)</div>
+                        <div class="col-lg-8">@Html.ExtDropDownListFor(m => m.LotNo, (IEnumerable<SelectListItem>)ViewBag.ListLotNo, "-- Please select --", new { @onchange = "ChangeLotNo()" })</div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">@Html.ExtLabelFor(m => m.NewLotNumber)</div>
+                        <div class="col-lg-8">@Html.ExtCheckBoxFor(m => m.NewLotNumber)</div>
+
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-6">
+                        <div class="col-lg-4">
+
+                            @Html.LabelFor(model => model.Mode)
+                        </div>
+                        <div class="col-lg-8" style="padding: 0">
+                            @Html.ExtRadioButtonFor(model => model.Mode, EnumsHelper.GetListItemsWithDescription<Constants.EnvMode>(Constants.EnvMode.SpecLine).OrderBy(i => int.Parse(i.Value)), new {}, true, 6)
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-8">
+                            <button type="submit" class="btn btn-default btn-flat btn-less-5-chars">Go</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    }
+</div>
+   
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+
+        <div class="panel-heading">
+            <span>Lot Data Sampling - TCEN042F</span>
+        </div>
+        <div class="panel-body">
+            <div class="col-lg-9">
+                <canvas id="chartTemper" width="400" height="200"></canvas>
+           </div>
+            <div class="col-lg-3">
+                <div class="panel panel-danger">
+                    <div class="panel-body">
+                        <div class="row form-group">
+                            <div class="col-lg-4">@Html.ExtLabelFor(m => m.HighTemp)</div>
+                            <div class="col-lg-8">
+                                @Html.ExtNumberFor(m => m.HighTemp,new KCSG.Core.CustomControls.NumberOption(){NumberOfDecimal = 2}, new { @readonly = true })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-4">@Html.ExtLabelFor(m => m.LowTemp)</div>
+                            <div class="col-lg-8">
+                                @Html.ExtNumberFor(m => m.LowTemp, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @readonly = true })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-4">@Html.ExtLabelFor(m => m.RangeTemp)</div>
+                            <div class="col-lg-8">
+                                @Html.ExtNumberFor(m => m.RangeTemp, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @readonly = true })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-4">@Html.ExtLabelFor(m => m.MeanTemp)</div>
+                            <div class="col-lg-8">
+                                @Html.ExtNumberFor(m => m.MeanTemp, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @readonly = true })
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-4">@Html.ExtLabelFor(m => m.SigmaTemp)</div>
+                            <div class="col-lg-8">
+                                @Html.ExtNumberFor(m => m.SigmaTemp, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @readonly = true })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+
+        <div class="panel-heading">
+            <span>Sample Period</span>
+        </div>
+
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-lg-12"> @Html.Grid(Model.Grid)</div>
+            </div>
+@using (Ajax.BeginForm("Add", "LotDataSampling", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onAddSuccess" }, new { id = "fromAdd" }))
+{
+    @Html.HiddenFor(m => m.Product, new { id = "hdfProduct" })
+    @Html.HiddenFor(m => m.LotNo, new { id = "hdfLotNo" })
+    @Html.HiddenFor(m=>m.Date,new{id="hdfDate"})
+    <div class="row form-group">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-4">
+            <div class="col-lg-4">
+                @Html.ExtLabelFor(m => m.Time)
+            </div>
+            <div class="col-lg-8">
+                @Html.ExtDateTimeFor(model => model.Time, new DateTimeOption() { Format = "HH:mm" })
+                <span class="field-validation-error" hidden id="lsterrorTime"></span>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="col-lg-4">
+                @Html.ExtLabelFor(m => m.Temperature)
+            </div>
+            <div class="col-lg-8">
+                @Html.ExtNumberFor(model => model.Temperature, new KCSG.Core.CustomControls.NumberOption() {NumberOfDecimal = 2},new {@readonly = true})
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+}
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <table class="table">
+                        <tr>
+                            <th>Date/Time</th>
+                            <th>Temperature</th>
+                            <th>Date/Time</th>
+                            <th>Temperature</th>
+                            <th>Date/Time</th>
+                            <th>Temperature</th>
+                        </tr>
+                        <tr>
+                            <td>@Html.ExtDateTimeFor(m => m.Time1, new DateTimeOption() { Format = "HH:mm" },new {@readonly = true})</td>
+                            <td>@Html.ExtNumberFor(m => m.Temperature1, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @readonly = true })</td>
+                            <td>@Html.ExtDateTimeFor(m => m.Time2, new DateTimeOption() { Format = "HH:mm" }, new { @readonly = true })</td>
+                            <td>@Html.ExtNumberFor(m => m.Temperature2, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @readonly = true })</td>
+                            <td>@Html.ExtDateTimeFor(m => m.Time3, new DateTimeOption() { Format = "HH:mm" }, new { @readonly = true })</td>
+                            <td>@Html.ExtNumberFor(m => m.Temperature3, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @readonly = true })</td>
+                         </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row form-group">
+                    <div class="col-lg-12">
+                        <input type="button" class="btn btn-less-5-chars btn-flat"  value="Add" id="btnAdd" disabled="disabled" onclick=" Add() "/>
+                        <input type="button" class="btn btn-flat btn-less-5-chars" value="Delete" id="btnDelete" onclick=" Delete() "/>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.ScreenId = "TCFC021F";
+    ViewBag.Title = "Inquiry by Warehouse Location";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using KCSG.Core.Constants
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@model KCSG.Web.Areas.Inquiry.ViewModels.InquiryByWarehouseLocation.InquiryByWarehouseLocationSearchViewModel
+@section scripts{
+    <script src="~/Scripts/areas/inquiry/inquiryByWarehouseLocation.js"></script>
+    <script src="~/Scripts/areas/inquiry/inquiryBase.js"></script>
+}
+@using (Html.ExtModalFor("locationMaterialStatus", ExtModal.ModalSize.Large, null))
+{
+    using (Html.ExtModalBodyFor())
+    {
+    }
+}
+
+@using (Ajax.BeginForm("Search", "InquiryByWarehouseLocation", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "InquiryByWarehouseLocation.onSuccess" }, new { @id = "searchForm" }))
+{
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Search Criteria</div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div class="col-lg-3">
+                        <label>Executing Classification</label>
+                    </div>
+                    <div class="col-lg-9">
+                        @Html.ExtRadioButtonFor(model => model.ExecutingClassification, EnumHelper.GetSelectList(typeof(Constants.ExecutingClassification), Constants.ExecutingClassification.Search), null, true, 2)
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-3">
+                        <label>Search Condition</label>
+                    </div>
+                    <div class="col-lg-9">
+                        @Html.ExtRadioButtonFor(model => model.SearchCondition, EnumsHelper.GetListItemsWithDescription<Constants.InquirySearchConditionWarehouseLocation>(Constants.InquirySearchConditionWarehouseLocation.Material), new { onchange = " InquiryByWarehouseLocation.onChange() " }, true, 2)
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-3">
+                        <label>Shelf No</label>
+                    </div>
+                    <div class="col-lg-9">
+                        <div style="display: inline-block">@Html.ExtDropDownListFor(m => m.ShelfNoRow, Model.ListShelfNoRow, null)</div>
+                        <div style="display: inline-block">@Html.ExtDropDownListFor(m => m.ShelfNoBay, Model.ListShelfNoBay, null)</div>
+                        <div style="display: inline-block">@Html.ExtDropDownListFor(m => m.ShelfNoLevel, Model.ListShelfNoLevel, null)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="panel panel-danger">
+            <div class="panel-heading">Print Option</div>
+            <div class="panel-body">
+                <div class="row form-group">
+                    <div class="col-lg-3">
+                        <label>Print Option</label>
+                    </div>
+                    <div class="col-lg-9">
+                        @Html.ExtRadioButtonFor(model => model.PrintOption, Model.ListPrintOption, null, true, 2)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div id="formPlaceholder"></div>
+    </div>
+
+    <div class="col-lg-12">
+        <input type="button" class="btn btn-flat  btn-less-5-chars" value="Print" onclick="InquiryByWarehouseLocation.onPrint()" />
+        <input type="submit" class="btn btn-flat  btn-less-5-chars" name="Search" value="OK" />
+    </div>
+
+}

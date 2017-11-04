@@ -1,0 +1,39 @@
+﻿<li class="treeview">
+    <a href="javascript:void(0);">
+        <i class="fa fa-comments-o" aria-hidden="true"></i>
+        <span>Communication Management</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+    </a>
+    <ul class="treeview-menu">
+        <li>
+            <a href="@Url.Action("Index", "AWMaterial", new { Area = "Communication" })"
+               data-toggle="tooltip"
+               title="Automated Warehouse Controller - Material">
+                <i class="fa fa-circle-o"></i>Automated Warehouse Controller - Material
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "AWPreProduct", new { Area = "Communication" })"
+               data-toggle="tooltip"
+               title="Automated Warehouse Controller – Preproduct">
+                <i class="fa fa-circle-o"></i>Automated Warehouse Controller – Preproduct
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "AWProduct", new {Area = "Communication"})"
+               data-toggle="tooltip"
+               title="Automated Warehouse Controller – Product">
+                <i class="fa fa-circle-o"></i>Automated Warehouse Controller – Product
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "WeighingEquipment", new { Area = "Communication" })"
+               data-toggle="tooltip"
+               title="Weighing Equipment Controller">
+                <i class="fa fa-circle-o"></i>Weighing Equipment Controller
+            </a>
+        </li>
+    </ul>
+</li>

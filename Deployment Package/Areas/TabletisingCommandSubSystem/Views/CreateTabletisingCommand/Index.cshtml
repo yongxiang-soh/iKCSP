@@ -1,0 +1,277 @@
+﻿@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@{
+    ViewBag.ScreenId = "TCMD011F";
+    ViewBag.Title = "Create Tabletising Command";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.TabletisingCommandSubSystem.ViewModels.TabletisingKneadingCommandListViewModel
+
+@*Angular framework*@
+<script src="~/Scripts/angular/angular.min.js"></script>
+
+@*Angular bootstrap*@
+<script src="~/Scripts/angular/ui-bootstrap-tpls-2.2.0.min.js"></script>
+
+@*Enumeration declaration*@
+<script src="~/Scripts/angular/modules/tabletising-command/enumerations/create-tabletising-step.enum.js"></script>
+
+@*Tabletising command services*@
+<script src="~/Scripts/angular/modules/tabletising-command/services/tabletising-command.service.js"></script>
+
+@*Tabletising command controllers*@
+<script src="~/Scripts/angular/modules/tabletising-command/controllers/create-tabletising-command.controller.js"></script>
+
+
+<div class="col-lg-12" 
+     ng-app="CreateTabletisingCommandModule" 
+     ng-controller="CreateTabletisingCommandController" 
+     ng-init="init()">
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <span>List of Kneading Command</span>
+        </div>
+
+        <div class="panel-body">
+            <div class="col-lg-12">
+
+                <!-- Kneading commands selection table -->
+                <div class="row">
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr class="jsgrid-header-row">
+                            <th></th>
+                            <th>Kneading No.</th>
+                            <th>Pre-Product Code</th>
+                            <th>Pre-Product Name</th>
+                            <th>Lot No</th>
+                            <th>Quantity</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="kneadingCommand in kneadingCommandSearchResult.commands" 
+                            ng-disabled="editorMode != steps.LoadKneadingCommand" 
+                            ng-click="chooseKneadingCommand(kneadingCommand)" 
+                            style="cursor: pointer">
+                            <td>
+                                <input type="radio" 
+                                       ng-model="$parent.kneadingCommandSelect" 
+                                       ng-value="kneadingCommand" 
+                                       ng-disabled="editorMode != steps.LoadKneadingCommand"  />
+                            </td>
+                            <td>{{kneadingCommand.KneadingNo}}</td>
+                            <td>{{kneadingCommand.PreproductCode}}</td>
+                            <td>{{kneadingCommand.PreproductName}}</td>
+                            <td>{{kneadingCommand.LotNo}}</td>
+                            <td>{{kneadingCommand.Quantity}}</td>
+                            <td>{{kneadingCommand.Status}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="row">
+                    <div class="pull-right">
+                        <ul uib-pagination
+                            max-size="5"
+                            items-per-page="kneadingCommandSearchCondition.pageSize"
+                            total-items="kneadingCommandSearchResult.total"
+                            first-text="<<"
+                            previous-text="<"
+                            next-text=">"
+                            last-text=">>"
+                            ng-model="kneadingCommandSearchCondition.pageIndex"
+                            ng-change="loadKneadingCommands(true)"></ul>
+                    </div>
+                </div>
+                <br />
+
+                <!-- Tabletising button commands -->
+                <div class="row">
+
+                    <button id="btnOk" 
+                            class="btn btn-flat btn-default btn-less-5-chars"
+                            ng-disabled="kneadingCommandSelect == null || editorMode != steps.LoadKneadingCommand" 
+                            ng-click="selectKneadingCommand(kneadingCommandSelect)">
+                        <span>OK</span>
+                    </button>
+
+                    <button id="btnDelete" class="btn btn-flat btn-default btn-less-5-chars" 
+                            ng-disabled="kneadingCommandSelect == null || kneadingCommandSelect.Status == 'Command' || editorMode != steps.LoadKneadingCommand" 
+                            ng-click="deleteKneadingCommand(kneadingCommandSelect)">
+                        <span>Delete</span>
+                    </button>
+
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-danger" 
+         ng-class="{'collapse': (editorMode != steps.LoadProductInformation && editorMode != steps.EditProductDetails)}">
+        <div class="panel-heading">
+            <span>Input of Tabletising Command</span>
+        </div>
+        <div class="panel-body">
+            <div class="col-lg-12">
+
+                <!-- Tabletising selection grid -->
+                <div class="row">
+                    <div ng-if="productSearchResult.products != null && productSearchResult.products.length > 0">
+                        <i>*Please select a record on the upper table, the detailed information will be displayed on the lower table.</i>
+                    </div>
+                    
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr class="jsgrid-header-row">
+                            <th></th>
+                            <th>Product Code</th>
+                            <th>Product Name</th>
+                            <th>Command Quantity</th>
+                            <th>Storage Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="product in productSearchResult.products" 
+                            ng-disabled="editorMode != steps.LoadProductInformation" 
+                            ng-click="chooseProduct(product)" 
+                            style="cursor: pointer">
+                            <td>
+                                <input type="radio"
+                                       ng-model="$parent.productSelect"
+                                       ng-disabled="editorMode != steps.LoadProductInformation"
+                                       ng-value="product"/>
+                            </td>
+                            <td>{{product.F09_ProductCode}}</td>
+                            <td>{{product.F09_ProductDesp}}</td>
+                            <td>{{product.CommandQty.toFixed(2)}}</td>
+                            <td>{{product.StorageQty}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="row">
+                    <div class="pull-right">
+                        <ul uib-pagination
+                            max-size="5"
+                            items-per-page="10"
+                            total-items="productSearchResult.total"
+                            first-text="<<"
+                            previous-text="<"
+                            next-text=">"
+                            last-text=">>"
+                            ng-disabled="editorMode != steps.EditProductDetails"
+                            ng-model="productSearchCondition.pageIndex"
+                            ng-change="selectKneadingCommand(kneadingCommandSelect)"></ul>
+                    </div>
+                </div>
+
+                <br />
+                
+                <div class="row" 
+                     ng-show="productSearchResult.products != null && productSearchResult.products.length > 0">
+
+                    <button id="btnDetails" 
+                            class="btn btn-flat btn-default btn-less-5-chars" 
+                            ng-disabled="editorMode != steps.LoadProductInformation || !canLoadProductDetails() || productSelect == null" 
+                            ng-click="clickDetail(kneadingCommandSelect.PreproductCode, kneadingCommandSelect.LotNo)">
+                        <span>Details</span>
+                    </button>
+
+                    <button id="btnSelect" 
+                            class="btn btn-flat btn-default btn-less-5-chars" 
+                            ng-disabled="editorMode != steps.LoadProductInformation || !canLoadProductDetails() || productSelect == null" 
+                            ng-click="loadProductDetails(kneadingCommandSelect)">
+                        <span>Select</span>
+                    </button>
+
+                </div>
+                <br/>
+
+                <!-- Product information selection grid -->
+                <div class="row" ng-show="editorMode == steps.EditProductDetails">
+                    <div>
+                        <i>*Please select a record on the below table to create new Tabletising Command.</i>
+                    </div>
+                    <table class="table table-responsive">
+                        <thead>
+                        <tr class="jsgrid-header-row">
+                            <th></th>
+                            <th>Product Code</th>
+                            <th>Product Name</th>
+                            <th>Tabletising Quantity</th>
+                            <th>Used pre-product</th>
+                            <th>Lot No</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="productDetail in productDetailSearchResult.productDetails">
+                            <td>
+                                <input type="radio"
+                                       ng-model="$parent.productDetailSelect"
+                                       ng-value="productDetail"
+                                       ng-disabled="editorMode != steps.EditProductDetails" />
+                            </td>
+                            <td>{{productDetail.ProductCode}}</td>
+                            <td>{{productDetail.ProductName}}</td>
+                            <td>
+                                <input class="form-control"
+                                       type="number"
+                                       step="0.01"
+                                       ng-model="productDetail.TabletisingQuantity"/>
+                            </td>
+                            <td>{{productDetail.UsedPreProduct}}</td>
+                            <td>
+                                <input class="form-control"
+                                       type="text"
+                                       ng-model="productDetail.LotNo"/>
+                            </td>
+                        </tr>
+                        <tr ng-show="productDetailSearchResult.productDetails == null || productDetailSearchResult.productDetails.length < 1">
+                            <td colspan="6">
+                                <div class="text-center">There is no record to show.</div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+
+                <div class="row" >
+                    <button class="btn btn-flat btn-default btn-less-5-chars" 
+                            ng-show="editorMode == steps.EditProductDetails && productDetailSearchResult.productDetails != null && productDetailSearchResult.productDetails.length > 0" 
+                            ng-click="go()" >
+                        Go
+                    </button>
+                    
+                    <button class="btn btn-flat btn-default btn-less-5-chars"
+                            ng-hide="productDetailSearchResult.productDetails == null || productDetailSearchResult.productDetails.length < 1"
+                            ng-disabled="productDetailSelect == null"
+                            ng-click="deleteProductDetail(productDetailSelect)">
+                        Delete
+                    </button>
+
+                    <button class="btn btn-flat btn-default btn-less-5-chars" 
+                            ng-click="init()">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @using (Html.ExtModalFor("productDetailModal", ExtModal.ModalSize.Medium, "TCMD013F - Details"))
+    {
+        using (Html.ExtModalBodyFor())
+        {
+        }
+        using (Html.ExtModalFooterFor("text-right"))
+        {
+            
+        }
+    }
+
+</div>

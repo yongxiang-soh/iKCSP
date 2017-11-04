@@ -1,0 +1,84 @@
+﻿
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th colspan="2"
+                class="text-center">** PRE- PRODUCT MASTER LIST **</th>
+        </tr>
+    <tr>
+        <td class="pull-left">[TCFC172P]</td>
+        <td class="pull-right"> {{currentDate}}</td>
+       
+    </tr>
+        <tr>
+            <td colspan="2" class="pull-right"> {{companyName}} </td>
+        </tr>
+    </thead>
+</table>
+{{#data}}
+<b>< Pre-product List ></b>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tr>
+        <td><b>Preproduct Code</b> {{F03_PreProductCode}}</td>
+        <td><b>MixMode</b> {{F03_MixMode}}</td>
+        <td><b>Batch / Lot</b>  {{F03_BatchLot}}</td>
+        <td><b>MixTime1 </b>{{MixDate1}}</td>
+        <td><b>Yield Rate</b> {{YieldRate}} %</td>
+    </tr>
+    <tr>
+        <td ><b>Preproduct Name</b> {{F03_PreProductName}}</td>
+        <td colspan="2"><b>Temp.Return Time</b> {{EquilibriumTime}}</td>
+        <td ><b>MixTime2</b> {{MixDate2}}</td>
+        <td><b>Temp.Class</b> {{LowTmpClass}}</td>
+    </tr>
+    <tr>
+        <td ><b>Kneading Line</b> {{KneadingLine}}</td>
+        <td ><b>Container Type</b> {{F03_ContainerType}}</td>
+        <td ><b>Factor </b>{{F03_Point}}</td>
+        <td><b>MixTime3</b> {{MixDate3}}</td>
+    </tr>
+</table>
+<b>< Material Make Up ></b>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>Material Code</th>
+            <th>Material Name</th>
+            <th>Ch.3F Ch.4F</th>
+            <th>Ch.Pri.</th>
+            <th>Ch.Seq.</th>
+            <th>Pot Seq.</th>
+            <th>W.Seq.</th>
+            <th>Post.</th>
+            <th>Weigh Meth.</th>
+            <th>Addictive</th>
+            <th>Crush(1)</th>
+            <th>Crush(2)</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#MaterialPrintItems}}
+    <tr>
+        <td>{{MasterialCode
+            }}</td>
+        <td>{{MasterialName}}</td>
+        <td>{{Sum3F4F}}</td>
+        <td>{{C_Pri}}</td>
+        <td>{{CSeq}}</td>
+        <td>{{PSeq}}</td>
+        <td>{{WSeq}}</td>
+        <td>{{Post}}</td>
+        <td>{{Method}}</td>
+        <td>{{Additive}}</td>
+        <td>{{MilingFlag1}}</td>
+        <td>{{MilingFlag2}}</td>
+    </tr>
+        {{/MaterialPrintItems}}
+    </tbody>
+</table>
+{{/data}}
+
+
+
+

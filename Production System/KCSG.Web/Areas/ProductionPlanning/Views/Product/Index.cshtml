@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.ScreenId = "TCPP031F";
+    ViewBag.Title = "Product Master DB";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.ProductionPlanning.ViewModels.Product.ProductSearchViewModel
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+<script src="/Scripts/areas/product/product.js" type="text/javascript"></script>
+<script>
+    var formUrl = {
+        urlEdit: '@Url.Action("Edit", "Product")',
+        urlDelete: '@Url.Action("Delete", "Product")'
+    }
+    var urlSaveProduct = '@Url.Action("Edit","Product")';
+</script>
+
+
+<div class="col-lg-12">
+    @using (Html.BeginForm("", ""))
+    {
+        <div class="panel panel-danger">
+            <div class="panel-heading">Search Criteria</div>
+            <div class="panel-body">
+                <div class="col-xs-3">
+                    @Html.ExtLabelFor(model => model.ProductCode)
+                </div>
+                <div class="col-xs-3">
+                    @Html.ExtTextBoxFor(model => model.ProductCode, new { @id = "txtProductCodeSearch"})
+                </div>
+                <div class="col-xs-5">
+                    <button type="button" class="btn btn-flat btn-default btn-less-5-chars" id="btnSearch" onclick=" search() ">Search</button>
+                    <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick="Clear(this)">Clear</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">List of Product</div>
+        <div class="panel-body">
+            <div class=" form-group">
+                @Html.Grid(Model.Grid)
+                </div>
+            <div class=" form-group">
+                <button class="btn btn-flat btn-default btn-less-5-chars" id="btnAdd" onclick=" addNew() ">Add</button>
+                <button class="btn btn-flat btn-default btn-less-5-chars" onclick=" edit() " disabled="disabled" id="btnUpdate">Update</button>
+                <button class="btn btn-flat btn-default btn-less-5-chars" id="btnDeleteProduct" disabled="disabled" onclick=" deleteItem() ">Delete</button>
+            </div>
+
+
+            </div>
+        
+    </div>
+</div>
+
+
+        <div class="col-md-12" style="margin-top: 20px;">
+            <div id="formPlaceholder"></div>
+        </div>
+

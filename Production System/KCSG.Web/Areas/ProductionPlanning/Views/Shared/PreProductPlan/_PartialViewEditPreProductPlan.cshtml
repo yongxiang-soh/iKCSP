@@ -1,0 +1,105 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@model  KCSG.Web.Areas.ProductionPlanning.ViewModels.PreProductPlan.PreProductPlanViewModel
+@using (Ajax.BeginForm("Edit", "PreProductPlan", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess(data, status, xhr)" }, new { @id = "addNewForm" }))
+{
+    
+    @Html.HiddenFor(model => model.IsCreate)
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            @if (Model.IsCreate)
+            {
+                <span> Add Pre-Product  Plan - TCPP072F  </span>
+            }
+            else
+            {
+                <span> Update Pre-Product  Plan - TCPP072F  </span>
+            }
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F94_YearMonth)
+                    </div>
+                    <div class="col-lg-8">
+                        @if (Model.IsCreate)
+                        {
+                            @Html.ExtDateTimeFor(model => model.F94_YearMonth, new DateTimeOption() { Format = "MM/YYYY", ViewMode = "years"})
+                        }
+                        else
+                        {
+                            @Html.ExtDateTimeFor(model => model.F94_YearMonth, new DateTimeOption() { Format = "MM/YYYY", ViewMode = "years" }, new { style = " cursor: not-allowed", @readonly = "readonly", @id = "disabledInput" })
+                        }
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F94_PrepdtCode)
+                    </div>
+                    <div class="col-lg-8">
+                       
+                            @if (Model.IsCreate)
+                            {
+                                @Html.ExtTextBoxAddOnFor(model => model.F94_PrepdtCode, CustomControlConstants.AddOn.Search, "#modalPreProductCodeSelect", new {  onChange = "SelectProductCode(this)", @id = "txtPreProductCode" })
+                               
+                            }
+                            else
+                            {
+                                @*@Html.ExtTextBoxAddOnFor(model => model.F94_PrepdtCode, CustomControlConstants.AddOn.Search, "#modalPreProductCodeSelectFortbl94", new { style = "width:100%;cursor: not-allowed", @readonly = "readonly", @id = "disabledInput", @class = "form-control" })*@
+                                @Html.ExtTextBoxAddOnFor(model => model.F94_PrepdtCode, CustomControlConstants.AddOn.Search, "", new { style = "cursor: not-allowed", @class = "form-control" })
+                              
+                            }
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.F94_amount)
+                    </div>
+                    <div class="col-lg-8">
+                        @Html.ExtNumberFor(model => model.F94_amount,new NumberOption(){NumberOfDecimal = 2,Max = 999999.99} )
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-lg-4">
+                        @Html.ExtLabelFor(model => model.PreProductName)
+                    </div>
+                    <div class="col-lg-8">
+                       @Html.ExtTextBoxFor(model => model.PreProductName, new { style = ";cursor: not-allowed", @readonly = "readonly",  id = "txtPreproductName" })
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-flat btn-default btn-less-5-chars">OK</button>
+            <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" hideForm() ">Cancel</button>
+        </div>
+    </div>
+}
+
+
+
+<script>
+    $(document).ready(function () {
+        $.validator.unobtrusive.parse('#addNewForm');
+         @if (Model.IsCreate)
+        {
+            <text>
+        $("#F94_YearMonth").focus();
+            </text>
+        }
+        else
+        { <text>
+
+        $("#F94_amount").focus();
+            </text>
+        }
+        
+    });
+
+
+</script>

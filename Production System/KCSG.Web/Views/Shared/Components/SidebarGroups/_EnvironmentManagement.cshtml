@@ -1,0 +1,158 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Domain.Interfaces.Services
+@{
+    // Find service which handles identity information.
+    var identityService = DependencyResolver.Current.GetService<IIdentityService>();
+
+    // Find available screens.
+    var availableScreens = identityService.FindAccessibleScreens(HttpContext.Current.User.Identity);
+}
+
+@if (identityService.IsScreenAccessible(availableScreens, new[] {"TCEN011F", "TCEN012F", "TCEN013F", "TCEN021F", "TCEN022F", "TCEN023F", "TCEN024F", "TCEN031F", "TCEN041F", "TCEN042F", "TCEN043F", "TCEN044F", "TCEN072F", "TCEN073F", "TCEN074F", "TCEN075F"}))
+{
+    <li class="treeview">
+        <a href="javascript:void(0);">
+            <i class="fa fa-table"></i>
+            <span>Environment Management</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu">
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCEN011F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "EnvironmentDataOneDay", new {Area = "EnvironmentManagement"})"
+                       data-toggle="tooltip"
+                       title="Environment Data (One Day)">
+                        <i class="fa fa-circle-o"></i>Environment Data (One Day)
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCEN012F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "EnvironmentDataDuration", new {Area = "EnvironmentManagement"})"
+                       data-toggle="tooltip"
+                       title="Environment Data (Duration)">
+                        <i class="fa fa-circle-o"></i>Environment Data (Duration)
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCEN013F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "CalculationOfControlLimit", new {Area = "EnvironmentManagement"})"
+                       data-toggle="tooltip"
+                       title="Calculation of Control Limit">
+                        <i class="fa fa-circle-o"></i>Calculation of Control Limit
+                    </a>
+                </li>
+            }
+            @if (identityService.IsScreenAccessible(availableScreens, "TCEN021F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "AvailabilityMixingRollMachine", new {Area = "EnvironmentManagement"})"
+                       data-toggle="tooltip"
+                       title="Calculation of Control Limit">
+                        <i class="fa fa-circle-o"></i>Availability of Mixing Roll Machine
+                    </a>
+                </li>
+            }
+            @if (identityService.IsScreenAccessible(availableScreens, "TCEN031F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "CleanlinessDataInput", new {Area = "EnvironmentManagement"})"
+                       data-toggle="tooltip"
+                       title="Calculation of Control Limit">
+                        <i class="fa fa-circle-o"></i>Cleanliness Data Input
+                    </a>
+                </li>
+            } 
+            @if (identityService.IsScreenAccessible(availableScreens, "TCEN024F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "XRTemperatureManagement", new {Area = "EnvironmentManagement"})"
+                       data-toggle="tooltip"
+                       title="Calculation of Control Limit">
+                        <i class="fa fa-circle-o"></i>X-R Temperature Management
+                    </a>
+                </li>
+            } @if (identityService.IsScreenAccessible(availableScreens, "TCEN041F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "CreepingAndRollSpeedDuration", new { Area = "EnvironmentManagement" })"
+                       data-toggle="tooltip"
+                       title="Calculation of Control Limit">
+                        <i class="fa fa-circle-o"></i>Creeping and Roll Speed
+                    </a>
+                </li>
+            }
+
+            @if (identityService.IsScreenAccessible(availableScreens, "TCEN042F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "LotDataSampling", new {Area = "EnvironmentManagement"})"
+                       data-toggle="tooltip"
+                       title="Lot Data Sampling">
+                        <i class="fa fa-circle-o"></i>Lot Data Sampling
+                    </a>
+                </li>
+            } 
+            @if (identityService.IsScreenAccessible(availableScreens, "TCEN043F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "LotDataCleanup", new {Area = "EnvironmentManagement"})"
+                       data-toggle="tooltip"
+                       title="Lot Data Cleanup">
+                        <i class="fa fa-circle-o"></i>Lot Data Cleanup
+                    </a>
+                </li>
+            }
+            @if (identityService.IsScreenAccessible(availableScreens, "TCEN044F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "ProductMasterManagement", new {Area = "EnvironmentManagement"})"
+                       data-toggle="tooltip"
+                       title="Product Master Management">
+                        <i class="fa fa-circle-o"></i>Product Master Management
+                    </a>
+                </li>
+            }
+            @if (identityService.IsScreenAccessible(availableScreens, "TCEN072F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "EnvironmentDataEdit", new {Area = "EnvironmentManagement"})"
+                       data-toggle="tooltip"
+                       title="Environment Data Edit">
+                        <i class="fa fa-circle-o"></i>Environment Data Edit
+                    </a>
+                </li>
+            }
+            
+            @if (identityService.IsScreenAccessible(availableScreens, "TCEN074F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "ControlLimitEdit", new {Area = "EnvironmentManagement"})"
+                       data-toggle="tooltip"
+                       title="Control Limit Edit">
+                        <i class="fa fa-circle-o"></i>Control Limit Edit
+                    </a>
+                </li>
+            }
+            @if (identityService.IsScreenAccessible(availableScreens, "TCEN075F"))
+            {
+                <li>
+                    <a href="@Url.Action("Index", "CreepingAndRollSpeedDataEdit", new {Area = "EnvironmentManagement"})"
+                       data-toggle="tooltip"
+                       title="Creeping and Roll Speed Data Edit">
+                        <i class="fa fa-circle-o"></i>Creeping and Roll Speed Data Edit
+                    </a>
+                </li>
+            }
+        </ul>
+    </li>
+}

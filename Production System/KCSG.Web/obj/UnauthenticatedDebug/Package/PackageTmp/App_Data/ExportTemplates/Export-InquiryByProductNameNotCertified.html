@@ -1,0 +1,64 @@
+﻿
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th style="text-align: center">** STOCK LIST ( UnCertified Item ) **</th>
+        </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC087P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td>< Product ></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+        <tr>
+            <th>Product Code</th>
+            <th>Product Name</th>
+            <th>Lot No.</th>
+            <th>Pallet No.</th>
+            <th>R.B.L</th>
+            <th class="text-align-right">Quantity (Kg)</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#notCertified}}
+        {{#PrintProductNameGroupItem}}
+        {{#FindPrintProductNameItem}}
+        <tr>
+            <td>{{ProductCode}}</td>
+            <td>{{ProductName}}</td>
+            <td>{{ProductLotNo}}</td>
+            <td>{{PalletNo}}</td>
+            <td>{{ShelfNo}}</td>
+            <td class="text-align-right">{{AmountString}}</td>
+        </tr>
+        {{/FindPrintProductNameItem}}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="text-align-right">Total:</td>
+            <td class="text-align-right">{{LotTotalString}}</td>
+        </tr>
+        {{/PrintProductNameGroupItem}}
+        {{/notCertified}}
+    </tbody>
+    <tfoot>
+    </tfoot>
+</table>

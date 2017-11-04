@@ -1,0 +1,70 @@
+﻿@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+@{
+    ViewBag.ScreenId = "TCPR101F";
+    ViewBag.Title = "Retrieval of External Pre-product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model KCSG.Web.Areas.ProductManagement.ViewModels.RetrievalOfExternalPreProduct.RetrievalOfExternalPreProductViewModel
+    
+
+<script src="~/Scripts/areas/productmanagement/retrievalOfExternalPreProduct.js"></script>
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">Retrieval of External Pre-product</div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    @Html.Grid(Model.ExternalPreProductGrid)
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+                    <label>Tabletising Line</label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+
+                    <div class="input-group">
+                        <input class="form-control"
+                               data-val="true"
+                               data-val-required="Please input data for this required field."
+                               id="txtTabletisingLine"
+                               name="MaterialCode"
+                               onkeypress=" setMaxLength($(this)); "
+                               readonly="readonly"
+                               type="text" value="">
+                        <span class="input-group-addon"
+                              style="cursor: pointer"
+                              data-toggle="modal"
+                              data-target="#modalTabletingLineSelect"><i class="fa fa-search"></i></span>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12 col-lg-push-2">
+                    <label>Tabletising Line Name</label>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 col-lg-push-2">
+                    <input id="txtTabletisingName"
+                           readonly="readonly"
+                           type="text"
+                           class="form-control" />
+
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <button id="btnRetrieval"
+                            class="btn btn-default btn-flat btn-more-5-chars "
+                            disabled="disabled"
+                            onclick=" retrievalExternalProduct() ">
+                        <span>Retrieval</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

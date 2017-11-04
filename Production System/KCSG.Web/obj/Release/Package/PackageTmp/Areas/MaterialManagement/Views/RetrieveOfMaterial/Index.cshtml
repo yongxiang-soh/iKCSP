@@ -1,0 +1,214 @@
+﻿@{
+    ViewBag.ScreenId = "TCRM071F";
+    ViewBag.Title = "Retrieval Of Material";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model KCSG.Web.Areas.MaterialManagement.ViewModels.RetrieveOfMaterial.RetrieveOfMaterialViewModel
+@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.jsGrid.MVC
+
+<script>
+    var urlRestorageOfMaterial = '@Url.Action("Index", "RestorageOfMaterial")';
+</script>
+@using NumberOption = KCSG.Core.CustomControls.NumberOption
+<script src="/Scripts/areas/retrievalMaterial/retrievalMaterial.js" type="text/javascript"></script>
+@using (Ajax.BeginForm("ReStorage", "RetrieveOfMaterial", new AjaxOptions() { HttpMethod = "Get", OnSuccess = "OnSuccess" }, new { Id = "formRetrievalOfMaterial" }))
+{ 
+<div class="col-lg-12">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <span>Generate Information</span>
+        </div>
+        <div class="panel-body">
+
+            <div class="row form-group">
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.MaterialCode)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @Html.ExtTextBoxAddOnFor(model => model.MaterialCode, CustomControlConstants.AddOn.Search, "#modalMaterialCodeSelect", new { @id = "txtMaterialCode", onchange = "CheckPallet()" })
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.MaterialName)
+                </div>
+                <div class="col-lg-4">
+                    @Html.ExtTextBoxFor(model => model.MaterialName, new { @readonly = "readonly", @id = "txtMaterialName", @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="row form-group">
+
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.CommWthMeasureSys)
+                </div>
+
+                <div class="col-lg-2">
+                    <input name="CommWthMeasureSys"
+                           value="@Constants.CommWthMeasureSys.None.ToString("D")"
+                           type="radio"
+                           disabled="disabled" />
+                    <span> None</span>
+                </div>
+
+                <div class="col-lg-2">
+                    <input name="CommWthMeasureSys"
+                           value="@Constants.CommWthMeasureSys.Megabit.ToString("D")"
+                           type="radio" 
+                           disabled="disabled"/>
+                    <span> Megabit</span>
+                </div>
+
+                <div class="col-lg-2">
+                    <input name="CommWthMeasureSys"
+                           value="@Constants.CommWthMeasureSys.Conventional.ToString("D")"
+                           type="radio" 
+                           disabled="disabled"/>
+                    <span> Conventional</span>
+                </div>
+
+                <div class="col-lg-2">
+                    <input name="CommWthMeasureSys"
+                           value="@Constants.CommWthMeasureSys.Both.ToString("D")"
+                           type="radio"
+                           disabled="disabled" />
+                    <span> Both</span>
+                </div>
+
+
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-2 col-sm-4">
+                    @Html.ExtLabelFor(model => model.RequestedRetrievalQuantity)
+                </div>
+                <div class="col-lg-4 col-sm-4 form-group">
+                    @Html.ExtNumberFor(model => model.RequestedRetrievalQuantity, new NumberOption() { NumberOfDecimal = 2 })
+                </div>
+
+                <div class="col-lg-4 col-sm-4">
+                    <button id="btnOnePallet"
+                            type="button"
+                            class="btn btn-flat btn-default btn-less-5-chars"
+                            onclick="assignPallet(1)">
+                        1 Pallet
+                    </button>
+
+                    <button id="btnAssign"
+                            type="button"
+                            class="btn btn-flat btn-default btn-less-5-chars"
+                            onclick="assignPallet(2)">
+                        Assign
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="row form-group">
+
+                <div class="col-lg-2 col-sm-4">
+                    @Html.ExtLabelFor(model => model.Tally)
+
+                </div>
+                <div class="col-lg-4 col-sm-4 form-group">
+                    <input id="txtTally"
+                           class="form-control"
+                           type="number"
+                           readonly="readonly" />
+                </div>
+
+                <div class="col-lg-4 col-sm-4">
+
+                    <button id="btnDetail"
+                            type="button"
+                            class="btn btn-flat btn-default btn-less-5-chars"
+                            disabled="disabled"
+                            onclick="findPalletsList()">
+                        Detail
+                    </button>
+
+                    <button id="btnUnassginMaterials"
+                            type="button"
+                            class="btn btn-flat btn-default btn-less-5-chars"
+                            onclick="unassignMaterial()"
+                            disabled="disabled">
+                        De-assign
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="row form-group">
+
+                <div class="col-lg-12">
+                    <button id="btnRestorage"
+                            type="button"
+                            class="btn btn-flat btn-default  btn-more-5-chars" 
+                            onclick="clickRestorage()">
+                        Re-Storage
+                    </button>
+
+                    <button id="btnRetrieval"
+                            type="button"
+                            class="btn btn-flat btn-default btn-more-5-chars"
+                            disabled="disabled"
+                            onclick="retrievalPallets(event)">
+                        Retrieval
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="col-lg-12">
+        <div id="panelPalletsList"
+             hidden="hidden"
+             class="panel panel-danger">
+            <div class="panel-heading">
+                Assign of Material Retrieval
+            </div>
+            <div class="panel-body">
+                <button id="btnUnassignSpecificPallet"
+                        class="btn btn-default btn-flat hidden"
+                        onclick="unassignSpecificPallet(event)">
+                    De-assign
+                </button>
+
+                <button class="btn btn-default btn-flat" onclick="cancelAssignMaterialRetrieval(event)">
+                    Cancel
+                </button>
+            </div>
+            <div class="panel-body">
+
+                <div class="col-lg-12 form-group">
+                    @Html.Grid(Model.PalletsGrid)
+                </div>
+
+
+                <div id="col-material-no"
+                     class="col-lg-6"
+                     hidden="hidden">
+                    <label>Material Lot No.</label>
+                    <div id="materialLotNoContainer">
+                    </div>
+
+                </div>
+
+                <div id="col-quantity"
+                     class="col-lg-6"
+                     hidden="hidden">
+                    <label>Quantity</label>
+
+                    <div id="quantityContainer">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+}
+<div class="col-md-12" style="margin-top: 20px;">
+    <div id="formPlaceholder"></div>
+</div>
+

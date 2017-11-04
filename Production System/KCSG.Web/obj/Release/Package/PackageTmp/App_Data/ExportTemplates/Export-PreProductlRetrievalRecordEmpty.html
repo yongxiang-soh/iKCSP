@@ -1,0 +1,144 @@
+﻿<style>
+    .title-table, .content-table {
+        border-collapse: collapse;
+        min-width: 100%;
+    }
+
+        .title-table th, td {
+            border: 0 solid transparent;
+        }
+
+        .content-table th {
+            border: 1px solid black;
+        }
+
+        .content-table td {
+            border: 1px solid black;
+        }
+        .table-bordered td, .table-bordered th{
+    border-color: black !important;
+}
+</style>
+<table class="table table-responsive" style="font-family:courier;">
+    <thead>
+    <tr>
+        <th style="text-align: center">** PRE-PRODUCT RETRIVAL REPORT **</th>
+    </tr>
+    </thead>
+</table>
+
+<table class="table table-responsive" style="font-family:courier;">
+    <tbody>
+        <tr>
+            <td> </td>
+            <td class="pull-right">{{Datetime}}</td>
+        </tr>
+        <tr>
+            <td>[TCFC121P]</td>
+            <td class="pull-right">{{CompanyName}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>        
+    </tbody>
+</table>
+<!--loop 1 here-->
+
+<table class="table table-responsive table-bordered" style="font-family:courier;">
+
+    <tbody>
+    
+    <tr>
+        
+        <td rowspan="2">R</td>
+        <td colspan="3">Pre-Product Code:</td>
+        <td colspan="3">Pre-Product Name:</td>
+    </tr>    
+    <tr>
+        <td colspan="3">LOT.NO</td>
+        <td colspan="3">Receive Quantity:</td>
+    </tr>
+    <tr>
+        <td rowspan="5">P</td>
+        <td >Product Code</td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td >Product Name</td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td >LOTNO</td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td >Valid Quantity</td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td >Lose</td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>L</td>
+        <td >Fraction</td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>R: Receive <br/> P: Pay <br/> L: Leftovers<br/><br/>      Note </td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td ></td>
+        <td></td>
+    </tr>
+    
+    </tbody>  
+
+</table>
+
+<br />
+<br />
+<!--end loop 1-->
+<table class="col-xs-4 table-bordered" style="table-layout: fixed;float: right">
+            <tr>
+                <td>Manager</td>
+                <td>Material</td>
+                <td>Worker1</td>
+                <td>Worker2</td> 
+                <td>Worker3</td>
+            </tr>
+    <tr style="height:60px !important">
+        <td> <br/> </td>
+        <td> <br/> </td>
+        <td> <br/> </td>
+        <td> <br/> </td>
+        <td> <br/> </td>
+    </tr>
+        </table>

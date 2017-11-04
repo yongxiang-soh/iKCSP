@@ -1,0 +1,117 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@model KCSG.Web.Areas.Inquiry.ViewModels.InquiryByWarehouseLocation.InquiryBySupplierPalletModelView
+
+@using (Ajax.BeginForm("UpdateSubscreentcf038f", "InquiryBase", new AjaxOptions() { HttpMethod = "POST", Confirm = "Ready to update ?", OnSuccess = "InquiryBase.onUpdateSubscreentcf038fSuccess" }, new { @id = "updateSubscreentcf038f" }))
+{
+    @Html.HiddenFor(m => m.SearchCondition)
+    @Html.HiddenFor(m => m.Row)
+    @Html.HiddenFor(m => m.Bay)
+    @Html.HiddenFor(m => m.Level)
+    <div class="panel panel-danger">
+        <div class="panel-heading">Inquiry by Supplier Pallet - TCFC038F</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.ShelfNo)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @Html.ExtTextBoxFor(model => model.ShelfNo, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtLabelFor(model => model.ShelfStatus)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @Html.ExtTextBoxFor(model => model.ShelfStatus, new { @class = "form-control", @disabled = "disabled" })
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    @Html.ExtLabelRequireFor(model => model.SupplierCode,Model.ShowUpdate)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @if (Model.ShowUpdate)
+                    {
+                        @Html.ExtTextBoxAddOnFor(model => model.SupplierCode, CustomControlConstants.AddOn.Search, "#modalSupplierCodeSelect", new { style = "width:100%", @id = "txtSupplierCode" })
+                    }
+                    else
+                    {
+                        @Html.ExtTextBoxAddOnFor(model => model.SupplierCode, CustomControlConstants.AddOn.Search, null, new { style = "width:100%", @id = "txtSupplierCode", @disabled = "disabled" })
+                    }
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    @Html.ExtLabelRequireFor(model => model.SupplierName, Model.ShowUpdate)
+                </div>
+                <div class="col-lg-10 form-group">
+                    @Html.ExtTextBoxFor(model => model.SupplierName, new { @class = "form-control", @readonly = "readonly", @id = "txtSupplierName" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    @Html.ExtLabelRequireFor(model => model.MaxPallet, Model.ShowUpdate)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @Html.ExtTextBoxFor(model => model.MaxPallet, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-lg-2">
+                    @Html.ExtLabelRequireFor(model => model.StockedPallet, Model.ShowUpdate)
+                </div>
+                <div class="col-lg-4 form-group">
+                    @if (Model.ShowUpdate)
+                    {
+                        @Html.ExtTextBoxFor(model => model.StockedPallet, new { type = "number", max = 99 })
+                    }
+                    else
+                    {
+                        @Html.ExtTextBoxFor(model => model.StockedPallet, new { type = "number", @readonly = "readonly" })
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        @if (Model.ShowUpdate)
+        { 
+            <button type="submit" class="btn btn-default btn-flat btn-less-5-chars" id="btnOk">OK</button>
+        }
+        <button class="btn btn-default btn-flat btn-less-5-chars" type="button" data-dismiss="modal">Cancel</button>
+    </div>
+}
+
+<script>
+    $().ready(function () {
+        $.validator.unobtrusive.parse("#updateSubscreentcf038f");
+        $.validator.addMethod("StockedPallet",
+                function (value, element, params) {
+                    
+                    var thiserror = "";
+                    if (parseInt(value) > parseInt($(params).val()) || parseInt(value) <= 0) {
+                        thiserror = "Invalid value of stocked pallets !";
+                        return false;
+                    }
+                    return true;
+                },
+                "Invalid value of stocked pallets !");
+        $.validator.addMethod("SupplierCode",
+                function (value, element, params) {
+                    
+                    var thiserror = "";
+                    if (value.trim() == "") {
+                        thiserror = "Please input data for this required field.";
+                        return false;
+                    }
+                    return true;
+                },
+                "Please input data for this required field.");
+        $("#StockedPallet").rules("add", { StockedPallet: '#MaxPallet' });
+        $("#txtSupplierCode").rules("add", { SupplierCode: true });
+
+    });
+</script>

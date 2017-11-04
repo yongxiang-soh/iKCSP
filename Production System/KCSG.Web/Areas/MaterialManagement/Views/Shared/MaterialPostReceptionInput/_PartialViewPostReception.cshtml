@@ -1,0 +1,120 @@
+﻿@using KCSG.Core.Constants
+@using KCSG.Core.Controls
+@using KCSG.Core.CustomControls
+@using KCSG.Core.Helper
+@using KCSG.jsGrid.MVC
+@model KCSG.Web.Areas.MaterialManagement.ViewModels.MaterialPostReceptionInput.MaterialPostReceptionInputViewModel
+@using (Ajax.BeginForm("SavePostReception", "MaterialPostReception", new AjaxOptions() { HttpMethod = "POST", OnSuccess = "onSuccess(data)", Confirm = "Are you sure you want to post-receive?" }, new { @id = "addNewForm" }))
+{
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <span>Post Reception Input Confirm</span>
+        </div>
+        <div class="panel-body">
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.F33_MaterialCode)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxFor(model => model.F33_MaterialCode,
+                                new { style = "cursor: not-allowed", @readonly = "readonly", @id = "txtMaterialCode"})
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.ShelfNo)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxFor(model => model.ShelfNo,
+                                new { style = "width:100%;cursor: not-allowed", @readonly = "readonly" })
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.F01_MaterialDsp)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxFor(model => model.F01_MaterialDsp,
+                                new { style = "width:100%;cursor: not-allowed", @readonly = "readonly"})
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.F33_PalletNo)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxFor(model => model.F33_PalletNo,
+                                    new { style = "width:100%;cursor: not-allowed", @readonly = "readonly"})
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.P_O_No)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxAddOnFor(model => model.P_O_No, CustomControlConstants.AddOn.Search, "#modalPONOSelectWithParameter", new { @id = "txtPONoCode" })
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-4">
+                        @Html.ExtLabelFor(model => model.PartialDelivery)
+                    </div>
+                    <div class="col-xs-8">
+                        @Html.ExtTextBoxFor(model => model.PartialDelivery, new { @id = "txtPartialDelivery" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 table-responsive">
+                <table class="table table-bordered" >
+                    <tr>
+                        <th width="60%">Lot No.</th>
+                        <th>Quantity</th>
+                    </tr>
+                    <tr>
+                        <td width="60%">@Html.ExtTextBoxFor(model => model.LotNo1,new {@class="clearText"})</td>
+                        <td>@Html.ExtNumberFor(model => model.Quantity1, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 },new{@class="clearNumber"}) </td>
+                    </tr>
+                    <tr>
+                        <td width="60%">@Html.ExtTextBoxFor(model => model.LotNo2, new { @class = "clearText" })</td>
+                        <td>@Html.ExtNumberFor(model => model.Quantity2, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @class = "clearNumber" })</td>
+                    </tr>
+                    <tr>
+                        <td width="60%">@Html.ExtTextBoxFor(model => model.LotNo3, new { @class = "clearText" })</td>
+                        <td>@Html.ExtNumberFor(model => model.Quantity3, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @class = "clearNumber" })</td>
+                    </tr>
+                    <tr>
+                        <td width="60%">@Html.ExtTextBoxFor(model => model.LotNo4, new { @class = "clearText" })</td>
+                        <td>@Html.ExtNumberFor(model => model.Quantity4, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @class = "clearNumber" })</td>
+                    </tr>
+                    <tr>
+                        <td width="60%">@Html.ExtTextBoxFor(model => model.LotNo5, new { @class = "clearText" })</td>
+                        <td>@Html.ExtNumberFor(model => model.Quantity5, new KCSG.Core.CustomControls.NumberOption() { NumberOfDecimal = 2 }, new { @class = "clearNumber" })</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row btnControl margin-top-10 margin-left-5">
+                <button type="submit" class="btn btn-flat btn-default btn-less-5-chars">OK</button>
+                <button type="button" class="btn btn-flat btn-default btn-less-5-chars" onclick=" hideForm() ">Exit</button>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        $('table tr td input').css('max-width', 'none');
+        $.validator.unobtrusive.parse('#addNewForm');
+        var $inputs = $('#addNewForm :input');
+        $inputs.change(function () {
+            //alert(this.value.length);
+        });
+    });
+
+
+</script>
